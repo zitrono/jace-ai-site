@@ -1,0 +1,26 @@
+{
+  "name": "jace-ai-site",
+  "version": "1.0.0",
+  "description": "Jace AI website - refactored from static Next.js export to modular component architecture",
+  "type": "module",
+  "scripts": {
+    "build": "node src/tools/build.js",
+    "dev": "npm run build && python3 -m http.server 8000 --directory dist",
+    "clean": "rm -rf dist",
+    "analyze": "node src/tools/analyze-sections.js",
+    "extract": "node src/tools/extract-components.js",
+    "unminify": "node src/tools/unminify.js"
+  },
+  "keywords": [
+    "jace-ai",
+    "email-assistant",
+    "static-site",
+    "component-architecture"
+  ],
+  "author": "Jace AI Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

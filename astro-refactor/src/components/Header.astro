@@ -4,11 +4,11 @@
 
 <header class="sticky top-0 z-20 inset-x-0">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-2">
-    <div class="flex items-center justify-between w-full p-4 transition-all bg-gray-900/50">
+    <div class="flex items-center justify-between w-full p-4 transition-all header-transparent" style="background-color: rgba(40, 40, 40, 0.5); backdrop-filter: blur(12px);">
       <div class="flex lg:flex-1">
         <a href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Jace AI</span>
-          <svg class="fill-white w-12 sm:w-16" viewBox="0 0 40 19" aria-labelledby="jace-logo-title">
+          <svg class="fill-white" style="width: 70px; height: 33.25px;" viewBox="0 0 40 19" aria-labelledby="jace-logo-title">
             <title id="jace-logo-title">Jace Logo</title>
             <path d="M0 16.469H1.09511C1.32926 16.469 1.49462 16.4247 1.59075 16.3365C1.68689 16.2478 1.73517 16.0879 1.73517 15.857V4.5509H4.7932V15.0611C4.7932 16.3128 4.43172 17.2819 3.70834 17.9694C2.98539 18.656 1.95522 19 0.619552 19H0V16.469ZM1.97317 2.92856C1.62194 2.60908 1.44633 2.20391 1.44633 1.71434C1.44633 1.22477 1.62194 0.833537 1.97317 0.500122C2.32439 0.166707 2.76149 0 3.28491 0C3.80832 0 4.24586 0.166707 4.59708 0.500122C4.9483 0.833537 5.12391 1.23828 5.12391 1.71434C5.12391 2.19041 4.9483 2.60908 4.59708 2.92856C4.24586 3.24847 3.80832 3.40801 3.28491 3.40801C2.76149 3.40801 2.32439 3.24805 1.97274 2.92856H1.97317Z"></path>
             <path d="M7.14878 14.3465C6.47368 13.7481 6.13656 12.966 6.13656 11.9996C6.13656 11.0331 6.44975 10.3333 7.07657 9.77496C7.70338 9.21744 8.60195 8.89078 9.77269 8.7954L12.1073 8.63207C12.6444 8.59113 12.9132 8.32608 12.9132 7.83609C12.9132 7.42797 12.7615 7.11862 12.4586 6.90759C12.1556 6.69699 11.7356 6.59106 11.1981 6.59106C10.0547 6.59106 9.4142 7.04012 9.27662 7.9378H6.34293C6.45317 6.75397 6.9142 5.8394 7.72731 5.19283C8.53999 4.54668 9.69706 4.22339 11.1985 4.22339C12.7 4.22339 13.881 4.57031 14.7005 5.26416C15.52 5.958 15.9298 6.992 15.9298 8.36618V12.3866H16.777V14.9171H15.5785C14.2976 14.9171 13.581 14.3322 13.4298 13.1623C13.099 13.8701 12.6239 14.3938 12.0044 14.7336C11.3844 15.0733 10.6683 15.2438 9.85558 15.2438C8.72586 15.2438 7.82388 14.9446 7.14921 14.3457L7.14878 14.3465ZM12.2522 12.2958C12.7068 11.8949 12.9341 11.415 12.9341 10.8571V10.4283L10.5166 10.6326C10.062 10.6735 9.72441 10.7993 9.50436 11.0103C9.28388 11.2213 9.17365 11.4897 9.17365 11.8164C9.17365 12.1431 9.29029 12.4051 9.52487 12.6022C9.75902 12.7998 10.0961 12.8981 10.5371 12.8981C11.2259 12.8981 11.7976 12.6976 12.2518 12.2963L12.2522 12.2958Z"></path>
@@ -34,13 +34,12 @@
       <div class="hidden lg:flex lg:gap-x-12">
         <a href="#features" class="font-semibold text-white hover:text-yellow-400 transition-colors">Features</a>
         <a href="/about" class="font-semibold text-white hover:text-yellow-400 transition-colors">Company</a>
-        <a href="#pricing" class="font-semibold text-white hover:text-yellow-400 transition-colors">Pricing</a>
         <a href="/blog" class="font-semibold text-white hover:text-yellow-400 transition-colors">Blog</a>
       </div>
       
       <!-- Desktop CTA Buttons -->
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-        <a href="https://app.jace.ai/signin" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:opacity-80 transition-opacity font-medium">
+        <a href="https://app.jace.ai/signin" class="secondary-button px-6 py-2 hover:opacity-80 transition-opacity font-medium">
           Log In
         </a>
         <button class="bg-yellow-400 text-gray-900 px-6 py-2 rounded-lg hover:bg-yellow-300 transition-colors font-medium">
@@ -74,10 +73,9 @@
       <nav class="flex flex-col space-y-4">
         <a href="#features" class="text-lg font-semibold text-white hover:text-yellow-400 transition-colors">Features</a>
         <a href="/about" class="text-lg font-semibold text-white hover:text-yellow-400 transition-colors">Company</a>
-        <a href="#pricing" class="text-lg font-semibold text-white hover:text-yellow-400 transition-colors">Pricing</a>
         <a href="/blog" class="text-lg font-semibold text-white hover:text-yellow-400 transition-colors">Blog</a>
         <div class="pt-6 border-t border-gray-700">
-          <a href="https://app.jace.ai/signin" class="block bg-gray-800 text-white px-6 py-3 rounded-lg hover:opacity-80 transition-opacity font-medium text-center mb-4">
+          <a href="https://app.jace.ai/signin" class="block secondary-button px-6 py-3 hover:opacity-80 transition-opacity font-medium text-center mb-4">
             Log In
           </a>
           <button class="block w-full bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg hover:bg-yellow-300 transition-colors font-medium">

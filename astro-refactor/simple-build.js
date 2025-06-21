@@ -20,9 +20,20 @@ function processAstroComponent(content, isLayout = false) {
     return `__SCRIPT_${scripts.length - 1}__`;
   });
   
+  // Don't process style content
+  let styles = [];
+  content = content.replace(/<style>([\s\S]*?)<\/style>/g, (match, styleContent) => {
+    styles.push(match);
+    return `__STYLE_${styles.length - 1}__`;
+  });
+  
   // Convert Astro syntax to HTML
   content = content
     .replace(/{([^}]+)}/g, (match, expr) => {
+      // Skip if it's inside a style tag
+      if (content.lastIndexOf('<style', content.indexOf(match)) > content.lastIndexOf('</style', content.indexOf(match))) {
+        return match;
+      }
       // Simple expression evaluation for props
       if (expr.includes('title')) return 'Jace AI | Email Assistant That Understands Your Voice';
       if (expr.includes('description')) return 'Your intelligent email assistant that understands your voice.';
@@ -38,6 +49,11 @@ function processAstroComponent(content, isLayout = false) {
   // Restore scripts
   scripts.forEach((script, index) => {
     content = content.replace(`__SCRIPT_${index}__`, script);
+  });
+  
+  // Restore styles
+  styles.forEach((style, index) => {
+    content = content.replace(`__STYLE_${index}__`, style);
   });
     
   return content;
@@ -77,7 +93,7 @@ function buildPage() {
   
   // Build complete page content
   const pageContent = `
-      <div class="bg-gray-900 min-h-screen">
+      <div class="min-h-screen">
         ${header}
         <main>
           ${hero}

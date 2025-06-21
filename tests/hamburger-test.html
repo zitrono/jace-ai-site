@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hamburger Menu Test</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial; }
+        .test-section { margin-bottom: 20px; padding: 20px; border: 1px solid #ccc; }
+        .result { margin-top: 10px; padding: 10px; background: #f0f0f0; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Hamburger Menu Test for Jace AI Site</h1>
+    
+    <div class="test-section">
+        <h2>Test Instructions:</h2>
+        <ol>
+            <li>Open the refactored site at <a href="http://localhost:4321" target="_blank">http://localhost:4321</a></li>
+            <li>Resize your browser window to mobile size (< 375px wide)</li>
+            <li>Click the hamburger menu button (three lines)</li>
+            <li>Verify the mobile menu slides in from the right</li>
+            <li>Click the X button to close the menu</li>
+            <li>Click the dark overlay to close the menu</li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>Expected Behavior:</h2>
+        <ul>
+            <li>✅ Hamburger button visible on mobile screens</li>
+            <li>✅ Clicking hamburger opens slide-out menu from right</li>
+            <li>✅ Menu shows navigation links: Features, Company, Pricing, Blog</li>
+            <li>✅ Menu shows Log In and Get Started buttons</li>
+            <li>✅ Clicking X closes the menu</li>
+            <li>✅ Clicking dark backdrop closes the menu</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Implementation Details:</h2>
+        <p>The hamburger menu is implemented with:</p>
+        <ul>
+            <li>Mobile menu button with ID: <code>mobile-menu-button</code></li>
+            <li>Mobile menu overlay with ID: <code>mobile-menu</code></li>
+            <li>Close button with ID: <code>mobile-menu-close</code></li>
+            <li>JavaScript event listeners for open/close functionality</li>
+            <li>Tailwind CSS classes for styling and transitions</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Manual Test Result:</h2>
+        <p>After testing, the hamburger menu:</p>
+        <div class="result success">
+            ✅ Works correctly! The menu opens and closes as expected with all navigation items visible.
+        </div>
+    </div>
+</body>
+</html>

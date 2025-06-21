@@ -13,6 +13,13 @@ function processAstroComponent(content, isLayout = false) {
   // Remove frontmatter (between ---)
   content = content.replace(/^---[\s\S]*?---\n/m, '');
   
+  // Don't process JavaScript content inside script tags
+  let scripts = [];
+  content = content.replace(/<script>([\s\S]*?)<\/script>/g, (match, scriptContent) => {
+    scripts.push(match);
+    return `__SCRIPT_${scripts.length - 1}__`;
+  });
+  
   // Convert Astro syntax to HTML
   content = content
     .replace(/{([^}]+)}/g, (match, expr) => {
@@ -27,6 +34,11 @@ function processAstroComponent(content, isLayout = false) {
   if (!isLayout) {
     content = content.replace(/<slot\s*\/>/g, ''); // Remove empty slots
   }
+  
+  // Restore scripts
+  scripts.forEach((script, index) => {
+    content = content.replace(`__SCRIPT_${index}__`, script);
+  });
     
   return content;
 }

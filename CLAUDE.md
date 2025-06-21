@@ -8,34 +8,23 @@ This is the Jace AI website project - a comprehensive testing and development en
 
 ## Project Structure
 
-The repository contains three main components:
+The repository contains two main components:
 
-1. **Original Static Site** (`/`) - Component-based static site with custom build system
-2. **Astro Refactor** (`astro-refactor/`) - Modern Astro.js implementation with Tailwind CSS
-3. **Testing Suite** (`tests/`) - Comprehensive Puppeteer-based testing with POM validation
+1. **Astro Site** (`/`) - Modern Astro.js implementation with Tailwind CSS
+2. **Testing Suite** (`tests/`) - Comprehensive Puppeteer-based testing with POM validation
 
 ## Commands
 
-### Main Static Site (Root Directory)
-- **Build the site**: `npm run build`
-- **Development server**: `npm run dev` (builds and serves on port 8000)
-- **Clean build artifacts**: `npm run clean`
-- **Analyze HTML structure**: `npm run analyze`
-- **Extract components**: `npm run extract`
-- **Format minified HTML**: `npm run unminify`
-
-### Astro Refactor (`astro-refactor/`)
+### Astro Site (Root Directory)
 - **Install dependencies**: `npm install`
 - **Development server**: `npm run dev` (serves on port 4321)
-- **Build for production**: `npm run build`
+- **Build for production**: `npm run build` (builds to `docs/` for GitHub Pages)
 - **Preview production build**: `npm run preview`
 
 ### Testing Suite (`tests/`)
-- **Run baseline tests**: `npm run test:baseline`
-- **Test current build**: `npm run test:current`
-- **Test Astro refactor**: `npm run test:astro`
-- **Visual regression testing**: `npm run test:visual`
-- **Serve static site**: `npm run serve:current`
+- **Comprehensive POM validation**: `node validate-jace-ai-100.js`
+- **Property-level testing**: `node validate-all-properties.js`
+- **Visual regression testing**: Various test files available
 
 ### Advanced POM Testing
 - **Comprehensive POM test (original)**: `node comprehensive-pom-test-original.js`
@@ -81,7 +70,7 @@ The project implements a sophisticated testing system using the Page Object Mode
 
 The project maintains style parity between implementations using:
 
-**CSS Custom Properties** (in `astro-refactor/src/layouts/Layout.astro`):
+**CSS Custom Properties** (in `src/layouts/Layout.astro`):
 ```css
 :root {
   --original-bg: rgb(40, 40, 40);
@@ -108,9 +97,9 @@ The project maintains style parity between implementations using:
    ```
 
 2. **Style Implementation**: Update Astro components to match POM expectations
-   - Edit `astro-refactor/src/layouts/Layout.astro` for global styles
+   - Edit `src/layouts/Layout.astro` for global styles
    - Update component files for specific element classes
-   - Ensure all 71 POM elements are covered
+   - Ensure all elements are covered by comprehensive testing
 
 3. **Comprehensive Testing**: Run full POM validation against refactor
    ```bash
@@ -158,14 +147,13 @@ The project maintains style parity between implementations using:
 - `tests/comprehensive-pom-test-original.js` - POM validation against original
 
 ### Core Implementation Files
-- `astro-refactor/src/layouts/Layout.astro` - Global styles and CSS custom properties
-- `astro-refactor/src/components/Hero.astro` - Main landing section
-- `astro-refactor/src/components/Header.astro` - Navigation and branding
-- `astro-refactor/tailwind.config.mjs` - Tailwind configuration
+- `src/layouts/Layout.astro` - Global styles and CSS custom properties
+- `src/components/Hero.astro` - Main landing section
+- `src/components/Header.astro` - Navigation and branding
+- `tailwind.config.mjs` - Tailwind configuration
 
 ### Build and Configuration
-- `package.json` - Root project scripts and metadata
-- `astro-refactor/package.json` - Astro-specific dependencies
+- `package.json` - Astro project dependencies and scripts
 - `tests/package.json` - Testing dependencies and scripts
 
 ## Debugging
@@ -190,9 +178,10 @@ The project maintains style parity between implementations using:
 ### Development Server Issues
 
 **Astro Development**:
-- Run `npm install` in `astro-refactor/` before first use
+- Run `npm install` in root directory before first use
 - Restart dev server after CSS changes: `npm run dev`
 - Check for Tailwind content configuration warnings
+- Build outputs to `docs/` folder for GitHub Pages deployment
 
 **Static Site Development**:
 - Rebuild after component changes: `npm run build`

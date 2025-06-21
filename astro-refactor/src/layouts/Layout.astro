@@ -1,47 +1,29 @@
 ---
-export interface Props {
-  title: string;
-  description?: string;
+interface Props {
+	title: string;
 }
 
-const { title, description = "Your intelligent email assistant that understands your voice. Write emails faster, schedule meetings seamlessly, and communicate more effectively." } = Astro.props;
+const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en" data-color-mode="dark">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content={description} />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- SEO Meta Tags -->
+  <meta name="description" content="Gain 2 Hours Daily with Jace - AI-powered email assistant" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
-  <link rel="canonical" href="https://jace.ai" />
   
-  <!-- Open Graph -->
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content="https://jace.ai" />
-  <meta property="og:site_name" content="Jace AI" />
-  <meta property="og:image" content="/og-image.jpg" />
-  <meta property="og:type" content="website" />
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="/og-image.jpg" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  
-  <!-- Custom styles for parity with original -->
   <style is:global>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import '../styles/tailwind.css';
+    @import '../styles/components.css';
     
     @font-face {
       font-family: 'Geist';
-      src: local('Inter'), local('Inter-Regular');
+      src: url('/fonts/Geist-Regular.woff2') format('woff2'),
+           url('/fonts/Geist-Regular.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
@@ -49,198 +31,33 @@ const { title, description = "Your intelligent email assistant that understands 
     
     @font-face {
       font-family: 'Geist';
-      src: local('Inter Medium'), local('Inter-Medium');
+      src: url('/fonts/Geist-Medium.woff2') format('woff2'),
+           url('/fonts/Geist-Medium.woff') format('woff');
       font-weight: 500;
       font-style: normal;
+      font-display: swap;
     }
     
     @font-face {
       font-family: 'Geist';
-      src: local('Inter SemiBold'), local('Inter-SemiBold');
+      src: url('/fonts/Geist-SemiBold.woff2') format('woff2'),
+           url('/fonts/Geist-SemiBold.woff') format('woff');
       font-weight: 600;
       font-style: normal;
+      font-display: swap;
     }
     
     @font-face {
       font-family: 'Geist';
-      src: local('Inter Bold'), local('Inter-Bold');
+      src: url('/fonts/Geist-Bold.woff2') format('woff2'),
+           url('/fonts/Geist-Bold.woff') format('woff');
       font-weight: 700;
       font-style: normal;
-    }
-    
-    :root {
-      /* Colors */
-      --original-bg: rgb(40, 40, 40);
-      --original-subtitle: rgba(255, 246, 238, 0.72);
-      --original-cta-bg: rgb(255, 220, 97);
-      --original-cta-text: rgb(41, 48, 69);
-      --original-secondary-bg: rgb(65, 65, 65);
-      --original-secondary-text: rgb(255, 246, 238);
-      --original-badge-bg: rgb(53, 53, 53);
-      --original-badge-border: rgba(255, 255, 255, 0.2);
-      --original-badge-text: rgb(156, 163, 175);
-      --original-avatar-border: rgb(31, 41, 55);
-      
-      /* Typography */
-      --base-font-size: 16px;
-      --base-line-height: 24px;
-    }
-    
-    body {
-      background-color: var(--original-bg) !important;
-      font-family: 'Geist', 'Geist Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-      font-size: var(--base-font-size);
-      line-height: var(--base-line-height);
-    }
-    
-    * {
-      font-family: inherit !important;
-    }
-    
-    /* Hero title gradient to match original */
-    .hero-title-gradient {
-      background: linear-gradient(353deg, rgb(153, 153, 153) 36%, rgb(255, 255, 255) 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: rgba(0, 0, 0, 0) !important;
-      font-size: 60px !important;
-      font-weight: 600 !important;
-      line-height: 60px !important;
-      letter-spacing: -1.5px !important;
-    }
-    
-    /* Subtitle color */
-    .hero-subtitle {
-      color: var(--original-subtitle);
-      font-size: 24px !important;
-      font-weight: 500 !important;
-      line-height: 32px !important;
-      margin-top: 16px !important;
-    }
-    
-    /* Primary CTA button */
-    .cta-button-original {
-      background-color: var(--original-cta-bg) !important;
-      color: var(--original-cta-text) !important;
-      font-size: 16px !important;
-      font-weight: 500 !important;
-      padding: 0px 24px !important;
-      border-radius: 8px !important;
-      border: 1px solid rgba(255, 255, 255, 0.02) !important;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px !important;
-    }
-    
-    /* Secondary button (Login) */
-    .secondary-button {
-      background-color: var(--original-secondary-bg) !important;
-      color: var(--original-secondary-text) !important;
-      border-radius: 8px !important;
-      padding: 0px 24px !important;
-      font-weight: 500 !important;
-      border: 1px solid rgba(255, 255, 255, 0.02) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-    
-    /* Header styles */
-    /* Removed .header-transparent rule to allow inline styles to work */
-    
-    /* Navigation links */
-    nav a {
-      font-size: 16px;
-      font-weight: 400;
-      text-decoration: none !important;
-      color: inherit;
-    }
-    
-    nav a,
-    nav a:visited,
-    nav a:hover,
-    nav a:active {
-      text-decoration: none !important;
-    }
-    
-    /* Force text decoration removal */
-    header nav a {
-      text-decoration: none !important;
-      text-decoration-line: none !important;
-      text-decoration-color: transparent !important;
-    }
-    
-    /* Logo styles */
-    header svg {
-      fill: rgb(255, 255, 255);
-      width: 70px;
-      height: 33.25px;
-    }
-    
-    /* CASA Badge */
-    .casa-badge {
-      background-color: var(--original-badge-bg) !important;
-      border: 2px solid var(--original-badge-border) !important;
-      border-radius: 9999px !important;
-      color: var(--original-badge-text) !important;
-    }
-    
-    /* Trust indicators - Avatars */
-    .avatar-circle {
-      width: 32px !important;
-      height: 32px !important;
-      border: 2px solid var(--original-avatar-border) !important;
-    }
-    
-    /* Video container gradient */
-    .video-gradient {
-      background: linear-gradient(to bottom right, rgb(59, 130, 246), rgb(20, 184, 166)) !important;
-      border-radius: 8px !important;
-      aspect-ratio: 16 / 9;
-    }
-    
-    /* Company logos opacity */
-    .company-logos-opacity {
-      opacity: 0.8 !important;
-    }
-    
-    /* Override Tailwind opacity for company logos */
-    .opacity-60 {
-      opacity: 0.8 !important;
-    }
-    
-    /* Section spacing */
-    .hero-spacing {
-      padding-top: 128px !important;
-    }
-    
-    .section-spacing {
-      padding: 24px 0px 8px 0px !important;
-    }
-    
-    /* Apply section spacing to first section, but preserve hero padding */
-    section:first-of-type {
-      padding: 128px 0px 8px 0px !important;
-    }
-    
-    /* Mobile menu styles */
-    .mobile-menu-overlay {
-      background-color: rgb(17, 24, 39) !important;
-      max-width: 24rem !important;
-    }
-    
-    .mobile-menu-backdrop {
-      background-color: rgba(0, 0, 0, 0.5) !important;
-    }
-    
-    /* Fix mobile button styles */
-    @media (max-width: 1023px) {
-      .cta-button-original {
-        font-size: 14px !important;
-      }
+      font-display: swap;
     }
   </style>
 </head>
-<body class="text-white font-sans antialiased">
+<body class="bg-gray-900 text-white font-sans antialiased" style="background-color: rgb(40, 40, 40);">
   <slot />
 </body>
 </html>

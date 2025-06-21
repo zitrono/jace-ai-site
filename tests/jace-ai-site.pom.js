@@ -180,7 +180,7 @@ export class JaceAISitePOM {
 
     // 19. NEW: Checkmarks in pricing features
     checkmarks: {
-      pricingCheckmarks: 'svg.lucide-check.text-emerald-500', // FIXED: combined selector for pricing checkmarks
+      pricingCheckmarks: '#pricing svg.text-emerald-500', // Checkmarks in pricing section
       allCheckmarks: 'svg[stroke="currentColor"][fill="none"]',
       featureCheckmarks: 'svg.text-emerald-500',
       checkmarkIcons: 'svg[fill="none"][stroke="currentColor"]'
@@ -229,16 +229,6 @@ export class JaceAISitePOM {
     }
     };
 
-    // Return site-adaptive selectors
-    if (this.isRefactor) {
-      // Override selectors for refactor site based on actual implementation
-      baseSelectors.checkmarks.pricingCheckmarks = 'svg.text-yellow-400'; // Refactor uses yellow checkmarks
-      baseSelectors.faqInteractive.buttons = 'button[onclick*="toggleFAQ"]'; // Refactor uses onclick instead of aria-expanded
-      baseSelectors.hero.ctaButton = '[data-test="cta-button"], button.btn-primary'; // Use data-test attributes
-      baseSelectors.navigation.ctaHeader = '[data-test="cta-button"]'; // Header CTA has data-test
-      baseSelectors.navigation.loginButton = '[data-test="secondary-button"]'; // Login has data-test
-    }
-
     return baseSelectors;
   }
 
@@ -276,7 +266,7 @@ export class JaceAISitePOM {
       headerButtonMobile: {
         backgroundColor: 'rgb(255, 220, 97)',
         color: 'rgb(41, 48, 69)',
-        padding: this.isRefactor ? '8px 16px' : '0px 8px', // Refactor uses Tailwind btn-sm
+        padding: '0px 24px', // Original has no vertical padding
         fontSize: '14px',
         borderRadius: '6px'
       },
@@ -285,7 +275,9 @@ export class JaceAISitePOM {
         color: 'rgb(41, 48, 69)',
         padding: '0px 24px',
         fontSize: '16px',
-        borderRadius: '8px'
+        borderRadius: '8px',
+        height: '40px',
+        lineHeight: '24px'
       },
       secondaryButton: {
         backgroundColor: 'rgb(65, 65, 65)',
@@ -298,7 +290,7 @@ export class JaceAISitePOM {
       },
       // NEW: Checkmark styles
       checkmark: {
-        color: this.isRefactor ? 'rgb(250, 204, 21)' : 'rgb(16, 185, 129)', // Yellow 400 for refactor, Emerald 500 for original
+        color: 'rgb(16, 185, 129)', // Emerald 500
         fill: 'none',
         stroke: 'currentColor',
         width: '24px',
@@ -368,9 +360,9 @@ export class JaceAISitePOM {
     await this.page.goto(targetUrl, { waitUntil: 'networkidle0' });
     
     // Auto-detect if this is the refactor site
-    this.isRefactor = targetUrl.includes('localhost') || targetUrl.includes('4321');
+    // No longer needed - we enforce strict parity
     
-    console.log(`🌐 Detected site type: ${this.isRefactor ? 'refactor' : 'original'} (${targetUrl})`);
+    console.log(`🌐 Navigated to: ${targetUrl}`);
   }
 
   // Helper methods
@@ -447,18 +439,17 @@ export class JaceAISitePOM {
       const buttonStyles = await this.getElementStyles(headerButtonSelector);
       if (buttonStyles) {
         // Dynamic expected padding based on site type and viewport
-        let expectedPadding;
-        if (this.isRefactor) {
-          // Refactor site has !important on btn-primary padding
-          expectedPadding = '0px 24px';
-        } else if (isMobile) {
-          expectedPadding = '0px 8px';
-        } else {
-          expectedPadding = '0px 24px';
-        }
+        // All buttons should have 0px 24px padding
+        const expectedPadding = '0px 24px';
         
         if (buttonStyles.padding !== expectedPadding) {
           errors.push(`Header button padding mismatch at ${viewport.width}px: ${buttonStyles.padding} (expected: ${expectedPadding})`);
+        }
+        
+        // Check button height
+        const expectedHeight = isMobile ? '32px' : '40px';
+        if (buttonStyles.height && buttonStyles.height !== expectedHeight && buttonStyles.height !== 'auto') {
+          errors.push(`Header button height mismatch at ${viewport.width}px: ${buttonStyles.height} (expected: ${expectedHeight})`);
         }
       }
     } else {
@@ -478,8 +469,8 @@ export class JaceAISitePOM {
     if (checkmarkExists) {
       const checkmarkStyles = await this.getElementStyles(this.selectors.checkmarks.pricingCheckmarks);
       if (checkmarkStyles) {
-        // Dynamic expected color based on site type
-        const expectedColor = this.isRefactor ? 'rgb(255, 220, 97)' : 'rgb(16, 185, 129)'; // Tailwind yellow-400 actual value
+        // Expected color is always emerald-500
+        const expectedColor = 'rgb(16, 185, 129)'; // emerald-500
         if (checkmarkStyles.color !== expectedColor) {
           errors.push(`Checkmark color mismatch: ${checkmarkStyles.color} (expected: ${expectedColor})`);
         }

@@ -1,204 +1,261 @@
-// Extract exact original values for new POM elements
+// Extract all exact design values from the original jace.ai site
+// This will be our source of truth for design parity
+
 import puppeteer from 'puppeteer';
 
 async function extractOriginalValues() {
-  console.log('🔍 Extracting exact original values from jace.ai...');
-  
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
+  await page.setViewport({ width: 1920, height: 1080 });
   
-  try {
-    const results = {};
+  console.log('🔍 Extracting all design values from original site...\n');
+  
+  await page.goto('http://localhost:8000', { waitUntil: 'networkidle0' });
+  
+  const values = {};
+  
+  // 1. Button styles (Get Started for Free)
+  console.log('📱 Button Styles:');
+  const ctaButtons = await page.$$eval('button', buttons => 
+    buttons.filter(btn => btn.textContent.includes('Get Started')).map(btn => {
+      const styles = window.getComputedStyle(btn);
+      return {
+        text: btn.textContent.trim(),
+        padding: styles.padding,
+        backgroundColor: styles.backgroundColor,
+        color: styles.color,
+        borderRadius: styles.borderRadius,
+        fontSize: styles.fontSize,
+        fontWeight: styles.fontWeight,
+        height: styles.height,
+        lineHeight: styles.lineHeight,
+        border: styles.border,
+        boxShadow: styles.boxShadow,
+        className: btn.className
+      };
+    })
+  );
+  values.ctaButtons = ctaButtons;
+  console.log('CTA Buttons:', ctaButtons);
+  
+  // 2. Checkmark colors in pricing
+  console.log('\n✅ Checkmark Colors:');
+  const checkmarkColors = await page.$$eval('#pricing svg', svgs => 
+    svgs.map(svg => {
+      const styles = window.getComputedStyle(svg);
+      return {
+        color: styles.color,
+        fill: styles.fill,
+        stroke: styles.stroke,
+        className: svg.className.baseVal || svg.className
+      };
+    })
+  );
+  values.checkmarkColors = checkmarkColors;
+  console.log('Checkmarks:', checkmarkColors);
+  
+  // 3. Feature card styles (Auto Drafts block)
+  console.log('\n📦 Feature Cards:');
+  const featureCards = await page.$$eval('.grid > div', cards => 
+    cards.slice(0, 3).map(card => {
+      const styles = window.getComputedStyle(card);
+      const heading = card.querySelector('h3');
+      return {
+        borderRadius: styles.borderRadius,
+        backgroundColor: styles.backgroundColor,
+        padding: styles.padding,
+        border: styles.border,
+        heading: heading ? heading.textContent : null
+      };
+    })
+  );
+  values.featureCards = featureCards;
+  console.log('Feature cards:', featureCards);
+  
+  // 4. Typography (fonts, sizes, line heights)
+  console.log('\n📝 Typography:');
+  const typography = await page.evaluate(() => {
+    const h1 = document.querySelector('h1');
+    const h1Styles = window.getComputedStyle(h1);
     
-    // Test multiple viewports to get exact values
-    const viewports = [
-      { width: 320, height: 568, name: 'mobile' },
-      { width: 768, height: 1024, name: 'tablet' },
-      { width: 1920, height: 1080, name: 'desktop' }
-    ];
+    const h2 = document.querySelector('h2');
+    const h2Styles = h2 ? window.getComputedStyle(h2) : null;
     
-    for (const viewport of viewports) {
-      console.log(`📱 Extracting from ${viewport.name} (${viewport.width}x${viewport.height})`);
-      
-      await page.setViewport({ width: viewport.width, height: viewport.height });
-      await page.goto('https://jace.ai', { waitUntil: 'networkidle0' });
-      
-      const viewportData = await page.evaluate(() => {
-        const data = {};
-        
-        // 1. Header button exact styles
-        const headerButtons = Array.from(document.querySelectorAll('header button, header a'))
-          .filter(btn => btn.textContent?.includes('Get Started') || btn.textContent?.includes('Free'));
-        
-        data.headerButtons = headerButtons.map(btn => {
-          const styles = window.getComputedStyle(btn);
-          return {
-            text: btn.textContent?.trim(),
-            padding: styles.padding,
-            paddingLeft: styles.paddingLeft,
-            paddingRight: styles.paddingRight,
-            paddingTop: styles.paddingTop,
-            paddingBottom: styles.paddingBottom,
-            fontSize: styles.fontSize,
-            backgroundColor: styles.backgroundColor,
-            color: styles.color,
-            borderRadius: styles.borderRadius,
-            display: styles.display,
-            visibility: styles.visibility,
-            className: btn.className
-          };
-        });
-        
-        // 2. Checkmark exact colors and properties
-        const checkmarks = Array.from(document.querySelectorAll('svg'))
-          .filter(svg => {
-            const parent = svg.closest('li, div');
-            const parentText = parent?.textContent?.toLowerCase() || '';
-            return parentText.includes('everything') || 
-                   parentText.includes('plus') || 
-                   parentText.includes('pro') ||
-                   parentText.includes('draft') ||
-                   parentText.includes('label') ||
-                   parentText.includes('email');
-          });
-        
-        data.checkmarks = checkmarks.slice(0, 10).map(svg => {
-          const styles = window.getComputedStyle(svg);
-          const parent = svg.closest('li, div');
-          return {
-            fill: svg.getAttribute('fill'),
-            stroke: svg.getAttribute('stroke'),
-            color: styles.color,
-            width: styles.width,
-            height: styles.height,
-            parentText: parent?.textContent?.trim().slice(0, 100),
-            viewBox: svg.getAttribute('viewBox'),
-            className: svg.className?.baseVal || svg.className
-          };
-        });
-        
-        // 3. FAQ button exact properties
-        const faqButtons = Array.from(document.querySelectorAll('button[aria-expanded]'))
-          .filter(btn => btn.textContent?.includes('?') || 
-                        btn.getAttribute('aria-expanded') !== null);
-        
-        data.faqButtons = faqButtons.map(btn => {
-          const styles = window.getComputedStyle(btn);
-          return {
-            ariaExpanded: btn.getAttribute('aria-expanded'),
-            text: btn.textContent?.trim().slice(0, 100),
-            cursor: styles.cursor,
-            pointerEvents: styles.pointerEvents,
-            backgroundColor: styles.backgroundColor,
-            color: styles.color,
-            border: styles.border,
-            className: btn.className
-          };
-        });
-        
-        // 4. Section backgrounds exact values
-        const sections = Array.from(document.querySelectorAll('section, main > div, [class*="bg-"]'))
-          .filter(section => {
-            const styles = window.getComputedStyle(section);
-            return styles.backgroundColor !== 'rgba(0, 0, 0, 0)' && 
-                   styles.backgroundColor !== 'transparent';
-          });
-        
-        data.sectionBackgrounds = sections.map((section, i) => {
-          const styles = window.getComputedStyle(section);
-          return {
-            index: i,
-            backgroundColor: styles.backgroundColor,
-            backgroundImage: styles.backgroundImage,
-            background: styles.background,
-            className: section.className,
-            tagName: section.tagName,
-            textContent: section.textContent?.trim().slice(0, 200)
-          };
-        });
-        
-        // 5. Get all button variations for comprehensive padding check
-        const allButtons = Array.from(document.querySelectorAll('button, a[class*="btn"], [role="button"]'))
-          .filter(btn => btn.textContent?.trim());
-        
-        data.allButtons = allButtons.slice(0, 20).map(btn => {
-          const styles = window.getComputedStyle(btn);
-          return {
-            text: btn.textContent?.trim().slice(0, 50),
-            padding: styles.padding,
-            paddingLeft: styles.paddingLeft,
-            paddingRight: styles.paddingRight,
-            backgroundColor: styles.backgroundColor,
-            color: styles.color,
-            fontSize: styles.fontSize,
-            display: styles.display,
-            className: btn.className,
-            tagName: btn.tagName
-          };
-        });
-        
-        return data;
-      });
-      
-      results[viewport.name] = viewportData;
+    const heroSubtitle = document.querySelector('h1 + p');
+    const subtitleStyles = heroSubtitle ? window.getComputedStyle(heroSubtitle) : null;
+    
+    return {
+      h1: {
+        fontSize: h1Styles.fontSize,
+        fontFamily: h1Styles.fontFamily,
+        fontWeight: h1Styles.fontWeight,
+        lineHeight: h1Styles.lineHeight,
+        letterSpacing: h1Styles.letterSpacing,
+        color: h1Styles.color
+      },
+      h2: h2Styles ? {
+        fontSize: h2Styles.fontSize,
+        fontFamily: h2Styles.fontFamily,
+        fontWeight: h2Styles.fontWeight,
+        lineHeight: h2Styles.lineHeight,
+        color: h2Styles.color
+      } : null,
+      heroSubtitle: subtitleStyles ? {
+        fontSize: subtitleStyles.fontSize,
+        fontFamily: subtitleStyles.fontFamily,
+        fontWeight: subtitleStyles.fontWeight,
+        lineHeight: subtitleStyles.lineHeight,
+        color: subtitleStyles.color,
+        opacity: subtitleStyles.opacity
+      } : null
+    };
+  });
+  values.typography = typography;
+  console.log('Typography:', typography);
+  
+  // 5. FAQ section styles
+  console.log('\n❓ FAQ Section:');
+  const faqSection = await page.evaluate(() => {
+    const section = Array.from(document.querySelectorAll('section'))
+      .find(s => s.textContent.includes('Frequently asked questions'));
+    
+    if (!section) return null;
+    
+    const sectionStyles = window.getComputedStyle(section);
+    const buttons = section.querySelectorAll('button[aria-expanded]');
+    const firstButton = buttons[0];
+    const buttonStyles = firstButton ? window.getComputedStyle(firstButton) : null;
+    
+    return {
+      section: {
+        backgroundColor: sectionStyles.backgroundColor,
+        backgroundImage: sectionStyles.backgroundImage,
+        padding: sectionStyles.padding
+      },
+      buttons: buttonStyles ? {
+        padding: buttonStyles.padding,
+        backgroundColor: buttonStyles.backgroundColor,
+        borderRadius: buttonStyles.borderRadius,
+        ariaExpanded: firstButton.getAttribute('aria-expanded')
+      } : null,
+      buttonCount: buttons.length
+    };
+  });
+  values.faqSection = faqSection;
+  console.log('FAQ Section:', faqSection);
+  
+  // 6. Pricing values
+  console.log('\n💰 Pricing:');
+  const pricing = await page.$$eval('#pricing .text-5xl', prices => 
+    prices.map(el => ({
+      price: el.textContent.trim(),
+      fontSize: window.getComputedStyle(el).fontSize,
+      fontWeight: window.getComputedStyle(el).fontWeight
+    }))
+  );
+  values.pricing = pricing;
+  console.log('Pricing:', pricing);
+  
+  // 7. Section padding/spacing
+  console.log('\n📏 Section Spacing:');
+  const sectionSpacing = await page.$$eval('section', sections => 
+    sections.slice(0, 5).map(section => {
+      const styles = window.getComputedStyle(section);
+      const heading = section.querySelector('h2');
+      return {
+        padding: styles.padding,
+        margin: styles.margin,
+        sectionName: heading ? heading.textContent.trim() : 'Unknown'
+      };
+    })
+  );
+  values.sectionSpacing = sectionSpacing;
+  console.log('Section spacing:', sectionSpacing);
+  
+  // 8. "Start saving 90%" block
+  console.log('\n💡 Start Saving 90% Block:');
+  const savingBlock = await page.evaluate(() => {
+    const block = Array.from(document.querySelectorAll('section'))
+      .find(s => s.textContent.includes('Start saving 90%'));
+    
+    if (!block) {
+      // Try alternative selectors
+      const altBlock = document.querySelector('[class*="gradient"]');
+      if (altBlock && altBlock.textContent.includes('90%')) {
+        return {
+          found: true,
+          selector: '[class*="gradient"]',
+          text: altBlock.textContent.trim(),
+          styles: {
+            background: window.getComputedStyle(altBlock).background,
+            backgroundColor: window.getComputedStyle(altBlock).backgroundColor,
+            backgroundImage: window.getComputedStyle(altBlock).backgroundImage,
+            padding: window.getComputedStyle(altBlock).padding,
+            borderRadius: window.getComputedStyle(altBlock).borderRadius
+          }
+        };
+      }
+      return { found: false, searchedText: 'Start saving 90%' };
     }
     
-    console.log('\n📋 ORIGINAL VALUES EXTRACTION:');
-    console.log(JSON.stringify(results, null, 2));
+    const styles = window.getComputedStyle(block);
+    const heading = block.querySelector('h2');
+    const button = block.querySelector('button');
     
-    await browser.close();
-    return results;
+    return {
+      found: true,
+      text: heading ? heading.textContent.trim() : block.textContent.trim(),
+      styles: {
+        background: styles.background,
+        backgroundColor: styles.backgroundColor,
+        backgroundImage: styles.backgroundImage,
+        padding: styles.padding,
+        borderRadius: styles.borderRadius
+      },
+      button: button ? {
+        text: button.textContent.trim(),
+        backgroundColor: window.getComputedStyle(button).backgroundColor,
+        color: window.getComputedStyle(button).color
+      } : null
+    };
+  });
+  values.savingBlock = savingBlock;
+  console.log('Saving 90% block:', savingBlock);
+  
+  // 9. Header navigation styles
+  console.log('\n🧭 Navigation:');
+  const navigation = await page.evaluate(() => {
+    const nav = document.querySelector('nav');
+    const navLinks = nav ? nav.querySelectorAll('a') : [];
+    const mobileMenuButton = document.querySelector('button[aria-label*="menu"]');
     
-  } catch (error) {
-    await browser.close();
-    console.error('❌ Extraction failed:', error.message);
-    return null;
-  }
+    return {
+      links: Array.from(navLinks).map(link => ({
+        text: link.textContent.trim(),
+        href: link.getAttribute('href'),
+        color: window.getComputedStyle(link).color,
+        fontSize: window.getComputedStyle(link).fontSize,
+        fontWeight: window.getComputedStyle(link).fontWeight
+      })),
+      mobileMenuButton: mobileMenuButton ? {
+        ariaLabel: mobileMenuButton.getAttribute('aria-label'),
+        ariaExpanded: mobileMenuButton.getAttribute('aria-expanded')
+      } : null
+    };
+  });
+  values.navigation = navigation;
+  console.log('Navigation:', navigation);
+  
+  // Save to file
+  const fs = await import('fs/promises');
+  await fs.writeFile(
+    'original-design-values.json', 
+    JSON.stringify(values, null, 2)
+  );
+  
+  console.log('\n✅ Design values extracted and saved to original-design-values.json');
+  
+  await browser.close();
 }
 
-extractOriginalValues().then(results => {
-  if (results) {
-    console.log('\n✅ Original values extraction complete');
-    
-    // Generate exact POM values
-    console.log('\n📊 EXACT VALUES FOR POM:');
-    
-    Object.keys(results).forEach(viewport => {
-      const data = results[viewport];
-      console.log(`\n${viewport.toUpperCase()}:`);
-      
-      if (data.headerButtons.length > 0) {
-        const btn = data.headerButtons[0];
-        console.log(`  Header Button:`);
-        console.log(`    padding: '${btn.padding}'`);
-        console.log(`    backgroundColor: '${btn.backgroundColor}'`);
-        console.log(`    color: '${btn.color}'`);
-        console.log(`    fontSize: '${btn.fontSize}'`);
-        console.log(`    borderRadius: '${btn.borderRadius}'`);
-      }
-      
-      if (data.checkmarks.length > 0) {
-        const check = data.checkmarks[0];
-        console.log(`  Checkmark:`);
-        console.log(`    color: '${check.color}'`);
-        console.log(`    fill: '${check.fill}'`);
-        console.log(`    stroke: '${check.stroke}'`);
-      }
-      
-      if (data.faqButtons.length > 0) {
-        const faq = data.faqButtons[0];
-        console.log(`  FAQ Button:`);
-        console.log(`    ariaExpanded: '${faq.ariaExpanded}'`);
-        console.log(`    cursor: '${faq.cursor}'`);
-        console.log(`    pointerEvents: '${faq.pointerEvents}'`);
-      }
-      
-      if (data.sectionBackgrounds.length > 0) {
-        const section = data.sectionBackgrounds[0];
-        console.log(`  Section Background:`);
-        console.log(`    backgroundColor: '${section.backgroundColor}'`);
-        console.log(`    backgroundImage: '${section.backgroundImage}'`);
-      }
-    });
-  }
-});
+extractOriginalValues().catch(console.error);

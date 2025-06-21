@@ -23,7 +23,7 @@
         <button class="btn-primary btn-sm rounded-md md:hidden">
           Get Started for Free
         </button>
-        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2.5 text-white" aria-label="Open main menu">
+        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center rounded-md p-2.5 text-white" aria-label="Open main menu" aria-expanded="false">
           <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
@@ -42,7 +42,7 @@
         <a href="https://app.jace.ai/signin" class="btn-secondary" data-test="secondary-button">
           Log In
         </a>
-        <button class="btn-primary" data-test="cta-button">
+        <button class="btn-primary btn-lg" data-test="cta-button">
           Get Started for Free
         </button>
       </div>
@@ -78,7 +78,7 @@
           <a href="https://app.jace.ai/signin" class="btn-secondary w-full mb-4 text-center">
             Log In
           </a>
-          <button class="btn-primary w-full">
+          <button class="btn-primary btn-lg w-full">
             Get Started for Free
           </button>
         </div>
@@ -94,16 +94,19 @@
   
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.remove('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'true');
   });
   
   mobileMenuClose?.addEventListener('click', () => {
     mobileMenu?.classList.add('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'false');
   });
   
   // Close menu when clicking on backdrop
   mobileMenu?.addEventListener('click', (e) => {
     if (e.target === mobileMenu || e.target === mobileMenu.firstElementChild) {
       mobileMenu.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
     }
   });
 </script>

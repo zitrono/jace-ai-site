@@ -1,0 +1,370 @@
+{
+  "ctaButtons": [
+    {
+      "text": "Get Started for Free",
+      "padding": "0px 24px",
+      "backgroundColor": "rgb(255, 220, 97)",
+      "color": "rgb(41, 48, 69)",
+      "borderRadius": "6px",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "32px",
+      "lineHeight": "20px",
+      "border": "1px solid rgba(255, 255, 255, 0.02)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+      "className": "inline-flex items-center justify-center gap-2 border border-[rgba(255,255,255,0.02)] whitespace-nowrap rounded-md font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-200 active:scale-[.99] bg-surface-highlight text-text-body-inverted shadow-sm hover:bg-surface-highlight-hover h-8 text-sm px-2 sm:px-6 cursor-pointer md:hidden"
+    },
+    {
+      "text": "Get Started for Free",
+      "padding": "0px 24px",
+      "backgroundColor": "rgb(255, 220, 97)",
+      "color": "rgb(41, 48, 69)",
+      "borderRadius": "8px",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "height": "40px",
+      "lineHeight": "24px",
+      "border": "1px solid rgba(255, 255, 255, 0.02)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+      "className": "inline-flex items-center justify-center gap-2 border border-[rgba(255,255,255,0.02)] whitespace-nowrap font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-200 active:scale-[.99] bg-surface-highlight text-text-body-inverted shadow-sm hover:bg-surface-highlight-hover h-10 rounded-lg text-md px-2 sm:px-6 cursor-pointer"
+    },
+    {
+      "text": "Get Started for Free",
+      "padding": "0px 24px",
+      "backgroundColor": "rgb(255, 220, 97)",
+      "color": "rgb(41, 48, 69)",
+      "borderRadius": "8px",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "height": "40px",
+      "lineHeight": "24px",
+      "border": "1px solid rgba(255, 255, 255, 0.02)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+      "className": "inline-flex items-center justify-center gap-2 border border-[rgba(255,255,255,0.02)] whitespace-nowrap font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-200 active:scale-[.99] bg-surface-highlight text-text-body-inverted shadow-sm hover:bg-surface-highlight-hover h-10 rounded-lg text-md px-2 sm:px-6 cursor-pointer"
+    },
+    {
+      "text": "Get Started for Free",
+      "padding": "0px 24px",
+      "backgroundColor": "rgb(255, 220, 97)",
+      "color": "rgb(41, 48, 69)",
+      "borderRadius": "8px",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "height": "40px",
+      "lineHeight": "24px",
+      "border": "1px solid rgba(255, 255, 255, 0.02)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+      "className": "inline-flex items-center justify-center gap-2 border border-[rgba(255,255,255,0.02)] whitespace-nowrap font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-200 active:scale-[.99] bg-surface-highlight text-text-body-inverted shadow-sm hover:bg-surface-highlight-hover h-10 rounded-lg px-6 text-md mt-6 w-full cursor-pointer"
+    },
+    {
+      "text": "Get Started for Free",
+      "padding": "0px 24px",
+      "backgroundColor": "rgb(255, 220, 97)",
+      "color": "rgb(41, 48, 69)",
+      "borderRadius": "8px",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "height": "40px",
+      "lineHeight": "24px",
+      "border": "1px solid rgba(255, 255, 255, 0.02)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
+      "className": "inline-flex items-center justify-center gap-2 border border-[rgba(255,255,255,0.02)] whitespace-nowrap font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-200 active:scale-[.99] bg-surface-highlight text-text-body-inverted shadow-sm hover:bg-surface-highlight-hover h-10 rounded-lg px-6 text-md mt-6 w-full cursor-pointer"
+    }
+  ],
+  "checkmarkColors": [
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "oklch(0.696 0.17 162.48)",
+      "fill": "none",
+      "stroke": "oklch(0.696 0.17 162.48)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md flex-shrink-0 h-5 w-5 text-emerald-500 mt-0.5 mr-3 flex-shrink-0"
+    },
+    {
+      "color": "rgb(255, 220, 97)",
+      "fill": "none",
+      "stroke": "rgb(255, 220, 97)",
+      "className": "inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md text-surface-highlight mb-3 w-8 h-8"
+    },
+    {
+      "color": "rgb(255, 220, 97)",
+      "fill": "none",
+      "stroke": "rgb(255, 220, 97)",
+      "className": "lucide lucide-check inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md text-surface-highlight mb-3 w-8 h-8"
+    },
+    {
+      "color": "rgb(255, 220, 97)",
+      "fill": "rgb(255, 220, 97)",
+      "stroke": "none",
+      "className": "inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md text-surface-highlight mb-3 w-8 h-8"
+    },
+    {
+      "color": "rgb(255, 220, 97)",
+      "fill": "rgb(255, 220, 97)",
+      "stroke": "none",
+      "className": "inline-block flex-grow-0 flex-shrink-0 w-icon-md h-icon-md text-surface-highlight mb-3 w-8 h-8"
+    }
+  ],
+  "featureCards": [
+    {
+      "borderRadius": "0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "1px",
+      "border": "0px solid rgb(0, 0, 0)",
+      "heading": null
+    },
+    {
+      "borderRadius": "0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "1px",
+      "border": "0px solid rgb(0, 0, 0)",
+      "heading": null
+    },
+    {
+      "borderRadius": "0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "1px",
+      "border": "0px solid rgb(0, 0, 0)",
+      "heading": null
+    }
+  ],
+  "typography": {
+    "h1": {
+      "fontSize": "60px",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontWeight": "600",
+      "lineHeight": "60px",
+      "letterSpacing": "-1.5px",
+      "color": "rgba(0, 0, 0, 0)"
+    },
+    "h2": {
+      "fontSize": "16px",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontWeight": "600",
+      "lineHeight": "28px",
+      "color": "rgb(255, 220, 97)"
+    },
+    "heroSubtitle": {
+      "fontSize": "24px",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontWeight": "500",
+      "lineHeight": "32px",
+      "color": "rgba(255, 246, 238, 0.72)",
+      "opacity": "1"
+    }
+  },
+  "faqSection": null,
+  "pricing": [],
+  "sectionSpacing": [],
+  "savingBlock": {
+    "found": false,
+    "searchedText": "Start saving 90%"
+  },
+  "navigation": {
+    "links": [
+      {
+        "text": "Jace AI\n\nJace Logo",
+        "href": "index.html",
+        "color": "rgb(0, 0, 0)",
+        "fontSize": "16px",
+        "fontWeight": "400"
+      },
+      {
+        "text": "Features",
+        "href": "index.html",
+        "color": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "fontWeight": "600"
+      },
+      {
+        "text": "Company",
+        "href": "about.html",
+        "color": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "fontWeight": "600"
+      },
+      {
+        "text": "Pricing",
+        "href": "index.html#pricing",
+        "color": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "fontWeight": "600"
+      },
+      {
+        "text": "Blog",
+        "href": "blog.html",
+        "color": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "fontWeight": "600"
+      },
+      {
+        "text": "Log In",
+        "href": "https://app.jace.ai/signin",
+        "color": "rgb(255, 246, 238)",
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    ],
+    "mobileMenuButton": null
+  }
+}

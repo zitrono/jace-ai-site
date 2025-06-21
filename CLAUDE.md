@@ -25,6 +25,8 @@ The repository contains two main components:
 - **Comprehensive POM validation**: `node validate-jace-ai-100.js`
 - **Property-level testing**: `node validate-all-properties.js`
 - **Visual regression testing**: Various test files available
+- **iOS Safari mobile testing**: `node ios-safari-mobile-pom.js`
+- **Mobile POM validation**: `node mobile-pom-validation.js`
 
 ### Advanced POM Testing
 - **Comprehensive POM test (original)**: `node comprehensive-pom-test-original.js`
@@ -145,6 +147,9 @@ The project maintains style parity between implementations using:
 - `tests/original-site.pom.js` - Complete POM with 71 tracked elements
 - `tests/comprehensive-pom-test.js` - Full validation suite for refactor
 - `tests/comprehensive-pom-test-original.js` - POM validation against original
+- `tests/ios-safari-mobile-pom.js` - Mobile-optimized POM for iOS Safari testing
+- `tests/ios-safari-pom.js` - iOS Safari-specific Page Object Model
+- `tests/mobile-pom-validation.js` - Mobile validation with touch target testing
 
 ### Core Implementation Files
 - `src/layouts/Layout.astro` - Global styles and CSS custom properties
@@ -202,3 +207,38 @@ The project maintains style parity between implementations using:
 - Astro dev server needs restart after significant Layout.astro changes
 - Gradient text effects require specific CSS properties for cross-browser compatibility
 - All 71 POM elements should achieve near-100% test success for complete parity
+
+## iOS Safari Mobile Testing
+
+### Mobile POM Architecture
+- **87% Mobile Compatibility** achieved (13/15 tests passed)
+- **70+ Mobile-Specific Selectors** implemented for iOS Safari
+- **4 iPhone Models** tested: iPhone SE, 15, 16 Pro, 16 Pro Max
+- **Touch Target Validation**: 44px minimum touch target requirements
+- **Mobile Menu Interaction**: Hamburger menu expand/collapse testing
+
+### Mobile Testing Commands
+- **iOS Simulator Integration**: Uses MCP iOS Simulator tools for device testing
+- **Mobile POM Validation**: `node mobile-pom-validation.js` for touch-friendly testing
+- **Multi-Device Screenshots**: Automated capture across iPhone models
+- **Mobile-Specific Selectors**: Optimized for iOS Safari rendering differences
+
+### Mobile Development Guidelines
+**Touch Target Requirements**:
+- Minimum 44px height for all interactive elements
+- CTA buttons must meet accessibility standards
+- Mobile menu items need adequate spacing
+
+**iOS Safari Compatibility**:
+- Test with iOS Simulator using MCP integration
+- Verify mobile menu functionality (hamburger → expand → close)
+- Validate responsive breakpoints on actual device viewports
+- Check touch interaction on all CTAs and navigation elements
+
+**Mobile POM Elements**:
+- Hero title visibility on small screens
+- Mobile navigation hamburger menu
+- Touch-friendly CTA buttons
+- Video section positioning
+- Company logos responsive scaling
+- Mobile menu overlay functionality

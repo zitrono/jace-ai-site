@@ -1,0 +1,41 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Your intelligent email assistant that understands your voice. Write emails faster, schedule meetings seamlessly, and communicate more effectively." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-color-mode="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>{title}</title>
+  <link rel="canonical" href="https://jace.ai" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content="https://jace.ai" />
+  <meta property="og:site_name" content="Jace AI" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="/og-image.jpg" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+  <slot />
+</body>
+</html>

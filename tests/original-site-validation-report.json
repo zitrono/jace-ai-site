@@ -1,0 +1,144 @@
+{
+  "timestamp": "2025-06-21T08:53:57.981Z",
+  "url": "http://localhost:8080",
+  "extractedValues": {
+    "backgrounds": {
+      "body": "rgb(40, 40, 40)",
+      "hero": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundImage": "radial-gradient(rgba(102, 126, 234, 0.15) 0%, rgba(0, 0, 0, 0) 50%), radial-gradient(at right bottom, rgba(240, 147, 251, 0.1) 0%, rgba(0, 0, 0, 0) 50%)"
+      }
+    },
+    "gradients": {
+      "heroTitle": {
+        "backgroundImage": "linear-gradient(353deg, rgb(153, 153, 153) 36%, rgb(255, 255, 255) 90%)",
+        "webkitBackgroundClip": "text",
+        "webkitTextFillColor": "rgba(0, 0, 0, 0)",
+        "color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    "elements": {
+      "heroTitle": "Gain 2 HoursDaily with Hero",
+      "navItems": [],
+      "hasResponsiveClasses": false
+    },
+    "mobile": {
+      "menuButton": {
+        "exists": true,
+        "selector": "button[aria-label*=\"menu\"]",
+        "classes": "mobile-menu-toggle"
+      }
+    },
+    "interactive": {
+      "faqCount": 0,
+      "hasPricingToggle": true
+    },
+    "visual": {
+      "companyLogosCount": 0,
+      "featureIconsCount": 8
+    }
+  },
+  "validationResults": {
+    "hero": [
+      "Hero title mismatch: \"Gain 2 HoursDaily with Hero\" !== \"Gain 2 Hours Daily with Jace\"",
+      "Hero subtitle mismatch: \"null\"",
+      "CTA button text mismatch: \"null\""
+    ],
+    "support": [
+      "Missing support features: 24/7 support, Money-back guarantee, Privacy protection, Secure checkout",
+      "Video container not found"
+    ],
+    "company": [],
+    "trust": [
+      "CASA Tier 3 text not found",
+      "Join 1000+ enthusiasts text not found"
+    ],
+    "navigation": [
+      "Navigation items mismatch: found "
+    ],
+    "backgrounds": [
+      "No gradient backgrounds found"
+    ],
+    "mobileMenu": [
+      "Mobile menu button not found",
+      "No mobile-specific elements found"
+    ],
+    "interactive": [
+      "No FAQ items found"
+    ],
+    "gradients": [
+      "No text gradient elements found"
+    ],
+    "visual": [],
+    "accessibility": [],
+    "responsive": [
+      "No responsive utility classes found"
+    ]
+  },
+  "summary": {
+    "totalSections": 12,
+    "sectionsPassed": 3,
+    "totalErrors": 14,
+    "failedSections": [
+      {
+        "section": "hero",
+        "errors": [
+          "Hero title mismatch: \"Gain 2 HoursDaily with Hero\" !== \"Gain 2 Hours Daily with Jace\"",
+          "Hero subtitle mismatch: \"null\"",
+          "CTA button text mismatch: \"null\""
+        ]
+      },
+      {
+        "section": "support",
+        "errors": [
+          "Missing support features: 24/7 support, Money-back guarantee, Privacy protection, Secure checkout",
+          "Video container not found"
+        ]
+      },
+      {
+        "section": "trust",
+        "errors": [
+          "CASA Tier 3 text not found",
+          "Join 1000+ enthusiasts text not found"
+        ]
+      },
+      {
+        "section": "navigation",
+        "errors": [
+          "Navigation items mismatch: found "
+        ]
+      },
+      {
+        "section": "backgrounds",
+        "errors": [
+          "No gradient backgrounds found"
+        ]
+      },
+      {
+        "section": "mobileMenu",
+        "errors": [
+          "Mobile menu button not found",
+          "No mobile-specific elements found"
+        ]
+      },
+      {
+        "section": "interactive",
+        "errors": [
+          "No FAQ items found"
+        ]
+      },
+      {
+        "section": "gradients",
+        "errors": [
+          "No text gradient elements found"
+        ]
+      },
+      {
+        "section": "responsive",
+        "errors": [
+          "No responsive utility classes found"
+        ]
+      }
+    ]
+  }
+}

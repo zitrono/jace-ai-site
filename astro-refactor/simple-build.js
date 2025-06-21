@@ -51,11 +51,23 @@ function buildPage() {
   const layoutContent = fs.readFileSync('./src/layouts/Layout.astro', 'utf8');
   const headerContent = fs.readFileSync('./src/components/Header.astro', 'utf8');
   const heroContent = fs.readFileSync('./src/components/Hero.astro', 'utf8');
+  const featuresContent = fs.readFileSync('./src/components/Features.astro', 'utf8');
+  const pricingContent = fs.readFileSync('./src/components/Pricing.astro', 'utf8');
+  const testimonialsContent = fs.readFileSync('./src/components/Testimonials.astro', 'utf8');
+  const ctaContent = fs.readFileSync('./src/components/CTA.astro', 'utf8');
+  const faqContent = fs.readFileSync('./src/components/FAQ.astro', 'utf8');
+  const footerContent = fs.readFileSync('./src/components/Footer.astro', 'utf8');
   
   // Process components
   const layout = processAstroComponent(layoutContent, true); // isLayout = true
   const header = processAstroComponent(headerContent);
   const hero = processAstroComponent(heroContent);
+  const features = processAstroComponent(featuresContent);
+  const pricing = processAstroComponent(pricingContent);
+  const testimonials = processAstroComponent(testimonialsContent);
+  const cta = processAstroComponent(ctaContent);
+  const faq = processAstroComponent(faqContent);
+  const footer = processAstroComponent(footerContent);
   
   console.log('Layout length:', layout.length);
   console.log('Header length:', header.length);
@@ -69,7 +81,13 @@ function buildPage() {
         ${header}
         <main>
           ${hero}
+          ${features}
+          ${pricing}
+          ${testimonials}
+          ${cta}
+          ${faq}
         </main>
+        ${footer}
       </div>
     `;
   

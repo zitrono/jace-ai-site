@@ -2,9 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Important Rules
+
+- Never change pom without my approval
+- The project is now named "ralph-web" and publishes to https://zitrono.github.io/ralph-web/
+- Package name has been updated from "jace-ai-astro" to "ralph-web"
+
 ## Project Overview
 
-This is the Jace AI website project - a comprehensive testing and development environment for maintaining style parity between an original static site and its Astro.js refactor. The project implements advanced visual regression testing using Puppeteer with a Page Object Model (POM) pattern to ensure pixel-perfect consistency across implementations.
+This is the Ralph Web project (formerly Jace AI website) - a comprehensive testing and development environment for maintaining style parity between an original static site and its Astro.js refactor. The project implements advanced visual regression testing using Puppeteer with a Page Object Model (POM) pattern to ensure pixel-perfect consistency across implementations.
 
 ## Project Structure
 
@@ -17,9 +23,11 @@ The repository contains two main components:
 
 ### Astro Site (Root Directory)
 - **Install dependencies**: `npm install`
-- **Development server**: `npm run dev` (serves on port 4321)
-- **Build for production**: `npm run build` (builds to `docs/` for GitHub Pages)
+- **Development server**: `npm run dev` (serves on port 4321 at /ralph-web/)
+- **Build for production**: `npm run build` (builds to `docs/` for GitHub Pages at /ralph-web/)
 - **Preview production build**: `npm run preview`
+- **GitHub Pages URL**: https://zitrono.github.io/ralph-web/
+- **Repository**: https://github.com/zitrono/ralph-web
 
 ### Testing Suite (`tests/`)
 - **Comprehensive POM validation**: `node validate-jace-ai-100.js`
@@ -269,8 +277,8 @@ The project maintains style parity between implementations using:
 
 ## Terminology
 
-- **jace**: Original site (jace.ai) - source of truth
-- **ralph**: Local implementation (localhost:4321) - our refactor
+- **jace**: Original site (jace.ai) - reference implementation for comparison
+- **ralph**: Our implementation (https://zitrono.github.io/ralph-web/) - the main project
 
 ## POM Selector Mapping
 

@@ -1,0 +1,15 @@
+{
+  "name": "jace-ai-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test:baseline": "node baseline.test.js",
+    "test:current": "npm run build --prefix .. && npm run serve:current & sleep 3 && node baseline.test.js --url http://localhost:8000",
+    "test:astro": "npm run dev --prefix .. & sleep 5 && node comparison.test.js",
+    "test:visual": "node visual-regression.test.js",
+    "serve:current": "python3 -m http.server 8000 --directory ../dist"
+  },
+  "dependencies": {
+    "puppeteer": "^24.10.2"
+  }
+}

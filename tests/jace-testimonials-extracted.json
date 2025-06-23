@@ -1,0 +1,288 @@
+{
+  "section": {
+    "structure": {
+      "tag": "DIV",
+      "className": "mx-auto max-w-7xl px-6 lg:px-8",
+      "id": null
+    },
+    "content": {
+      "title": "Less Email, More Productivity",
+      "subtitle": "Jace users save hours every week—read their stories"
+    },
+    "styles": {
+      "section": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "padding": "0px 32px",
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      "title": {
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "color": "rgb(255, 220, 97)",
+        "textAlign": "center",
+        "marginBottom": "0px"
+      },
+      "subtitle": {
+        "fontSize": "48px",
+        "color": "rgb(255, 255, 255)",
+        "marginBottom": "0px"
+      }
+    }
+  },
+  "testimonials": [
+    {
+      "content": {
+        "quote": "“Jace has entirely reshaped the way I approach email. It saves me over an hour a day - and the feature list keeps growing. It seamlessly integrates with my Google Workspace Gmail account. Additionally, I use Superwhisper to chat with the email agent, so I rarely have to touch my keyboard.”",
+        "author": "Josh Graham",
+        "title": "Founder @ instantvoiceover.ai"
+      },
+      "styles": {
+        "figure": {
+          "className": "col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "0px"
+        },
+        "blockquote": {
+          "className": "p-12 text-xl/8 font-semibold tracking-tight text-gray-900",
+          "padding": "48px",
+          "fontSize": "20px",
+          "fontWeight": "600",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "20px",
+          "lineHeight": "32px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“Been using Jace for 6mo now. Honestly saves me 1h+ every day. Give it a shot if you're struggling with emails like me!”",
+        "author": "Jenny Xiao",
+        "title": "Jenny Xiao@jennywxiao"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“Jace is the best AI for email I've used. I'm impressed by how good the generated replies are. It's just like myself. And I hardly ever need to edit them. I'm saving hours a week on email. Jace is so good that I even included it in my AI basics course to help beginners get started with AI.”",
+        "author": "Darius Foroux",
+        "title": "Darius Foroux@DariusForoux"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“Now we are talking. Thats something I really want. Amazing usecase for AI.”",
+        "author": "Chubby",
+        "title": "Chubby@kimmonismus"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“Impressive!”",
+        "author": "Philippe Tremblay",
+        "title": "Philippe Tremblay@philtrem22"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“testing the most beautiful new email ai agent i’ve seen yet”",
+        "author": "swyx",
+        "title": "swyx@swyx"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“wow, yes — Jace from @ZetaLabsAI is exactly what I've been looking in an email helper”",
+        "author": "Andel Husbands",
+        "title": "Andel Husbands@AndelHusbands"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“This @ZetaLabsAI Jace AI agent looks great-just what we desperately need!”",
+        "author": "Derya Unutmaz",
+        "title": "Derya Unutmaz@DeryaTR_"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    },
+    {
+      "content": {
+        "quote": "“E-mail inboxes are precious but extremely cluttered knowledge bases (personal and professional). Jace is helping me streamline retrieving important information and knowledge, in a way that, without Jace, I'd still be hostage to searching dozens of emails, bad ui, mess, to find something. I thank you for drastically reducing my stress levels.”",
+        "author": "João Neto",
+        "title": "João NetoNeumatic"
+      },
+      "styles": {
+        "figure": {
+          "className": "rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.21 -0.00316127 -0.0338527 / 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+          "padding": "24px"
+        },
+        "blockquote": {
+          "className": "text-gray-900",
+          "padding": "0px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "color": "oklch(0.21 0.034 264.665)"
+        },
+        "quote": {
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "color": "oklch(0.21 0.034 264.665)"
+        }
+      }
+    }
+  ],
+  "testimonialsCount": 9
+}

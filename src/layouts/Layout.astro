@@ -1,0 +1,191 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Gain 2 Hours Daily with Jace - AI-powered email assistant" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+  
+  <style is:global>
+    @import '../styles/tailwind.css';
+    @import '../styles/components.css';
+    
+    /* Temporarily disabled while fixing corrupted font files
+    @font-face {
+      font-family: 'Geist';
+      src: url('/fonts/Geist-Regular.woff2') format('woff2'),
+           url('/fonts/Geist-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Geist';
+      src: url('/fonts/Geist-Medium.woff2') format('woff2'),
+           url('/fonts/Geist-Medium.woff') format('woff');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Geist';
+      src: url('/fonts/Geist-SemiBold.woff2') format('woff2'),
+           url('/fonts/Geist-SemiBold.woff') format('woff');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Geist';
+      src: url('/fonts/Geist-Bold.woff2') format('woff2'),
+           url('/fonts/Geist-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    */
+    
+    /* Mobile-specific header adjustments */
+    @media (max-width: 640px) {
+      /* Reduce header padding on mobile */
+      header nav > div {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+      
+      /* Ensure hamburger menu button is properly sized */
+      #mobile-menu-button {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 0.5rem;
+      }
+    }
+    
+    /* Header transition for smooth height changes */
+    header {
+      transition: all 0.3s ease;
+    }
+    
+    /* Ensure consistent header height when scrolled */
+    header.scrolled nav > div {
+      padding-top: 0.75rem !important;
+      padding-bottom: 0.75rem !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased" style="background-color: rgb(40, 40, 40);">
+  <slot />
+  <script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.remove('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'true');
+        });
+      }
+      
+      if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton?.setAttribute('aria-expanded', 'false');
+        });
+      }
+      
+      // Close menu when clicking on backdrop
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+          if (e.target === mobileMenu || e.target === mobileMenu.firstElementChild) {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton?.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    });
+
+    // FAQ toggle functionality
+    window.toggleFAQ = function(button) {
+      const content = button.nextElementSibling;
+      const arrow = button.querySelector('svg');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      if (isExpanded) {
+        content.classList.add('hidden');
+        arrow.classList.remove('rotate-180');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        content.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    // Cookie consent functionality
+    function showCookieBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner && !localStorage.getItem('cookieConsent')) {
+        // Show banner after a short delay
+        setTimeout(() => {
+          banner.style.opacity = '1';
+          banner.style.transform = 'translateY(0)';
+        }, 1000);
+      }
+    }
+
+    function hideCookieBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) {
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(100vh)';
+      }
+    }
+
+    function setCookieConsent(value) {
+      localStorage.setItem('cookieConsent', value);
+      hideCookieBanner();
+    }
+
+    // Cookie consent event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const settingsBtn = document.getElementById('cookie-settings');
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => setCookieConsent('accepted'));
+      }
+
+      if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => setCookieConsent('rejected'));
+      }
+
+      if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+          console.log('Cookie settings clicked');
+          setCookieConsent('settings');
+        });
+      }
+
+      // Show banner if consent not given
+      showCookieBanner();
+    });
+  </script>
+</body>
+</html>

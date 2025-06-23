@@ -1,10 +1,11 @@
 ---
 // Header component with navigation
+import Button from './Button.astro';
 ---
 
 <header class="sticky top-0 z-20 inset-x-0 transition-all">
   <nav class="mx-auto flex max-w-7xl items-center justify-between">
-    <div class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all header-transparent" style="background-color: rgba(40, 40, 40, 0.5); backdrop-filter: blur(12px);">
+    <div class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all header-transparent">
       <div class="flex lg:flex-1">
         <a href="/ralph-web/" class="-m-1.5 p-1.5">
           <span class="sr-only">Ralph</span>
@@ -14,10 +15,10 @@
       
       <!-- Mobile CTA Button -->
       <div class="flex lg:hidden flex-1 justify-end mr-3">
-        <button class="btn-primary btn-sm rounded-md mobile-cta-responsive">
+        <Button variant="primary" size="sm" class="rounded-md mobile-cta-responsive">
           <span class="hidden min-[360px]:inline">Book a Demo</span>
           <span class="inline min-[360px]:hidden">Book Demo</span>
-        </button>
+        </Button>
       </div>
       
       <!-- Mobile Menu Button -->
@@ -38,12 +39,12 @@
       
       <!-- Desktop CTA Buttons -->
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-        <button id="login-button" class="btn-secondary" data-test="secondary-button">
+        <Button variant="secondary" id="login-button" data-test="secondary-button">
           Log In
-        </button>
-        <button class="btn-primary btn-lg" data-test="cta-button">
+        </Button>
+        <Button variant="primary" size="lg" data-test="cta-button">
           Book a Demo
-        </button>
+        </Button>
       </div>
     </div>
   </nav>
@@ -67,12 +68,12 @@
         <a href="/ralph-web/pricing" class="nav-link text-lg">Pricing</a>
         <a href="/ralph-web/learn" class="nav-link text-lg">Learn</a>
         <div class="pt-6 border-t border-gray-700 flex flex-row gap-4">
-          <button id="mobile-login-button" class="btn-secondary flex-1 text-center">
+          <Button variant="secondary" id="mobile-login-button" class="flex-1 text-center">
             Log In
-          </button>
-          <button class="btn-primary btn-lg flex-1">
+          </Button>
+          <Button variant="primary" size="lg" class="flex-1">
             Book a Demo
-          </button>
+          </Button>
         </div>
       </nav>
     </div>

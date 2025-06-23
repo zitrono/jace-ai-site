@@ -9,6 +9,149 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Package name has been updated from "jace-ai-astro" to "ralph-web"
 - Jace.ai local archive: http://localhost:8081/ (static copy with working hamburger menu and FAQ functionality)
 
+## ACTIVE REFACTORING: CSS Architecture & POM Compliance
+
+### Refactoring Imperatives (CRITICAL - READ FIRST)
+
+1. **POM is Sacred**: The POM (jace-ai-site.pom.js) is the single source of truth. NEVER modify styles without verifying against POM.
+
+2. **Visual Verification Required**: After EVERY change:
+   - Use Puppeteer MCP to screenshot affected elements
+   - Run `node unified-test.js ralph` to verify POM compliance
+   - Compare visual output with baseline screenshots
+
+3. **Change One Thing at a Time**: 
+   - Make atomic changes (one color, one component, one style rule)
+   - Verify immediately with Puppeteer MCP
+   - Only proceed if POM tests still pass
+
+4. **POM Constants Must Match Exactly**:
+   ```css
+   /* These values come from POM expectedStyles */
+   --pom-bg-body: rgb(40, 40, 40);          /* NOT #282828 or similar */
+   --pom-accent: rgb(255, 220, 97);         /* NOT #FFDC61 */
+   --pom-accent-text: rgb(41, 48, 69);     /* NOT #293045 */
+   ```
+
+5. **Selector Structure is Critical**:
+   - Hero CTA must be: `main button.btn-primary.btn-lg`
+   - Header CTA must be: `header button.btn-primary`
+   - FAQ buttons must have: `onclick*="toggleFAQ"`
+
+6. **Mobile Requirements are Strict**:
+   - Header inner container: exactly 64px height
+   - Touch targets: minimum 44px
+   - Viewport meta: `width=device-width, initial-scale=1.0, maximum-scale=1.0`
+
+### Refactoring Workflow
+
+1. **Before ANY style change**:
+   ```bash
+   # Take baseline screenshot with Puppeteer MCP
+   # Run POM test to get baseline numbers
+   cd tests && node unified-test.js ralph
+   ```
+
+2. **Make ONE atomic change**
+
+3. **Immediately verify**:
+   ```bash
+   # Visual check with Puppeteer MCP
+   # Re-run POM test
+   cd tests && node unified-test.js ralph
+   ```
+
+4. **If ANY test fails**: Revert immediately
+
+### CSS Variable Mapping (From POM expectedStyles)
+
+```css
+:root {
+  /* Background colors - from POM */
+  --pom-bg-body: rgb(40, 40, 40);
+  --pom-bg-secondary: rgb(65, 65, 65);
+  --pom-bg-card: rgb(53, 53, 53);
+  
+  /* Text colors - from POM */
+  --pom-text-primary: rgb(255, 255, 255);
+  --pom-text-secondary: rgba(255, 246, 238, 0.72);
+  --pom-text-muted: rgb(156, 163, 175);
+  
+  /* Accent colors - from POM */
+  --pom-accent: rgb(255, 220, 97);
+  --pom-accent-text: rgb(41, 48, 69);
+  
+  /* Button specs - from POM */
+  --pom-btn-padding: 0px 24px;
+  --pom-btn-height: 40px;
+  --pom-btn-radius: 6px;
+  
+  /* Typography - from POM */
+  --pom-font-hero-size: 48px;
+  --pom-font-hero-weight: 600;
+  --pom-font-subtitle-size: 18px;
+}
+```
+
+### Component Refactoring Rules
+
+1. **Button Component**: Must produce exact POM selectors
+2. **Card Component**: Background must be `rgb(53, 53, 53)`
+3. **Section Component**: Must not alter existing spacing
+4. **Header Component**: Mobile must be exactly 64px height
+
+### Visual Verification Commands
+
+```javascript
+// After changing a color
+await puppeteer_evaluate({
+  script: `getComputedStyle(document.querySelector('.btn-primary')).backgroundColor`
+});
+
+// After changing layout
+await puppeteer_screenshot({ name: 'current-state', width: 1200, height: 800 });
+
+// Check specific element
+await puppeteer_evaluate({
+  script: `
+    const el = document.querySelector('${selector}');
+    const styles = getComputedStyle(el);
+    ({
+      backgroundColor: styles.backgroundColor,
+      color: styles.color,
+      padding: styles.padding,
+      borderRadius: styles.borderRadius
+    })
+  `
+});
+```
+
+### Files Being Refactored
+
+Priority order:
+1. `src/layouts/Layout.astro` - CSS variables and global styles
+2. `src/styles/components.css` - Remove !important, consolidate
+3. `src/components/Button.astro` - New component (create)
+4. `src/components/Card.astro` - New component (create)
+5. `src/components/Section.astro` - New component (create)
+6. All existing components - Update to use new system
+
+### Success Criteria
+
+- [ ] POM tests: 189/189 elements pass
+- [ ] CSS properties: 3,500+ tests pass
+- [ ] Zero !important declarations
+- [ ] All colors use CSS variables
+- [ ] No inline styles (except dynamic)
+- [ ] Visual screenshots match baseline
+
+### Do NOT Proceed If
+
+- POM test count drops below current baseline
+- Visual differences detected in screenshots
+- Any selector structure changes
+- Mobile header height changes from 64px
+
 ## Project Overview
 
 This is the Ralph Web project (formerly Jace AI website) - a comprehensive testing and development environment for maintaining style parity between an original static site and its Astro.js refactor. The project implements advanced visual regression testing using Puppeteer with a Page Object Model (POM) pattern to ensure pixel-perfect consistency across implementations.

@@ -2,7 +2,7 @@
 // FAQ section component
 ---
 
-<section class="py-20" style="background-color: rgb(40, 40, 40);">
+<section class="py-20 bg-primary">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
@@ -19,11 +19,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">How does Ralph keep our deal data confidential?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             Your data stays on your servers. Ralph's AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.
           </div>
         </div>
@@ -32,11 +32,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">Can we run Ralph on our own servers?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We'll help you set it up.
           </div>
         </div>
@@ -45,11 +45,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">What security standards does Ralph follow?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             Ralph inherits your existing security standards since it runs on your infrastructure. We follow secure development practices including code audits, penetration testing, and encrypted communications. The specifics depend on your deployment - we adapt to your requirements.
           </div>
         </div>
@@ -58,11 +58,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">How does Ralph handle LP confidential information?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph's agents respect your existing data governance policies.
           </div>
         </div>
@@ -71,11 +71,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">Can we integrate Ralph with our existing security tools?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We'll work with your IT team to ensure Ralph fits seamlessly into your security stack.
           </div>
         </div>
@@ -84,11 +84,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">What's Ralph's track record on data security?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             We're in private beta with select PE firms, building security-first from day one. While we don't have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We're happy to share our security documentation.
           </div>
         </div>
@@ -97,11 +97,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">How quickly can we revoke access if needed?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             Immediately. Since Ralph uses your authentication system, you can revoke access the same way you would for any employee - through your identity provider. Data access stops instantly. If you cancel Ralph entirely, just shut down the servers. You retain all your data.
           </div>
         </div>
@@ -110,11 +110,11 @@
         <div class="card">
           <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
             <h3 class="heading-3">Does Ralph use our data to improve its AI models?</h3>
-            <svg class="h-5 w-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="mt-4 text-gray-300 hidden">
+          <div class="faq-content mt-4 text-gray-300 hidden">
             No. Your data is never used to train or improve Ralph's models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.
           </div>
         </div>

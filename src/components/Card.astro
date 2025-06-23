@@ -1,0 +1,59 @@
+---
+interface Props {
+  variant?: 'dark' | 'light';
+  hover?: boolean;
+  class?: string;
+}
+
+const { 
+  variant = 'dark', 
+  hover = false, 
+  class: className = ''
+} = Astro.props;
+
+const classes = [
+  'card',
+  hover && 'card-hover',
+  variant === 'light' && 'card-white',
+  className
+].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  <slot />
+</div>
+
+<style>
+  /* POM-validated card styles */
+  .card {
+    border-radius: 1.5rem;
+    padding: 2rem;
+    background-color: var(--pom-bg-card);
+  }
+  
+  .card-hover {
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+  
+  .card-hover:hover {
+    background-color: var(--pom-bg-secondary);
+  }
+  
+  .card-white {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-white h3,
+  .card-white h4 {
+    color: rgb(17, 24, 39);
+  }
+  
+  .card-white p {
+    color: rgb(75, 85, 99);
+  }
+</style>

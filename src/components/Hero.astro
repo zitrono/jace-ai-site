@@ -1,5 +1,6 @@
 ---
 // Hero section component
+import Button from './Button.astro';
 ---
 
 <section class="relative isolate lg:mt-[-5.6em] max-md:pt-4 hero-spacing">
@@ -18,13 +19,13 @@
       <h1 class="lg:mt-10 pb-2 text-pretty text-5xl font-bold gradient-hero-title max-sm:text-center" style="letter-spacing: -1.5px; font-size: 48px;" data-test="hero-title">
         Turn Unstructured Portfolio Data Into Predictive Intelligence
       </h1>
-      <p class="mt-4 max-md:mb-12 text-pretty text-lg font-medium sm:text-2xl/8 max-sm:text-center" style="color: rgba(255, 246, 238, 0.72);" data-test="hero-subtitle">
+      <p class="mt-4 max-md:mb-12 text-pretty text-lg font-medium sm:text-2xl/8 max-sm:text-center hero-subtitle" data-test="hero-subtitle">
         Ralph's AI agents work 24/7 to analyze your portfolio, predict risks 30 days early, and identify opportunities your competitors miss.
       </p>
       <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
-        <button class="btn-primary btn-lg" data-test="cta-button">
+        <Button variant="primary" size="lg" data-test="cta-button">
           Book a Demo
-        </button>
+        </Button>
       </div>
       
       <!-- Trust indicators removed for Ralph -->

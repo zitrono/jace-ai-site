@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
 ---
 
 <Layout title="Learn | Ralph - AI-Native Private Equity Platform">
@@ -9,7 +10,7 @@ import Footer from '../components/Footer.astro';
     <Header />
     <main>
       <!-- Hero Section -->
-      <section class="relative pt-24 pb-12" style="background-color: rgb(40, 40, 40);">
+      <section class="relative pt-24 pb-12 bg-primary">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
           <div class="mx-auto max-w-4xl text-center">
             <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">
@@ -23,7 +24,7 @@ import Footer from '../components/Footer.astro';
       </section>
 
       <!-- Newsletter CTA -->
-      <section class="py-12" style="background-color: rgb(40, 40, 40);">
+      <section class="py-12 bg-primary">
         <div class="mx-auto max-w-4xl px-6 lg:px-8">
           <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-8 text-center">
             <h2 class="text-2xl font-bold text-white mb-4">
@@ -38,45 +39,19 @@ import Footer from '../components/Footer.astro';
                 placeholder="Enter your email"
                 class="flex-1 px-4 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               />
-              <button type="submit" class="btn-primary">
+              <Button variant="primary" type="submit">
                 Subscribe
-              </button>
+              </Button>
             </form>
           </div>
         </div>
       </section>
 
       <!-- Articles Grid -->
-      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+      <section class="py-20 bg-primary">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Article 1 -->
-            <article class="bg-gray-800 rounded-lg p-8 hover:bg-gray-750 transition-colors">
-              <h3 class="text-2xl font-bold text-white mb-4">
-                10 Queries Every PE Firm Should Ask Their AI
-              </h3>
-              <p class="text-gray-300 mb-6">
-                Discover the most valuable questions that surface hidden opportunities and risks across your portfolio. From deal screening to exit planning, these queries transform raw data into strategic insights.
-              </p>
-              <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-300">
-                Read more �
-              </a>
-            </article>
-
-            <!-- Article 2 -->
-            <article class="bg-gray-800 rounded-lg p-8 hover:bg-gray-750 transition-colors">
-              <h3 class="text-2xl font-bold text-white mb-4">
-                Finding Hidden Risks in 30 Minutes with AI Agents
-              </h3>
-              <p class="text-gray-300 mb-6">
-                Learn how autonomous agents can scan thousands of data points to identify emerging risks before they impact performance. Real-world examples from portfolio monitoring.
-              </p>
-              <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-300">
-                Read more �
-              </a>
-            </article>
-
-            <!-- Article 3 -->
             <article class="bg-gray-800 rounded-lg p-8 hover:bg-gray-750 transition-colors">
               <h3 class="text-2xl font-bold text-white mb-4">
                 The Monday Morning AI Routine for Deal Partners
@@ -84,21 +59,34 @@ import Footer from '../components/Footer.astro';
               <p class="text-gray-300 mb-6">
                 Start your week with AI-powered insights. This practical routine helps partners stay ahead of portfolio developments and market movements in just 15 minutes.
               </p>
-              <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-300">
-                Read more �
+              <a href="/ralph-web/learn/monday-morning-ai-routine" class="text-yellow-400 font-semibold hover:text-yellow-300">
+                Read more →
               </a>
             </article>
 
-            <!-- Article 4 -->
+            <!-- Article 2 -->
             <article class="bg-gray-800 rounded-lg p-8 hover:bg-gray-750 transition-colors">
               <h3 class="text-2xl font-bold text-white mb-4">
-                From Data Chaos to First Insight: A 48-Hour Guide
+                10 Queries Every PE Firm Should Ask Their AI
               </h3>
               <p class="text-gray-300 mb-6">
-                Transform your unstructured data into actionable intelligence in two days. Step-by-step guide to implementing AI agents for immediate portfolio insights.
+                Discover the most valuable questions that surface hidden opportunities and risks across your portfolio. From deal screening to exit planning, these queries transform raw data into strategic insights.
               </p>
-              <a href="#" class="text-yellow-400 font-semibold hover:text-yellow-300">
-                Read more �
+              <a href="/ralph-web/learn/10-queries-every-pe-firm-should-ask" class="text-yellow-400 font-semibold hover:text-yellow-300">
+                Read more →
+              </a>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="bg-gray-800 rounded-lg p-8 hover:bg-gray-750 transition-colors">
+              <h3 class="text-2xl font-bold text-white mb-4">
+                Finding Hidden Risks in 30 Minutes with AI Agents
+              </h3>
+              <p class="text-gray-300 mb-6">
+                Learn how autonomous agents can scan thousands of data points to identify emerging risks before they impact performance. Real-world examples from portfolio monitoring.
+              </p>
+              <a href="/ralph-web/learn/finding-hidden-risks-30-minutes" class="text-yellow-400 font-semibold hover:text-yellow-300">
+                Read more →
               </a>
             </article>
           </div>
@@ -106,15 +94,15 @@ import Footer from '../components/Footer.astro';
       </section>
 
       <!-- CTA Section -->
-      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+      <section class="py-20 bg-primary">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
           <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8">
               Ready to see Ralph in action?
             </h2>
-            <a href="/ralph-web/#" class="btn-primary btn-lg">
+            <Button variant="primary" size="lg" href="/ralph-web/#">
               Book a Demo
-            </a>
+            </Button>
           </div>
         </div>
       </section>

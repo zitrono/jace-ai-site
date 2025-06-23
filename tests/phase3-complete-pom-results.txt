@@ -1,0 +1,160 @@
+🚀 Unified Test Runner - Target: RALPH
+==================================================
+🌐 Navigated to: https://zitrono.github.io/ralph-web/ (target: ralph)
+
+📋 Running comprehensive validation...
+
+✅ Backgrounds: PASSED
+📱 Validating viewport-specific styles...
+✅ ViewportSpecificStyles: PASSED
+✅ Validating checkmark colors...
+✅ CheckmarkColors: PASSED
+❓ Validating FAQ interactivity...
+✅ FAQInteractivity: PASSED
+🎨 Validating special section backgrounds...
+   ✅ Found special background sections
+✅ SpecialBackgrounds: PASSED
+🍪 Validating cookie consent functionality...
+   ℹ️ No dedicated cookie policy link found (may be included in privacy policy)
+✅ CookieConsent: PASSED
+❌ HeroSection: FAILED (3 errors)
+   - Hero title should contain "Jace", found: "Turn Unstructured Portfolio Data Into Predictive Intelligence"
+   - Hero subtitle not found or incorrect
+   - Hero video section not found
+❌ Navigation: FAILED (1 errors)
+   - Navigation items incomplete. Expected: Features, Company, Pricing, Blog, Found: Pricing
+❌ TrustIndicators: FAILED (2 errors)
+   - CASA Tier 3 badge not found
+   - User count text not found
+✅ CompanyLogos: PASSED
+✅ Features: PASSED
+❌ Pricing: FAILED (1 errors)
+   - Pricing title text incorrect
+❌ Testimonials: FAILED (1 errors)
+   - Testimonials section with "Less Email, More Productivity" not found
+✅ FAQ: PASSED
+✅ MobileMenu: PASSED
+✅ Accessibility: PASSED
+✅ Responsive: PASSED
+✅ VisualElements: PASSED
+✅ CookieBanner: PASSED
+✅ MobileLayout: PASSED
+✅ MobileMenuPanel: PASSED
+📱 Validating iOS horizontal scroll prevention...
+✅ IOSHorizontalScroll: PASSED
+
+🔧 Testing interactive elements...
+
+✅ Mobile Menu Toggle: PASSED
+✅ Hover States: PASSED
+✅ FAQ Accordion: PASSED
+📱 Testing iOS horizontal swipe behavior...
+✅ iOS Horizontal Swipe: PASSED
+
+==================================================
+🔬 COMPREHENSIVE PROPERTY TESTING
+==================================================
+Testing ALL CSS properties on ALL elements...
+
+
+🚀 Starting Comprehensive Property-Level Validation
+
+This tests EVERY individual CSS property on EVERY element
+
+🧪 Testing all CSS properties for every element...
+
+📋 Testing body (body)
+  ✅ body: 117 properties PASSED
+📋 Testing main (main)
+  ✅ main: 117 properties PASSED
+📋 Testing header (header)
+  ✅ header: 117 properties PASSED
+📋 Testing footer (footer)
+  ❌ footer: 1 property failures
+     - footer.borderWidth: Invalid size value "1px 0px 0px"
+📋 Testing heroTitle (h1)
+  ✅ heroTitle: 117 properties PASSED
+📋 Testing heroSubtitle (h1 + p)
+  ✅ heroSubtitle: 117 properties PASSED
+📋 Testing sectionTitles (h2.heading-2)
+  ✅ sectionTitles: 117 properties PASSED
+📋 Testing pricingTitle (h2.heading-2)
+  ✅ pricingTitle: 117 properties PASSED
+📋 Testing faqTitle (h2.heading-2)
+  ✅ faqTitle: 117 properties PASSED
+📋 Testing pricingCards (.card)
+  ✅ pricingCards: 117 properties PASSED
+📋 Testing headingLevel3 (h3)
+  ✅ headingLevel3: 117 properties PASSED
+📋 Testing paragraphs (p)
+  ✅ paragraphs: 117 properties PASSED
+📋 Testing spans (span)
+  ✅ spans: 117 properties PASSED
+📋 Testing ctaButton (button.btn-primary)
+  ✅ ctaButton: 117 properties PASSED
+📋 Testing buttons (button)
+  ✅ buttons: 117 properties PASSED
+📋 Testing navLinks (nav a)
+  ✅ navLinks: 117 properties PASSED
+📋 Testing footerLinks (footer a)
+  ✅ footerLinks: 117 properties PASSED
+📋 Testing links (a)
+  ✅ links: 117 properties PASSED
+📋 Testing casaBadge (.badge-certification)
+  ❌ casaBadge: 1 property failures
+     - Element not found: casaBadge (.badge-certification)
+📋 Testing icons (svg)
+  ✅ icons: 117 properties PASSED
+📋 Testing navigation (nav)
+  ✅ navigation: 117 properties PASSED
+📋 Testing divs (div)
+  ✅ divs: 117 properties PASSED
+
+📱 Testing responsive property variations...
+📱 Testing mobile (375x667)
+📱 Testing tablet (768x1024)
+📱 Testing desktop (1200x800)
+
+🎯 Testing interactive state properties...
+🎯 Testing interactive states for ctaButton
+🎯 Testing interactive states for navLinks
+🎯 Testing interactive states for footerLinks
+
+📊 COMPREHENSIVE PROPERTY VALIDATION SUMMARY
+=============================================
+Total CSS properties tracked: 117
+Total properties tested: 2458
+Total property errors: 2
+Property-level pass rate: 99.9%
+Base elements tested: 22
+Responsive viewports: 3 (mobile, tablet, desktop)
+Interactive states tested: hover, focus, active
+
+🎉 EXCELLENT! 95%+ property-level validation achieved!
+
+📊 Property Test Final Summary:
+Total Properties Tested: 2458
+Total Property Errors: 2
+Property-Level Pass Rate: 99.9%
+
+==================================================
+📊 COMPLETE TEST SUMMARY
+==================================================
+Target: RALPH
+
+Element Tests:
+  Passed: 21
+  Failed: 5
+  Success Rate: 80.8%
+
+Property Tests:
+  Total Tested: 2458
+  Errors: 2
+  Success Rate: 99.9%
+
+❌ Failed Sections:
+   - HeroSection
+   - Navigation
+   - TrustIndicators
+   - Pricing
+   - Testimonials

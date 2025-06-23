@@ -20,43 +20,44 @@ const { title } = Astro.props;
     @import '../styles/tailwind.css';
     @import '../styles/components.css';
     
-    /* Temporarily disabled while fixing corrupted font files
-    @font-face {
-      font-family: 'Geist';
-      src: url('/fonts/Geist-Regular.woff2') format('woff2'),
-           url('/fonts/Geist-Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
+    /* POM-Validated CSS Variables */
+    :root {
+      /* Background colors - from POM expectedStyles */
+      --pom-bg-body: rgb(40, 40, 40);
+      --pom-bg-secondary: rgb(65, 65, 65);
+      --pom-bg-card: rgb(53, 53, 53);
+      
+      /* Text colors - from POM expectedStyles */
+      --pom-text-primary: rgb(255, 255, 255);
+      --pom-text-secondary: rgba(255, 246, 238, 0.72);
+      --pom-text-muted: rgb(156, 163, 175);
+      
+      /* Accent colors - from POM expectedStyles */
+      --pom-accent: rgb(255, 220, 97);
+      --pom-accent-text: rgb(41, 48, 69);
+      
+      /* Button specifications - from POM expectedStyles */
+      --pom-btn-padding: 0px 24px;
+      --pom-btn-height: 40px;
+      --pom-btn-height-sm: 32px;
+      --pom-btn-radius: 6px;
+      --pom-btn-radius-lg: 8px;
+      
+      /* Typography - from POM expectedStyles */
+      --pom-font-hero-size: 48px;
+      --pom-font-hero-weight: 600;
+      --pom-font-subtitle-size: 18px;
+      --pom-font-subtitle-color: rgba(255, 246, 238, 0.72);
+      
+      /* Spacing - from POM requirements */
+      --pom-section-padding-top: 96px;
+      --pom-section-padding-bottom: 128px;
+      
+      /* Mobile specific - from POM mobileRequirements */
+      --pom-mobile-header-height: 64px;
+      --pom-mobile-touch-target: 44px;
     }
     
-    @font-face {
-      font-family: 'Geist';
-      src: url('/fonts/Geist-Medium.woff2') format('woff2'),
-           url('/fonts/Geist-Medium.woff') format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    
-    @font-face {
-      font-family: 'Geist';
-      src: url('/fonts/Geist-SemiBold.woff2') format('woff2'),
-           url('/fonts/Geist-SemiBold.woff') format('woff');
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
-    
-    @font-face {
-      font-family: 'Geist';
-      src: url('/fonts/Geist-Bold.woff2') format('woff2'),
-           url('/fonts/Geist-Bold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    */
     
     /* iOS horizontal scroll prevention */
     html, body {
@@ -64,12 +65,62 @@ const { title } = Astro.props;
       touch-action: pan-y pinch-zoom;
     }
     
+    /* Apply POM body background */
+    body {
+      background-color: var(--pom-bg-body);
+    }
+    
+    /* Hero subtitle color */
+    .hero-subtitle {
+      color: var(--pom-text-secondary);
+    }
+    
+    /* Header transparent background */
+    .header-transparent {
+      background-color: rgba(40, 40, 40, 0.5);
+      backdrop-filter: blur(12px);
+    }
+    
+    /* Background utilities */
+    .bg-primary {
+      background-color: var(--pom-bg-body);
+    }
+    
+    .bg-secondary {
+      background-color: var(--pom-bg-secondary);
+    }
+    
+    .bg-card {
+      background-color: var(--pom-bg-card);
+    }
+    
+    .bg-accent {
+      background-color: var(--pom-accent);
+    }
+    
+    /* Text color utilities */
+    .text-accent {
+      color: var(--pom-accent);
+    }
+    
+    .text-accent-text {
+      color: var(--pom-accent-text);
+    }
+    
+    .text-secondary {
+      color: var(--pom-text-secondary);
+    }
+    
+    .text-muted {
+      color: var(--pom-text-muted);
+    }
+    
     /* Mobile-specific header adjustments */
     @media (max-width: 640px) {
       /* Reduce header padding on mobile */
       header nav > div {
-        padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
       }
       
       /* Ensure hamburger menu button is properly sized */
@@ -87,59 +138,97 @@ const { title } = Astro.props;
     
     /* Ensure consistent header height when scrolled */
     header.scrolled nav > div {
-      padding-top: 0.75rem !important;
-      padding-bottom: 0.75rem !important;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans antialiased" style="background-color: rgb(40, 40, 40);">
+<body class="bg-gray-900 text-white font-sans antialiased">
   <slot />
   <script>
-    // Mobile menu functionality
+    // Mobile menu functionality with smooth animations
     document.addEventListener('DOMContentLoaded', () => {
       const mobileMenuButton = document.getElementById('mobile-menu-button');
       const mobileMenuClose = document.getElementById('mobile-menu-close');
       const mobileMenu = document.getElementById('mobile-menu');
       
-      if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
+      const showMenu = () => {
+        if (mobileMenu) {
           mobileMenu.classList.remove('hidden');
-          mobileMenuButton.setAttribute('aria-expanded', 'true');
-        });
+          mobileMenu.style.opacity = '0';
+          mobileMenu.style.transform = 'translateY(-20px)';
+          mobileMenuButton?.setAttribute('aria-expanded', 'true');
+          
+          // Trigger animation
+          requestAnimationFrame(() => {
+            mobileMenu.style.opacity = '1';
+            mobileMenu.style.transform = 'translateY(0)';
+          });
+        }
+      };
+      
+      const hideMenu = () => {
+        if (mobileMenu) {
+          mobileMenu.style.opacity = '0';
+          mobileMenu.style.transform = 'translateY(-20px)';
+          mobileMenuButton?.setAttribute('aria-expanded', 'false');
+          
+          setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+          }, 200);
+        }
+      };
+      
+      if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', showMenu);
       }
       
-      if (mobileMenuClose && mobileMenu) {
-        mobileMenuClose.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          mobileMenuButton?.setAttribute('aria-expanded', 'false');
-        });
+      if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', hideMenu);
       }
       
       // Close menu when clicking on backdrop
       if (mobileMenu) {
         mobileMenu.addEventListener('click', (e) => {
           if (e.target === mobileMenu || e.target === mobileMenu.firstElementChild) {
-            mobileMenu.classList.add('hidden');
-            mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            hideMenu();
           }
         });
       }
     });
 
-    // FAQ toggle functionality
+    // FAQ toggle functionality with smooth transitions
     window.toggleFAQ = function(button) {
       const content = button.nextElementSibling;
       const arrow = button.querySelector('svg');
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
       
       if (isExpanded) {
-        content.classList.add('hidden');
+        // Collapse
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.offsetHeight; // Force reflow
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
         arrow.classList.remove('rotate-180');
         button.setAttribute('aria-expanded', 'false');
+        
+        setTimeout(() => {
+          content.classList.add('hidden');
+        }, 300);
       } else {
+        // Expand
         content.classList.remove('hidden');
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        content.offsetHeight; // Force reflow
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
         arrow.classList.add('rotate-180');
         button.setAttribute('aria-expanded', 'true');
+        
+        setTimeout(() => {
+          content.style.maxHeight = 'none';
+        }, 300);
       }
     };
 
@@ -190,7 +279,7 @@ const { title } = Astro.props;
       }
 
       // Show banner if consent not given
-      // showCookieBanner(); // Temporarily disabled for development
+      showCookieBanner();
     });
 
     // Login button functionality
@@ -198,29 +287,44 @@ const { title } = Astro.props;
       const loginButton = document.getElementById('login-button');
       const mobileLoginButton = document.getElementById('mobile-login-button');
       
-      const showLoginAlert = () => {
-        alert('Ralph is currently in private beta. Please contact us for access.');
+      const showLoginModalFunc = () => {
+        if (typeof showLoginModal === 'function') {
+          showLoginModal();
+        }
       };
       
       if (loginButton) {
-        loginButton.addEventListener('click', showLoginAlert);
+        loginButton.addEventListener('click', showLoginModalFunc);
       }
       
       if (mobileLoginButton) {
-        mobileLoginButton.addEventListener('click', showLoginAlert);
+        mobileLoginButton.addEventListener('click', showLoginModalFunc);
       }
     });
 
-    // Book a Demo button functionality
+    // Book a Demo button functionality (optimized with event delegation)
     document.addEventListener('DOMContentLoaded', () => {
-      const bookDemoButtons = document.querySelectorAll('button');
-      
-      bookDemoButtons.forEach(button => {
-        if (button.innerText.includes('Book a Demo') || button.innerText.includes('Book Demo')) {
-          button.addEventListener('click', () => {
-            window.location.href = 'mailto:Konstantin@beneficious.com?subject=Ralph Demo Request&body=Hello, I would like to schedule a demo of Ralph for my PE firm.';
-          });
+      // Use event delegation for better performance
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.tagName === 'BUTTON' && 
+            (target.textContent.includes('Book a Demo') || target.textContent.includes('Book Demo'))) {
+          e.preventDefault();
+          window.location.href = 'mailto:Konstantin@beneficious.com?subject=Ralph Demo Request&body=Hello, I would like to schedule a demo of Ralph for my PE firm.';
         }
+      });
+      
+      // Preload critical resources
+      const criticalImages = [
+        '/ralph-web/ralph_favicon.svg'
+      ];
+      
+      criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
       });
     });
   </script>

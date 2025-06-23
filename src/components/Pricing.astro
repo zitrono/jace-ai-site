@@ -1,8 +1,9 @@
 ---
 // Pricing section component
+import Button from './Button.astro';
 ---
 
-<section id="pricing" class="py-20" style="background-color: rgb(40, 40, 40);">
+<section id="pricing" class="py-20 bg-primary">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="heading-2">
@@ -70,9 +71,9 @@
         
         <p class="mt-6 text-sm text-gray-400">Additional data sources: €25,000 each</p>
         
-        <button class="mt-8 w-full btn-secondary">
+        <Button variant="secondary" class="mt-8 w-full">
           Book a Demo
-        </button>
+        </Button>
       </div>
       
       <!-- Enterprise Plan -->
@@ -131,9 +132,9 @@
         
         <p class="mt-6 text-sm text-gray-400">Additional data sources: €20,000 each</p>
         
-        <button class="mt-8 w-full btn-primary">
+        <Button variant="primary" class="mt-8 w-full">
           Book a Demo
-        </button>
+        </Button>
       </div>
     </div>
     

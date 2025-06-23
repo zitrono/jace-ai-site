@@ -13,35 +13,35 @@
   
   .btn-primary {
     @apply btn bg-yellow-400 hover:bg-yellow-300;
-    color: rgb(41, 48, 69) !important;
-    padding: 0px 24px !important;
-    height: 40px;
-    line-height: 40px;
+    color: var(--pom-accent-text);
+    padding: var(--pom-btn-padding);
+    height: var(--pom-btn-height);
+    line-height: var(--pom-btn-height);
   }
   
   .btn-secondary {
     @apply btn hover:bg-gray-500;
-    background-color: rgb(65, 65, 65);
-    color: rgb(255, 246, 238);
-    padding: 0px 24px;
-    height: 40px;
-    line-height: 40px;
+    background-color: var(--pom-bg-secondary);
+    color: var(--pom-text-secondary);
+    padding: var(--pom-btn-padding);
+    height: var(--pom-btn-height);
+    line-height: var(--pom-btn-height);
   }
   
   .btn-sm {
     @apply px-3 text-sm;
-    height: 32px;
-    line-height: 32px;
+    height: var(--pom-btn-height-sm);
+    line-height: var(--pom-btn-height-sm);
     white-space: nowrap;
   }
   
   .btn-lg {
     @apply text-base;
-    padding: 0px 24px !important;
-    border-radius: 8px;
+    padding: var(--pom-btn-padding);
+    border-radius: var(--pom-btn-radius-lg);
     white-space: nowrap;
-    height: 40px;
-    line-height: 40px;
+    height: var(--pom-btn-height);
+    line-height: var(--pom-btn-height);
   }
   
   /* Typography */
@@ -64,20 +64,22 @@
     @apply text-xl sm:text-2xl font-semibold text-white;
   }
   
-  .text-body {
-    @apply text-base text-gray-300 leading-relaxed;
-  }
   
   .text-muted {
     @apply text-gray-400;
   }
   
   .text-text-secondary {
-    @apply text-gray-300;
+    color: var(--pom-text-secondary);
   }
   
   .text-text-muted {
-    @apply text-gray-400;
+    color: var(--pom-text-muted);
+  }
+  
+  /* Additional text utilities */
+  .text-body {
+    @apply text-gray-300;
   }
   
   /* Gradients */
@@ -91,7 +93,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: rgba(0, 0, 0, 0) !important;
+    color: rgba(0, 0, 0, 0);
   }
   
   /* Sections */
@@ -106,7 +108,7 @@
   /* Cards */
   .card {
     @apply rounded-3xl p-8;
-    background-color: rgb(53, 53, 53);
+    background-color: var(--pom-bg-card);
   }
   
   .card-hover {
@@ -114,7 +116,7 @@
   }
   
   .card-hover:hover {
-    background-color: rgb(65, 65, 65);
+    background-color: var(--pom-bg-secondary);
   }
   
   .card-white {
@@ -137,15 +139,19 @@
   
   .badge-certification {
     @apply badge border-2;
-    background-color: rgb(53, 53, 53);
-    color: rgb(156, 163, 175);
+    background-color: var(--pom-bg-card);
+    color: var(--pom-text-muted);
     border: 2px solid rgba(255, 255, 255, 0.2);
   }
   
   /* Navigation */
   .nav-link {
-    @apply font-semibold text-white hover:text-yellow-400 transition-colors;
+    @apply font-semibold text-white transition-colors;
     text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    color: var(--pom-accent);
   }
   
   /* Company logos */
@@ -163,5 +169,21 @@
       @apply px-2 text-xs;
       font-size: 0.875rem;
     }
+  }
+  
+  /* FAQ transition styles for smooth expand/collapse */
+  .faq-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+  }
+  
+  /* Arrow rotation transition */
+  .faq-arrow {
+    transition: transform 0.3s ease-out;
+  }
+  
+  /* Mobile menu transitions */
+  #mobile-menu {
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
   }
 }

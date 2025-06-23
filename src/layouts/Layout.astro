@@ -10,9 +10,9 @@ const { title } = Astro.props;
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Gain 2 Hours Daily with Jace - AI-powered email assistant" />
+  <meta name="description" content="Ralph - See Tomorrow's Opportunities Today. AI-powered predictive intelligence for private equity firms." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/ralph-web/ralph_favicon.svg" />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
   
@@ -190,7 +190,38 @@ const { title } = Astro.props;
       }
 
       // Show banner if consent not given
-      showCookieBanner();
+      // showCookieBanner(); // Temporarily disabled for development
+    });
+
+    // Login button functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginButton = document.getElementById('login-button');
+      const mobileLoginButton = document.getElementById('mobile-login-button');
+      
+      const showLoginAlert = () => {
+        alert('Ralph is currently in private beta. Please contact us for access.');
+      };
+      
+      if (loginButton) {
+        loginButton.addEventListener('click', showLoginAlert);
+      }
+      
+      if (mobileLoginButton) {
+        mobileLoginButton.addEventListener('click', showLoginAlert);
+      }
+    });
+
+    // Book a Demo button functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const bookDemoButtons = document.querySelectorAll('button');
+      
+      bookDemoButtons.forEach(button => {
+        if (button.innerText.includes('Book a Demo') || button.innerText.includes('Book Demo')) {
+          button.addEventListener('click', () => {
+            window.location.href = 'mailto:Konstantin@beneficious.com?subject=Ralph Demo Request&body=Hello, I would like to schedule a demo of Ralph for my PE firm.';
+          });
+        }
+      });
     });
   </script>
 </body>

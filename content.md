@@ -246,10 +246,10 @@ No. Your data is never used to train or improve Ralph's models. Each deployment 
 
 ---
 
-## ENTITY G: Testimonials `[APPROVED]` - Approved: 2025-01-10, Revised: 2025-01-10
+## ENTITY G: Testimonials `[APPROVED]` - Approved: 2025-01-10, Revised: 2025-01-23
 
 ### Requirements:
-- 2-3 testimonial quotes
+- 6 testimonial quotes (updated from 2-3)
 - Attribution details
 - Must work without real customer testimonials
 - Should reinforce positioning and credibility
@@ -260,21 +260,30 @@ No. Your data is never used to train or improve Ralph's models. Each deployment 
 **Q24: Testimonial Strategy Without Customers** (Answered)
 - Choice: Industry Expert Quotes
 - Approach: Use real quotes from PE leaders about AI needs (properly attributed)
-- Format: Leave firm names as placeholders for now
+- Format: Use actual firm names with full attribution
 
 **Q25: Industry Expert Quote Selection** (Answered)
-- Choice: Option B - Problem-Solution Focus
-- Rationale: Shows both the current state of AI in PE (Blackstone's success), the reality check (Francisco Partners' critique), and the imperative for innovation (EQT)
+- Choice: Option A - 6 quotes showing urgency and transformation
+- Rationale: Shows competitive advantage (Gray), urgency (Schwarzman), transformation speed (Brand), risk of inaction (Smith), reality check (Deb), and future vision (Sinding)
 
 ### Final Testimonials:
 
-1. **Quote**: "Now when I get a call from an investment banker, we have AI tools that can build a high-quality first model while I'm still on the phone."
+1. **Quote**: "We've been incorporating data scientists in our equity businesses and in a bunch of our portfolio companies. We believe that gives us a real competitive advantage."
+   - **Attribution**: Jonathan Gray, President & COO, Blackstone
+
+2. **Quote**: "This is a transformational technology. You have to be the first mover in your industry."
+   - **Attribution**: Stephen Schwarzman, Chairman, CEO & Co-Founder, Blackstone
+
+3. **Quote**: "Now when I get a call from an investment banker, we have AI tools that can build a high-quality first model while I'm still on the phone."
    - **Attribution**: Martin Brand, Head of North America PE, Blackstone
 
-2. **Quote**: "Most of the AI portfolio that private equity is talking about today, candidly, is more marketing than substance."
+4. **Quote**: "We think that next year, 40% of the people at this conference will have an AI agent and the remaining 60% will be looking for work."
+   - **Attribution**: Robert F. Smith, Founder, Chairman & CEO, Vista Equity Partners
+
+5. **Quote**: "Most of the AI portfolio that private equity is talking about today, candidly, is more marketing than substance."
    - **Attribution**: Dipanjan "DJ" Deb, Co-Founder & CEO, Francisco Partners
 
-3. **Quote**: "Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry."
+6. **Quote**: "Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry."
    - **Attribution**: Christian Sinding, CEO, EQT
 
 ---

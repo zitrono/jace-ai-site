@@ -4,183 +4,129 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="About | Jace AI">
-  <Header />
-  
-  <main class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="pt-24 pb-16" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <h1 class="hero-title-gradient text-4xl font-bold tracking-tight sm:text-6xl mb-6">
-            Don't just chat. Act.
-          </h1>
-          <p class="text-lg leading-8 text-gray-300 max-w-2xl mx-auto">
-            At Zeta Labs, we are dedicated to the art of possibility and the pursuit of significance.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Our Values Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-16 text-center">
-            Our Values
-          </h2>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Speed of Progress</h3>
-              <p class="text-gray-300">We prioritize rapid advancement and continuous forward momentum in everything we build.</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Reduce Complexity</h3>
-              <p class="text-gray-300">We simplify complex problems to create elegant, user-friendly solutions.</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Fast Iteration Cycles</h3>
-              <p class="text-gray-300">We embrace rapid prototyping and quick iterations to perfect our products.</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Leverage Tools</h3>
-              <p class="text-gray-300">We utilize the best available tools and technologies to maximize our efficiency.</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Question Everything</h3>
-              <p class="text-gray-300">We challenge assumptions and conventional wisdom to drive innovation.</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <h3 class="text-xl font-semibold text-white mb-4">Care About People</h3>
-              <p class="text-gray-300">We put people first in everything we do, building technology that truly serves humanity.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Our Team Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8 text-center">
-            Our Team
-          </h2>
-          
-          <p class="text-lg text-gray-300 text-center mb-16 max-w-3xl mx-auto">
-            7 engineers and 1 operations expert with backgrounds from Meta AI, Google, Amazon, and Tesla, 
-            united in our mission to develop transformative technologies.
-          </p>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-8 rounded-xl border border-gray-700 text-center" style="background-color: rgba(80, 80, 80, 0.5);">
-              <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span class="text-xl font-bold text-gray-900">PA</span>
-              </div>
-              <h3 class="text-xl font-semibold text-white mb-2">Peter Albert</h3>
-              <p class="text-yellow-400 mb-3">Co-Founder</p>
-              <p class="text-gray-300 text-sm">Former Meta AI engineer with expertise in large-scale AI systems</p>
-            </div>
-            
-            <div class="p-8 rounded-xl border border-gray-700 text-center" style="background-color: rgba(80, 80, 80, 0.5);">
-              <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background: linear-gradient(to bottom right, rgb(255, 220, 97), rgb(255, 180, 40));">
-                <span class="text-xl font-bold text-white">FW</span>
-              </div>
-              <h3 class="text-xl font-semibold text-white mb-2">Fryderyk Wiatrowski</h3>
-              <p class="text-yellow-400 mb-3">Co-Founder</p>
-              <p class="text-gray-300 text-sm">Engineering leader with startup experience and AI expertise</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Investors Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-16">
-            Investors and Backers
-          </h2>
-          
-          <p class="text-lg text-gray-300 mb-12">
-            Backed by leading AI investors and organizations who believe in our vision.
-          </p>
-          
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-            <div class="p-6 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <p class="text-white font-semibold">Daniel Gross</p>
-              <p class="text-gray-400 text-sm">AI Investor</p>
-            </div>
-            
-            <div class="p-6 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <p class="text-white font-semibold">Nat Friedman</p>
-              <p class="text-gray-400 text-sm">Former GitHub CEO</p>
-            </div>
-            
-            <div class="p-6 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <p class="text-white font-semibold">AI Grant</p>
-              <p class="text-gray-400 text-sm">Research Foundation</p>
-            </div>
-            
-            <div class="p-6 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <p class="text-white font-semibold">Leonis Capital</p>
-              <p class="text-gray-400 text-sm">Venture Capital</p>
-            </div>
-            
-            <div class="p-6 rounded-xl border border-gray-700" style="background-color: rgba(60, 60, 60, 0.5);">
-              <p class="text-white font-semibold">KAYA VC</p>
-              <p class="text-gray-400 text-sm">Venture Capital</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-16 text-center">
-            In the News
-          </h2>
-          
-          <div class="p-8 rounded-xl border border-gray-700" style="background-color: rgba(80, 80, 80, 0.5);">
-            <h3 class="text-xl font-semibold text-white mb-4">
-              "Former Meta engineers launch Jace, an AI agent that works independently"
-            </h3>
-            <p class="text-gray-300 mb-4">
-              VentureBeat covers our launch and mission to create autonomous AI agents that can complete complex tasks without human intervention.
+<Layout title="About | Ralph - AI-Native Private Equity Platform">
+  <div class="min-h-screen">
+    <Header />
+    <main>
+      <!-- Hero Section -->
+      <section class="relative pt-24 pb-12" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl text-center">
+            <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+              About Ralph
+            </h1>
+            <p class="mt-6 text-xl text-gray-300">
+              Ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot opportunities and risks weeks before others, making better decisions inevitable.
             </p>
-            <p class="text-yellow-400 font-medium">VentureBeat</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CTA Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8">
-            Ready to experience the future?
-          </h2>
-          <p class="text-lg text-gray-300 mb-8">
-            Join thousands of users who are already transforming their workflow with Jace.
-          </p>
-          <button class="btn-primary btn-lg">
-            Get Started for Free
-          </button>
+      <!-- Founder Section -->
+      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-white mb-8">
+              Our Founder
+            </h2>
+            <div class="bg-gray-800 rounded-lg p-8">
+              <h3 class="text-2xl font-semibold text-white mb-4">
+                Konstantin Andreyev
+              </h3>
+              <p class="text-gray-300 leading-relaxed">
+                Entrepreneur and AI investor focused on making AI genuinely useful for professionals. Ralph represents years of research into how AI can augment human decision-making in high-stakes environments.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
-  
-  <Footer />
+      </section>
+
+      <!-- Building the Team Section -->
+      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-white mb-8">
+              Building the Team
+            </h2>
+            <p class="text-gray-300 mb-8">
+              We're assembling a world-class team to revolutionize private equity. Current openings:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  VP of Sales
+                </h3>
+                <p class="text-gray-400">
+                  B2B enterprise SaaS
+                </p>
+              </div>
+              <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  Head of Customer Success
+                </h3>
+                <p class="text-gray-400">
+                  Enterprise client management
+                </p>
+              </div>
+              <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  Lead AI Engineer
+                </h3>
+                <p class="text-gray-400">
+                  Multi-agent systems
+                </p>
+              </div>
+              <div class="bg-gray-800 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  VP of Product
+                </h3>
+                <p class="text-gray-400">
+                  Enterprise SaaS experience
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advisors & Partners Section -->
+      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-white mb-8">
+              Advisors & Partners
+            </h2>
+            <p class="text-gray-300 mb-8">
+              We're building relationships with leading PE firms and industry experts. Announcements coming soon.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map(() => (
+                <div class="bg-gray-800 rounded-lg p-8 flex items-center justify-center">
+                  <span class="text-4xl text-gray-600">?</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="py-20" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">
+              Contact
+            </h2>
+            <p class="text-gray-300 mb-4">
+              <strong>Location:</strong> Berlin, Germany
+            </p>
+            <p class="text-gray-300">
+              <strong>Email:</strong> <a href="mailto:Konstantin@beneficious.com" class="text-yellow-400 hover:text-yellow-300">Konstantin@beneficious.com</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </div>
 </Layout>

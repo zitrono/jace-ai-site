@@ -164,6 +164,18 @@ export class JaceAISitePOM {
       pricing: 'a[href="/#pricing"]',
       blog: 'a[href="/blog"]',
       login: 'a[href*="signin"]',
+      product: {
+        selector: 'a[href*="/product"]',
+        unique: true  // Ralph-specific product page
+      },
+      learn: {
+        selector: 'a[href*="/learn"]',
+        unique: true  // Ralph-specific learn page (replaces blog)
+      },
+      about: {
+        selector: 'a[href*="/about"]',
+        unique: true  // Ralph-specific about page content
+      },
       ctaHeader: {
         selector: 'header button.btn-primary',
         jaceSelector: 'header button[class*="bg-surface-highlight"]'
@@ -178,24 +190,46 @@ export class JaceAISitePOM {
       }
     },
 
-    // 4. Trust Indicators
+    // 4. Trust Indicators (removed in Ralph)
     trust: {
       casaBadge: {
         selector: '.badge-certification',
-        jaceSelector: 'div[class*="bg-"][class*="353535"]'
+        jaceSelector: 'div[class*="bg-"][class*="353535"]',
+        unique: true  // Removed in Ralph implementation
       },
-      userCount: '.text-gray-400',
-      userAvatars: '.flex.items-center img[alt*="user"]'
+      userCount: {
+        selector: '.text-gray-400',
+        unique: true  // Removed in Ralph implementation
+      },
+      userAvatars: {
+        selector: '.flex.items-center img[alt*="user"]',
+        unique: true  // Removed in Ralph implementation
+      }
     },
 
-    // 5. Company Logos
+    // 5. Company Logos (AI Adoption Paradox in Ralph)
     companies: {
-      section: '.mt-16.lg\\:mt-24', // FIXED: was '.text-text-muted.text-sm.font-medium'
+      section: {
+        selector: 'section.py-16',  // Ralph statistics section
+        jaceSelector: '.mt-16.lg\\:mt-24'  // Jace company logos section
+      },
       text: {
         selector: '.text-gray-400',
         jaceSelector: '.text-text-muted.text-sm.font-medium'
       },
-      logos: 'img[alt*="company"], img[alt*="logo"]'
+      logos: {
+        selector: 'img[alt*="company"], img[alt*="logo"]',
+        unique: true  // Ralph shows statistics instead of logos
+      },
+      // Ralph-specific statistics
+      paradoxTitle: {
+        selector: 'h2:contains("The AI Adoption Paradox")',
+        unique: true
+      },
+      statistics: {
+        selector: '.text-4xl.font-bold.text-yellow-400',
+        unique: true
+      }
     },
 
     // 6. Features Section

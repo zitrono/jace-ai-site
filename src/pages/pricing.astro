@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Pricing | Ralph - AI-Native Private Equity Platform">
+  <div class="min-h-screen">
+    <Header />
+    <main>
+      <!-- Hero Section -->
+      <section class="relative pt-24 pb-12" style="background-color: rgb(40, 40, 40);">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-4xl text-center">
+            <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+              Transparent Pricing
+            </h1>
+            <p class="mt-6 text-xl text-gray-300">
+              Enterprise-ready plans that scale with your portfolio
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <Pricing />
+
+      <!-- FAQ Section -->
+      <FAQ />
+    </main>
+    <Footer />
+  </div>
+</Layout>

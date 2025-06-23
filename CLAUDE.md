@@ -30,18 +30,27 @@ The repository contains two main components:
 - **GitHub Pages URL**: https://zitrono.github.io/ralph-web/
 - **Repository**: https://github.com/zitrono/ralph-web
 
-### Testing Suite (`tests/`)
-- **Comprehensive POM validation**: `node validate-jace-ai-100.js`
-- **Property-level testing**: `node validate-all-properties.js`
-- **Visual regression testing**: Various test files available
-- **iOS Safari mobile testing**: `node ios-safari-mobile-pom.js`
-- **Mobile POM validation**: `node mobile-pom-validation.js`
+### Build and Deploy Workflow
+1. **Development**: `npm run dev` - Live reload development server
+2. **Build**: `npm run build` - Creates production build in `docs/` folder
+3. **Test**: `cd tests && npm run test:ralph` - Validates build against POM
+4. **Deploy**: `git add docs && git commit && git push` - Deploys to GitHub Pages
 
-### Advanced POM Testing
-- **Comprehensive POM test (original)**: `node comprehensive-pom-test-original.js`
-- **Comprehensive POM test (refactor)**: `node comprehensive-pom-test.js`
-- **Simple POM validation**: `node simple-pom-test.js`
-- **Enhanced POM validation**: `node validate-enhanced-pom.js`
+### Testing Suite (`tests/`)
+- **Main test command**: `npm run test:ralph` or `node unified-test.js ralph`
+- **Test jace reference**: `npm run test:jace` or `node unified-test.js jace`
+- **Serve jace archive**: `npm run serve:jace` (runs on port 8081)
+- **Package name**: ralph-web-tests (formerly jace-ai-tests)
+
+### Legacy Test Files (deprecated - use unified-test.js)
+- `node validate-jace-ai-100.js`
+- `node validate-all-properties.js`
+- `node ios-safari-mobile-pom.js`
+- `node mobile-pom-validation.js`
+- `node comprehensive-pom-test-original.js`
+- `node comprehensive-pom-test.js`
+- `node simple-pom-test.js`
+- `node validate-enhanced-pom.js`
 
 ## Architecture
 
@@ -49,7 +58,7 @@ The repository contains two main components:
 
 The project implements a sophisticated testing system using the Page Object Model (POM) pattern:
 
-**Page Object Model (`original-site.pom.js`)**:
+**Page Object Model (`jace-ai-site.pom.js`)**:
 - **71 total elements** tracked across selectors, styles, and content
 - **14 CSS selectors** for DOM elements (header, navigation, hero, badges, etc.)
 - **47 style properties** covering typography, colors, spacing, gradients, shadows
@@ -129,8 +138,9 @@ The project maintains style parity between implementations using:
 **Comprehensive Coverage**: Tests must achieve near-100% success rate across all 71 POM elements, not just basic functionality.
 
 **Server Management**: 
-- Original site runs on port 8000
-- Astro refactor runs on port 4321
+- Jace archive runs on port 8081 (via `npm run serve:jace` in tests/)
+- Ralph/Astro runs on port 4321 (via `npm run dev` in root)
+- Legacy static build runs on port 8000 (if using old build system)
 - Ensure proper server startup before running tests
 
 ### Style Development Guidelines
@@ -153,12 +163,9 @@ The project maintains style parity between implementations using:
 ## Key Files
 
 ### Testing Files
-- `tests/original-site.pom.js` - Complete POM with 71 tracked elements
-- `tests/comprehensive-pom-test.js` - Full validation suite for refactor
-- `tests/comprehensive-pom-test-original.js` - POM validation against original
-- `tests/ios-safari-mobile-pom.js` - Mobile-optimized POM for iOS Safari testing
-- `tests/ios-safari-pom.js` - iOS Safari-specific Page Object Model
-- `tests/mobile-pom-validation.js` - Mobile validation with touch target testing
+- `tests/jace-ai-site.pom.js` - Single consolidated POM with all selectors and validation methods
+- `tests/unified-test.js` - Main test runner for both ralph and jace testing
+- `tests/package.json` - Test configuration with ralph-web-tests naming
 
 ### Core Implementation Files
 - `src/layouts/Layout.astro` - Global styles and CSS custom properties
@@ -320,3 +327,4 @@ All tests validate both high-level elements and individual CSS properties.
 2. Do not create new POM files. All POM logic belongs in jace-ai-site.pom.js.
 3. Use the selector mapping system for ralph/jace differences (selector vs jaceSelector).
 4. Mark ralph-only elements with `unique: true`.
+5. When implementing Ralph content that deviates from Jace reference, check if the corresponding POM selector needs `unique: true` to avoid test errors.

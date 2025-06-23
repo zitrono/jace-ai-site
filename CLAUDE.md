@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Never change pom without my approval
 - The project is now named "ralph-web" and publishes to https://zitrono.github.io/ralph-web/
 - Package name has been updated from "jace-ai-astro" to "ralph-web"
+- Jace.ai local archive: http://localhost:8081/ (static copy with working hamburger menu and FAQ functionality)
 
 ## Project Overview
 

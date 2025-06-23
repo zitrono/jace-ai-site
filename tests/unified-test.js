@@ -16,9 +16,9 @@ async function runTest({ target = 'ralph' }) {
     
     // Navigate based on target
     if (target === 'jace') {
-      await pom.navigate('https://jace.ai', 'jace');
+      await pom.navigate(pom.jaceUrl, 'jace');
     } else {
-      await pom.navigate('https://zitrono.github.io/ralph-web/', 'ralph');
+      await pom.navigate(pom.url, 'ralph');
     }
     
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -64,7 +64,8 @@ async function runTest({ target = 'ralph' }) {
     const interactiveTests = [
       { name: 'Mobile Menu Toggle', method: 'testMobileMenuToggle' },
       { name: 'Hover States', method: 'testHoverStates' },
-      { name: 'FAQ Accordion', method: 'testFAQAccordion' }
+      { name: 'FAQ Accordion', method: 'testFAQAccordion' },
+      { name: 'iOS Horizontal Swipe', method: 'testIOSHorizontalSwipe' }
     ];
     
     for (const test of interactiveTests) {

@@ -11,7 +11,7 @@ const { title } = Astro.props;
 <head>
   <meta charset="UTF-8" />
   <meta name="description" content="Gain 2 Hours Daily with Jace - AI-powered email assistant" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
@@ -57,6 +57,12 @@ const { title } = Astro.props;
       font-display: swap;
     }
     */
+    
+    /* iOS horizontal scroll prevention */
+    html, body {
+      overflow-x: hidden;
+      touch-action: pan-y pinch-zoom;
+    }
     
     /* Mobile-specific header adjustments */
     @media (max-width: 640px) {

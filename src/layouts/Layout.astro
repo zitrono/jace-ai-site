@@ -1,24 +1,129 @@
 ---
 interface Props {
 	title: string;
+	description?: string;
+	image?: string;
+	ogType?: string;
+	canonicalUrl?: string;
 }
 
-const { title } = Astro.props;
+const { 
+	title, 
+	description = "Ralph - See Tomorrow's Opportunities Today. AI-powered predictive intelligence for private equity firms.",
+	image = "/ralph-web/ralph_favicon.svg",
+	ogType = "website",
+	canonicalUrl = Astro.url.href
+} = Astro.props;
+
+// Base URL for canonical and Open Graph URLs
+const baseUrl = "https://zitrono.github.io";
+const fullUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`;
+const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 ---
 
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Ralph - See Tomorrow's Opportunities Today. AI-powered predictive intelligence for private equity firms." />
+  <meta name="description" content={description} />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/ralph-web/ralph_favicon.svg" />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
   
+  <!-- Canonical URL -->
+  <link rel="canonical" href={fullUrl} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={fullUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={fullImageUrl} />
+  <meta property="og:site_name" content="Ralph - AI-Native Private Equity Platform" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={fullUrl} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={fullImageUrl} />
+  <meta property="twitter:creator" content="@RalphAI" />
+  <meta property="twitter:site" content="@RalphAI" />
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="author" content="Ralph AI" />
+  <meta name="keywords" content="AI, private equity, predictive intelligence, investment, portfolio management, deal sourcing, due diligence, risk assessment" />
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="theme-color" content="#FFDC61" />
+  <meta name="msapplication-TileColor" content="#FFDC61" />
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Ralph",
+      "description": "AI-Native Private Equity Platform - See Tomorrow's Opportunities Today",
+      "url": "https://zitrono.github.io/ralph-web/",
+      "logo": "https://zitrono.github.io/ralph-web/ralph_favicon.svg",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "Ralph AI",
+        "url": "https://zitrono.github.io/ralph-web/",
+        "logo": "https://zitrono.github.io/ralph-web/ralph_favicon.svg",
+        "description": "AI-powered predictive intelligence for private equity firms",
+        "industry": "Financial Technology",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "Konstantin@beneficious.com",
+          "contactType": "customer service"
+        }
+      },
+      "featureList": [
+        "AI-powered deal sourcing",
+        "Predictive market intelligence",
+        "Risk assessment automation",
+        "Portfolio management optimization",
+        "Due diligence enhancement"
+      ]
+    }
+  </script>
+  
+  <!-- Font Preloading for Performance -->
+  <link rel="preload" href="/ralph-web/fonts/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/ralph-web/fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  
   <style is:global>
     @import '../styles/tailwind.css';
     @import '../styles/components.css';
+    
+    /* Font Face Declarations */
+    @font-face {
+      font-family: 'Geist';
+      src: url('/ralph-web/fonts/Geist-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    @font-face {
+      font-family: 'Geist';
+      src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
     
     /* POM-Validated CSS Variables */
     :root {
@@ -141,9 +246,40 @@ const { title } = Astro.props;
       padding-top: 0.75rem;
       padding-bottom: 0.75rem;
     }
+    
+    /* Skip to main content styles */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    .focus\:not-sr-only:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0.5rem 1rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans antialiased">
+<body class="text-white font-sans antialiased">
+  <!-- Skip to main content link for keyboard users -->
+  <a 
+    href="#main" 
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-accent focus:text-accent-text focus:px-4 focus:py-2 focus:rounded focus:font-medium focus:no-underline"
+  >
+    Skip to main content
+  </a>
   <slot />
   <script>
     // Mobile menu functionality with smooth animations
@@ -229,6 +365,14 @@ const { title } = Astro.props;
         setTimeout(() => {
           content.style.maxHeight = 'none';
         }, 300);
+      }
+    };
+    
+    // FAQ keyboard handler for accessibility
+    window.handleFAQKeydown = function(event, button) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleFAQ(button);
       }
     };
 

@@ -1,30 +1,50 @@
 ---
 // Hero section component
 import Button from './Button.astro';
+
+interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  showPattern?: boolean;
+}
+
+const { 
+  class: className = '',
+  title = "Turn Unstructured Portfolio Data Into Predictive Intelligence",
+  subtitle = "Ralph's AI agents work 24/7 to analyze your portfolio, predict risks 30 days early, and identify opportunities your competitors miss.",
+  ctaText = "Book a Demo",
+  ctaHref,
+  showPattern = true
+} = Astro.props;
 ---
 
-<section class="relative isolate lg:mt-[-5.6em] max-md:pt-4 hero-spacing">
+<section class={`relative isolate lg:mt-[-5.6em] max-md:pt-4 hero-spacing ${className}`}>
   <!-- Background pattern -->
-  <svg aria-hidden="true" class="absolute inset-0 -z-10 size-full stroke-white/10">
-    <defs>
-      <pattern x="50%" y="-1" id="hero-pattern" width="200" height="200" patternUnits="userSpaceOnUse">
-        <path d="M100 200V.5M.5 .5H200" fill="none"></path>
-      </pattern>
-    </defs>
-    <rect fill="url(#hero-pattern)" width="100%" height="100%" stroke-width="0"></rect>
-  </svg>
+  {showPattern && (
+    <svg aria-hidden="true" class="absolute inset-0 -z-10 size-full stroke-white/10">
+      <defs>
+        <pattern x="50%" y="-1" id="hero-pattern" width="200" height="200" patternUnits="userSpaceOnUse">
+          <path d="M100 200V.5M.5 .5H200" fill="none"></path>
+        </pattern>
+      </defs>
+      <rect fill="url(#hero-pattern)" width="100%" height="100%" stroke-width="0"></rect>
+    </svg>
+  )}
   
   <div class="mx-auto max-w-7xl px-6 md:pt-24 lg:flex lg:items-center lg:gap-x-20 lg:px-8 lg:pt-32">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto lg:w-5/12">
-      <h1 class="lg:mt-10 pb-2 text-pretty text-5xl font-bold gradient-hero-title max-sm:text-center" style="letter-spacing: -1.5px; font-size: 48px;" data-test="hero-title">
-        Turn Unstructured Portfolio Data Into Predictive Intelligence
+      <h1 class="hero-title-custom lg:mt-10 pb-2 text-pretty text-5xl font-bold gradient-hero-title max-sm:text-center" data-test="hero-title">
+        {title}
       </h1>
       <p class="mt-4 max-md:mb-12 text-pretty text-lg font-medium sm:text-2xl/8 max-sm:text-center hero-subtitle" data-test="hero-subtitle">
-        Ralph's AI agents work 24/7 to analyze your portfolio, predict risks 30 days early, and identify opportunities your competitors miss.
+        {subtitle}
       </p>
       <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
-        <Button variant="primary" size="lg" data-test="cta-button">
-          Book a Demo
+        <Button variant="primary" size="lg" data-test="cta-button" href={ctaHref}>
+          {ctaText}
         </Button>
       </div>
       
@@ -44,3 +64,10 @@ import Button from './Button.astro';
   
   <!-- Company logos removed for Ralph -->
 </section>
+
+<style>
+  .hero-title-custom {
+    letter-spacing: -1.5px;
+    font-size: 48px;
+  }
+</style>

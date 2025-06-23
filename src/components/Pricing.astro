@@ -1,16 +1,30 @@
 ---
 // Pricing section component
 import Button from './Button.astro';
+
+interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  showBothPlans?: boolean;
+}
+
+const { 
+  class: className = '',
+  title = "Enterprise-Ready Pricing",
+  subtitle = "Transparent pricing that scales with your portfolio",
+  showBothPlans = true
+} = Astro.props;
 ---
 
-<section id="pricing" class="py-20 bg-primary">
+<section id="pricing" class={`py-20 bg-primary ${className}`}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="heading-2">
-        Enterprise-Ready Pricing
+        {title}
       </h2>
       <p class="mt-4 text-lg text-text-muted">
-        Transparent pricing that scales with your portfolio
+        {subtitle}
       </p>
     </div>
     

@@ -1,0 +1,21 @@
+<svg width="110" height="40" viewBox="0 0 110 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Vista Equity Partners Logo - Clean geometric design -->
+  <g>
+    <!-- VISTA letterform -->
+    <rect x="6" y="6" width="4" height="20" fill="#1E40AF" transform="rotate(15 8 16)"/>
+    <rect x="14" y="6" width="4" height="28" fill="#1E40AF"/>
+    <rect x="22" y="8" width="4" height="12" fill="#1E40AF"/>
+    <rect x="30" y="6" width="4" height="28" fill="#1E40AF"/>
+    <rect x="38" y="6" width="12" height="4" fill="#1E40AF"/>
+    <rect x="38" y="18" width="10" height="4" fill="#1E40AF"/>
+    <rect x="38" y="30" width="12" height="4" fill="#1E40AF"/>
+    
+    <!-- Equity symbol - upward arrow/chart -->
+    <path d="M55 25 L60 20 L65 22 L70 15" stroke="#2563EB" stroke-width="3" fill="none"/>
+    <circle cx="70" cy="15" r="2" fill="#2563EB"/>
+    
+    <!-- VISTA text -->
+    <text x="75" y="17" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#1E40AF">VISTA</text>
+    <text x="75" y="28" font-family="Arial, sans-serif" font-size="6" font-weight="400" fill="#2563EB">EQUITY</text>
+  </g>
+</svg>

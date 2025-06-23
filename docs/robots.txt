@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://zitrono.github.io/ralph-web/sitemap-index.xml
+Sitemap: https://zitrono.github.io/ralph-web/sitemap-0.xml
+
+# Crawl delay (optional - prevents overwhelming the server)
+Crawl-delay: 1
+
+# Specific directives for common crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block access to sensitive directories (if any)
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*?*
+
+# Allow all standard web files
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$

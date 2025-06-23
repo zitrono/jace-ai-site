@@ -11,7 +11,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Geist', 'Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-video': 'linear-gradient(to bottom right, rgb(59, 130, 246), rgb(20, 184, 166))',

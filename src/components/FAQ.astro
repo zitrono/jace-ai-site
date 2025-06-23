@@ -1,15 +1,29 @@
 ---
 // FAQ section component
+
+interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  contactEmail?: string;
+}
+
+const { 
+  class: className = '',
+  title = "Frequently asked questions",
+  subtitle = "Everything you need to know about Ralph's security and deployment",
+  contactEmail = "Konstantin@beneficious.com"
+} = Astro.props;
 ---
 
-<section class="py-20 bg-primary">
+<section class={`py-20 bg-primary ${className}`}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-        Frequently asked questions
+        {title}
       </h2>
       <p class="mt-4 text-lg text-gray-400">
-        Everything you need to know about Ralph's security and deployment
+        {subtitle}
       </p>
     </div>
     
@@ -17,104 +31,176 @@
       <div class="space-y-8">
         <!-- FAQ 1 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-1"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">How does Ralph keep our deal data confidential?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-1" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-1-title">
+            <span id="faq-1-title" class="sr-only">Answer: How does Ralph keep our deal data confidential?</span>
             Your data stays on your servers. Ralph's AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.
           </div>
         </div>
         
         <!-- FAQ 2 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-2"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">Can we run Ralph on our own servers?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-2" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-2-title">
+            <span id="faq-2-title" class="sr-only">Answer: Can we run Ralph on our own servers?</span>
             Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We'll help you set it up.
           </div>
         </div>
         
         <!-- FAQ 3 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-3"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">What security standards does Ralph follow?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-3" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-3-title">
+            <span id="faq-3-title" class="sr-only">Answer: What security standards does Ralph follow?</span>
             Ralph inherits your existing security standards since it runs on your infrastructure. We follow secure development practices including code audits, penetration testing, and encrypted communications. The specifics depend on your deployment - we adapt to your requirements.
           </div>
         </div>
         
         <!-- FAQ 4 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-4"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">How does Ralph handle LP confidential information?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-4" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-4-title">
+            <span id="faq-4-title" class="sr-only">Answer: How does Ralph handle LP confidential information?</span>
             LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph's agents respect your existing data governance policies.
           </div>
         </div>
         
         <!-- FAQ 5 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-5"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">Can we integrate Ralph with our existing security tools?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-5" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-5-title">
+            <span id="faq-5-title" class="sr-only">Answer: Can we integrate Ralph with our existing security tools?</span>
             Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We'll work with your IT team to ensure Ralph fits seamlessly into your security stack.
           </div>
         </div>
         
         <!-- FAQ 6 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-6"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">What's Ralph's track record on data security?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-6" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-6-title">
+            <span id="faq-6-title" class="sr-only">Answer: What's Ralph's track record on data security?</span>
             We're in private beta with select PE firms, building security-first from day one. While we don't have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We're happy to share our security documentation.
           </div>
         </div>
         
         <!-- FAQ 7 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-7"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">How quickly can we revoke access if needed?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-7" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-7-title">
+            <span id="faq-7-title" class="sr-only">Answer: How quickly can we revoke access if needed?</span>
             Immediately. Since Ralph uses your authentication system, you can revoke access the same way you would for any employee - through your identity provider. Data access stops instantly. If you cancel Ralph entirely, just shut down the servers. You retain all your data.
           </div>
         </div>
         
         <!-- FAQ 8 -->
         <div class="card">
-          <button class="w-full text-left flex items-center justify-between group" aria-expanded="false" onclick="toggleFAQ(this)">
+          <button 
+            class="w-full text-left flex items-center justify-between group" 
+            aria-expanded="false" 
+            aria-describedby="faq-content-8"
+            role="button"
+            tabindex="0"
+            onclick="toggleFAQ(this)"
+            onkeydown="handleFAQKeydown(event, this)"
+          >
             <h3 class="heading-3">Does Ralph use our data to improve its AI models?</h3>
-            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="faq-arrow h-5 w-5 text-gray-400 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <div class="faq-content mt-4 text-gray-300 hidden">
+          <div id="faq-content-8" class="faq-content mt-4 text-gray-300 hidden" role="region" aria-labelledby="faq-8-title">
+            <span id="faq-8-title" class="sr-only">Answer: Does Ralph use our data to improve its AI models?</span>
             No. Your data is never used to train or improve Ralph's models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.
           </div>
         </div>
@@ -123,7 +209,7 @@
       <div class="mt-12 text-center">
         <p class="text-gray-400">
           Still have a question in mind? 
-          <a href="mailto:Konstantin@beneficious.com" class="text-yellow-400 hover:text-yellow-300 font-medium">
+          <a href={`mailto:${contactEmail}`} class="text-yellow-400 hover:text-yellow-300 font-medium">
             Contact us
           </a>
         </p>

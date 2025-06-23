@@ -1,0 +1,18 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blackstone Logo - Geometric design inspired by EQT -->
+  <g>
+    <!-- Letter B with geometric styling -->
+    <rect x="8" y="8" width="20" height="6" fill="#1F2937"/>
+    <rect x="8" y="17" width="22" height="6" fill="#1F2937"/>
+    <rect x="8" y="26" width="20" height="6" fill="#1F2937"/>
+    <rect x="6" y="6" width="4" height="28" fill="#1F2937"/>
+    
+    <!-- Modern accent elements -->
+    <rect x="35" y="6" width="75" height="4" fill="#374151"/>
+    <rect x="35" y="18" width="60" height="4" fill="#374151"/>
+    <rect x="35" y="30" width="70" height="4" fill="#374151"/>
+    
+    <!-- BLACKSTONE text -->
+    <text x="38" y="17" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#1F2937">BLACKSTONE</text>
+  </g>
+</svg>

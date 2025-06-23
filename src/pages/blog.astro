@@ -9,7 +9,7 @@ import Footer from '../components/Footer.astro';
   
   <main class="min-h-screen">
     <!-- Hero Section -->
-    <section class="pt-24 pb-16" style="background-color: rgb(40, 40, 40);">
+    <section class="blog-section pt-24 pb-16">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <h1 class="hero-title-gradient text-4xl font-bold tracking-tight sm:text-6xl mb-6">
@@ -23,13 +23,13 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- Blog Posts Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
+    <section class="blog-section py-24">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-6xl">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Blog Post 1 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
               <div class="h-48 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
@@ -57,11 +57,11 @@ import Footer from '../components/Footer.astro';
             </article>
 
             <!-- Blog Post 2 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
-              <div class="h-48 relative" style="background: linear-gradient(to bottom right, rgba(255, 220, 97, 0.2), rgba(255, 180, 40, 0.2));">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
+              <div class="blog-gradient-gold h-48 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
-                  <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset" style="background-color: rgba(255, 220, 97, 0.1); color: rgb(255, 220, 97); box-shadow: inset 0 0 0 1px rgba(255, 220, 97, 0.2);">
+                  <span class="blog-badge-gold inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset">
                     Real Estate
                   </span>
                 </div>
@@ -85,7 +85,7 @@ import Footer from '../components/Footer.astro';
             </article>
 
             <!-- Blog Post 3 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
               <div class="h-48 bg-gradient-to-br from-green-400/20 to-emerald-500/20 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
@@ -113,7 +113,7 @@ import Footer from '../components/Footer.astro';
             </article>
 
             <!-- Blog Post 4 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
               <div class="h-48 bg-gradient-to-br from-purple-400/20 to-pink-500/20 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
@@ -141,7 +141,7 @@ import Footer from '../components/Footer.astro';
             </article>
 
             <!-- Blog Post 5 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
               <div class="h-48 bg-gradient-to-br from-red-400/20 to-orange-500/20 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
@@ -169,11 +169,11 @@ import Footer from '../components/Footer.astro';
             </article>
 
             <!-- Blog Post 6 -->
-            <article class="rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors" style="background-color: rgba(60, 60, 60, 0.5);">
-              <div class="h-48 relative" style="background: linear-gradient(to bottom right, rgba(255, 220, 97, 0.2), rgba(255, 180, 40, 0.2));">
+            <article class="blog-card rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-colors">
+              <div class="blog-gradient-gold h-48 relative">
                 <div class="absolute inset-0 bg-gray-900/20"></div>
                 <div class="absolute bottom-4 left-4">
-                  <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset" style="background-color: rgba(255, 220, 97, 0.1); color: rgb(255, 220, 97); box-shadow: inset 0 0 0 1px rgba(255, 220, 97, 0.2);">
+                  <span class="blog-badge-gold inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset">
                     AI Story
                   </span>
                 </div>
@@ -202,7 +202,7 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- Newsletter Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
+    <section class="blog-section py-24">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8">
@@ -215,7 +215,7 @@ import Footer from '../components/Footer.astro';
             <input 
               type="email" 
               placeholder="Enter your email" 
-              class="flex-1 px-4 py-3 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent" style="background-color: rgba(60, 60, 60, 0.8);"
+              class="blog-input flex-1 px-4 py-3 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
             />
             <button class="btn-primary whitespace-nowrap">
               Subscribe
@@ -226,7 +226,7 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24" style="background-color: rgb(40, 40, 40);">
+    <section class="blog-section py-24">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center">
           <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8">
@@ -245,3 +245,27 @@ import Footer from '../components/Footer.astro';
   
   <Footer />
 </Layout>
+
+<style>
+  .blog-section {
+    background-color: rgb(40, 40, 40);
+  }
+  
+  .blog-card {
+    background-color: rgba(60, 60, 60, 0.5);
+  }
+  
+  .blog-gradient-gold {
+    background: linear-gradient(to bottom right, rgba(255, 220, 97, 0.2), rgba(255, 180, 40, 0.2));
+  }
+  
+  .blog-badge-gold {
+    background-color: rgba(255, 220, 97, 0.1);
+    color: rgb(255, 220, 97);
+    box-shadow: inset 0 0 0 1px rgba(255, 220, 97, 0.2);
+  }
+  
+  .blog-input {
+    background-color: rgba(60, 60, 60, 0.8);
+  }
+</style>

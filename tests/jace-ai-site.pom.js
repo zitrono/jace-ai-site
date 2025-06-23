@@ -653,7 +653,21 @@ export class JaceAISitePOM {
   // Navigation with target setting
   async navigate(url = null, target = null) {
     const targetUrl = url || this.url;
-    await this.page.goto(targetUrl, { waitUntil: 'networkidle0' });
+    try {
+      await this.page.goto(targetUrl, { 
+        waitUntil: 'domcontentloaded',
+        timeout: 60000 
+      });
+      // Wait for key elements to be visible
+      await this.page.waitForSelector('h1', { timeout: 10000 }).catch(() => {});
+    } catch (error) {
+      console.error(`Navigation error: ${error.message}`);
+      // Try once more with minimal wait
+      await this.page.goto(targetUrl, { 
+        waitUntil: 'load',
+        timeout: 30000 
+      });
+    }
     
     // Set target type if specified
     if (target) {

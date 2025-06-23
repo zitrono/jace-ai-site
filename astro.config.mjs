@@ -5,7 +5,7 @@ export default defineConfig({
   integrations: [tailwind()],
   output: 'static',
   outDir: './docs',
-  base: '/jace-ai-site/',
+  base: '/ralph-web/',
   build: {
     assets: 'assets'
   }

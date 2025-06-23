@@ -1,7 +1,7 @@
 // Check if GitHub Pages site is running
 import puppeteer from 'puppeteer';
 
-const GH_PAGES_URL = 'https://zitrono.github.io/jace-ai-site/';
+const GH_PAGES_URL = 'https://zitrono.github.io/ralph-web/';
 
 async function checkGitHubPages() {
   console.log('🔍 Checking GitHub Pages Deployment\n');

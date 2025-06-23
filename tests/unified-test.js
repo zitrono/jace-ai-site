@@ -18,7 +18,7 @@ async function runTest({ target = 'ralph' }) {
     if (target === 'jace') {
       await pom.navigate('https://jace.ai', 'jace');
     } else {
-      await pom.navigate('http://localhost:4321/jace-ai-site/', 'ralph');
+      await pom.navigate('https://zitrono.github.io/ralph-web/', 'ralph');
     }
     
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -142,7 +142,15 @@ async function runTest({ target = 'ralph' }) {
 }
 
 // Run based on command line argument or default
-const target = process.argv[2] || 'ralph';
+let target = 'ralph';
+const args = process.argv.slice(2);
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '--target' && args[i + 1]) {
+    target = args[i + 1];
+  } else if (!args[i].startsWith('--')) {
+    target = args[i];
+  }
+}
 runTest({ target }).catch(console.error);
 
 // Comprehensive property testing using consolidated POM

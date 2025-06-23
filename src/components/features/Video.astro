@@ -1,0 +1,80 @@
+---
+// Video section component with design tokens
+import Section from '../layout/Section.astro';
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  videoSrc?: string;
+  posterImage?: string;
+  placeholder?: string;
+  aspectRatio?: '16:9' | '4:3' | '1:1';
+  autoplay?: boolean;
+}
+
+const {
+  class: className = '',
+  title = 'See Ralph in Action',
+  subtitle = 'Watch how Ralph transforms your portfolio intelligence',
+  videoSrc,
+  posterImage,
+  placeholder = '2-minute demo video coming soon',
+  aspectRatio = '16:9',
+  autoplay = false,
+} = Astro.props;
+---
+
+<Section class={`video-section py-20 ${className}`} as="section">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="heading-2">
+        {title}
+      </h2>
+      <p class="mt-4 text-lg text-text-muted">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="mt-16 mx-auto max-w-4xl">
+      <div class="video-gradient-container rounded-lg p-8 text-center" data-test="video-container">
+        {
+          videoSrc ? (
+            <video class="video-player w-full rounded-lg" controls poster={posterImage}>
+              <source src={videoSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <div class="video-placeholder bg-gray-800 rounded-lg flex items-center justify-center">
+              <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          )
+        }
+        <p class="mt-4 text-white font-medium">
+          {placeholder}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-section {
+    background-color: rgb(40, 40, 40);
+  }
+
+  .video-gradient-container {
+    background: linear-gradient(to right bottom, rgb(37, 99, 235), rgb(13, 148, 136));
+    border-radius: 8px;
+  }
+
+  .video-player {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-placeholder {
+    aspect-ratio: 16 / 9;
+  }
+</style>

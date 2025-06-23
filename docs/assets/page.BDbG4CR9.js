@@ -1,0 +1,1 @@
+import{i}from"../chunks/vendor-astro.adjVY21w.js";i();

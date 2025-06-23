@@ -1,0 +1,97 @@
+---
+// Enhanced Section component with comprehensive background and spacing variants
+import type { HTMLAttributes } from 'astro/types';
+
+export interface SectionProps extends HTMLAttributes<'section'> {
+  /** Additional CSS classes */
+  class?: string;
+  /** Background variant */
+  background?: 'primary' | 'secondary' | 'card' | 'gradient' | 'transparent';
+  /** Vertical spacing variant */
+  spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  /** Maximum width constraint */
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+  /** Section ID for navigation */
+  id?: string;
+  /** Semantic HTML element to use */
+  as?: 'section' | 'div' | 'article' | 'main' | 'aside' | 'header' | 'footer';
+  /** Whether to add horizontal padding */
+  padded?: boolean;
+  /** Custom ARIA label */
+  ariaLabel?: string;
+  /** Custom ARIA labelledby */
+  ariaLabelledBy?: string;
+}
+
+const {
+  class: className = '',
+  background = 'primary',
+  spacing = 'lg',
+  maxWidth = '2xl',
+  id,
+  as: Element = 'section',
+  padded = true,
+  ariaLabel,
+  ariaLabelledBy,
+  ...rest
+} = Astro.props;
+
+// Background variants using design tokens
+const backgroundClasses = {
+  primary: 'bg-neutral-700', // Design system primary background
+  secondary: 'bg-neutral-600', // Design system secondary background
+  card: 'bg-surface-card', // Card background from design tokens
+  gradient: 'bg-gradient-cta-section', // Design system gradient
+  transparent: 'bg-transparent',
+};
+
+// Spacing variants using design tokens
+const spacingClasses = {
+  xs: 'py-section-sm', // 48px from design system
+  sm: 'py-12', // 48px
+  md: 'py-16', // 64px
+  lg: 'py-section-base', // 80px from design system
+  xl: 'py-24', // 96px
+  '2xl': 'py-section-lg', // 128px from design system
+};
+
+// Max width variants
+const maxWidthClasses = {
+  sm: 'max-w-3xl',
+  md: 'max-w-5xl',
+  lg: 'max-w-6xl',
+  xl: 'max-w-7xl',
+  '2xl': 'max-w-7xl',
+  full: 'max-w-none',
+};
+
+const sectionClasses = [
+  backgroundClasses[background],
+  spacingClasses[spacing],
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const containerClasses = [
+  'mx-auto',
+  maxWidthClasses[maxWidth],
+  padded && 'px-6 lg:px-8',
+]
+  .filter(Boolean)
+  .join(' ');
+
+const elementProps = {
+  class: sectionClasses,
+  id,
+  ...(ariaLabel && { 'aria-label': ariaLabel }),
+  ...(ariaLabelledBy && { 'aria-labelledby': ariaLabelledBy }),
+  ...rest,
+};
+---
+
+<Element {...elementProps}>
+  <div class={containerClasses}>
+    <slot />
+  </div>
+</Element>

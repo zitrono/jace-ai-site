@@ -1,0 +1,93 @@
+---
+// CTA section component - matching original "Start saving 90%" block
+import Button from '../primitives/Button.astro';
+import Section from '../layout/Section.astro';
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  background?: 'gradient' | 'solid';
+  showPattern?: boolean;
+  variant?: 'default' | 'compact';
+}
+
+const {
+  class: className = '',
+  title = 'Ready to transform your portfolio intelligence?',
+  subtitle = 'See what Ralph can do for your firm.',
+  ctaText = 'Book a Demo',
+  ctaHref,
+  background: _background = 'gradient',
+  showPattern = true,
+  variant = 'default',
+} = Astro.props;
+---
+
+<Section class={`py-20 overflow-hidden bg-primary ${className}`} as="section">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8 overflow-hidden">
+    <div class={`mx-auto ${variant === 'compact' ? 'mt-12 max-w-4xl' : 'mt-20 max-w-7xl sm:mt-32'} sm:px-6 lg:px-8 overflow-hidden`}>
+      <div
+        class="cta-gradient-container relative isolate overflow-hidden px-6 py-20 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-24"
+      >
+        <h2
+          class="mx-auto max-w-xl text-center text-4xl font-semibold tracking-tight text-text-inverted sm:text-5xl"
+        >
+          {title}
+        </h2>
+        <p class="mx-auto mt-6 max-w-lg text-center text-xl text-text-inverted">
+          {subtitle}
+        </p>
+        <div class="mt-10 flex justify-center">
+          <Button variant="primary" size="lg" href={ctaHref}>
+            {ctaText}
+          </Button>
+        </div>
+
+        <!-- Radial gradient background -->
+        {
+          showPattern && (
+            <svg
+              viewBox="0 0 1024 1024"
+              aria-hidden="true"
+              class="cta-pattern-svg absolute left-1/2 top-1/2 -z-10 size-[64rem] max-w-none -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            >
+              <circle
+                r="512"
+                cx="512"
+                cy="512"
+                fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
+                fill-opacity="0.7"
+              />
+              <defs>
+                <radialGradient
+                  r="1"
+                  cx="0"
+                  cy="0"
+                  id="759c1415-0410-454c-8f7c-9a820de03641"
+                  gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(512 512) rotate(90) scale(512)"
+                >
+                  <stop stop-color="rgba(196, 164, 221, 0.8)" />
+                  <stop offset="1" stop-color="rgba(248, 174, 207, 0.2)" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+            </svg>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .cta-gradient-container {
+    background: linear-gradient(135deg, rgb(196, 164, 221), rgb(248, 174, 207), rgb(255, 220, 97));
+  }
+
+  .cta-pattern-svg {
+    max-width: 100vw;
+  }
+</style>

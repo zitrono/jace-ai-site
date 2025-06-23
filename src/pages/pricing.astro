@@ -1,39 +1,21 @@
 ---
+// Redirect to homepage #pricing section
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Pricing from '../components/Pricing.astro';
-import FAQ from '../components/FAQ.astro';
-import Footer from '../components/Footer.astro';
 ---
 
-<Layout 
-  title="Pricing | Ralph - AI-Native Private Equity Platform" 
-  description="Enterprise-ready AI pricing for private equity. Essential and Enterprise plans starting at €150,000/year. Transparent pricing that scales with your portfolio."
-  ogType="website"
->
-  <div class="min-h-screen">
-    <Header />
-    <main id="main" role="main">
-      <!-- Hero Section -->
-      <section class="relative pt-24 pb-12 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl text-center">
-            <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">
-              Transparent Pricing
-            </h1>
-            <p class="mt-6 text-xl text-gray-300">
-              Enterprise-ready plans that scale with your portfolio
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Pricing Section -->
-      <Pricing />
-
-      <!-- FAQ Section -->
-      <FAQ />
-    </main>
-    <Footer />
+<Layout title="Pricing | Ralph - AI-Native Private Equity Platform">
+  <div class="min-h-screen bg-primary flex items-center justify-center">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold text-white mb-4">Redirecting...</h1>
+      <p class="text-gray-300 mb-4">You are being redirected to our pricing section.</p>
+      <a href="/ralph-web/#pricing" class="text-yellow-400 hover:text-yellow-300 underline">
+        Click here if you are not redirected automatically.
+      </a>
+    </div>
   </div>
 </Layout>
+
+<script>
+  // Client-side redirect to homepage with pricing anchor
+  window.location.href = '/ralph-web/#pricing';
+</script>

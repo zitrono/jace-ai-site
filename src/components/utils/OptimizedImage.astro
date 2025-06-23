@@ -1,0 +1,69 @@
+---
+/**
+ * Optimized image component with responsive loading and format optimization
+ * Automatically generates multiple densities and formats for best performance
+ * 
+ * @example
+ * ```astro
+ * import OptimizedImage from '../components/utils/OptimizedImage.astro';
+ * import heroImage from '../assets/images/hero-background.jpg';
+ * 
+ * <OptimizedImage
+ *   src={heroImage}
+ *   alt="Ralph AI Platform Dashboard"
+ *   class="w-full h-auto rounded-lg shadow-lg"
+ *   width={1920}
+ *   height={1080}
+ *   loading="eager"
+ *   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+ * />
+ * ```
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+  /** Image source - can be imported asset or URL string */
+  src: ImageMetadata | string;
+  /** Alt text for accessibility (required) */
+  alt: string;
+  /** Additional CSS classes */
+  class?: string;
+  /** Loading strategy - lazy by default for performance */
+  loading?: 'lazy' | 'eager';
+  /** Image width in pixels */
+  width?: number;
+  /** Image height in pixels */
+  height?: number;
+  /** Output format - webp by default for best compression */
+  format?: 'webp' | 'png' | 'jpg' | 'avif';
+  /** Image quality 0-100, 80 by default */
+  quality?: number;
+  /** Responsive sizes attribute for different viewports */
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  loading = 'lazy',
+  width,
+  height,
+  format = 'webp',
+  quality = 80,
+  sizes,
+} = Astro.props;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  class={className}
+  loading={loading}
+  width={width}
+  height={height}
+  format={format}
+  quality={quality}
+  sizes={sizes}
+  densities={[1, 2]}
+/>

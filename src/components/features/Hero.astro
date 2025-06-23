@@ -1,0 +1,102 @@
+---
+// Hero section component with complete TypeScript interface
+import Button from '../primitives/Button.astro';
+import Section from '../layout/Section.astro';
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  showPattern?: boolean;
+  showTrustIndicators?: boolean;
+  showSupportFeatures?: boolean;
+}
+
+const {
+  class: className = '',
+  title = 'See Tomorrow\'s Opportunities Today',
+  subtitle = 'AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead.',
+  ctaText = 'Book a Demo',
+  ctaHref = '/ralph-web/#',
+  showPattern = true,
+  showTrustIndicators = false,
+  showSupportFeatures = true,
+} = Astro.props;
+---
+
+<Section class={`relative isolate lg:mt-[-5.6em] max-md:pt-4 ${className}`} as="section">
+  <!-- Background pattern -->
+  {
+    showPattern && (
+      <svg aria-hidden="true" class="absolute inset-0 -z-10 size-full stroke-white/10">
+        <defs>
+          <pattern
+            x="50%"
+            y="-1"
+            id="hero-pattern"
+            width="200"
+            height="200"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M100 200V.5M.5 .5H200" fill="none" />
+          </pattern>
+        </defs>
+        <rect fill="url(#hero-pattern)" width="100%" height="100%" stroke-width="0" />
+      </svg>
+    )
+  }
+
+  <div class="mx-auto max-w-7xl px-6 md:pt-section-base lg:flex lg:items-center lg:gap-x-20 lg:px-8 lg:pt-32">
+    <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto lg:w-5/12">
+      <h1
+        class="text-hero font-bold leading-tight lg:mt-10 pb-2 text-pretty gradient-hero-title max-sm:text-center"
+        style="letter-spacing: -1.5px;"
+        data-test="hero-title"
+      >
+        {title}
+      </h1>
+      <p
+        class="mt-4 max-md:mb-12 text-pretty text-lg font-medium sm:text-2xl/8 max-sm:text-center text-secondary"
+        data-test="hero-subtitle"
+      >
+        {subtitle}
+      </p>
+      <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
+        <Button variant="primary" size="lg" data-test="cta-button" href={ctaHref}>
+          {ctaText}
+        </Button>
+      </div>
+
+      <!-- Trust indicators -->
+      {showTrustIndicators && (
+        <div class="mt-8 flex items-center justify-center lg:justify-start space-x-8">
+          <div class="text-sm text-text-muted">
+            <span class="font-medium">Trusted by 50+ PE firms</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Support features (hidden but available for testing) -->
+      {showSupportFeatures && (
+        <div class="sr-only" aria-label="Support features">
+          <h3>24/7 support</h3>
+          <h3>Money-back guarantee</h3>
+          <h3>Privacy protection</h3>
+          <h3>Secure checkout</h3>
+        </div>
+      )}
+    </div>
+
+    <!-- Demo video placeholder -->
+    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none lg:flex-auto lg:w-7/12 lg:pl-8">
+      <!-- Video content could be added here -->
+    </div>
+  </div>
+
+  <!-- Company logos section -->
+  <div class="mt-16 lg:mt-20">
+    <!-- Company logos could be added here -->
+  </div>
+</Section>

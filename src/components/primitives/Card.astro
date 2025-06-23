@@ -1,0 +1,156 @@
+---
+import type { BaseComponentProps, CardVariant, PaddingSize } from '../../types/components';
+
+interface Props extends BaseComponentProps {
+  /** Card variant style */
+  variant?: CardVariant;
+  /** Legacy dark/light variant for backwards compatibility */
+  legacyVariant?: 'dark' | 'light';
+  /** Enable hover effects */
+  hover?: boolean;
+  /** Padding size */
+  padding?: PaddingSize;
+  /** Whether the card is clickable */
+  clickable?: boolean;
+  /** Card border radius */
+  rounded?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  /** Shadow intensity */
+  shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const { 
+  variant = 'default',
+  legacyVariant,
+  hover = false,
+  padding = 'md',
+  clickable = false,
+  rounded = 'xl',
+  shadow = 'none',
+  class: className = '',
+  style,
+  data,
+  ...rest
+} = Astro.props;
+
+// Handle legacy variant mapping
+const actualVariant = legacyVariant === 'light' ? 'elevated' : variant;
+
+// Padding classes
+const paddingClasses = {
+  none: 'p-0',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+  xl: 'p-10',
+};
+
+// Variant classes using design tokens
+const variantClasses = {
+  default: 'bg-neutral-500 border border-neutral-600',
+  elevated: 'bg-white border border-neutral-200 shadow-lg',
+  outlined: 'bg-transparent border-2 border-neutral-600',
+  filled: 'bg-neutral-600 border border-neutral-500',
+};
+
+// Rounded classes
+const roundedClasses = {
+  sm: 'rounded-sm',
+  md: 'rounded-md',
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
+};
+
+// Shadow classes
+const shadowClasses = {
+  none: '',
+  sm: 'shadow-sm',
+  md: 'shadow-md',
+  lg: 'shadow-lg',
+  xl: 'shadow-xl',
+};
+
+// Combine all classes
+const classes = [
+  // Base card styles
+  'relative',
+  'transition-all duration-200',
+  // Variant classes
+  variantClasses[actualVariant],
+  // Padding
+  paddingClasses[padding],
+  // Border radius
+  roundedClasses[rounded],
+  // Shadow
+  shadowClasses[shadow],
+  // Hover effects
+  hover && 'hover:shadow-lg hover:scale-[1.02]',
+  clickable && 'cursor-pointer focus:ring-2 focus:ring-primary-yellow/50 focus:outline-none',
+  // Legacy POM compatibility
+  'card',
+  hover && 'card-hover',
+  legacyVariant === 'light' && 'card-white',
+  // Custom classes
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+// Data attributes
+const dataAttributes = data ? Object.entries(data).reduce((acc, [key, value]) => {
+  acc[`data-${key}`] = value;
+  return acc;
+}, {} as Record<string, string>) : {};
+---
+
+<div 
+  class={classes}
+  style={style}
+  tabindex={clickable ? 0 : undefined}
+  role={clickable ? 'button' : undefined}
+  {...dataAttributes}
+  {...rest}
+>
+  <slot name="header" />
+  <div class="card-content">
+    <slot />
+  </div>
+  <slot name="footer" />
+</div>
+
+<!-- POM compatibility styles only - all other styles are Tailwind utilities -->
+<style>
+  /* POM compatibility - maintain exact selectors and properties */
+  .card {
+    background-color: var(--pom-bg-card);
+  }
+
+  .card-hover {
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+
+  .card-hover:hover {
+    background-color: var(--pom-bg-secondary);
+  }
+
+  .card-white {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .card-white h3,
+  .card-white h4 {
+    color: rgb(17, 24, 39);
+  }
+
+  .card-white p {
+    color: rgb(75, 85, 99);
+  }
+
+  /* Content area for slotted content */
+  .card-content:empty {
+    display: none;
+  }
+</style>

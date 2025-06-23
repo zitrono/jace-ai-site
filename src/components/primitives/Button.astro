@@ -1,0 +1,203 @@
+---
+import type { BaseComponentProps, InteractiveComponentProps, ButtonVariant, SizeVariant, ButtonState } from '../../types/components';
+
+interface Props extends BaseComponentProps, InteractiveComponentProps {
+  /** Button variant style */
+  variant: ButtonVariant;
+  /** Button size */
+  size?: SizeVariant;
+  /** Button state */
+  state?: ButtonState;
+  /** Loading state */
+  loading?: boolean;
+  /** Click handler */
+  onclick?: string;
+  /** Button ID */
+  id?: string;
+  /** Test attribute */
+  'data-test'?: string;
+  /** Link href for anchor behavior */
+  href?: string;
+  /** Button type */
+  type?: 'button' | 'submit' | 'reset';
+  /** Full width button */
+  fullWidth?: boolean;
+  /** Icon slot name */
+  icon?: string;
+  /** Right icon slot name */
+  rightIcon?: string;
+}
+
+const {
+  variant,
+  size = 'md',
+  state = 'default',
+  loading = false,
+  disabled = false,
+  class: className = '',
+  onclick,
+  id,
+  'data-test': dataTest,
+  href,
+  type = 'button',
+  fullWidth = false,
+  icon,
+  rightIcon,
+  tabIndex,
+  ariaLabel,
+  ariaDescribedBy,
+  style,
+  data,
+  ...rest
+} = Astro.props;
+
+// Determine actual disabled state
+const isDisabled = disabled || state === 'disabled' || loading;
+
+// Size classes using Tailwind utilities
+const sizeClasses = {
+  xs: 'h-8 px-3 text-xs',
+  sm: 'h-9 px-4 text-sm',
+  md: 'h-10 px-6 text-sm', // POM compatible height
+  lg: 'h-11 px-8 text-base',
+  xl: 'h-12 px-10 text-lg',
+};
+
+// Variant classes using design tokens
+const variantClasses = {
+  primary: 'bg-primary-yellow text-pom-accent-text hover:bg-primary-yellow-hover focus:ring-primary-yellow/50 border-transparent',
+  secondary: 'bg-neutral-600 text-pom-text-secondary hover:bg-neutral-500 focus:ring-neutral-500/50 border-neutral-600',
+  outline: 'bg-transparent text-pom-text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
+  ghost: 'bg-transparent text-pom-text-secondary hover:bg-neutral-600 focus:ring-neutral-500/50 border-transparent',
+  danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 border-transparent',
+};
+
+// State classes
+const stateClasses = {
+  default: '',
+  loading: 'cursor-wait',
+  disabled: 'opacity-50 cursor-not-allowed',
+};
+
+// Combine all classes
+const classes = [
+  // Base button styles
+  'inline-flex items-center justify-center',
+  'font-medium rounded-md border',
+  'transition-all duration-200',
+  'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-700',
+  'disabled:opacity-50 disabled:cursor-not-allowed',
+  'active:scale-[0.99]',
+  'cursor-pointer',
+  // Size classes
+  sizeClasses[size],
+  // Variant classes
+  variantClasses[variant],
+  // State classes
+  stateClasses[state],
+  // Full width
+  fullWidth && 'w-full',
+  // Loading state
+  loading && 'cursor-wait',
+  // POM compatibility classes
+  variant === 'primary' && 'btn-primary',
+  variant === 'secondary' && 'btn-secondary',
+  size === 'sm' && 'btn-sm',
+  size === 'lg' && 'btn-lg',
+  // Custom classes
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+// Data attributes
+const dataAttributes = data ? Object.entries(data).reduce((acc, [key, value]) => {
+  acc[`data-${key}`] = value;
+  return acc;
+}, {} as Record<string, string>) : {};
+
+// ARIA attributes
+const ariaAttributes = {
+  ...(ariaLabel && { 'aria-label': ariaLabel }),
+  ...(ariaDescribedBy && { 'aria-describedby': ariaDescribedBy }),
+  ...(loading && { 'aria-busy': 'true' }),
+  ...(isDisabled && { 'aria-disabled': 'true' }),
+};
+---
+
+{
+  href ? (
+    <a 
+      href={href} 
+      class={classes} 
+      id={id} 
+      data-test={dataTest}
+      style={style}
+      tabindex={tabIndex}
+      {...ariaAttributes}
+      {...dataAttributes}
+      {...rest}
+    >
+      {icon && <span class="mr-2" aria-hidden="true"><slot name="icon" /></span>}
+      <slot />
+      {rightIcon && <span class="ml-2" aria-hidden="true"><slot name="right-icon" /></span>}
+    </a>
+  ) : (
+    <button 
+      type={type} 
+      class={classes} 
+      onclick={onclick} 
+      id={id} 
+      data-test={dataTest}
+      style={style}
+      disabled={isDisabled}
+      tabindex={tabIndex}
+      {...ariaAttributes}
+      {...dataAttributes}
+      {...rest}
+    >
+      {loading && (
+        <svg class="animate-spin -ml-1 mr-3 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      )}
+      {icon && !loading && <span class="mr-2" aria-hidden="true"><slot name="icon" /></span>}
+      <slot />
+      {rightIcon && <span class="ml-2" aria-hidden="true"><slot name="right-icon" /></span>}
+    </button>
+  )
+}
+
+<!-- POM compatibility styles only - all other styles are Tailwind utilities -->
+<style>
+  /* POM compatibility - maintain exact selectors and properties */
+  .btn-primary {
+    background-color: var(--pom-accent);
+    color: var(--pom-accent-text);
+    padding: var(--pom-btn-padding);
+    height: var(--pom-btn-height);
+    border-radius: var(--pom-btn-radius);
+  }
+
+  .btn-secondary {
+    background-color: var(--pom-bg-secondary);
+    color: var(--pom-text-secondary);
+    padding: var(--pom-btn-padding);
+    height: var(--pom-btn-height);
+    border-radius: var(--pom-btn-radius);
+  }
+
+  .btn-sm {
+    height: 32px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .btn-lg {
+    height: var(--pom-btn-height);
+    padding: var(--pom-btn-padding);
+    border-radius: 8px;
+    font-size: 16px;
+  }
+</style>

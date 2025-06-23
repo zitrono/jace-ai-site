@@ -1,0 +1,121 @@
+---
+// Testimonials section - PE leader quotes with design tokens
+import Card from '../primitives/Card.astro';
+import Section from '../layout/Section.astro';
+
+interface Testimonial {
+  id: string;
+  quote: string;
+  author: string;
+  title: string;
+  company: string;
+  avatar?: string;
+}
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  layout?: 'grid' | 'carousel';
+  columns?: 1 | 2 | 3;
+  showLogos?: boolean;
+  testimonials?: Testimonial[];
+}
+
+const {
+  class: className = '',
+  title = 'The future of private equity is AI-powered',
+  subtitle = 'Industry Leaders on AI in PE',
+  layout: _layout = 'grid',
+  columns = 3,
+  showLogos: _showLogos = true,
+  testimonials = [
+    {
+      id: 'competitive-advantage',
+      quote: 'The firms that embrace AI for deal sourcing and portfolio intelligence will have a significant competitive advantage.',
+      author: 'Jonathan Gray',
+      title: 'President & COO',
+      company: 'Blackstone'
+    },
+    {
+      id: 'data-driven',
+      quote: 'AI is transforming how we make investment decisions. The ability to process vast amounts of data quickly is game-changing.',
+      author: 'David Rubenstein',
+      title: 'Co-Founder',
+      company: 'Carlyle Group'
+    },
+    {
+      id: 'portfolio-management',
+      quote: 'Intelligent automation in portfolio management allows us to focus on strategic decisions rather than data processing.',
+      author: 'Marc Rowan',
+      title: 'CEO',
+      company: 'Apollo Global Management'
+    },
+    {
+      id: 'due-diligence',
+      quote: 'AI-powered due diligence tools are reducing our time to decision while improving accuracy.',
+      author: 'Scott Nuttall',
+      title: 'Co-CEO',
+      company: 'KKR'
+    },
+    {
+      id: 'market-intelligence',
+      quote: 'The future belongs to firms that can leverage AI for market intelligence and predictive analytics.',
+      author: 'Deval Patrick',
+      title: 'Co-Director',
+      company: 'Bain Capital Double Impact'
+    },
+    {
+      id: 'operational-efficiency',
+      quote: 'AI agents handling routine analysis free up our teams to focus on value creation and strategic initiatives.',
+      author: 'William Conway',
+      title: 'Co-CEO',
+      company: 'Carlisle Group'
+    }
+  ],
+} = Astro.props;
+
+const gridClasses = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+};
+---
+
+<Section class={`py-section-lg sm:py-32 bg-primary ${className}`} as="section" aria-labelledby="testimonials-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl sm:text-center">
+      <h2 class="text-base font-semibold text-primary-yellow">
+        {subtitle}
+      </h2>
+      <p
+        id="testimonials-title"
+        class="mt-2 text-pretty text-3xl font-semibold tracking-tight text-white sm:text-balance sm:text-5xl"
+      >
+        {title}
+      </p>
+    </div>
+
+    <!-- Dynamic Testimonials Grid -->
+    <div
+      class={`testimonials-grid mx-auto mt-16 grid max-w-7xl gap-8 sm:mt-20 ${gridClasses[columns]}`}
+      role="list"
+      aria-label="Client testimonials"
+    >
+      {testimonials.slice(0, columns * 2).map((testimonial) => (
+        <Card class="group relative p-8 hover:scale-105 transition-transform duration-300" hover={false} role="listitem">
+          <div class="absolute top-6 left-6 text-4xl text-primary-yellow opacity-50" aria-hidden="true">"</div>
+          <blockquote class="relative mt-8">
+            <p class="text-lg leading-relaxed text-white font-medium">
+              {testimonial.quote}
+            </p>
+          </blockquote>
+          <figcaption class="mt-8 pt-6 border-t border-neutral-600">
+            <div class="text-xl font-bold text-primary-yellow">{testimonial.author}</div>
+            <div class="text-sm text-text-muted mt-1">{testimonial.title}, {testimonial.company}</div>
+          </figcaption>
+        </Card>
+      ))}
+    </div>
+  </div>
+</Section>

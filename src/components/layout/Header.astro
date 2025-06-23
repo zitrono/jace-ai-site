@@ -1,0 +1,372 @@
+---
+// Enhanced Header component with TypeScript interface and accessibility improvements
+import Button from '../primitives/Button.astro';
+import type { HTMLAttributes } from 'astro/types';
+
+export interface HeaderProps extends HTMLAttributes<'header'> {
+  /** Additional CSS classes */
+  class?: string;
+  /** Whether the header should stick to the top when scrolling */
+  sticky?: boolean;
+  /** Whether the header should have a transparent background */
+  transparent?: boolean;
+  /** Whether to show the logo */
+  showLogo?: boolean;
+  /** Logo text content */
+  logoText?: string;
+  /** Logo link destination */
+  logoHref?: string;
+  /** Main navigation links */
+  navLinks?: Array<{
+    href: string;
+    text: string;
+    external?: boolean;
+  }>;
+  /** Whether to show CTA buttons */
+  showCta?: boolean;
+  /** Custom CTA button text */
+  ctaText?: string;
+  /** Custom login button text */
+  loginText?: string;
+}
+
+const {
+  class: className = '',
+  sticky = true,
+  transparent = false,
+  showLogo = true,
+  logoText = 'ralph',
+  logoHref = '/ralph-web/',
+  navLinks = [
+    { href: '/ralph-web/#product', text: 'Product' },
+    { href: '/ralph-web/#pricing', text: 'Pricing' },
+    { href: '/ralph-web/learn', text: 'Learn' },
+  ],
+  showCta = true,
+  ctaText = 'Book a Demo',
+  loginText = 'Log In',
+  ...rest
+} = Astro.props;
+
+const headerClasses = [
+  // Position
+  sticky ? 'sticky top-0' : 'relative',
+  // Layout and z-index
+  'z-20 inset-x-0',
+  // Background
+  transparent ? 'bg-transparent' : 'bg-neutral-700/95 backdrop-blur-sm',
+  // Transitions
+  'transition-all duration-300',
+  // Border for definition when not transparent
+  !transparent && 'border-b border-neutral-600/50',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<header class={headerClasses} {...rest}>
+  {/* Skip link for accessibility */}
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:rounded-base focus:bg-primary-yellow focus:px-component-base focus:py-component-sm focus:text-text-inverted focus:no-underline focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+  >
+    Skip to main content
+  </a>
+
+  <nav id="navigation" class="mx-auto flex max-w-7xl items-center justify-between" role="navigation" aria-label="Main navigation">
+    <div
+      class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all duration-300"
+      style="height: 64px;"
+    >
+      {/* Logo */}
+      {showLogo && (
+        <div class="flex lg:flex-1">
+          <a 
+            href={logoHref} 
+            class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          >
+            <span class="sr-only">{logoText}</span>
+            <span class="text-text-primary font-bold text-2xl">{logoText}</span>
+          </a>
+        </div>
+      )}
+
+      {/* Mobile CTA Button */}
+      {showCta && (
+        <div class="flex lg:hidden flex-1 justify-end mr-3">
+          <Button 
+            variant="primary" 
+            size="sm" 
+            class="text-xs sm:text-sm min-h-[44px] min-w-[44px] touch-manipulation"
+          >
+            <span class="hidden min-[360px]:inline">{ctaText}</span>
+            <span class="inline min-[360px]:hidden">Book Demo</span>
+          </Button>
+        </div>
+      )}
+
+      {/* Mobile Menu Button */}
+      <div class="flex lg:hidden">
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          aria-label="Open main menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-haspopup="true"
+        >
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+        </button>
+      </div>
+
+      {/* Desktop Navigation */}
+      <nav class="hidden lg:flex lg:gap-x-12" role="navigation" aria-label="Main navigation">
+        {navLinks.map((link) => (
+          <a 
+            href={link.href} 
+            class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
+            {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {link.text}
+          </a>
+        ))}
+      </nav>
+
+      {/* Desktop CTA Buttons */}
+      {showCta && (
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
+          <Button 
+            variant="secondary" 
+            id="login-button" 
+            data-test="secondary-button"
+            class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+          >
+            {loginText}
+          </Button>
+          <Button 
+            variant="primary" 
+            size="lg" 
+            data-test="cta-button"
+            class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          >
+            {ctaText}
+          </Button>
+        </div>
+      )}
+    </div>
+  </nav>
+
+  {/* Mobile Menu Overlay - Performance optimized with client:media */}
+  <div
+    id="mobile-menu"
+    class="hidden fixed inset-0 z-50 lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mobile-menu-title"
+    data-mobile-menu-overlay
+  >
+    {/* Backdrop */}
+    <div class="fixed inset-0 bg-black/50" aria-hidden="true"></div>
+    
+    {/* Menu Panel */}
+    <div class="fixed right-0 top-0 bottom-0 w-full bg-neutral-700 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out" data-mobile-menu-panel>
+      <div class="flex items-center justify-between mb-8">
+        {showLogo && (
+          <a 
+            href={logoHref} 
+            class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          >
+            <span class="sr-only">{logoText}</span>
+            <span class="text-text-primary font-bold text-2xl">{logoText}</span>
+          </a>
+        )}
+        <button
+          id="mobile-menu-close"
+          type="button"
+          class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          aria-label="Close menu"
+        >
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <nav class="flex flex-col space-y-4" role="navigation" aria-label="Mobile navigation">
+        <h2 id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</h2>
+        {navLinks.map((link) => (
+          <a 
+            href={link.href} 
+            class="nav-link text-lg text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium py-3 px-2 rounded-base min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+            {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {link.text}
+          </a>
+        ))}
+        
+        {showCta && (
+          <div class="pt-6 border-t border-neutral-600 flex flex-row gap-4">
+            <Button 
+              variant="secondary" 
+              id="mobile-login-button" 
+              class="flex-1 text-center min-h-[44px] focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              {loginText}
+            </Button>
+            <Button 
+              variant="primary" 
+              size="lg" 
+              class="flex-1 min-h-[44px] focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              {ctaText}
+            </Button>
+          </div>
+        )}
+      </nav>
+    </div>
+  </div>
+
+<!-- Performance-optimized mobile menu script with client:media for mobile-only loading -->
+<script client:media="(max-width: 1024px)">
+  // Mobile menu functionality optimized for performance
+  function initializeMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuPanel = document.querySelector('[data-mobile-menu-panel]');
+
+    if (!mobileMenuButton || !mobileMenu || !mobileMenuPanel) return;
+
+    // Performance-optimized show/hide with hardware acceleration
+    const showMenu = () => {
+      // Use will-change for better performance
+      mobileMenuPanel.style.willChange = 'transform';
+      mobileMenu.classList.remove('hidden');
+      
+      requestAnimationFrame(() => {
+        mobileMenuPanel.style.transform = 'translateX(0)';
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
+        
+        // Focus management
+        const firstFocusable = mobileMenu.querySelector('a, button');
+        if (firstFocusable) firstFocusable.focus();
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+      });
+    };
+
+    const hideMenu = () => {
+      mobileMenuPanel.style.transform = 'translateX(100%)';
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuPanel.style.willChange = 'auto';
+        
+        // Return focus to menu button
+        if (mobileMenuButton) mobileMenuButton.focus();
+      }, 300);
+    };
+
+    // Event listeners with performance optimizations
+    mobileMenuButton.addEventListener('click', showMenu, { passive: true });
+    
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', hideMenu, { passive: true });
+    }
+
+    // Optimized backdrop click handling
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu || e.target.hasAttribute('data-mobile-menu-overlay')) {
+        hideMenu();
+      }
+    }, { passive: true });
+
+    // Keyboard handling
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        hideMenu();
+      }
+    });
+
+    // Touch handling for mobile swipe-to-close
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      mobileMenuPanel.style.transition = 'none';
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+      const deltaX = currentX - startX;
+      
+      if (deltaX > 0) {
+        const translateX = Math.min(deltaX, window.innerWidth);
+        mobileMenuPanel.style.transform = `translateX(${translateX}px)`;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const deltaX = currentX - startX;
+      mobileMenuPanel.style.transition = '';
+      
+      if (deltaX > window.innerWidth * 0.3) {
+        hideMenu();
+      } else {
+        mobileMenuPanel.style.transform = 'translateX(0)';
+      }
+    };
+
+    if ('ontouchstart' in window) {
+      mobileMenuPanel.addEventListener('touchstart', handleTouchStart, { passive: true });
+      mobileMenuPanel.addEventListener('touchmove', handleTouchMove, { passive: true });
+      mobileMenuPanel.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeMobileMenu);
+  } else {
+    initializeMobileMenu();
+  }
+</script>
+</header>

@@ -1,0 +1,102 @@
+---
+// Enhanced Footer component with TypeScript interface and accessibility improvements
+import type { HTMLAttributes } from 'astro/types';
+
+export interface FooterProps extends HTMLAttributes<'footer'> {
+  /** Additional CSS classes */
+  class?: string;
+  /** Company name for copyright */
+  companyName?: string;
+  /** Copyright year (defaults to current year) */
+  year?: number;
+  /** Contact email address */
+  contactEmail?: string;
+  /** Whether to show footer links */
+  showLinks?: boolean;
+  /** Custom footer links */
+  customLinks?: Array<{
+    href: string;
+    text: string;
+    external?: boolean;
+  }>;
+  /** Whether to show copyright notice */
+  showCopyright?: boolean;
+  /** Custom copyright text */
+  customCopyright?: string;
+  /** Background variant */
+  background?: 'primary' | 'secondary' | 'card';
+  /** Whether to show border */
+  showBorder?: boolean;
+}
+
+const {
+  class: className = '',
+  companyName = 'Beneficious',
+  year = new Date().getFullYear(),
+  contactEmail = 'Konstantin@beneficious.com',
+  showLinks = true,
+  customLinks,
+  showCopyright = true,
+  customCopyright,
+  background = 'primary',
+  showBorder = true,
+  ...rest
+} = Astro.props;
+
+const defaultLinks = [
+  { href: '/ralph-web/privacy', text: 'Privacy Policy' },
+  { href: '/ralph-web/terms', text: 'Terms of Service' },
+  { href: `mailto:${contactEmail}`, text: 'Contact' },
+];
+
+const links = customLinks || defaultLinks;
+
+// Background variants using design tokens
+const backgroundClasses = {
+  primary: 'bg-neutral-700',
+  secondary: 'bg-neutral-600',
+  card: 'bg-surface-card',
+};
+
+const footerClasses = [
+  backgroundClasses[background],
+  showBorder && 'border-t border-neutral-600',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const copyrightText = customCopyright || `© ${year} ${companyName}. All rights reserved.`;
+---
+
+<footer id="footer" class={footerClasses} role="contentinfo" {...rest}>
+  <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+    <div class="flex flex-col items-center space-y-6">
+      {showLinks && (
+        <nav role="navigation" aria-label="Footer navigation">
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm">
+            {links.map((link, index) => (
+              <a 
+                href={link.href} 
+                class="text-text-muted hover:text-text-primary transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700 focus:rounded-base min-h-[44px] flex items-center px-2 py-1"
+                {...(link.external && { 
+                  target: '_blank', 
+                  rel: 'noopener noreferrer',
+                  'aria-label': `${link.text} (opens in new tab)`
+                })}
+              >
+                {link.text}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+
+      {showCopyright && (
+        <p class="text-center text-sm text-text-muted" role="contentinfo">
+          {copyrightText}
+        </p>
+      )}
+    </div>
+  </div>
+</footer>

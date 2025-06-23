@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "./docs/assets/*.js",
+      "maxSize": "200kb",
+      "compression": "gzip"
+    },
+    {
+      "path": "./docs/assets/*.css",
+      "maxSize": "100kb",
+      "compression": "gzip"
+    },
+    {
+      "path": "./docs/**/*.woff2",
+      "maxSize": "300kb"
+    },
+    {
+      "path": "./docs/**/*.{jpg,jpeg,png,webp,avif}",
+      "maxSize": "500kb"
+    },
+    {
+      "path": "./docs/**/*.*",
+      "maxSize": "2mb"
+    }
+  ],
+  "ci": {
+    "trackBranches": ["main", "development"],
+    "repoBranchBase": "main"
+  }
+}

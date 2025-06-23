@@ -1,0 +1,243 @@
+---
+// FAQ section component with comprehensive TypeScript interface
+import Icon from '../primitives/Icon.astro';
+import Card from '../primitives/Card.astro';
+import Section from '../layout/Section.astro';
+
+interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  contactEmail?: string;
+  faqs?: FAQItem[];
+  showContactCTA?: boolean;
+}
+
+const {
+  class: className = '',
+  title = 'Frequently asked questions',
+  subtitle = "Everything you need to know about Ralph's security and deployment",
+  contactEmail = 'Konstantin@beneficious.com',
+  showContactCTA = true,
+  faqs = [
+    {
+      id: 'confidentiality',
+      question: 'How does Ralph keep our deal data confidential?',
+      answer: 'Your data stays on your servers. Ralph\'s AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.'
+    },
+    {
+      id: 'on-premise',
+      question: 'Can we run Ralph on our own servers?',
+      answer: 'Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We\'ll help you set it up.'
+    },
+    {
+      id: 'security-standards',
+      question: 'What security standards does Ralph follow?',
+      answer: 'Ralph inherits your existing security standards since it runs on your infrastructure. We follow secure development practices including code audits, penetration testing, and encrypted communications. The specifics depend on your deployment - we adapt to your requirements.'
+    },
+    {
+      id: 'lp-confidential',
+      question: 'How does Ralph handle LP confidential information?',
+      answer: 'LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph\'s agents respect your existing data governance policies.'
+    },
+    {
+      id: 'security-integration',
+      question: 'Can we integrate Ralph with our existing security tools?',
+      answer: 'Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We\'ll work with your IT team to ensure Ralph fits seamlessly into your security stack.'
+    },
+    {
+      id: 'track-record',
+      question: 'What\'s Ralph\'s track record on data security?',
+      answer: 'We\'re in private beta with select PE firms, building security-first from day one. While we don\'t have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We\'re happy to share our security documentation.'
+    },
+    {
+      id: 'revoke-access',
+      question: 'How quickly can we revoke access if needed?',
+      answer: 'Immediately. Since Ralph uses your authentication system, you can revoke access the same way you would for any employee - through your identity provider. Data access stops instantly. If you cancel Ralph entirely, just shut down the servers. You retain all your data.'
+    },
+    {
+      id: 'data-training',
+      question: 'Does Ralph use our data to improve its AI models?',
+      answer: 'No. Your data is never used to train or improve Ralph\'s models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.'
+    },
+    {
+      id: 'implementation-timeline',
+      question: 'How long does Ralph implementation typically take?',
+      answer: 'Most deployments complete within 4-6 weeks. Week 1-2: Infrastructure setup and data source connections. Week 3-4: Agent configuration and testing. Week 5-6: Team training and go-live. Timeline varies based on data complexity and integration requirements.'
+    },
+    {
+      id: 'technical-infrastructure',
+      question: 'What technical infrastructure do we need?',
+      answer: 'Ralph runs on your cloud infrastructure (AWS, Azure, GCP) or on-premise servers. Minimum requirements: 16GB RAM, 4 CPU cores, 500GB storage for starter deployment. We\'ll help size your infrastructure based on portfolio size and data volume during the planning phase.'
+    },
+    {
+      id: 'data-integration',
+      question: 'How does Ralph integrate with our existing data systems?',
+      answer: 'Ralph connects to your data sources through secure APIs and adapters. Common integrations include: CRM systems, document repositories, email platforms, financial databases, and portfolio management tools. We handle the technical integration - no coding required from your team.'
+    },
+    {
+      id: 'ongoing-support',
+      question: 'What ongoing support do you provide?',
+      answer: 'Enterprise customers get a dedicated customer success manager, 24/7 technical support, quarterly strategic reviews, and continuous system monitoring. Essential tier includes email support and self-service resources. All customers receive regular product updates and security patches.'
+    },
+    {
+      id: 'phased-deployment',
+      question: 'Can we start with a subset of our portfolio?',
+      answer: 'Absolutely. Many clients start with 3-5 portfolio companies to test and refine the approach. This lets you validate value before full deployment and helps your team learn the system. You can expand to additional companies quarterly as you see results.'
+    }
+  ],
+} = Astro.props;
+---
+
+<Section class={`py-20 bg-primary ${className}`} as="section" aria-labelledby="faq-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 id="faq-title" class="heading-2">
+        {title}
+      </h2>
+      <p class="mt-4 text-lg text-text-muted">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="mt-16 max-w-3xl mx-auto">
+      <!-- Progressive Enhancement: FAQ works without JS, enhanced with client:visible -->
+      <div class="space-y-4" role="list" id="faq-container">
+        {faqs.map((faq, index) => (
+          <Card hover={false} class="faq-item" role="listitem">
+            <button
+              class="w-full text-left flex items-center justify-between group min-h-[44px] p-2 -m-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-600 text-high-contrast"
+              aria-expanded="false"
+              aria-controls={`faq-content-${index + 1}`}
+              aria-describedby={`faq-content-${index + 1}`}
+              id={`faq-button-${index + 1}`}
+              onclick="toggleFAQ(this)"
+              onkeydown="handleFAQKeydown(event, this)"
+              aria-label={`Toggle FAQ: ${faq.question}`}
+            >
+              <h3 class="heading-3 text-left pr-4">{faq.question}</h3>
+              <Icon 
+                name="chevron-down" 
+                class="faq-arrow text-text-muted transform transition-transform duration-200 flex-shrink-0" 
+                aria-hidden="true" 
+              />
+            </button>
+            <div
+              id={`faq-content-${index + 1}`}
+              class="faq-content mt-4 text-text-muted hidden"
+              role="region"
+              aria-labelledby={`faq-button-${index + 1}`}
+            >
+              <div class="prose prose-sm max-w-none text-text-muted">
+                {faq.answer}
+              </div>
+            </div>
+          </Card>
+        ))}
+
+      </div>
+
+      {showContactCTA && (
+        <div class="mt-12 text-center">
+          <p class="text-text-muted">
+            Still have a question in mind?
+            <a
+              href={`mailto:${contactEmail}`}
+              class="text-primary-yellow hover:text-primary-yellow-hover font-medium focus:outline-none focus:underline transition-colors duration-200"
+            >
+              Contact us
+            </a>
+          </p>
+        </div>
+      )}
+    </div>
+    </div>
+  </div>
+</Section>
+
+<!-- Enhanced FAQ functionality with progressive enhancement -->
+<script client:visible>
+  // Performance-optimized FAQ functionality
+  function initializeFAQ() {
+    // Enhanced FAQ functionality with keyboard navigation and performance optimizations
+    function toggleFAQ(button) {
+      const content = document.getElementById(button.getAttribute('aria-describedby'));
+      const arrow = button.querySelector('.faq-arrow');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      // Use requestAnimationFrame for smooth animations
+      requestAnimationFrame(() => {
+        // Close all other FAQs efficiently
+        const openButtons = document.querySelectorAll('.faq-item button[aria-expanded="true"]');
+        openButtons.forEach(otherButton => {
+          if (otherButton !== button) {
+            const otherContent = document.getElementById(otherButton.getAttribute('aria-describedby'));
+            const otherArrow = otherButton.querySelector('.faq-arrow');
+            
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherContent.classList.add('hidden');
+            otherArrow.style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        // Toggle current FAQ with smooth animation
+        if (isExpanded) {
+          button.setAttribute('aria-expanded', 'false');
+          content.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        } else {
+          button.setAttribute('aria-expanded', 'true');
+          content.classList.remove('hidden');
+          arrow.style.transform = 'rotate(180deg)';
+          
+          // Ensure smooth scrolling to FAQ if needed
+          if (content.getBoundingClientRect().bottom > window.innerHeight) {
+            content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      });
+    }
+
+    function handleFAQKeydown(event, button) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleFAQ(button);
+      }
+    }
+
+    // Make functions globally available for inline event handlers
+    window.toggleFAQ = toggleFAQ;
+    window.handleFAQKeydown = handleFAQKeydown;
+
+    // Progressive enhancement: Add intersection observer for lazy loading
+    if ('IntersectionObserver' in window) {
+      const faqContainer = document.getElementById('faq-container');
+      if (faqContainer) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('faq-visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        faqContainer.querySelectorAll('.faq-item').forEach(item => {
+          observer.observe(item);
+        });
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFAQ);
+  } else {
+    initializeFAQ();
+  }
+</script>

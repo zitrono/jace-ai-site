@@ -20,7 +20,9 @@ if (pricingMatch) {
 }
 
 // Look for Testimonials
-const testimonialsMatch = html.match(/<h2[^>]*>.*?Testimonial.*?<\/h2>[\s\S]*?(?=<section|<footer|$)/i);
+const testimonialsMatch = html.match(
+  /<h2[^>]*>.*?Testimonial.*?<\/h2>[\s\S]*?(?=<section|<footer|$)/i
+);
 if (testimonialsMatch) {
   sections.push({ name: 'Testimonials', content: testimonialsMatch[0].substring(0, 500) + '...' });
 }
@@ -38,7 +40,7 @@ if (footerMatch) {
 }
 
 console.log('Found sections:');
-sections.forEach(section => {
+sections.forEach((section) => {
   console.log(`\n${section.name}:`);
   console.log(section.content);
 });

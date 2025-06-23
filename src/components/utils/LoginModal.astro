@@ -1,0 +1,190 @@
+---
+/**
+ * Login modal component for private beta access
+ * Provides accessible modal with focus management and keyboard navigation
+ * 
+ * @example
+ * ```astro
+ * <LoginModal 
+ *   title="Private Beta Access"
+ *   contactEmail="contact@example.com"
+ * />
+ * ```
+ */
+import Button from '../primitives/Button.astro';
+
+interface Props {
+  /** Additional CSS classes */
+  class?: string;
+  /** Modal title */
+  title?: string;
+  /** Main message content */
+  message?: string;
+  /** Contact email for beta access requests */
+  contactEmail?: string;
+  /** HTML id attribute */
+  id?: string;
+}
+
+const {
+  class: className = '',
+  title = 'Private Beta Access',
+  message = 'Ralph is currently in private beta. Please contact us for access to our AI-powered private equity platform.',
+  contactEmail = 'Konstantin@beneficious.com',
+  id = 'login-modal',
+} = Astro.props;
+---
+
+<div
+  id={id}
+  class={`hidden fixed inset-0 z-50 flex items-center justify-center animate-fade-in ${className}`}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <div 
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+    onclick="closeLoginModal()" 
+    aria-hidden="true"
+  ></div>
+  <div class="relative bg-card rounded-lg p-8 max-w-md w-full mx-4 border border-gray-700">
+    <button
+      onclick="closeLoginModal()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+      aria-label="Close modal"
+      tabindex="0"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div class="text-center">
+      <h2 id="modal-title" class="text-2xl font-bold text-white mb-4">{title}</h2>
+      <p id="modal-description" class="text-secondary mb-6">
+        {message}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <Button variant="secondary" onclick="closeLoginModal()" class="flex-1">Close</Button>
+        <Button
+          variant="primary"
+          href={`mailto:${contactEmail}?subject=Ralph%20Beta%20Access%20Request&body=Hello%2C%20I%20would%20like%20to%20request%20access%20to%20Ralph%27s%20private%20beta.`}
+          class="flex-1"
+        >
+          Request Access
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Performance-optimized modal with client:load for immediate interactivity -->
+<script client:load>
+  // Optimized modal functionality with proper performance considerations
+  function initializeLoginModal() {
+    // Global functions for modal control with performance optimizations
+    window.showLoginModal = function () {
+      const modal = document.getElementById('login-modal');
+      if (modal) {
+        // Use requestAnimationFrame for smooth UI updates
+        requestAnimationFrame(() => {
+          modal.classList.remove('hidden');
+          // Add fade-in animation
+          modal.style.opacity = '0';
+          modal.offsetHeight; // Force reflow
+          modal.style.opacity = '1';
+          
+          // Enhanced focus management
+          const firstButton = modal.querySelector('button:not([disabled])');
+          if (firstButton) {
+            firstButton.focus();
+          }
+          
+          // Store the previously focused element for return focus
+          const activeElement = document.activeElement;
+          modal.setAttribute(
+            'data-previous-focus',
+            activeElement ? (activeElement.id || activeElement.tagName) : ''
+          );
+          
+          // Prevent body scroll when modal is open
+          document.body.style.overflow = 'hidden';
+        });
+      }
+    };
+
+    window.closeLoginModal = function () {
+      const modal = document.getElementById('login-modal');
+      if (modal) {
+        // Add fade-out animation
+        modal.style.opacity = '0';
+        
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.style.opacity = '';
+          
+          // Restore body scroll
+          document.body.style.overflow = '';
+          
+          // Return focus to previously focused element
+          const previousFocus = modal.getAttribute('data-previous-focus');
+          if (previousFocus) {
+            const elementToFocus = document.getElementById(previousFocus) || 
+                                 document.querySelector(previousFocus.toLowerCase());
+            if (elementToFocus && elementToFocus.focus) {
+              elementToFocus.focus();
+            }
+          }
+        }, 150); // Match animation duration
+      }
+    };
+
+    // Enhanced keyboard handling with performance optimizations
+    const handleKeydown = function (e) {
+      const modal = document.getElementById('login-modal');
+      if (!modal || modal.classList.contains('hidden')) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        window.closeLoginModal();
+        return;
+      }
+
+      // Optimized focus trap - keep focus within modal
+      if (e.key === 'Tab') {
+        const focusableElements = modal.querySelectorAll(
+          'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+        );
+        
+        if (focusableElements.length === 0) return;
+        
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    // Use passive event listener for better performance
+    document.addEventListener('keydown', handleKeydown, { passive: false });
+
+    // Cleanup function for memory management
+    window.addEventListener('beforeunload', () => {
+      document.removeEventListener('keydown', handleKeydown);
+    });
+  }
+
+  // Initialize immediately for interactive modal
+  initializeLoginModal();
+</script>

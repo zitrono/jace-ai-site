@@ -1,0 +1,159 @@
+---
+// Features section component
+import Card from '../primitives/Card.astro';
+import Icon from '../primitives/Icon.astro';
+import Section from '../layout/Section.astro';
+
+interface Feature {
+  id: string;
+  icon: 'bar-chart' | 'alert-triangle' | 'trending-up' | 'zap' | 'shield-check' | 'clock';
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  class?: string;
+  title?: string;
+  subtitle?: string;
+  layout?: 'grid' | 'list';
+  columns?: 1 | 2 | 3 | 4;
+  features?: Feature[];
+}
+
+const {
+  class: className = '',
+  title = 'How Ralph Works',
+  subtitle = 'Meet the AI agents that transform how PE firms see opportunities',
+  layout: _layout = 'grid',
+  columns = 3,
+  features = [
+    {
+      id: 'deal-intelligence',
+      icon: 'bar-chart',
+      title: 'Deal Intelligence',
+      description: 'AI agents analyze deal data from every angle, surfacing insights and patterns human teams might miss during evaluation.'
+    },
+    {
+      id: 'risk-insights',
+      icon: 'alert-triangle',
+      title: 'Risk Insights',
+      description: 'Specialized agents continuously scan your portfolio data, identifying emerging risks through comprehensive pattern analysis across all sources.'
+    },
+    {
+      id: 'opportunity-discovery',
+      icon: 'trending-up',
+      title: 'Opportunity Discovery',
+      description: 'Multi-agent teams explore market data and portfolio performance, uncovering hidden opportunities for value creation and strategic moves.'
+    },
+    {
+      id: 'instant-analysis',
+      icon: 'zap',
+      title: 'Instant Analysis',
+      description: 'Get answers to complex portfolio questions in seconds. AI agents rapidly process vast datasets to deliver actionable insights.'
+    },
+    {
+      id: 'strategic-recommendations',
+      icon: 'shield-check',
+      title: 'Strategic Recommendations',
+      description: 'Agents analyze your portfolio context and market conditions, proposing strategic options with clear rationale for informed decision-making.'
+    },
+    {
+      id: 'continuous-monitoring',
+      icon: 'clock',
+      title: 'Continuous Monitoring',
+      description: 'AI agents work 24/7 tracking portfolio changes, market movements, and competitive dynamics, alerting you to what matters most.'
+    }
+  ],
+} = Astro.props;
+
+const processSteps = [
+  {
+    number: '1',
+    title: 'Agent Preparation',
+    headline: 'Your data sources become intelligent feeds for specialized AI teams',
+    explanation: 'Connect your data rooms, CRM, and portfolio reports - Ralph handles any format. Specialized agents process and structure this information, creating a unified intelligence layer. Your messy data becomes a strategic asset ready for analysis.'
+  },
+  {
+    number: '2',
+    title: 'On-Demand Agents',
+    headline: 'Expert agents ready to analyze any deal or portfolio question',
+    explanation: 'Ask any question about your deals or portfolio companies. Expert agents instantly analyze relevant data, cross-reference information, and deliver comprehensive insights. Like having your best analysts available 24/7, but 1000x faster.'
+  },
+  {
+    number: '3',
+    title: 'Autonomous Agents',
+    headline: 'Tireless agents work round-the-clock seeking opportunities',
+    explanation: 'While you focus on strategy, autonomous agents monitor your entire portfolio continuously. They track performance changes, identify emerging risks, and spot opportunities across all your data sources. You\'re alerted only when something needs your attention.'
+  },
+  {
+    number: '4',
+    title: 'Strategic Insights',
+    headline: 'Collective agent intelligence delivers tomorrow\'s insights today',
+    explanation: 'Receive actionable intelligence that helps you see around corners. Agents synthesize patterns across deals, predict market movements, and recommend strategic options. Make decisions with confidence, knowing you have insights competitors won\'t see for weeks.'
+  }
+];
+
+const gridClasses = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 lg:grid-cols-2',
+  3: 'grid-cols-1 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+};
+---
+
+<Section id="features" class={`py-20 bg-primary ${className}`} as="section" aria-labelledby="features-title">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    {
+      (title || subtitle) && (
+        <div class="mx-auto max-w-2xl text-center mb-16">
+          {title && <h2 id="features-title" class="heading-2">{title}</h2>}
+          {subtitle && <p class="mt-4 text-lg text-text-muted">{subtitle}</p>}
+        </div>
+      )
+    }
+    
+    <!-- Six Core Features -->
+    <div class={`mt-16 grid gap-8 ${gridClasses[columns]}`}>
+      {features.slice(0, columns === 4 ? 4 : features.length).map((feature) => (
+        <Card hover>
+          <div class="text-primary-yellow mb-4">
+            <Icon name={feature.icon} size="lg" aria-hidden="true" />
+          </div>
+          <h3 class="heading-3 mb-2">{feature.title}</h3>
+          <p class="text-text-muted">
+            {feature.description}
+          </p>
+        </Card>
+      ))}
+    </div>
+    
+    <!-- Four-Step Process -->
+    <div class="mt-20">
+      <h3 class="text-2xl font-bold text-center text-white mb-12">Ralph's Four-Step Process</h3>
+      <div class="space-y-12">
+        {processSteps.map((step, index) => (
+          <div class="relative">
+            {/* Connector line */}
+            {index < processSteps.length - 1 && (
+              <div class="absolute left-6 top-16 w-px h-16 bg-yellow-400/30 hidden md:block"></div>
+            )}
+            
+            <div class="flex flex-col md:flex-row items-start gap-6">
+              {/* Step number */}
+              <div class="flex-shrink-0 w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold text-lg">
+                {step.number}
+              </div>
+              
+              {/* Step content */}
+              <div class="flex-1 bg-card rounded-lg p-6">
+                <h4 class="text-xl font-bold text-white mb-2">{step.title}</h4>
+                <p class="text-lg text-yellow-400 mb-4">{step.headline}</p>
+                <p class="text-gray-300">{step.explanation}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

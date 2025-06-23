@@ -102,7 +102,7 @@
   }
   
   .section-dark {
-    @apply section bg-gray-900;
+    @apply section bg-primary;
   }
   
   /* Cards */

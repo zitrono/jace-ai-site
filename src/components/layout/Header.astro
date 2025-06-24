@@ -183,24 +183,25 @@ const headerClasses = [
     </div>
   </nav>
 
-  {/* Mobile Menu Overlay - Performance optimized with client:media */}
+  {/* Mobile Menu Overlay - Matching Jace structure exactly */}
   <div
     id="mobile-menu"
-    class="hidden fixed inset-0 z-50 lg:hidden bg-transparent"
+    class="hidden fixed inset-0 z-50 lg:hidden"
     role="dialog"
     aria-modal="true"
     aria-labelledby="mobile-menu-title"
     data-mobile-menu-overlay
   >
-    {/* Backdrop */}
-    <div class="fixed inset-0 bg-neutral-700 z-40" aria-hidden="true"></div>
+    {/* Transparent overlay - matches Jace's rgba(0,0,0,0) */}
+    <div class="fixed inset-0 bg-transparent" aria-hidden="true"></div>
 
-    {/* Menu Panel */}
+    {/* Menu Panel - Max 320px width, full width on smaller screens */}
     <div
-      class="fixed right-0 top-0 bottom-0 w-full h-screen bg-neutral-700 bg-opacity-100 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out rounded-none z-50"
+      class="fixed right-0 top-0 bottom-0 w-full max-w-[320px] h-screen bg-neutral-700 p-6 overflow-auto transform translate-x-full transition-transform duration-300 ease-in-out z-50"
       data-mobile-menu-panel
+      style="background-color: rgb(40, 40, 40);"
     >
-      <div class="flex items-center justify-end mb-0">
+      <div class="flex justify-end mb-6">
         <button
           id="mobile-menu-close"
           type="button"
@@ -220,13 +221,13 @@ const headerClasses = [
         </button>
       </div>
 
-      <nav class="flex flex-col space-y-4" role="navigation" aria-label="Mobile navigation">
+      <nav class="flex flex-col" role="navigation" aria-label="Mobile navigation">
         <h2 id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</h2>
         {
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="mobile-nav-link text-[18px] text-text-primary hover:text-primary-yellow transition-colors duration-200 font-normal p-0 rounded-none min-h-0 block leading-10 focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+              class="text-lg text-white hover:text-gray-300 transition-colors duration-200 font-normal block leading-10 mobile-nav-link focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-800"
               {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
             >
               {link.text}
@@ -236,22 +237,28 @@ const headerClasses = [
 
         {
           showCta && (
-            <div class="mt-6 flex flex-row gap-3">
-              <Button
-                variant="secondary"
+            <>
+              {/* Login button - styled exactly like Jace */}
+              <button
+                type="button"
                 id="mobile-login-button"
-                class="flex-1 text-center h-10 min-h-0 text-base focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+                class="w-full text-center text-base bg-neutral-600 text-white rounded-lg hover:bg-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
+                style="background-color: rgb(65, 65, 65); color: rgb(255, 246, 238); font-size: 16px; border-radius: 8px; padding: 10px 24px;"
               >
                 {loginText}
-              </Button>
-              <Button
-                variant="primary"
-                size="lg"
-                class="flex-1 h-10 min-h-0 text-base focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-              >
-                {ctaText}
-              </Button>
-            </div>
+              </button>
+              
+              {/* CTA Button - matching Jace's exact styling */}
+              <div class="mt-4">
+                <button
+                  type="button"
+                  class="w-full h-10 text-base bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
+                  style="background-color: rgb(255, 220, 97); color: rgb(40, 40, 40); border-radius: 8px;"
+                >
+                  Get Started for Free
+                </button>
+              </div>
+            </>
           )
         }
       </nav>

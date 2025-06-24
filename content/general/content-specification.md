@@ -114,25 +114,25 @@ This document contains the definitive, approved content for the Ralph website. A
 - **Headline**: "Collective agent intelligence delivers tomorrow's insights today"
 - **Explanation**: "Receive actionable intelligence that helps you see around corners. Agents synthesize patterns across deals, predict market movements, and recommend strategic options. Make decisions with confidence, knowing you have insights competitors won't see for weeks."
 
-### Testimonials Section (6 PE Leader Quotes)
+### Testimonials Section (6 PE Leader Quotes) [Updated: 2025-01-23 via Q84]
 
-1. **Quote**: "We've been incorporating data scientists in our equity businesses and in a bunch of our portfolio companies. We believe that gives us a real competitive advantage."
-   - **Attribution**: Jonathan Gray, President & COO, Blackstone
-
-2. **Quote**: "This is a transformational technology. You have to be the first mover in your industry."
+1. **Quote**: "This is a transformational technology. You have to be the first mover in your industry."
    - **Attribution**: Stephen Schwarzman, Chairman, CEO & Co-Founder, Blackstone
 
-3. **Quote**: "Now when I get a call from an investment banker, we have AI tools that can build a high-quality first model while I'm still on the phone."
-   - **Attribution**: Martin Brand, Head of North America PE, Blackstone
-
-4. **Quote**: "We think that next year, 40% of the people at this conference will have an AI agent and the remaining 60% will be looking for work."
+2. **Quote**: "We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes."
    - **Attribution**: Robert F. Smith, Founder, Chairman & CEO, Vista Equity Partners
 
-5. **Quote**: "Most of the AI portfolio that private equity is talking about today, candidly, is more marketing than substance."
-   - **Attribution**: Dipanjan "DJ" Deb, Co-Founder & CEO, Francisco Partners
-
-6. **Quote**: "Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry."
+3. **Quote**: "Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry."
    - **Attribution**: Christian Sinding, CEO, EQT
+
+4. **Quote**: "Artificial intelligence today, it's not a fad. It's really a tectonic shift in terms of general purpose technology evolution, similar to electrification or Internet."
+   - **Attribution**: Waldemar Szlezak, Partner & Global Head of Digital Infrastructure, KKR
+
+5. **Quote**: "A greater emphasis on generating value through digital capabilities in portfolio companies was necessary."
+   - **Attribution**: David Sambur, Partner & Co-Head of Equity, Apollo Global Management
+
+6. **Quote**: "There is a huge opportunity coming our way, but that means there is also real danger for those that are not prepared."
+   - **Attribution**: Jean-Rémy Roussel, Managing Partner, CVC Capital Partners
 
 ### Pricing Structure
 

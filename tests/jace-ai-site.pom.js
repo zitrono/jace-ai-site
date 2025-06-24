@@ -1330,10 +1330,16 @@ export class JaceAISitePOM {
             };
           }, subtitleElement);
           
-          // Typography tolerance validation (±20px acceptable)
+          // Typography tolerance validation (5% tolerance)
           const fontSize = parseInt(subtitleStyles.fontSize);
-          if (fontSize < 16 || fontSize > 80) {
-            errors.push(`Font size outside acceptable range: ${fontSize}px (expected: 16-80px)`);
+          const expectedSize = 24; // Jace reference size
+          const tolerance = expectedSize * 0.05; // 5% tolerance
+          const minSize = expectedSize - tolerance;
+          const maxSize = expectedSize + tolerance;
+          
+          if (fontSize < minSize || fontSize > maxSize) {
+            const percentDiff = Math.abs((fontSize - expectedSize) / expectedSize * 100).toFixed(1);
+            errors.push(`Font size outside 5% tolerance: ${fontSize}px vs ${expectedSize}px (${percentDiff}% difference)`);
           }
           
           // Content adequacy validation (minimum character requirements)
@@ -1395,10 +1401,16 @@ export class JaceAISitePOM {
           };
         }, titleElement);
         
-        // Hero title size validation (reasonable ranges)
+        // Hero title size validation (5% tolerance)
         const titleFontSize = parseInt(titleStyles.fontSize);
-        if (titleFontSize < 24 || titleFontSize > 120) {
-          errors.push(`Hero title size outside acceptable range: ${titleFontSize}px`);
+        const expectedTitleSize = 60; // Jace reference size
+        const titleTolerance = expectedTitleSize * 0.05; // 5% tolerance
+        const minTitleSize = expectedTitleSize - titleTolerance;
+        const maxTitleSize = expectedTitleSize + titleTolerance;
+        
+        if (titleFontSize < minTitleSize || titleFontSize > maxTitleSize) {
+          const percentDiff = Math.abs((titleFontSize - expectedTitleSize) / expectedTitleSize * 100).toFixed(1);
+          errors.push(`Hero title size outside 5% tolerance: ${titleFontSize}px vs ${expectedTitleSize}px (${percentDiff}% difference)`);
         }
       }
     } catch (error) {
@@ -1408,13 +1420,16 @@ export class JaceAISitePOM {
     return errors;
   }
 
-  // Helper method for color equivalence with tolerance
-  colorsEquivalent(color1, color2, tolerance = 10) {
+  // Helper method for color equivalence with 5% tolerance
+  colorsEquivalent(color1, color2, tolerancePercent = 5) {
     try {
       const rgb1 = this.parseRGB(color1);
       const rgb2 = this.parseRGB(color2);
       
       if (!rgb1 || !rgb2) return false;
+      
+      // 5% of 255 RGB range
+      const tolerance = 255 * (tolerancePercent / 100);
       
       return Math.abs(rgb1.r - rgb2.r) <= tolerance &&
              Math.abs(rgb1.g - rgb2.g) <= tolerance &&

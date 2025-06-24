@@ -45,12 +45,13 @@ class UltimatePOM {
       return errors; // Critical failure
     }
     
-    // 2. Functional equivalence: Size within reasonable range
-    const sizeDiff = Math.abs(
-      parseInt(jaceSubtitle.fontSize) - parseInt(ralphSubtitle.fontSize)
-    );
-    if (sizeDiff > 20) { // 20px tolerance
-      errors.push(`Font size variance excessive: ${sizeDiff}px (max: 20px)`);
+    // 2. Functional equivalence: Size within 5% tolerance
+    const jaceSize = parseInt(jaceSubtitle.fontSize);
+    const ralphSize = parseInt(ralphSubtitle.fontSize);
+    const percentDiff = Math.abs((ralphSize - jaceSize) / jaceSize * 100);
+    
+    if (percentDiff > 5) { // 5% tolerance
+      errors.push(`Font size variance excessive: ${percentDiff.toFixed(1)}% (max: 5%)`);
     }
     
     // 3. Color equivalence: Functional color matching
@@ -107,22 +108,22 @@ class UltimatePOM {
 
 ## Tolerance Specifications
 
-### Typography Tolerance
+### Typography Tolerance (5% Rule)
 ```javascript
 const typographyTolerance = {
-  fontSize: 20,        // ±20px acceptable
-  lineHeight: 8,       // ±8px acceptable  
-  letterSpacing: 2,    // ±2px acceptable
-  wordSpacing: 4       // ±4px acceptable
+  fontSize: '5%',      // ±5% of expected value
+  lineHeight: '5%',    // ±5% of expected value  
+  letterSpacing: '5%', // ±5% of expected value
+  wordSpacing: '5%'    // ±5% of expected value
 };
 ```
 
-### Color Tolerance
+### Color Tolerance (5% Rule)
 ```javascript
 const colorTolerance = {
-  rgb: 10,             // ±10 RGB values
-  hsl: { h: 5, s: 5, l: 5 }, // HSL tolerances
-  opacity: 0.1         // ±0.1 opacity
+  rgb: '5%',           // ±5% of 255 (±12.75 RGB values)
+  hsl: '5%',           // ±5% of respective ranges
+  opacity: '5%'        // ±5% of 1.0 (±0.05)
 };
 ```
 

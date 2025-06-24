@@ -24,53 +24,53 @@ export interface Props {
 
 const {
   class: className = '',
-  title = 'The future of private equity is AI-powered',
-  subtitle = 'Industry Leaders on AI in PE',
+  title = 'Leading PE Firms Are Embracing AI Transformation',
+  subtitle = 'Industry Leaders on AI Adoption',
   layout: _layout = 'grid',
   columns = 3,
   showLogos: _showLogos = true,
   testimonials = [
     {
-      id: 'competitive-advantage',
-      quote: 'The firms that embrace AI for deal sourcing and portfolio intelligence will have a significant competitive advantage.',
-      author: 'Jonathan Gray',
-      title: 'President & COO',
+      id: 'blackstone-first-mover',
+      quote: 'This is a transformational technology. You have to be the first mover in your industry.',
+      author: 'Stephen Schwarzman',
+      title: 'Chairman, CEO & Co-Founder',
       company: 'Blackstone'
     },
     {
-      id: 'data-driven',
-      quote: 'AI is transforming how we make investment decisions. The ability to process vast amounts of data quickly is game-changing.',
-      author: 'David Rubenstein',
-      title: 'Co-Founder',
-      company: 'Carlyle Group'
+      id: 'vista-ai-transformation',
+      quote: 'We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.',
+      author: 'Robert F. Smith',
+      title: 'Founder, Chairman & CEO',
+      company: 'Vista Equity Partners'
     },
     {
-      id: 'portfolio-management',
-      quote: 'Intelligent automation in portfolio management allows us to focus on strategic decisions rather than data processing.',
-      author: 'Marc Rowan',
+      id: 'eqt-competitive-edge',
+      quote: 'Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry.',
+      author: 'Christian Sinding',
       title: 'CEO',
-      company: 'Apollo Global Management'
+      company: 'EQT'
     },
     {
-      id: 'due-diligence',
-      quote: 'AI-powered due diligence tools are reducing our time to decision while improving accuracy.',
-      author: 'Scott Nuttall',
-      title: 'Co-CEO',
+      id: 'kkr-tectonic-shift',
+      quote: 'Artificial intelligence today, it\'s not a fad. It\'s really a tectonic shift in terms of general purpose technology evolution, similar to electrification or Internet.',
+      author: 'Waldemar Szlezak',
+      title: 'Partner & Global Head of Digital Infrastructure',
       company: 'KKR'
     },
     {
-      id: 'market-intelligence',
-      quote: 'The future belongs to firms that can leverage AI for market intelligence and predictive analytics.',
-      author: 'Deval Patrick',
-      title: 'Co-Director',
-      company: 'Bain Capital Double Impact'
+      id: 'apollo-digital-value',
+      quote: 'A greater emphasis on generating value through digital capabilities in portfolio companies was necessary.',
+      author: 'David Sambur',
+      title: 'Partner & Co-Head of Equity',
+      company: 'Apollo Global Management'
     },
     {
-      id: 'operational-efficiency',
-      quote: 'AI agents handling routine analysis free up our teams to focus on value creation and strategic initiatives.',
-      author: 'William Conway',
-      title: 'Co-CEO',
-      company: 'Carlisle Group'
+      id: 'cvc-opportunity-danger',
+      quote: 'There is a huge opportunity coming our way, but that means there is also real danger for those that are not prepared.',
+      author: 'Jean-Rémy Roussel',
+      title: 'Managing Partner',
+      company: 'CVC Capital Partners'
     }
   ],
 } = Astro.props;
@@ -100,7 +100,7 @@ const gridClasses = {
     <div
       class={`testimonials-grid mx-auto mt-16 grid max-w-7xl gap-8 sm:mt-20 ${gridClasses[columns]}`}
       role="list"
-      aria-label="Client testimonials"
+      aria-label="Industry testimonials"
     >
       {testimonials.slice(0, columns * 2).map((testimonial) => (
         <Card class="group relative p-8 hover:scale-105 transition-transform duration-300" hover={false} role="listitem">
@@ -112,7 +112,8 @@ const gridClasses = {
           </blockquote>
           <figcaption class="mt-8 pt-6 border-t border-neutral-600">
             <div class="text-xl font-bold text-primary-yellow">{testimonial.author}</div>
-            <div class="text-sm text-text-muted mt-1">{testimonial.title}, {testimonial.company}</div>
+            <div class="text-sm text-text-muted mt-1">{testimonial.title}</div>
+            <div class="text-sm text-text-muted">{testimonial.company}</div>
           </figcaption>
         </Card>
       ))}

@@ -238,21 +238,22 @@ const headerClasses = [
         {
           showCta && (
             <>
-              {/* Login button - styled exactly like Jace */}
-              <button
-                type="button"
-                id="mobile-login-button"
-                class="w-full text-center text-base bg-neutral-600 text-white rounded-lg hover:bg-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
-                style="background-color: rgb(65, 65, 65); color: rgb(255, 246, 238); font-size: 16px; border-radius: 8px; padding: 10px 24px;"
-              >
-                {loginText}
-              </button>
-              
-              {/* CTA Button - matching Jace's exact styling */}
-              <div class="mt-4">
+              {/* Button container - horizontal layout like Jace */}
+              <div class="mt-6 flex flex-row gap-3">
+                {/* Login button - styled exactly like Jace */}
                 <button
                   type="button"
-                  class="w-full h-10 text-base bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
+                  id="mobile-login-button"
+                  class="flex-1 text-center text-base bg-neutral-600 text-white rounded-lg hover:bg-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
+                  style="background-color: rgb(65, 65, 65); color: rgb(255, 246, 238); font-size: 16px; border-radius: 8px; padding: 10px 24px;"
+                >
+                  {loginText}
+                </button>
+                
+                {/* CTA Button - matching Jace's exact styling */}
+                <button
+                  type="button"
+                  class="flex-1 h-10 text-base bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
                   style="background-color: rgb(255, 220, 97); color: rgb(40, 40, 40); border-radius: 8px;"
                 >
                   Get Started for Free

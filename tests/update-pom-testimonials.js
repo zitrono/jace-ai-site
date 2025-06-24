@@ -17,56 +17,56 @@ const testimonialsPOM = {
       testimonialCards: 'figure',
       testimonialQuote: 'blockquote p',
       testimonialAuthor: 'figcaption div:first-child',
-      testimonialTitle: 'figcaption div:last-child'
-    }
+      testimonialTitle: 'figcaption div:last-child',
+    },
   },
-  
+
   // Expected styles from jace.ai
   expectedStyles: {
     testimonialsSection: {
       backgroundColor: 'rgba(0, 0, 0, 0)', // Transparent
-      padding: '0px 32px' // From extraction
+      padding: '0px 32px', // From extraction
     },
     testimonialsTitle: {
       fontSize: '16px',
       fontWeight: '600',
       color: 'rgb(255, 220, 97)',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     testimonialsSubtitle: {
       fontSize: '48px',
       color: 'rgb(255, 255, 255)',
-      marginTop: '16px' // Adjust based on actual
+      marginTop: '16px', // Adjust based on actual
     },
     testimonialCard: {
       backgroundColor: 'rgb(255, 255, 255)',
       borderRadius: '16px',
       boxShadow: testimonialsData.testimonials[0].styles.figure.boxShadow,
-      padding: '24px' // Standard card padding
+      padding: '24px', // Standard card padding
     },
     testimonialQuote: {
       fontSize: '14px',
       lineHeight: '24px',
-      color: 'oklch(0.21 0.034 264.665)' // From jace
+      color: 'oklch(0.21 0.034 264.665)', // From jace
     },
     testimonialAuthor: {
       fontWeight: '600',
-      color: 'oklch(0.21 0.034 264.665)'
-    }
+      color: 'oklch(0.21 0.034 264.665)',
+    },
   },
-  
+
   // Expected content from jace.ai
   expectedContent: {
     title: 'Less Email, More Productivity',
     subtitle: 'Jace users save hours every week—read their stories',
     testimonialCount: 9,
-    testimonials: testimonialsData.testimonials.map(t => ({
+    testimonials: testimonialsData.testimonials.map((t) => ({
       quote: t.content.quote,
       author: t.content.author,
-      title: t.content.title
-    }))
+      title: t.content.title,
+    })),
   },
-  
+
   // Validation method to add to POM
   validationMethod: `
   async validateTestimonials() {
@@ -130,7 +130,7 @@ const testimonialsPOM = {
     }
     
     return errors;
-  }`
+  }`,
 };
 
 console.log('🎨 Testimonials POM Structure:');

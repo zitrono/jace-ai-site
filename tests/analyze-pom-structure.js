@@ -1,9 +1,9 @@
 import { JaceAISitePOM } from './jace-ai-site.pom.js';
 
 // Create a dummy page object to access the POM structure
-const dummyPage = { 
-  goto: () => {}, 
-  viewport: () => ({ width: 1200, height: 800 })
+const dummyPage = {
+  goto: () => {},
+  viewport: () => ({ width: 1200, height: 800 }),
 };
 const pom = new JaceAISitePOM(dummyPage);
 
@@ -19,7 +19,7 @@ for (const [category, items] of Object.entries(selectors)) {
   let count = 0;
   let withMapping = 0;
   let uniqueToRalph = 0;
-  
+
   if (typeof items === 'object' && !Array.isArray(items)) {
     for (const [key, value] of Object.entries(items)) {
       count++;
@@ -31,11 +31,11 @@ for (const [category, items] of Object.entries(selectors)) {
       }
     }
   }
-  
+
   selectorsByType[category] = {
     total: count,
     withMapping,
-    uniqueToRalph
+    uniqueToRalph,
   };
   totalSelectors += count;
 }
@@ -67,7 +67,7 @@ for (const [name, selector] of Object.entries(coreElements)) {
   coreCount++;
   const hasMapping = typeof selector === 'object' && selector.jaceSelector;
   if (hasMapping) coreMapped++;
-  
+
   console.log(
     `${name.padEnd(21)} | ${typeof selector === 'string' ? 'string' : 'object'} | ${hasMapping ? 'Yes' : 'No'}`
   );
@@ -81,7 +81,9 @@ console.log(`\n\nCSS PROPERTIES TRACKED: ${pom.cssProperties.length} properties 
 
 // Calculate expected property counts
 console.log('\n\nEXPECTED PROPERTY COUNTS:');
-console.log(`- If all ${coreCount} elements found: ${coreCount * pom.cssProperties.length} properties`);
+console.log(
+  `- If all ${coreCount} elements found: ${coreCount * pom.cssProperties.length} properties`
+);
 console.log(`- If 1 element missing: ${(coreCount - 1) * pom.cssProperties.length} properties`);
 
 console.log('\n\nOBSERVED IN TESTS:');

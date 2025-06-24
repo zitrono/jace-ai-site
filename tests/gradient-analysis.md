@@ -3,7 +3,8 @@
 ## 1. Gradient Styles Found
 
 ### Hero.astro
-- **Hero Title Gradient**: 
+
+- **Hero Title Gradient**:
   - Class: `hero-title-gradient`
   - Implementation: `linear-gradient(353deg, rgb(153, 153, 153) 36%, rgb(255, 255, 255) 90%)`
   - Description: Gray-to-white gradient for the main heading
@@ -11,11 +12,12 @@
 
 - **Video Container Gradient**:
   - Class: `video-gradient bg-gradient-to-br`
-  - Implementation: `linear-gradient(to bottom right, rgb(59, 130, 246), rgb(20, 184, 166))` 
+  - Implementation: `linear-gradient(to bottom right, rgb(59, 130, 246), rgb(20, 184, 166))`
   - Description: Blue-to-teal gradient for the video demo container
   - Applied to: Video placeholder box
 
 ### Pricing.astro
+
 - **Pro Plan Card Gradient**:
   - Class: `bg-gradient-to-b from-gray-800 to-gray-850`
   - Implementation: Tailwind gradient from gray-800 to gray-850
@@ -23,6 +25,7 @@
   - Applied to: Pro plan card background
 
 ### CTA.astro
+
 - **Section Background Gradient**:
   - Class: `bg-gradient-to-r from-purple-900 to-indigo-900`
   - Implementation: Tailwind gradient from purple-900 to indigo-900
@@ -30,6 +33,7 @@
   - Applied to: Entire CTA section
 
 ### Layout.astro
+
 - Defines the custom CSS for gradient implementations:
   - `.hero-title-gradient`: Gray-to-white text gradient
   - `.video-gradient`: Blue-to-teal background gradient
@@ -53,14 +57,17 @@ The comprehensive POM specifies a **purple-to-yellow gradient** (`from-purple-40
 ## 4. Conflicts and Issues
 
 ### Missing Implementations:
+
 1. **Feature Card Headings**: Should have `bg-gradient-to-r from-purple-400 to-yellow-400` text gradient
 2. **Features section**: Completely missing gradient implementations
 
 ### Inconsistencies:
+
 1. **CTA Section**: Uses `from-purple-900 to-indigo-900` instead of a purple-to-yellow gradient
 2. **No unified gradient system**: Each section uses different gradient colors without a cohesive theme
 
 ### Duplications:
+
 - No actual duplications found, but there's a lack of reusable gradient utilities
 
 ## 5. Recommendations

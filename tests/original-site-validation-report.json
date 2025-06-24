@@ -49,31 +49,15 @@
       "Video container not found"
     ],
     "company": [],
-    "trust": [
-      "CASA Tier 3 text not found",
-      "Join 1000+ enthusiasts text not found"
-    ],
-    "navigation": [
-      "Navigation items mismatch: found "
-    ],
-    "backgrounds": [
-      "No gradient backgrounds found"
-    ],
-    "mobileMenu": [
-      "Mobile menu button not found",
-      "No mobile-specific elements found"
-    ],
-    "interactive": [
-      "No FAQ items found"
-    ],
-    "gradients": [
-      "No text gradient elements found"
-    ],
+    "trust": ["CASA Tier 3 text not found", "Join 1000+ enthusiasts text not found"],
+    "navigation": ["Navigation items mismatch: found "],
+    "backgrounds": ["No gradient backgrounds found"],
+    "mobileMenu": ["Mobile menu button not found", "No mobile-specific elements found"],
+    "interactive": ["No FAQ items found"],
+    "gradients": ["No text gradient elements found"],
     "visual": [],
     "accessibility": [],
-    "responsive": [
-      "No responsive utility classes found"
-    ]
+    "responsive": ["No responsive utility classes found"]
   },
   "summary": {
     "totalSections": 12,
@@ -97,47 +81,31 @@
       },
       {
         "section": "trust",
-        "errors": [
-          "CASA Tier 3 text not found",
-          "Join 1000+ enthusiasts text not found"
-        ]
+        "errors": ["CASA Tier 3 text not found", "Join 1000+ enthusiasts text not found"]
       },
       {
         "section": "navigation",
-        "errors": [
-          "Navigation items mismatch: found "
-        ]
+        "errors": ["Navigation items mismatch: found "]
       },
       {
         "section": "backgrounds",
-        "errors": [
-          "No gradient backgrounds found"
-        ]
+        "errors": ["No gradient backgrounds found"]
       },
       {
         "section": "mobileMenu",
-        "errors": [
-          "Mobile menu button not found",
-          "No mobile-specific elements found"
-        ]
+        "errors": ["Mobile menu button not found", "No mobile-specific elements found"]
       },
       {
         "section": "interactive",
-        "errors": [
-          "No FAQ items found"
-        ]
+        "errors": ["No FAQ items found"]
       },
       {
         "section": "gradients",
-        "errors": [
-          "No text gradient elements found"
-        ]
+        "errors": ["No text gradient elements found"]
       },
       {
         "section": "responsive",
-        "errors": [
-          "No responsive utility classes found"
-        ]
+        "errors": ["No responsive utility classes found"]
       }
     ]
   }

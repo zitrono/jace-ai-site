@@ -3,15 +3,15 @@ import { JaceAISitePOM } from './jace-ai-site.pom.js';
 function analyzePOM() {
   console.log('📊 POM Coverage Analysis');
   console.log('========================\n');
-  
+
   // Create a dummy page object for analysis
   const dummyPage = {};
   const pom = new JaceAISitePOM(dummyPage);
-  
+
   // Count selectors
   let totalSelectors = 0;
   let selectorsBySection = {};
-  
+
   function countSelectors(obj, section = '') {
     let count = 0;
     for (const [key, value] of Object.entries(obj)) {
@@ -36,20 +36,20 @@ function analyzePOM() {
     }
     return count;
   }
-  
+
   countSelectors(pom.selectors);
-  
+
   console.log('📌 SELECTORS:');
   console.log(`Total selectors: ${totalSelectors}\n`);
   console.log('By section:');
   Object.entries(selectorsBySection).forEach(([section, count]) => {
     console.log(`  ${section}: ${count}`);
   });
-  
+
   // Count expected styles
   let totalStyles = 0;
   let stylesByCategory = {};
-  
+
   function countStyles(obj, category = '') {
     let count = 0;
     for (const [key, value] of Object.entries(obj)) {
@@ -67,16 +67,16 @@ function analyzePOM() {
     }
     return count;
   }
-  
+
   countStyles(pom.expectedStyles);
-  
+
   console.log('\n📐 EXPECTED STYLES:');
   console.log(`Total style properties: ${totalStyles}\n`);
   console.log('By category:');
   Object.entries(stylesByCategory).forEach(([category, count]) => {
     console.log(`  ${category}: ${count}`);
   });
-  
+
   // Count expected content
   let totalContent = 0;
   for (const [key, value] of Object.entries(pom.expectedContent)) {
@@ -86,26 +86,26 @@ function analyzePOM() {
       totalContent++;
     }
   }
-  
+
   console.log('\n📝 EXPECTED CONTENT:');
   console.log(`Total content items: ${totalContent}`);
-  
+
   // Check validation methods
   const validationMethods = [];
   const allMethods = Object.getOwnPropertyNames(Object.getPrototypeOf(pom));
-  
+
   for (const method of allMethods) {
     if (method.startsWith('validate') && typeof pom[method] === 'function') {
       validationMethods.push(method);
     }
   }
-  
+
   console.log('\n🧪 VALIDATION METHODS:');
   console.log(`Total validation methods: ${validationMethods.length}`);
-  validationMethods.forEach(method => {
+  validationMethods.forEach((method) => {
     console.log(`  - ${method}`);
   });
-  
+
   // Interactive test methods
   const interactiveMethods = [];
   for (const method of allMethods) {
@@ -113,13 +113,13 @@ function analyzePOM() {
       interactiveMethods.push(method);
     }
   }
-  
+
   console.log('\n🎮 INTERACTIVE TEST METHODS:');
   console.log(`Total interactive methods: ${interactiveMethods.length}`);
-  interactiveMethods.forEach(method => {
+  interactiveMethods.forEach((method) => {
     console.log(`  - ${method}`);
   });
-  
+
   // Summary
   console.log('\n📊 SUMMARY:');
   console.log('==========');
@@ -129,12 +129,12 @@ function analyzePOM() {
   console.log(`Total Validation Methods: ${validationMethods.length}`);
   console.log(`Total Interactive Methods: ${interactiveMethods.length}`);
   console.log(`\nGRAND TOTAL ELEMENTS: ${totalSelectors + totalStyles + totalContent}`);
-  
+
   // Check which validation methods are called in unified-test.js
   const testedSections = [
     'Backgrounds',
     'Hero',
-    'Navigation', 
+    'Navigation',
     'Trust',
     'Companies',
     'Features',
@@ -148,16 +148,16 @@ function analyzePOM() {
     'Typography',
     'Colors',
     'Interactive',
-    'NewElements'
+    'NewElements',
   ];
-  
+
   console.log('\n✅ COVERAGE CHECK:');
-  const testedMethods = testedSections.map(s => `validate${s}`);
-  const untestedMethods = validationMethods.filter(m => !testedMethods.includes(m));
-  
+  const testedMethods = testedSections.map((s) => `validate${s}`);
+  const untestedMethods = validationMethods.filter((m) => !testedMethods.includes(m));
+
   if (untestedMethods.length > 0) {
     console.log('❌ Untested validation methods:');
-    untestedMethods.forEach(method => console.log(`  - ${method}`));
+    untestedMethods.forEach((method) => console.log(`  - ${method}`));
   } else {
     console.log('✅ All validation methods are covered in unified-test.js');
   }

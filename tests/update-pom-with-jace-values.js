@@ -11,57 +11,59 @@ const pomUpdates = {
   expectedStyles: {
     backgrounds: {
       body: extractedData.styles.body.backgroundColor, // rgb(40, 40, 40)
-      sections: extractedData.styles.body.backgroundColor
+      sections: extractedData.styles.body.backgroundColor,
     },
-    
+
     typography: {
       heroTitle: {
         fontSize: extractedData.styles.heroTitle?.fontSize || '60px',
         fontWeight: extractedData.styles.heroTitle?.fontWeight || '600',
-        lineHeight: extractedData.styles.heroTitle?.lineHeight || '1'
+        lineHeight: extractedData.styles.heroTitle?.lineHeight || '1',
       },
       heroSubtitle: {
         fontSize: extractedData.styles.heroSubtitle?.fontSize || '18px',
-        color: extractedData.styles.heroSubtitle?.color || 'rgba(255, 246, 238, 0.72)'
+        color: extractedData.styles.heroSubtitle?.color || 'rgba(255, 246, 238, 0.72)',
       },
       body: {
         fontFamily: extractedData.styles.body.fontFamily,
         fontSize: extractedData.styles.body.fontSize,
-        lineHeight: extractedData.styles.body.lineHeight
-      }
+        lineHeight: extractedData.styles.body.lineHeight,
+      },
     },
-    
+
     components: {
       ctaButton: {
         backgroundColor: extractedData.elements.primaryButtonBg, // rgb(255, 220, 97)
         color: 'rgb(41, 48, 69)',
         fontSize: '14px',
         padding: '0px 24px',
-        height: '40px'
+        height: '40px',
       },
       casaBadge: {
         backgroundColor: extractedData.elements.cardBg, // rgb(53, 53, 53)
-        color: 'rgb(156, 163, 175)'
-      }
-    }
+        color: 'rgb(156, 163, 175)',
+      },
+    },
   },
-  
+
   // Expected content from jace.ai
   expectedContent: {
     heroTitle: extractedData.content.heroTitle || 'Gain 2 Hours Daily with Jace',
-    heroSubtitle: extractedData.content.heroSubtitle || 'Start your day with emails organized, drafts ready in your voice, and daily brief for maximum efficiency.',
+    heroSubtitle:
+      extractedData.content.heroSubtitle ||
+      'Start your day with emails organized, drafts ready in your voice, and daily brief for maximum efficiency.',
     ctaButtonText: 'Get Started for Free',
     casaBadgeText: 'CASA TIER 3 CERTIFIED',
     userCountText: 'Join 1000+ enthusiasts',
     companyText: 'Built by engineers from',
-    navItems: extractedData.content.navItems || ['Features', 'Company', 'Pricing', 'Blog']
+    navItems: extractedData.content.navItems || ['Features', 'Company', 'Pricing', 'Blog'],
   },
-  
+
   // Sections that should NOT exist in ralph (based on jace.ai structure)
   sectionsToRemove: {
     testimonials: !extractedData.structure.hasTestimonials, // true - should be removed
-    cookieBanner: !extractedData.structure.hasCookieBanner  // true - should be removed
-  }
+    cookieBanner: !extractedData.structure.hasCookieBanner, // true - should be removed
+  },
 };
 
 // Log updates needed

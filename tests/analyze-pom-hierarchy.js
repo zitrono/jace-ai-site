@@ -1,9 +1,9 @@
 import { JaceAISitePOM } from './jace-ai-site.pom.js';
 
 // Create dummy page to access POM structure
-const dummyPage = { 
-  goto: () => {}, 
-  viewport: () => ({ width: 1200, height: 800 })
+const dummyPage = {
+  goto: () => {},
+  viewport: () => ({ width: 1200, height: 800 }),
 };
 const pom = new JaceAISitePOM(dummyPage);
 
@@ -18,13 +18,13 @@ console.log('┌─ selectors (root)');
 
 // Count elements per category
 const stats = {};
-categories.forEach(category => {
+categories.forEach((category) => {
   if (category === 'coreElements') return; // Handle separately
-  
+
   const items = selectors[category];
   let count = 0;
   let mappedCount = 0;
-  
+
   if (typeof items === 'object' && !Array.isArray(items)) {
     Object.entries(items).forEach(([key, value]) => {
       count++;
@@ -33,7 +33,7 @@ categories.forEach(category => {
       }
     });
   }
-  
+
   stats[category] = { count, mappedCount };
   console.log(`├─ ${category} (${count} elements, ${mappedCount} mapped)`);
 });
@@ -49,17 +49,17 @@ const groups = {
   'Hero/Landing': ['hero'],
   'Social Proof': ['trust', 'companies', 'testimonials'],
   'Content Sections': ['features', 'pricing', 'faq', 'faqInteractive'],
-  'Footer': ['footer'],
+  Footer: ['footer'],
   'UI Components': ['interactive', 'visual', 'buttons', 'forms', 'checkmarks'],
-  'Compliance': ['cookie', 'cookieConsent'],
-  'Accessibility': ['accessibility'],
-  'Responsive': ['responsive'],
-  'Core Testing': ['coreElements']
+  Compliance: ['cookie', 'cookieConsent'],
+  Accessibility: ['accessibility'],
+  Responsive: ['responsive'],
+  'Core Testing': ['coreElements'],
 };
 
 Object.entries(groups).forEach(([group, categories]) => {
   console.log(`\n${group}:`);
-  categories.forEach(cat => {
+  categories.forEach((cat) => {
     if (stats[cat]) {
       console.log(`  - ${cat}: ${stats[cat].count} elements`);
     } else if (cat === 'coreElements') {
@@ -73,18 +73,19 @@ console.log('\n\nPOM BEST PRACTICES ANALYSIS:');
 
 const bestPractices = {
   'Logical Hierarchy': categories.length > 0 && selectors.coreElements,
-  'Semantic Naming': categories.every(cat => /^[a-z][a-zA-Z]+$/.test(cat)),
-  'Selector Abstraction': Object.values(selectors).some(s => 
-    Object.values(s).some(v => typeof v === 'object' && v.selector)
+  'Semantic Naming': categories.every((cat) => /^[a-z][a-zA-Z]+$/.test(cat)),
+  'Selector Abstraction': Object.values(selectors).some((s) =>
+    Object.values(s).some((v) => typeof v === 'object' && v.selector)
   ),
-  'Platform Mapping': Object.values(selectors).some(s => 
-    Object.values(s).some(v => typeof v === 'object' && v.jaceSelector)
+  'Platform Mapping': Object.values(selectors).some((s) =>
+    Object.values(s).some((v) => typeof v === 'object' && v.jaceSelector)
   ),
-  'Reusable Methods': Object.getOwnPropertyNames(Object.getPrototypeOf(pom))
-    .filter(m => m.startsWith('validate')).length > 0,
+  'Reusable Methods':
+    Object.getOwnPropertyNames(Object.getPrototypeOf(pom)).filter((m) => m.startsWith('validate'))
+      .length > 0,
   'CSS Property Tracking': Array.isArray(pom.cssProperties) && pom.cssProperties.length > 0,
   'Mobile Support': !!pom.mobileRequirements,
-  'Expected Values': !!pom.expectedStyles
+  'Expected Values': !!pom.expectedStyles,
 };
 
 console.log('✓ = Implemented, ✗ = Missing\n');
@@ -98,15 +99,15 @@ let selectorTypes = {
   'CSS Class': 0,
   'CSS ID': 0,
   'Tag Name': 0,
-  'Attribute': 0,
-  'Complex': 0,
-  'Mapped (ralph/jace)': 0
+  Attribute: 0,
+  Complex: 0,
+  'Mapped (ralph/jace)': 0,
 };
 
 // Count selector types across all categories
-Object.values(selectors).forEach(category => {
+Object.values(selectors).forEach((category) => {
   if (typeof category === 'object') {
-    Object.values(category).forEach(selector => {
+    Object.values(category).forEach((selector) => {
       if (typeof selector === 'string') {
         if (selector.startsWith('.')) selectorTypes['CSS Class']++;
         else if (selector.startsWith('#')) selectorTypes['CSS ID']++;
@@ -128,7 +129,7 @@ Object.entries(selectorTypes).forEach(([type, count]) => {
 console.log('\n\nPOM STANDARDS COMPLIANCE:');
 console.log(`
 Overall Assessment: ${
-  Object.values(bestPractices).filter(v => v).length >= 6 ? 'GOOD' : 'NEEDS IMPROVEMENT'
+  Object.values(bestPractices).filter((v) => v).length >= 6 ? 'GOOD' : 'NEEDS IMPROVEMENT'
 }
 
 Strengths:
@@ -154,8 +155,10 @@ ${Object.keys(selectors.coreElements).length > 30 ? '- Consider sub-grouping cor
 - Document selector naming conventions in comments
 
 Industry Standard Compliance: ${
-  Object.values(bestPractices).filter(v => v).length >= 7 ? 'EXCELLENT' : 
-  Object.values(bestPractices).filter(v => v).length >= 5 ? 'GOOD' :
-  'NEEDS WORK'
+  Object.values(bestPractices).filter((v) => v).length >= 7
+    ? 'EXCELLENT'
+    : Object.values(bestPractices).filter((v) => v).length >= 5
+      ? 'GOOD'
+      : 'NEEDS WORK'
 }
 `);

@@ -74,37 +74,46 @@ const headerClasses = [
     Skip to main content
   </a>
 
-  <nav id="navigation" class="mx-auto flex max-w-7xl items-center justify-between" role="navigation" aria-label="Main navigation">
+  <nav
+    id="navigation"
+    class="mx-auto flex max-w-7xl items-center justify-between"
+    role="navigation"
+    aria-label="Main navigation"
+  >
     <div
       class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all duration-300"
       style="height: 64px;"
     >
       {/* Logo */}
-      {showLogo && (
-        <div class="flex lg:flex-1">
-          <a 
-            href={logoHref} 
-            class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-          >
-            <span class="sr-only">{logoText}</span>
-            <span class="text-text-primary font-bold text-2xl">{logoText}</span>
-          </a>
-        </div>
-      )}
+      {
+        showLogo && (
+          <div class="flex lg:flex-1">
+            <a
+              href={logoHref}
+              class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              <span class="sr-only">{logoText}</span>
+              <span class="text-text-primary font-bold text-2xl">{logoText}</span>
+            </a>
+          </div>
+        )
+      }
 
       {/* Mobile CTA Button */}
-      {showCta && (
-        <div class="flex lg:hidden flex-1 justify-end mr-3">
-          <Button 
-            variant="primary" 
-            size="sm" 
-            class="text-xs sm:text-sm min-h-[44px] min-w-[44px] touch-manipulation"
-          >
-            <span class="hidden min-[360px]:inline">{ctaText}</span>
-            <span class="inline min-[360px]:hidden">Book Demo</span>
-          </Button>
-        </div>
-      )}
+      {
+        showCta && (
+          <div class="flex lg:hidden flex-1 justify-end mr-3">
+            <Button
+              variant="primary"
+              size="sm"
+              class="text-xs sm:text-sm min-h-[44px] min-w-[44px] touch-manipulation"
+            >
+              <span class="hidden min-[360px]:inline">{ctaText}</span>
+              <span class="inline min-[360px]:hidden">Book Demo</span>
+            </Button>
+          </div>
+        )
+      }
 
       {/* Mobile Menu Button */}
       <div class="flex lg:hidden">
@@ -135,38 +144,42 @@ const headerClasses = [
 
       {/* Desktop Navigation */}
       <nav class="hidden lg:flex lg:gap-x-12" role="navigation" aria-label="Main navigation">
-        {navLinks.map((link) => (
-          <a 
-            href={link.href} 
-            class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
-            {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-          >
-            {link.text}
-          </a>
-        ))}
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
+              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+            >
+              {link.text}
+            </a>
+          ))
+        }
       </nav>
 
       {/* Desktop CTA Buttons */}
-      {showCta && (
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-          <Button 
-            variant="secondary" 
-            id="login-button" 
-            data-test="secondary-button"
-            class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
-          >
-            {loginText}
-          </Button>
-          <Button 
-            variant="primary" 
-            size="lg" 
-            data-test="cta-button"
-            class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-          >
-            {ctaText}
-          </Button>
-        </div>
-      )}
+      {
+        showCta && (
+          <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
+            <Button
+              variant="secondary"
+              id="login-button"
+              data-test="secondary-button"
+              class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              {loginText}
+            </Button>
+            <Button
+              variant="primary"
+              size="lg"
+              data-test="cta-button"
+              class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              {ctaText}
+            </Button>
+          </div>
+        )
+      }
     </div>
   </nav>
 
@@ -181,19 +194,24 @@ const headerClasses = [
   >
     {/* Backdrop */}
     <div class="fixed inset-0 bg-black/50" aria-hidden="true"></div>
-    
+
     {/* Menu Panel */}
-    <div class="fixed right-0 top-0 bottom-0 w-full bg-neutral-700 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out" data-mobile-menu-panel>
+    <div
+      class="fixed right-0 top-0 bottom-0 w-full bg-neutral-700 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out"
+      data-mobile-menu-panel
+    >
       <div class="flex items-center justify-between mb-8">
-        {showLogo && (
-          <a 
-            href={logoHref} 
-            class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-          >
-            <span class="sr-only">{logoText}</span>
-            <span class="text-text-primary font-bold text-2xl">{logoText}</span>
-          </a>
-        )}
+        {
+          showLogo && (
+            <a
+              href={logoHref}
+              class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+            >
+              <span class="sr-only">{logoText}</span>
+              <span class="text-text-primary font-bold text-2xl">{logoText}</span>
+            </a>
+          )
+        }
         <button
           id="mobile-menu-close"
           type="button"
@@ -212,161 +230,169 @@ const headerClasses = [
           </svg>
         </button>
       </div>
-      
+
       <nav class="flex flex-col space-y-4" role="navigation" aria-label="Mobile navigation">
         <h2 id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</h2>
-        {navLinks.map((link) => (
-          <a 
-            href={link.href} 
-            class="nav-link text-lg text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium py-3 px-2 rounded-base min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-            {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-          >
-            {link.text}
-          </a>
-        ))}
-        
-        {showCta && (
-          <div class="pt-6 border-t border-neutral-600 flex flex-row gap-4">
-            <Button 
-              variant="secondary" 
-              id="mobile-login-button" 
-              class="flex-1 text-center min-h-[44px] focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="nav-link text-lg text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium py-3 px-2 rounded-base min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
             >
-              {loginText}
-            </Button>
-            <Button 
-              variant="primary" 
-              size="lg" 
-              class="flex-1 min-h-[44px] focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-            >
-              {ctaText}
-            </Button>
-          </div>
-        )}
+              {link.text}
+            </a>
+          ))
+        }
+
+        {
+          showCta && (
+            <div class="pt-6 border-t border-neutral-600 flex flex-row gap-4">
+              <Button
+                variant="secondary"
+                id="mobile-login-button"
+                class="flex-1 text-center min-h-[44px] focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+              >
+                {loginText}
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                class="flex-1 min-h-[44px] focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+              >
+                {ctaText}
+              </Button>
+            </div>
+          )
+        }
       </nav>
     </div>
   </div>
 
-<!-- Performance-optimized mobile menu script with client:media for mobile-only loading -->
-<script client:media="(max-width: 1024px)">
-  // Mobile menu functionality optimized for performance
-  function initializeMobileMenu() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuPanel = document.querySelector('[data-mobile-menu-panel]');
+  <!-- Performance-optimized mobile menu script -->
+  <script>
+    // Mobile menu functionality optimized for performance
+    function initializeMobileMenu() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuPanel = document.querySelector('[data-mobile-menu-panel]');
 
-    if (!mobileMenuButton || !mobileMenu || !mobileMenuPanel) return;
+      if (!mobileMenuButton || !mobileMenu || !mobileMenuPanel) return;
 
-    // Performance-optimized show/hide with hardware acceleration
-    const showMenu = () => {
-      // Use will-change for better performance
-      mobileMenuPanel.style.willChange = 'transform';
-      mobileMenu.classList.remove('hidden');
-      
-      requestAnimationFrame(() => {
-        mobileMenuPanel.style.transform = 'translateX(0)';
-        mobileMenuButton.setAttribute('aria-expanded', 'true');
-        
-        // Focus management
-        const firstFocusable = mobileMenu.querySelector('a, button');
-        if (firstFocusable) firstFocusable.focus();
-        
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
+      // Performance-optimized show/hide with hardware acceleration
+      const showMenu = () => {
+        // Use will-change for better performance
+        mobileMenuPanel.style.willChange = 'transform';
+        mobileMenu.classList.remove('hidden');
+
+        requestAnimationFrame(() => {
+          mobileMenuPanel.style.transform = 'translateX(0)';
+          mobileMenuButton.setAttribute('aria-expanded', 'true');
+
+          // Focus management
+          const firstFocusable = mobileMenu.querySelector('a, button');
+          if (firstFocusable) firstFocusable.focus();
+
+          // Prevent body scroll
+          document.body.style.overflow = 'hidden';
+        });
+      };
+
+      const hideMenu = () => {
+        mobileMenuPanel.style.transform = 'translateX(100%)';
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+
+        // Restore body scroll
+        document.body.style.overflow = '';
+
+        setTimeout(() => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuPanel.style.willChange = 'auto';
+
+          // Return focus to menu button
+          if (mobileMenuButton) mobileMenuButton.focus();
+        }, 300);
+      };
+
+      // Event listeners with performance optimizations
+      mobileMenuButton.addEventListener('click', showMenu, { passive: true });
+
+      if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', hideMenu, { passive: true });
+      }
+
+      // Optimized backdrop click handling
+      mobileMenu.addEventListener(
+        'click',
+        (e) => {
+          if (e.target === mobileMenu || e.target.hasAttribute('data-mobile-menu-overlay')) {
+            hideMenu();
+          }
+        },
+        { passive: true }
+      );
+
+      // Keyboard handling
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          hideMenu();
+        }
       });
-    };
 
-    const hideMenu = () => {
-      mobileMenuPanel.style.transform = 'translateX(100%)';
-      mobileMenuButton.setAttribute('aria-expanded', 'false');
-      
-      // Restore body scroll
-      document.body.style.overflow = '';
-      
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden');
-        mobileMenuPanel.style.willChange = 'auto';
-        
-        // Return focus to menu button
-        if (mobileMenuButton) mobileMenuButton.focus();
-      }, 300);
-    };
+      // Touch handling for mobile swipe-to-close
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
 
-    // Event listeners with performance optimizations
-    mobileMenuButton.addEventListener('click', showMenu, { passive: true });
-    
-    if (mobileMenuClose) {
-      mobileMenuClose.addEventListener('click', hideMenu, { passive: true });
+      const handleTouchStart = (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        mobileMenuPanel.style.transition = 'none';
+      };
+
+      const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+        const deltaX = currentX - startX;
+
+        if (deltaX > 0) {
+          const translateX = Math.min(deltaX, window.innerWidth);
+          mobileMenuPanel.style.transform = `translateX(${translateX}px)`;
+        }
+      };
+
+      const handleTouchEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        const deltaX = currentX - startX;
+        mobileMenuPanel.style.transition = '';
+
+        if (deltaX > window.innerWidth * 0.3) {
+          hideMenu();
+        } else {
+          mobileMenuPanel.style.transform = 'translateX(0)';
+        }
+      };
+
+      if ('ontouchstart' in window) {
+        mobileMenuPanel.addEventListener('touchstart', handleTouchStart, { passive: true });
+        mobileMenuPanel.addEventListener('touchmove', handleTouchMove, { passive: true });
+        mobileMenuPanel.addEventListener('touchend', handleTouchEnd, { passive: true });
+      }
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', () => {
+        document.body.style.overflow = '';
+      });
     }
 
-    // Optimized backdrop click handling
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu || e.target.hasAttribute('data-mobile-menu-overlay')) {
-        hideMenu();
-      }
-    }, { passive: true });
-
-    // Keyboard handling
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-        hideMenu();
-      }
-    });
-
-    // Touch handling for mobile swipe-to-close
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-
-    const handleTouchStart = (e) => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-      mobileMenuPanel.style.transition = 'none';
-    };
-
-    const handleTouchMove = (e) => {
-      if (!isDragging) return;
-      currentX = e.touches[0].clientX;
-      const deltaX = currentX - startX;
-      
-      if (deltaX > 0) {
-        const translateX = Math.min(deltaX, window.innerWidth);
-        mobileMenuPanel.style.transform = `translateX(${translateX}px)`;
-      }
-    };
-
-    const handleTouchEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-      
-      const deltaX = currentX - startX;
-      mobileMenuPanel.style.transition = '';
-      
-      if (deltaX > window.innerWidth * 0.3) {
-        hideMenu();
-      } else {
-        mobileMenuPanel.style.transform = 'translateX(0)';
-      }
-    };
-
-    if ('ontouchstart' in window) {
-      mobileMenuPanel.addEventListener('touchstart', handleTouchStart, { passive: true });
-      mobileMenuPanel.addEventListener('touchmove', handleTouchMove, { passive: true });
-      mobileMenuPanel.addEventListener('touchend', handleTouchEnd, { passive: true });
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeMobileMenu);
+    } else {
+      initializeMobileMenu();
     }
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      document.body.style.overflow = '';
-    });
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeMobileMenu);
-  } else {
-    initializeMobileMenu();
-  }
-</script>
+  </script>
 </header>

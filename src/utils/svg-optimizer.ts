@@ -23,12 +23,9 @@ interface SVGOptimizationOptions {
  * @param options - Configuration options for the SVG
  * @returns Optimized inline SVG string
  */
-export function inlineSVG(
-  svgContent: string, 
-  options: SVGOptimizationOptions = {}
-): string {
+export function inlineSVG(svgContent: string, options: SVGOptimizationOptions = {}): string {
   const { className = '', ariaLabel = '', addRole = true } = options;
-  
+
   // Remove XML declaration and comments
   let optimized = svgContent
     .replace(/<\?xml[^>]*\?>/g, '')
@@ -38,11 +35,11 @@ export function inlineSVG(
 
   // Build attributes string
   const attributes: string[] = [];
-  
+
   if (className) {
     attributes.push(`class="${className}"`);
   }
-  
+
   if (ariaLabel) {
     attributes.push(`aria-label="${ariaLabel}"`);
     if (addRole) {
@@ -52,10 +49,7 @@ export function inlineSVG(
 
   // Add attributes if provided
   if (attributes.length > 0) {
-    optimized = optimized.replace(
-      '<svg',
-      `<svg ${attributes.join(' ')}`
-    );
+    optimized = optimized.replace('<svg', `<svg ${attributes.join(' ')}`);
   }
 
   return optimized;
@@ -74,9 +68,7 @@ export function svgToDataURI(svgContent: string): string {
     .trim();
 
   // Encode for URI, handling quotes and other special characters
-  const encoded = encodeURIComponent(optimized)
-    .replace(/'/g, '%27')
-    .replace(/"/g, '%22');
+  const encoded = encodeURIComponent(optimized).replace(/'/g, '%27').replace(/"/g, '%22');
 
   return `data:image/svg+xml,${encoded}`;
 }
@@ -99,20 +91,17 @@ interface SpriteOptions {
  * @param options - Sprite configuration options
  * @returns SVG symbol element string
  */
-export function svgToSprite(
-  svgContent: string, 
-  options: SpriteOptions
-): string {
+export function svgToSprite(svgContent: string, options: SpriteOptions): string {
   const { id, viewBox, preserveAspectRatio = 'xMidYMid meet' } = options;
-  
+
   // Extract content between <svg> tags
   const contentMatch = svgContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
   const content = contentMatch ? contentMatch[1] : '';
-  
+
   // Extract viewBox from original SVG if not provided
   const viewBoxMatch = svgContent.match(/viewBox=["']([^"']+)["']/i);
   const finalViewBox = viewBox || (viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24');
-  
+
   return `<symbol id="${id}" viewBox="${finalViewBox}" preserveAspectRatio="${preserveAspectRatio}">${content}</symbol>`;
 }
 
@@ -122,25 +111,22 @@ export function svgToSprite(
  * @param options - Additional options for the use element
  * @returns SVG use element string
  */
-export function createSVGUse(
-  spriteId: string, 
-  options: SVGOptimizationOptions = {}
-): string {
+export function createSVGUse(spriteId: string, options: SVGOptimizationOptions = {}): string {
   const { className = '', ariaLabel = '' } = options;
-  
+
   const attributes: string[] = [];
-  
+
   if (className) {
     attributes.push(`class="${className}"`);
   }
-  
+
   if (ariaLabel) {
     attributes.push(`aria-label="${ariaLabel}"`);
     attributes.push('role="img"');
   }
-  
+
   const attributeString = attributes.length > 0 ? ` ${attributes.join(' ')}` : '';
-  
+
   return `<svg${attributeString}><use href="#${spriteId}"></use></svg>`;
 }
 
@@ -165,18 +151,18 @@ export interface SVGOptimizationResult {
  * @returns Optimization result with metrics
  */
 export function optimizeSVG(
-  svgContent: string, 
+  svgContent: string,
   options: SVGOptimizationOptions = {}
 ): SVGOptimizationResult {
   const originalSize = new Blob([svgContent]).size;
   const optimizedContent = inlineSVG(svgContent, options);
   const optimizedSize = new Blob([optimizedContent]).size;
-  
+
   return {
     content: optimizedContent,
     originalSize,
     optimizedSize,
-    compressionRatio: (originalSize - optimizedSize) / originalSize
+    compressionRatio: (originalSize - optimizedSize) / originalSize,
   };
 }
 

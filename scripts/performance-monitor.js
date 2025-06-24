@@ -2,13 +2,13 @@
 
 /**
  * Performance Monitoring and Budget Validation Script
- * 
+ *
  * This script monitors build performance, validates bundle sizes,
  * and provides performance metrics for the Ralph Web project.
- * 
+ *
  * Usage:
  *   node scripts/performance-monitor.js [--build] [--analyze] [--budget]
- * 
+ *
  * Features:
  * - Bundle size analysis
  * - Performance budget validation
@@ -33,12 +33,12 @@ const PERFORMANCE_BUDGETS = {
   totalCSS: 200 * 1024, // 200KB
   totalImages: 2 * 1024 * 1024, // 2MB
   totalFonts: 300 * 1024, // 300KB
-  
+
   // Individual file limits
   maxJavaScriptFile: 200 * 1024, // 200KB
   maxCSSFile: 100 * 1024, // 100KB
   maxImageFile: 500 * 1024, // 500KB
-  
+
   // Performance metrics targets
   firstContentfulPaint: 1500, // 1.5s
   largestContentfulPaint: 2500, // 2.5s
@@ -122,7 +122,15 @@ class PerformanceMonitor {
     // Categorize assets
     const jsSize = this.getSizeByExtensions(assetStats, ['.js', '.mjs']);
     const cssSize = this.getSizeByExtensions(assetStats, ['.css']);
-    const imageSize = this.getSizeByExtensions(assetStats, ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg']);
+    const imageSize = this.getSizeByExtensions(assetStats, [
+      '.jpg',
+      '.jpeg',
+      '.png',
+      '.gif',
+      '.webp',
+      '.avif',
+      '.svg',
+    ]);
     const fontSize = this.getSizeByExtensions(assetStats, ['.woff', '.woff2', '.ttf', '.eot']);
 
     // Check total budgets
@@ -134,16 +142,38 @@ class PerformanceMonitor {
     // Check individual file budgets
     const largestJS = this.getLargestFileByType(assetStats, ['.js', '.mjs']);
     const largestCSS = this.getLargestFileByType(assetStats, ['.css']);
-    const largestImage = this.getLargestFileByType(assetStats, ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif']);
+    const largestImage = this.getLargestFileByType(assetStats, [
+      '.jpg',
+      '.jpeg',
+      '.png',
+      '.gif',
+      '.webp',
+      '.avif',
+    ]);
 
     if (largestJS) {
-      this.checkBudget('Largest JavaScript file', largestJS.size, PERFORMANCE_BUDGETS.maxJavaScriptFile, largestJS.path);
+      this.checkBudget(
+        'Largest JavaScript file',
+        largestJS.size,
+        PERFORMANCE_BUDGETS.maxJavaScriptFile,
+        largestJS.path
+      );
     }
     if (largestCSS) {
-      this.checkBudget('Largest CSS file', largestCSS.size, PERFORMANCE_BUDGETS.maxCSSFile, largestCSS.path);
+      this.checkBudget(
+        'Largest CSS file',
+        largestCSS.size,
+        PERFORMANCE_BUDGETS.maxCSSFile,
+        largestCSS.path
+      );
     }
     if (largestImage) {
-      this.checkBudget('Largest Image file', largestImage.size, PERFORMANCE_BUDGETS.maxImageFile, largestImage.path);
+      this.checkBudget(
+        'Largest Image file',
+        largestImage.size,
+        PERFORMANCE_BUDGETS.maxImageFile,
+        largestImage.path
+      );
     }
 
     console.log('');
@@ -154,7 +184,7 @@ class PerformanceMonitor {
    */
   getSizeByExtensions(assetStats, extensions) {
     return assetStats.files
-      .filter(file => extensions.includes(file.ext))
+      .filter((file) => extensions.includes(file.ext))
       .reduce((total, file) => total + file.size, 0);
   }
 
@@ -163,7 +193,7 @@ class PerformanceMonitor {
    */
   getLargestFileByType(assetStats, extensions) {
     return assetStats.files
-      .filter(file => extensions.includes(file.ext))
+      .filter((file) => extensions.includes(file.ext))
       .sort((a, b) => b.size - a.size)[0];
   }
 
@@ -177,12 +207,16 @@ class PerformanceMonitor {
     const status = actual <= budget ? '✅' : '❌';
     const fileInfo = filename ? ` (${filename})` : '';
 
-    console.log(`${status} ${name}: ${actualKB}KB / ${budgetKB}KB (${percentage.toFixed(1)}%)${fileInfo}`);
+    console.log(
+      `${status} ${name}: ${actualKB}KB / ${budgetKB}KB (${percentage.toFixed(1)}%)${fileInfo}`
+    );
 
     if (actual > budget) {
       this.errors.push(`${name} exceeds budget: ${actualKB}KB > ${budgetKB}KB${fileInfo}`);
     } else if (percentage > 80) {
-      this.warnings.push(`${name} approaching budget limit: ${actualKB}KB / ${budgetKB}KB${fileInfo}`);
+      this.warnings.push(
+        `${name} approaching budget limit: ${actualKB}KB / ${budgetKB}KB${fileInfo}`
+      );
     }
   }
 
@@ -196,7 +230,9 @@ class PerformanceMonitor {
     console.log('Overall Statistics:');
     console.log(`- Total files: ${assetStats.files.length}`);
     console.log(`- Total size: ${Math.round(assetStats.totalSize / 1024)}KB`);
-    console.log(`- Estimated gzipped: ${Math.round(assetStats.files.reduce((total, file) => total + file.gzipSize, 0) / 1024)}KB`);
+    console.log(
+      `- Estimated gzipped: ${Math.round(assetStats.files.reduce((total, file) => total + file.gzipSize, 0) / 1024)}KB`
+    );
     console.log('');
 
     // Largest files
@@ -212,10 +248,12 @@ class PerformanceMonitor {
     // File type breakdown
     console.log('File Type Breakdown:');
     Object.entries(assetStats.types)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .forEach(([ext, size]) => {
         const percentage = (size / assetStats.totalSize) * 100;
-        console.log(`- ${ext || 'no extension'}: ${Math.round(size / 1024)}KB (${percentage.toFixed(1)}%)`);
+        console.log(
+          `- ${ext || 'no extension'}: ${Math.round(size / 1024)}KB (${percentage.toFixed(1)}%)`
+        );
       });
     console.log('');
 
@@ -229,9 +267,11 @@ class PerformanceMonitor {
   generateOptimizationRecommendations(assetStats) {
     console.log('💡 Optimization Recommendations:\n');
 
-    const jsFiles = assetStats.files.filter(f => ['.js', '.mjs'].includes(f.ext));
-    const cssFiles = assetStats.files.filter(f => f.ext === '.css');
-    const imageFiles = assetStats.files.filter(f => ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg'].includes(f.ext));
+    const jsFiles = assetStats.files.filter((f) => ['.js', '.mjs'].includes(f.ext));
+    const cssFiles = assetStats.files.filter((f) => f.ext === '.css');
+    const imageFiles = assetStats.files.filter((f) =>
+      ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg'].includes(f.ext)
+    );
 
     // JavaScript recommendations
     if (jsFiles.length > 0) {
@@ -261,7 +301,7 @@ class PerformanceMonitor {
 
     // Image recommendations
     if (imageFiles.length > 0) {
-      const largeImages = imageFiles.filter(f => f.size > 100 * 1024); // > 100KB
+      const largeImages = imageFiles.filter((f) => f.size > 100 * 1024); // > 100KB
       if (largeImages.length > 0) {
         console.log('🖼️  Image Optimizations:');
         console.log('  - Convert large images to WebP or AVIF format');
@@ -295,13 +335,28 @@ class PerformanceMonitor {
         assert: {
           preset: 'lighthouse:recommended',
           assertions: {
-            'first-contentful-paint': ['error', { maxNumericValue: PERFORMANCE_BUDGETS.firstContentfulPaint }],
-            'largest-contentful-paint': ['error', { maxNumericValue: PERFORMANCE_BUDGETS.largestContentfulPaint }],
-            'first-input-delay': ['error', { maxNumericValue: PERFORMANCE_BUDGETS.firstInputDelay }],
-            'cumulative-layout-shift': ['error', { maxNumericValue: PERFORMANCE_BUDGETS.cumulativeLayoutShift }],
-            'total-blocking-time': ['error', { maxNumericValue: PERFORMANCE_BUDGETS.totalBlockingTime }],
+            'first-contentful-paint': [
+              'error',
+              { maxNumericValue: PERFORMANCE_BUDGETS.firstContentfulPaint },
+            ],
+            'largest-contentful-paint': [
+              'error',
+              { maxNumericValue: PERFORMANCE_BUDGETS.largestContentfulPaint },
+            ],
+            'first-input-delay': [
+              'error',
+              { maxNumericValue: PERFORMANCE_BUDGETS.firstInputDelay },
+            ],
+            'cumulative-layout-shift': [
+              'error',
+              { maxNumericValue: PERFORMANCE_BUDGETS.cumulativeLayoutShift },
+            ],
+            'total-blocking-time': [
+              'error',
+              { maxNumericValue: PERFORMANCE_BUDGETS.totalBlockingTime },
+            ],
             'speed-index': ['warn', { maxNumericValue: 3000 }],
-            'interactive': ['warn', { maxNumericValue: 3000 }],
+            interactive: ['warn', { maxNumericValue: 3000 }],
           },
         },
         upload: {
@@ -326,19 +381,19 @@ class PerformanceMonitor {
 
     // Final summary
     console.log('\n📋 Summary\n');
-    
+
     if (this.errors.length === 0 && this.warnings.length === 0) {
       console.log('✅ All performance budgets are within limits!');
     } else {
       if (this.errors.length > 0) {
         console.log('❌ Performance Budget Violations:');
-        this.errors.forEach(error => console.log(`  - ${error}`));
+        this.errors.forEach((error) => console.log(`  - ${error}`));
         console.log('');
       }
 
       if (this.warnings.length > 0) {
         console.log('⚠️  Performance Budget Warnings:');
-        this.warnings.forEach(warning => console.log(`  - ${warning}`));
+        this.warnings.forEach((warning) => console.log(`  - ${warning}`));
         console.log('');
       }
     }

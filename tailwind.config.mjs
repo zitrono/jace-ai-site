@@ -65,14 +65,38 @@ export default {
 
       fontSize: {
         // Design System Font Sizes
-        xs: [designSystem.typography.fontSize.xs, { lineHeight: designSystem.typography.lineHeight.base }],
-        sm: [designSystem.typography.fontSize.sm, { lineHeight: designSystem.typography.lineHeight.base }],
-        base: [designSystem.typography.fontSize.base, { lineHeight: designSystem.typography.lineHeight.base }],
-        lg: [designSystem.typography.fontSize.lg, { lineHeight: designSystem.typography.lineHeight.base }],
-        xl: [designSystem.typography.fontSize.xl, { lineHeight: designSystem.typography.lineHeight.base }],
-        '2xl': [designSystem.typography.fontSize['2xl'], { lineHeight: designSystem.typography.lineHeight.tight }],
-        '3xl': [designSystem.typography.fontSize['3xl'], { lineHeight: designSystem.typography.lineHeight.tight }],
-        hero: [designSystem.typography.fontSize.hero, { lineHeight: designSystem.typography.lineHeight.tight }],
+        xs: [
+          designSystem.typography.fontSize.xs,
+          { lineHeight: designSystem.typography.lineHeight.base },
+        ],
+        sm: [
+          designSystem.typography.fontSize.sm,
+          { lineHeight: designSystem.typography.lineHeight.base },
+        ],
+        base: [
+          designSystem.typography.fontSize.base,
+          { lineHeight: designSystem.typography.lineHeight.base },
+        ],
+        lg: [
+          designSystem.typography.fontSize.lg,
+          { lineHeight: designSystem.typography.lineHeight.base },
+        ],
+        xl: [
+          designSystem.typography.fontSize.xl,
+          { lineHeight: designSystem.typography.lineHeight.base },
+        ],
+        '2xl': [
+          designSystem.typography.fontSize['2xl'],
+          { lineHeight: designSystem.typography.lineHeight.tight },
+        ],
+        '3xl': [
+          designSystem.typography.fontSize['3xl'],
+          { lineHeight: designSystem.typography.lineHeight.tight },
+        ],
+        hero: [
+          designSystem.typography.fontSize.hero,
+          { lineHeight: designSystem.typography.lineHeight.tight },
+        ],
 
         // POM Typography Scale (backwards compatibility)
         'hero-title': ['48px', { lineHeight: '1.2', fontWeight: '600' }],
@@ -109,7 +133,7 @@ export default {
       borderRadius: {
         // Design System Border Radius
         ...designSystem.borderRadius,
-        
+
         // POM Border Radius (backwards compatibility)
         button: '6px',
         'button-lg': '8px',
@@ -129,7 +153,7 @@ export default {
         'gradient-video-container': designSystem.colors.gradients.videoContainer,
         'gradient-cta-section': designSystem.colors.gradients.ctaSection,
 
-        // Legacy gradients (backwards compatibility) 
+        // Legacy gradients (backwards compatibility)
         'gradient-video': 'linear-gradient(to bottom right, rgb(59, 130, 246), rgb(20, 184, 166))',
         'gradient-features': 'linear-gradient(to right, rgb(192, 132, 252), rgb(250, 204, 21))',
         'gradient-hero':

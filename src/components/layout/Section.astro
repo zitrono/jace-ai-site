@@ -65,19 +65,11 @@ const maxWidthClasses = {
   full: 'max-w-none',
 };
 
-const sectionClasses = [
-  backgroundClasses[background],
-  spacingClasses[spacing],
-  className,
-]
+const sectionClasses = [backgroundClasses[background], spacingClasses[spacing], className]
   .filter(Boolean)
   .join(' ');
 
-const containerClasses = [
-  'mx-auto',
-  maxWidthClasses[maxWidth],
-  padded && 'px-6 lg:px-8',
-]
+const containerClasses = ['mx-auto', maxWidthClasses[maxWidth], padded && 'px-6 lg:px-8']
   .filter(Boolean)
   .join(' ');
 

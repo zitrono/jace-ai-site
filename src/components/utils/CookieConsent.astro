@@ -1,10 +1,10 @@
 ---
 /**
  * Cookie consent banner component matching original implementation
- * 
+ *
  * @example
  * ```astro
- * <CookieConsent 
+ * <CookieConsent
  *   title="Cookie Preferences"
  *   position="bottom-left"
  *   privacyLink="/privacy"
@@ -43,10 +43,9 @@ const positionClasses = {
 };
 ---
 
-<!-- Cookie Banner - initially hidden, positioned bottom-left -->
-<!-- Progressive Enhancement: Non-critical functionality loaded with client:idle -->
-<div 
-  id={id} 
+<!-- Cookie Banner - initially hidden, positioned bottom-left --><!-- Progressive Enhancement: Non-critical functionality loaded with client:idle -->
+<div
+  id={id}
   class={`opacity-0 translate-y-full transition-all duration-300 ease-in-out fixed inset-x-0 bottom-0 z-[999] ${className}`}
   data-testid="cookie-consent-banner"
 >
@@ -62,8 +61,7 @@ const positionClasses = {
             href={privacyLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-white hover:text-gray-300 underline"
-            >here</a
+            class="text-white hover:text-gray-300 underline">here</a
           >.
         </p>
       </div>
@@ -96,14 +94,14 @@ const positionClasses = {
   </div>
 </div>
 
-<!-- Performance-optimized cookie consent with client:idle for non-critical loading -->
-<script client:idle>
+<!-- Performance-optimized cookie consent -->
+<script>
   // Optimized cookie consent functionality with performance considerations
   function initializeCookieConsent() {
     // Check if consent was already given to avoid unnecessary operations
     const consentGiven = localStorage.getItem('cookieConsent');
     const banner = document.getElementById('cookie-banner');
-    
+
     if (consentGiven || !banner) return;
 
     // Performance-optimized banner display with IntersectionObserver
@@ -135,7 +133,7 @@ const positionClasses = {
       requestAnimationFrame(() => {
         banner.style.opacity = '0';
         banner.style.transform = 'translateY(100vh)';
-        
+
         // Remove from DOM after animation for better performance
         setTimeout(() => {
           if (banner.parentNode) {
@@ -149,11 +147,11 @@ const positionClasses = {
       try {
         localStorage.setItem('cookieConsent', value);
         hideBanner();
-        
+
         // Dispatch custom event for analytics or other tracking
         if ('CustomEvent' in window) {
           const event = new CustomEvent('cookieConsentChanged', {
-            detail: { consent: value }
+            detail: { consent: value },
           });
           document.dispatchEvent(event);
         }
@@ -184,11 +182,15 @@ const positionClasses = {
     banner.addEventListener('click', handleButtonClick, { passive: true });
 
     // Enhanced keyboard support
-    banner.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        setCookieConsent('rejected');
-      }
-    }, { passive: false });
+    banner.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key === 'Escape') {
+          setCookieConsent('rejected');
+        }
+      },
+      { passive: false }
+    );
 
     // Show banner with optimized timing
     showBannerWithDelay();

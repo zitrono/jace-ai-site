@@ -198,7 +198,11 @@ export const designSystem: DesignSystem = {
 };
 
 // Type helpers for extracting nested values
-export type ColorToken = keyof Colors['primary'] | keyof Colors['neutral'] | keyof Colors['text'] | keyof Colors['gradients'];
+export type ColorToken =
+  | keyof Colors['primary']
+  | keyof Colors['neutral']
+  | keyof Colors['text']
+  | keyof Colors['gradients'];
 export type SpacingToken = keyof Spacing['section'] | keyof Spacing['component'];
 export type FontSizeToken = keyof Typography['fontSize'];
 export type FontWeightToken = keyof Typography['fontWeight'];

@@ -1,6 +1,5 @@
 ---
 // AI Adoption Paradox statistics section with design tokens
-import Section from '../layout/Section.astro';
 
 interface Statistic {
   value: string;
@@ -20,7 +19,7 @@ const {
   title = 'The AI Adoption Paradox',
   showStats = true,
   customStats,
-  variant = 'default',
+  variant: _variant = 'default',
 } = Astro.props;
 
 const defaultStats = [

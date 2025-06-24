@@ -1,5 +1,11 @@
 ---
-import type { BaseComponentProps, InteractiveComponentProps, ValidationState, InputType, SizeVariant } from '../../types/components';
+import type {
+  BaseComponentProps,
+  InteractiveComponentProps,
+  ValidationState,
+  InputType,
+  SizeVariant,
+} from '../../types/components';
 
 interface Props extends BaseComponentProps, InteractiveComponentProps {
   /** Input type */
@@ -99,7 +105,6 @@ const {
 // Generate unique ID if not provided
 const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 const helperId = `${inputId}-helper`;
-const errorId = `${inputId}-error`;
 
 // Size classes
 const sizeClasses = {
@@ -168,26 +173,34 @@ const labelClasses = [
 // Helper text classes
 const helperClasses = [
   'mt-1 text-xs',
-  state === 'error' ? 'text-red-500' : 
-  state === 'success' ? 'text-green-500' :
-  state === 'warning' ? 'text-yellow-500' :
-  'text-pom-text-muted',
+  state === 'error'
+    ? 'text-red-500'
+    : state === 'success'
+      ? 'text-green-500'
+      : state === 'warning'
+        ? 'text-yellow-500'
+        : 'text-pom-text-muted',
 ]
   .filter(Boolean)
   .join(' ');
 
 // Get current message based on state
-const currentMessage = 
+const currentMessage =
   (state === 'error' && errorMessage) ||
   (state === 'success' && successMessage) ||
   (state === 'warning' && warningMessage) ||
   helperText;
 
 // Data attributes
-const dataAttributes = data ? Object.entries(data).reduce((acc, [key, value]) => {
-  acc[`data-${key}`] = value;
-  return acc;
-}, {} as Record<string, string>) : {};
+const dataAttributes = data
+  ? Object.entries(data).reduce(
+      (acc, [key, value]) => {
+        acc[`data-${key}`] = value;
+        return acc;
+      },
+      {} as Record<string, string>
+    )
+  : {};
 
 // ARIA attributes
 const ariaAttributes = {
@@ -229,47 +242,81 @@ const inputAttributes = {
 ---
 
 <div class={fullWidth ? 'w-full' : ''}>
-  {label && (
-    <label for={inputId} class={labelClasses}>
-      {label}
-      {required && <span class="text-red-500 ml-1" aria-label="required">*</span>}
-    </label>
-  )}
-  
+  {
+    label && (
+      <label for={inputId} class={labelClasses}>
+        {label}
+        {required && (
+          <span class="text-red-500 ml-1" aria-label="required">
+            *
+          </span>
+        )}
+      </label>
+    )
+  }
+
   <div class="relative">
-    <input
-      class={inputClasses}
-      {...inputAttributes}
-    />
-    
+    <input class={inputClasses} {...inputAttributes} />
+
     {/* State icon */}
-    {state !== 'default' && (
-      <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-        {state === 'error' && (
-          <svg class={`h-4 w-4 ${stateIconClasses.error}`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-          </svg>
-        )}
-        {state === 'success' && (
-          <svg class={`h-4 w-4 ${stateIconClasses.success}`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        )}
-        {state === 'warning' && (
-          <svg class={`h-4 w-4 ${stateIconClasses.warning}`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
-        )}
-      </div>
-    )}
+    {
+      state !== 'default' && (
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          {state === 'error' && (
+            <svg
+              class={`h-4 w-4 ${stateIconClasses.error}`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
+          {state === 'success' && (
+            <svg
+              class={`h-4 w-4 ${stateIconClasses.success}`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
+          {state === 'warning' && (
+            <svg
+              class={`h-4 w-4 ${stateIconClasses.warning}`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
+        </div>
+      )
+    }
   </div>
-  
+
   {/* Helper/Error text */}
-  {currentMessage && (
-    <p id={helperId} class={helperClasses}>
-      {currentMessage}
-    </p>
-  )}
+  {
+    currentMessage && (
+      <p id={helperId} class={helperClasses}>
+        {currentMessage}
+      </p>
+    )
+  }
 </div>
 
 <style>
@@ -277,23 +324,23 @@ const inputAttributes = {
   input:focus {
     box-shadow: 0 0 0 3px var(--tw-ring-color);
   }
-  
+
   /* Ensure consistent appearance across browsers */
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
-  
+
   /* Number input spinner styling */
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  
-  input[type="number"] {
+
+  input[type='number'] {
     -moz-appearance: textfield;
   }
 </style>

@@ -125,50 +125,54 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       type="font/woff2"
       crossorigin
     />
-    
+
     <!-- Preconnect to external domains -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//www.google-analytics.com">
-    
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+
     <!-- Resource hints for critical assets -->
-    <link rel="prefetch" href="/ralph-web/ralph_favicon.svg">
-    
+    <link rel="prefetch" href="/ralph-web/ralph_favicon.svg" />
+
     <!-- Web Vitals and Performance Monitoring -->
     <script type="module">
       // Comprehensive performance monitoring with Web Vitals
-      import('/ralph-web/src/utils/web-vitals.js').then(({ initPerformanceMonitoring, defaultConfig }) => {
-        const config = {
-          ...defaultConfig,
-          enableConsoleLogging: true,
-          enableAnalytics: false, // Enable in production
-          debug: false,
-          thresholds: {
-            CLS: 0.1,
-            FID: 100,
-            LCP: 2500,
-            FCP: 1800,
-            TTFB: 800
-          }
-        };
-        
-        initPerformanceMonitoring(config).then(budget => {
-          // Store budget globally for debugging
-          window.performanceBudget = budget;
-          
-          // Log performance summary after initial load
-          setTimeout(() => {
-            const score = budget.getPerformanceScore();
-            console.log(`🎯 Performance Score: ${score}/100`);
-            
-            if (score < 80) {
-              console.warn('⚠️ Performance could be improved. Check the console for specific metrics.');
-            }
-          }, 3000);
+      import('/ralph-web/src/utils/web-vitals.js')
+        .then(({ initPerformanceMonitoring, defaultConfig }) => {
+          const config = {
+            ...defaultConfig,
+            enableConsoleLogging: true,
+            enableAnalytics: false, // Enable in production
+            debug: false,
+            thresholds: {
+              CLS: 0.1,
+              FID: 100,
+              LCP: 2500,
+              FCP: 1800,
+              TTFB: 800,
+            },
+          };
+
+          initPerformanceMonitoring(config).then((budget) => {
+            // Store budget globally for debugging
+            window.performanceBudget = budget;
+
+            // Log performance summary after initial load
+            setTimeout(() => {
+              const score = budget.getPerformanceScore();
+              console.log(`🎯 Performance Score: ${score}/100`);
+
+              if (score < 80) {
+                console.warn(
+                  '⚠️ Performance could be improved. Check the console for specific metrics.'
+                );
+              }
+            }, 3000);
+          });
+        })
+        .catch(() => {
+          // Fallback for when web-vitals module is not available
+          console.log('📊 Performance monitoring not available');
         });
-      }).catch(() => {
-        // Fallback for when web-vitals module is not available
-        console.log('📊 Performance monitoring not available');
-      });
 
       // Resource loading optimization
       const criticalImages = ['/ralph-web/ralph_favicon.svg'];
@@ -402,7 +406,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         color: rgba(0, 0, 0, 0);
       }
 
-      /* Badge utilities */  
+      /* Badge utilities */
       .badge {
         display: inline-flex;
         align-items: center;
@@ -449,7 +453,9 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* FAQ transition styles for smooth expand/collapse */
       .faq-content {
-        transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        transition:
+          max-height 0.3s ease-out,
+          opacity 0.3s ease-out;
         overflow: hidden;
       }
 
@@ -460,7 +466,9 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Mobile menu transitions */
       #mobile-menu {
-        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        transition:
+          opacity 0.2s ease-out,
+          transform 0.2s ease-out;
       }
 
       /* Accessibility: Screen reader only content */
@@ -502,7 +510,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       /* High contrast focus for buttons */
       button:focus-visible,
       .btn:focus-visible,
-      [role="button"]:focus-visible {
+      [role='button']:focus-visible {
         outline: 3px solid var(--pom-accent);
         outline-offset: 2px;
         box-shadow: 0 0 0 1px var(--pom-accent-text);
@@ -527,7 +535,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       /* Accessibility: Minimum touch target sizes */
       button,
       .btn,
-      [role="button"],
+      [role='button'],
       a {
         min-height: 44px;
         min-width: 44px;
@@ -626,7 +634,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
     <!-- ARIA live regions for dynamic content announcements -->
     <div aria-live="polite" aria-atomic="true" class="sr-live-polite" id="status-messages"></div>
     <div aria-live="assertive" aria-atomic="true" class="sr-live-polite" id="alert-messages"></div>
-    
+
     <slot />
     <script>
       // Essential functionality extracted from modular TypeScript files
@@ -643,14 +651,16 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
             mobileMenu.style.opacity = '0';
             mobileMenu.style.transform = 'translateY(-20px)';
             mobileMenuButton?.setAttribute('aria-expanded', 'true');
-            
+
             // Focus trap - move focus to first focusable element in menu
-            const firstFocusable = mobileMenu.querySelector('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            
+            const firstFocusable = mobileMenu.querySelector(
+              'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+
             requestAnimationFrame(() => {
               mobileMenu.style.opacity = '1';
               mobileMenu.style.transform = 'translateY(0)';
-              
+
               // Announce menu opening and focus first element
               if (statusMessages) {
                 statusMessages.textContent = 'Mobile menu opened';
@@ -668,12 +678,12 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
             mobileMenu.style.opacity = '0';
             mobileMenu.style.transform = 'translateY(-20px)';
             mobileMenuButton?.setAttribute('aria-expanded', 'false');
-            
+
             // Return focus to menu button
             if (mobileMenuButton) {
               mobileMenuButton.focus();
             }
-            
+
             // Announce menu closing
             if (statusMessages) {
               statusMessages.textContent = 'Mobile menu closed';
@@ -699,13 +709,13 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
               hideMenu();
             }
           });
-          
+
           // Keyboard navigation for mobile menu
           mobileMenu.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
               hideMenu();
             }
-            
+
             // Tab trapping
             if (e.key === 'Tab') {
               const focusableElements = mobileMenu.querySelectorAll(
@@ -713,7 +723,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
               );
               const firstFocusable = focusableElements[0];
               const lastFocusable = focusableElements[focusableElements.length - 1];
-              
+
               if (e.shiftKey) {
                 if (document.activeElement === firstFocusable) {
                   e.preventDefault();

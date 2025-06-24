@@ -72,31 +72,35 @@ const copyrightText = customCopyright || `© ${year} ${companyName}. All rights 
 <footer id="footer" class={footerClasses} role="contentinfo" {...rest}>
   <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8">
     <div class="flex flex-col items-center space-y-6">
-      {showLinks && (
-        <nav role="navigation" aria-label="Footer navigation">
-          <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm">
-            {links.map((link, index) => (
-              <a 
-                href={link.href} 
-                class="text-text-muted hover:text-text-primary transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700 focus:rounded-base min-h-[44px] flex items-center px-2 py-1"
-                {...(link.external && { 
-                  target: '_blank', 
-                  rel: 'noopener noreferrer',
-                  'aria-label': `${link.text} (opens in new tab)`
-                })}
-              >
-                {link.text}
-              </a>
-            ))}
-          </div>
-        </nav>
-      )}
+      {
+        showLinks && (
+          <nav role="navigation" aria-label="Footer navigation">
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm">
+              {links.map((link) => (
+                <a
+                  href={link.href}
+                  class="text-text-muted hover:text-text-primary transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700 focus:rounded-base min-h-[44px] flex items-center px-2 py-1"
+                  {...(link.external && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    'aria-label': `${link.text} (opens in new tab)`,
+                  })}
+                >
+                  {link.text}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )
+      }
 
-      {showCopyright && (
-        <p class="text-center text-sm text-text-muted" role="contentinfo">
-          {copyrightText}
-        </p>
-      )}
+      {
+        showCopyright && (
+          <p class="text-center text-sm text-text-muted" role="contentinfo">
+            {copyrightText}
+          </p>
+        )
+      }
     </div>
   </div>
 </footer>

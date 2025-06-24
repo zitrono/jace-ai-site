@@ -15,7 +15,7 @@ export class ModalManager {
   public init(): void {
     // Set up login button event listeners
     this.setupLoginButtons();
-    
+
     // Set up global function for compatibility
     this.setupGlobalFunctions();
 
@@ -45,11 +45,11 @@ export class ModalManager {
     // For now, this is a placeholder - in a real implementation,
     // this would show an actual login modal
     console.log('Login modal would be shown here');
-    
+
     // Dispatch custom event for potential analytics
     const event = new CustomEvent('loginModalRequested');
     document.dispatchEvent(event);
-    
+
     // Placeholder: For now, we'll just redirect to a contact form
     // In the future, this could open a proper login modal
     this.showContactModal();
@@ -67,18 +67,18 @@ export class ModalManager {
 
     // Store reference to previously focused element
     this.previouslyFocused = document.activeElement as HTMLElement;
-    
+
     // Show modal
     this.activeModal = modal;
     modal.classList.remove('hidden');
     modal.setAttribute('aria-hidden', 'false');
-    
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
-    
+
     // Focus first focusable element in modal
     this.focusFirstElement(modal);
-    
+
     // Set up focus trapping
     this.trapFocus(modal);
   }
@@ -91,16 +91,16 @@ export class ModalManager {
 
     this.activeModal.classList.add('hidden');
     this.activeModal.setAttribute('aria-hidden', 'true');
-    
+
     // Restore body scroll
     document.body.style.overflow = '';
-    
+
     // Return focus to previously focused element
     if (this.previouslyFocused) {
       this.previouslyFocused.focus();
       this.previouslyFocused = null;
     }
-    
+
     this.activeModal = null;
   }
 
@@ -111,7 +111,7 @@ export class ModalManager {
     const focusableElements = modal.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const firstFocusable = focusableElements[0] as HTMLElement;
     if (firstFocusable) {
       firstFocusable.focus();
@@ -125,7 +125,7 @@ export class ModalManager {
     const focusableElements = modal.querySelectorAll(
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const firstFocusable = focusableElements[0] as HTMLElement;
     const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
 
@@ -157,9 +157,10 @@ export class ModalManager {
     // This is a placeholder implementation
     // In a real application, this would show a proper modal
     const message = 'Login functionality coming soon! For now, please contact us directly.';
-    
+
     if (confirm(message + '\n\nWould you like to send us an email?')) {
-      window.location.href = 'mailto:Konstantin@beneficious.com?subject=Login Request&body=Hello, I would like to access Ralph.';
+      window.location.href =
+        'mailto:Konstantin@beneficious.com?subject=Login Request&body=Hello, I would like to access Ralph.';
     }
   }
 

@@ -52,14 +52,14 @@ export class FAQManager {
     content.classList.remove('hidden');
     content.style.maxHeight = '0px';
     content.style.opacity = '0';
-    
+
     // Force browser reflow
     content.offsetHeight;
-    
+
     // Animate to full height
     content.style.maxHeight = content.scrollHeight + 'px';
     content.style.opacity = '1';
-    
+
     // Update button state
     arrow?.classList.add('rotate-180');
     button.setAttribute('aria-expanded', 'true');
@@ -76,14 +76,14 @@ export class FAQManager {
   private collapseFAQ(button: HTMLElement, content: HTMLElement, arrow: Element | null): void {
     // Set explicit height before collapsing
     content.style.maxHeight = content.scrollHeight + 'px';
-    
+
     // Force browser reflow
     content.offsetHeight;
-    
+
     // Animate to zero height
     content.style.maxHeight = '0px';
     content.style.opacity = '0';
-    
+
     // Update button state
     arrow?.classList.remove('rotate-180');
     button.setAttribute('aria-expanded', 'false');
@@ -100,7 +100,7 @@ export class FAQManager {
   private setupGlobalFunctions(): void {
     // Make functions available globally for inline onclick handlers
     (window as any).toggleFAQ = (button: HTMLElement) => this.toggleFAQ(button);
-    (window as any).handleFAQKeydown = (event: KeyboardEvent, button: HTMLElement) => 
+    (window as any).handleFAQKeydown = (event: KeyboardEvent, button: HTMLElement) =>
       this.handleFAQKeydown(event, button);
   }
 }

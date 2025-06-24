@@ -114,10 +114,10 @@ export class CookieConsentManager {
    */
   protected onConsentChange(value: ConsentValue): void {
     console.log('Cookie consent updated:', value);
-    
+
     // Dispatch custom event
-    const event = new CustomEvent('cookieConsentChange', { 
-      detail: { consent: value }
+    const event = new CustomEvent('cookieConsentChange', {
+      detail: { consent: value },
     });
     document.dispatchEvent(event);
   }

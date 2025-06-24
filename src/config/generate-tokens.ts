@@ -5,77 +5,79 @@ import { designSystem, type DesignSystem } from './design-system';
 function hexToRgb(hex: string): string {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return hex; // Return original if not a valid hex
-  
+
   const r = parseInt(result[1], 16);
   const g = parseInt(result[2], 16);
   const b = parseInt(result[3], 16);
-  
+
   return `rgb(${r}, ${g}, ${b})`;
 }
 
 // Generate CSS variables from design system
 export function generateCSSVariables(system: DesignSystem = designSystem): string {
   const lines: string[] = [':root {'];
-  
+
   // Colors
   lines.push('  /* Brand Colors */');
   Object.entries(system.colors.primary).forEach(([key, value]) => {
     lines.push(`  --color-primary-${key.toLowerCase()}: ${value};`);
     lines.push(`  --color-primary-${key.toLowerCase()}-rgb: ${hexToRgb(value)};`);
   });
-  
+
   lines.push('\n  /* Neutral Colors */');
   Object.entries(system.colors.neutral).forEach(([key, value]) => {
     lines.push(`  --color-neutral-${key}: ${value};`);
     lines.push(`  --color-neutral-${key}-rgb: ${hexToRgb(value)};`);
   });
-  
+
   lines.push('\n  /* Text Colors */');
   Object.entries(system.colors.text).forEach(([key, value]) => {
     lines.push(`  --color-text-${key}: ${value};`);
   });
-  
+
   lines.push('\n  /* Gradients */');
   Object.entries(system.colors.gradients).forEach(([key, value]) => {
     lines.push(`  --gradient-${kebabCase(key)}: ${value};`);
   });
-  
+
   // Spacing
   lines.push('\n  /* Section Spacing */');
   Object.entries(system.spacing.section).forEach(([key, value]) => {
     lines.push(`  --spacing-section-${key}: ${value};`);
   });
-  
+
   lines.push('\n  /* Component Spacing */');
   Object.entries(system.spacing.component).forEach(([key, value]) => {
     lines.push(`  --spacing-${key}: ${value};`);
   });
-  
+
   // Typography
   lines.push('\n  /* Font Family */');
-  lines.push(`  --font-primary: ${system.typography.fontFamily.primary.map(f => `"${f}"`).join(', ')};`);
-  
+  lines.push(
+    `  --font-primary: ${system.typography.fontFamily.primary.map((f) => `"${f}"`).join(', ')};`
+  );
+
   lines.push('\n  /* Font Sizes */');
   Object.entries(system.typography.fontSize).forEach(([key, value]) => {
     lines.push(`  --font-size-${key}: ${value};`);
   });
-  
+
   lines.push('\n  /* Font Weights */');
   Object.entries(system.typography.fontWeight).forEach(([key, value]) => {
     lines.push(`  --font-weight-${key}: ${value};`);
   });
-  
+
   lines.push('\n  /* Line Heights */');
   Object.entries(system.typography.lineHeight).forEach(([key, value]) => {
     lines.push(`  --line-height-${key}: ${value};`);
   });
-  
+
   // Border Radius
   lines.push('\n  /* Border Radius */');
   Object.entries(system.borderRadius).forEach(([key, value]) => {
     lines.push(`  --radius-${key}: ${value};`);
   });
-  
+
   // POM-specific mappings for backwards compatibility
   lines.push('\n  /* POM Compatibility Variables */');
   lines.push('  --pom-bg-body: var(--color-neutral-700-rgb);');
@@ -92,9 +94,9 @@ export function generateCSSVariables(system: DesignSystem = designSystem): strin
   lines.push('  --pom-font-hero-size: 48px;');
   lines.push('  --pom-font-hero-weight: 600;');
   lines.push('  --pom-font-subtitle-size: 18px;');
-  
+
   lines.push('}');
-  
+
   return lines.join('\n');
 }
 
@@ -112,10 +114,13 @@ export function generateTailwindTheme(system: DesignSystem = designSystem): Reco
     fontFamily: {
       sans: system.typography.fontFamily.primary,
     },
-    fontSize: Object.entries(system.typography.fontSize).reduce((acc, [key, value]) => {
-      acc[key] = [value, { lineHeight: system.typography.lineHeight.base }];
-      return acc;
-    }, {} as Record<string, any>),
+    fontSize: Object.entries(system.typography.fontSize).reduce(
+      (acc, [key, value]) => {
+        acc[key] = [value, { lineHeight: system.typography.lineHeight.base }];
+        return acc;
+      },
+      {} as Record<string, any>
+    ),
     fontWeight: system.typography.fontWeight,
     lineHeight: system.typography.lineHeight,
     borderRadius: system.borderRadius,
@@ -140,19 +145,19 @@ function kebabCase(str: string): string {
 export function getToken(path: string): string | undefined {
   const parts = path.split('.');
   let current: any = designSystem;
-  
+
   for (const part of parts) {
     if (current[part] === undefined) return undefined;
     current = current[part];
   }
-  
+
   return current;
 }
 
 // Export function to generate all tokens as a flat object (useful for debugging)
 export function getAllTokens(): Record<string, string> {
   const tokens: Record<string, string> = {};
-  
+
   function traverse(obj: any, prefix: string = '') {
     Object.entries(obj).forEach(([key, value]) => {
       const path = prefix ? `${prefix}.${key}` : key;
@@ -163,7 +168,7 @@ export function getAllTokens(): Record<string, string> {
       }
     });
   }
-  
+
   traverse(designSystem);
   return tokens;
 }

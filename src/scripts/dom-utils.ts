@@ -59,7 +59,7 @@ export function addEventListenerToAll<K extends keyof HTMLElementEventMap>(
   options?: boolean | AddEventListenerOptions
 ): void {
   if (elements) {
-    elements.forEach(element => {
+    elements.forEach((element) => {
       addEventListenerSafe(element, event, handler, options);
     });
   }
@@ -90,12 +90,9 @@ export function raf(callback: () => void): void {
 /**
  * Set multiple attributes on an element
  */
-export function setAttributes(
-  element: Element | null,
-  attributes: Record<string, string>
-): void {
+export function setAttributes(element: Element | null, attributes: Record<string, string>): void {
   if (!element) return;
-  
+
   Object.entries(attributes).forEach(([key, value]) => {
     element.setAttribute(key, value);
   });
@@ -104,11 +101,7 @@ export function setAttributes(
 /**
  * Toggle class with optional force parameter
  */
-export function toggleClass(
-  element: Element | null,
-  className: string,
-  force?: boolean
-): boolean {
+export function toggleClass(element: Element | null, className: string, force?: boolean): boolean {
   if (!element) return false;
   return element.classList.toggle(className, force);
 }
@@ -116,10 +109,7 @@ export function toggleClass(
 /**
  * Check if element matches selector
  */
-export function matches(
-  element: Element | null,
-  selector: string
-): boolean {
+export function matches(element: Element | null, selector: string): boolean {
   if (!element) return false;
   return element.matches(selector);
 }

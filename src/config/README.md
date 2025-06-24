@@ -14,90 +14,96 @@ This directory contains the unified design token system for Ralph Web. The desig
 ### Colors
 
 #### Primary Colors
+
 ```typescript
-colors.primary.yellow        // #FFDC61 - Main brand color
-colors.primary.yellowHover   // #FFE580 - Hover state
+colors.primary.yellow; // #FFDC61 - Main brand color
+colors.primary.yellowHover; // #FFE580 - Hover state
 ```
 
 #### Neutral Scale
+
 ```typescript
-colors.neutral[900]  // #0A0A0A - Darkest
-colors.neutral[800]  // #1A1A1A
-colors.neutral[700]  // #282828 - Main background
-colors.neutral[600]  // #414141 - Secondary surfaces
-colors.neutral[500]  // #525252
-colors.neutral[400]  // #737373
-colors.neutral[300]  // #A3A3A3
-colors.neutral[200]  // #D4D4D4
-colors.neutral[100]  // #F5F5F5
-colors.neutral[50]   // #FAFAFA - Lightest
+colors.neutral[900]; // #0A0A0A - Darkest
+colors.neutral[800]; // #1A1A1A
+colors.neutral[700]; // #282828 - Main background
+colors.neutral[600]; // #414141 - Secondary surfaces
+colors.neutral[500]; // #525252
+colors.neutral[400]; // #737373
+colors.neutral[300]; // #A3A3A3
+colors.neutral[200]; // #D4D4D4
+colors.neutral[100]; // #F5F5F5
+colors.neutral[50]; // #FAFAFA - Lightest
 ```
 
 #### Semantic Text Colors
+
 ```typescript
-colors.text.primary     // #FFFFFF - Primary text
-colors.text.secondary   // rgba(255, 246, 238, 0.72) - Secondary text
-colors.text.muted       // #9CA3AF - Muted text
-colors.text.inverted    // #293044 - Text on yellow background
+colors.text.primary; // #FFFFFF - Primary text
+colors.text.secondary; // rgba(255, 246, 238, 0.72) - Secondary text
+colors.text.muted; // #9CA3AF - Muted text
+colors.text.inverted; // #293044 - Text on yellow background
 ```
 
 #### Gradients
+
 ```typescript
-colors.gradients.heroTitle      // Hero title gradient
-colors.gradients.purpleYellow   // Purple to yellow gradient
-colors.gradients.videoContainer // Video section gradient
-colors.gradients.ctaSection     // CTA section gradient
+colors.gradients.heroTitle; // Hero title gradient
+colors.gradients.purpleYellow; // Purple to yellow gradient
+colors.gradients.videoContainer; // Video section gradient
+colors.gradients.ctaSection; // CTA section gradient
 ```
 
 ### Typography
 
 ```typescript
-typography.fontFamily.primary   // ['Geist', 'Inter', 'system-ui', 'sans-serif']
-typography.fontSize.xs          // 0.875rem (14px)
-typography.fontSize.sm          // 1rem (16px)
-typography.fontSize.base        // 1.125rem (18px)
-typography.fontSize.lg          // 1.5rem (24px)
-typography.fontSize.xl          // 2rem (32px)
-typography.fontSize['2xl']      // 2.5rem (40px)
-typography.fontSize['3xl']      // 3rem (48px)
-typography.fontSize.hero        // 3.75rem (60px)
+typography.fontFamily.primary; // ['Geist', 'Inter', 'system-ui', 'sans-serif']
+typography.fontSize.xs; // 0.875rem (14px)
+typography.fontSize.sm; // 1rem (16px)
+typography.fontSize.base; // 1.125rem (18px)
+typography.fontSize.lg; // 1.5rem (24px)
+typography.fontSize.xl; // 2rem (32px)
+typography.fontSize['2xl']; // 2.5rem (40px)
+typography.fontSize['3xl']; // 3rem (48px)
+typography.fontSize.hero; // 3.75rem (60px)
 
-typography.fontWeight.normal    // 400
-typography.fontWeight.medium    // 500
-typography.fontWeight.semibold  // 600
-typography.fontWeight.bold      // 700
+typography.fontWeight.normal; // 400
+typography.fontWeight.medium; // 500
+typography.fontWeight.semibold; // 600
+typography.fontWeight.bold; // 700
 
-typography.lineHeight.tight     // 1.1
-typography.lineHeight.base      // 1.5
-typography.lineHeight.relaxed   // 1.75
+typography.lineHeight.tight; // 1.1
+typography.lineHeight.base; // 1.5
+typography.lineHeight.relaxed; // 1.75
 ```
 
 ### Spacing
 
 #### Section Spacing
+
 ```typescript
-spacing.section.sm    // 3rem (48px)
-spacing.section.base  // 5rem (80px)
-spacing.section.lg    // 8rem (128px)
+spacing.section.sm; // 3rem (48px)
+spacing.section.base; // 5rem (80px)
+spacing.section.lg; // 8rem (128px)
 ```
 
 #### Component Spacing
+
 ```typescript
-spacing.component.xs    // 0.5rem (8px)
-spacing.component.sm    // 1rem (16px)
-spacing.component.base  // 1.5rem (24px)
-spacing.component.lg    // 2rem (32px)
-spacing.component.xl    // 3rem (48px)
+spacing.component.xs; // 0.5rem (8px)
+spacing.component.sm; // 1rem (16px)
+spacing.component.base; // 1.5rem (24px)
+spacing.component.lg; // 2rem (32px)
+spacing.component.xl; // 3rem (48px)
 ```
 
 ### Border Radius
 
 ```typescript
-borderRadius.sm    // 0.375rem (6px)
-borderRadius.base  // 0.5rem (8px)
-borderRadius.lg    // 0.75rem (12px)
-borderRadius.xl    // 1rem (16px)
-borderRadius.full  // 9999px
+borderRadius.sm; // 0.375rem (6px)
+borderRadius.base; // 0.5rem (8px)
+borderRadius.lg; // 0.75rem (12px)
+borderRadius.xl; // 1rem (16px)
+borderRadius.full; // 9999px
 ```
 
 ## Usage Examples
@@ -105,6 +111,7 @@ borderRadius.full  // 9999px
 ### In Astro Components
 
 #### Using CSS Variables
+
 ```css
 .my-component {
   background-color: var(--color-neutral-700);
@@ -115,13 +122,13 @@ borderRadius.full  // 9999px
 ```
 
 #### Using Tailwind Classes
+
 ```html
-<div class="bg-neutral-700 text-primary p-base rounded-lg">
-  Content
-</div>
+<div class="bg-neutral-700 text-primary p-base rounded-lg">Content</div>
 ```
 
 #### Using Design System Gradients
+
 ```css
 .hero-title {
   background: var(--gradient-hero-title);
@@ -145,12 +152,14 @@ const fontSize = getToken('typography.fontSize.hero');
 ## Token Naming Conventions
 
 ### CSS Variables
+
 - Colors: `--color-{category}-{name}` and `--color-{category}-{name}-rgb`
 - Typography: `--font-{property}-{name}`
 - Spacing: `--spacing-{name}` or `--spacing-{category}-{name}`
 - Gradients: `--gradient-{kebab-case-name}`
 
 ### Tailwind Classes
+
 - Follow Tailwind conventions but using our token names
 - Colors: `bg-neutral-700`, `text-primary`
 - Typography: `text-hero`, `font-semibold`
@@ -165,6 +174,7 @@ The design system maintains backwards compatibility with POM (Page Object Model)
 3. **Exact Value Preservation** - All POM-required values maintained exactly
 
 ### POM Variables
+
 ```css
 --pom-bg-body: var(--color-neutral-700-rgb);
 --pom-text-primary: var(--color-text-primary);
@@ -177,16 +187,18 @@ The design system maintains backwards compatibility with POM (Page Object Model)
 ### From Legacy CSS to Design Tokens
 
 #### Before
+
 ```css
 .component {
   background-color: rgb(40, 40, 40);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 18px;
   padding: 24px;
 }
 ```
 
 #### After
+
 ```css
 .component {
   background-color: var(--color-neutral-700);
@@ -199,13 +211,15 @@ The design system maintains backwards compatibility with POM (Page Object Model)
 ### From Tailwind Arbitrary Values to Tokens
 
 #### Before
+
 ```html
-<div class="bg-[#282828] text-[#FFFFFF] text-[18px] p-[24px]">
+<div class="bg-[#282828] text-[#FFFFFF] text-[18px] p-[24px]"></div>
 ```
 
 #### After
+
 ```html
-<div class="bg-neutral-700 text-primary text-base p-base">
+<div class="bg-neutral-700 text-primary text-base p-base"></div>
 ```
 
 ## Development Workflow
@@ -213,15 +227,17 @@ The design system maintains backwards compatibility with POM (Page Object Model)
 ### Adding New Tokens
 
 1. **Add to design-system.ts**
+
    ```typescript
    export const designSystem: DesignSystem = {
      colors: {
        // Add new color tokens here
-     }
-   }
+     },
+   };
    ```
 
 2. **Regenerate CSS tokens**
+
    ```bash
    # CSS is currently manually maintained
    # TODO: Add automated generation script

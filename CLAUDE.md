@@ -16,21 +16,24 @@ This project has undergone comprehensive refactoring to enterprise-grade standar
 ### ⚡ Architecture Standards (IMMUTABLE)
 
 #### 1. **Component Organization** - NEVER violate this structure:
+
 ```
 src/components/
 ├── primitives/   # Button, Card, Input, Icon - reusable UI elements
-├── layout/       # Header, Footer, Section - page structure  
+├── layout/       # Header, Footer, Section - page structure
 ├── features/     # Hero, FAQ, Pricing - feature-specific components
 └── utils/        # CookieConsent, LoginModal - utility components
 ```
 
 #### 2. **TypeScript Requirements** - ALL components MUST have:
+
 - **Complete interface definitions** extending BaseComponentProps
 - **Proper prop destructuring** with TypeScript types
 - **JSDoc documentation** with usage examples
 - **No any types** - use proper type definitions
 
 #### 3. **CSS Architecture** - ZERO TOLERANCE for violations:
+
 - **100% Utility-First**: Use ONLY Tailwind utilities + design tokens
 - **NO custom CSS**: No `<style>` blocks, no components.css
 - **Design Token Usage**: All colors/spacing via `bg-background`, `text-primary`, etc.
@@ -39,18 +42,21 @@ src/components/
 ### 🎯 Development Standards (MANDATORY)
 
 #### 4. **File Creation Rules**:
+
 - **NEW COMPONENTS**: Must use component template with full TypeScript interface
-- **NO NEW CSS FILES**: Use design tokens and Tailwind utilities only  
+- **NO NEW CSS FILES**: Use design tokens and Tailwind utilities only
 - **DOCUMENTATION**: Every component needs JSDoc with props and examples
 - **INDEX FILES**: Update appropriate index.ts for exports
 
 #### 5. **Code Quality Gates**:
+
 - **Pre-commit validation**: `npm run validate` must pass (type-check + lint + format)
 - **POM compliance**: 99.9% property-level success rate required
 - **Build success**: `npm run build` must complete without warnings
 - **Performance budgets**: All categories must stay within established limits
 
 #### 6. **Performance Standards**:
+
 - **Bundle size limits**: JS <500KB, CSS <200KB, Total <2MB
 - **Lighthouse scores**: 95+ in all categories
 - **Accessibility**: WCAG 2.1 AA compliance maintained
@@ -59,6 +65,7 @@ src/components/
 ### 🚨 ABSOLUTELY FORBIDDEN
 
 #### 7. **Never Do These**:
+
 - ❌ Create new `.css` files or add `<style>` blocks
 - ❌ Use hardcoded colors/spacing instead of design tokens
 - ❌ Add components without TypeScript interfaces
@@ -71,6 +78,7 @@ src/components/
 ### 🔧 Development Workflow (REQUIRED)
 
 #### 8. **Every Change Must**:
+
 1. **Start with**: `npm run dev` and verify current state
 2. **Check compliance**: Run POM tests before changes
 3. **Make changes**: Following architecture standards above
@@ -80,6 +88,7 @@ src/components/
 7. **Performance check**: `npm run perf:analyze` - budgets maintained
 
 #### 9. **Component Development Template**:
+
 ```astro
 ---
 /**
@@ -107,6 +116,7 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 ### 📊 Quality Metrics (MAINTAINED)
 
 #### 10. **Success Criteria** - These MUST be maintained:
+
 - ✅ **TypeScript Coverage**: 100% with strict mode
 - ✅ **POM Compliance**: 99.9% property-level success (2,458+ properties)
 - ✅ **Bundle Performance**: All budgets <50% utilization
@@ -127,6 +137,7 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 4. **`content/general/technical-constraints.md`** - POM requirements and template limits (IMMUTABLE)
 
 **MANDATORY PROCESS FOR ALL CONTENT CHANGES**:
+
 - Read `content/general/claude.md` for complete content management protocol
 - ALWAYS identify highest-priority content area before suggesting changes
 - Present strategic options using Q&A format (never implement directly)
@@ -135,6 +146,7 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 - Update `content-specification.md` only after approved Q&A
 
 **NEVER**:
+
 - Modify website content without going through the Q&A process
 - Change content-specification.md directly
 - Alter existing Q&A entries
@@ -145,6 +157,7 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 **POM is Sacred**: The POM (jace-ai-site.pom.js) is the single source of truth. NEVER modify styles without verifying against POM.
 
 ### Critical Requirements
+
 - **Testing**: Run `cd tests && node unified-test.js ralph` before/after any changes
 - **Success Criteria**: 189+ elements pass, 3,500+ CSS properties pass
 - **Mobile Header**: Exactly 64px height (immutable)
@@ -152,25 +165,33 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 - **Colors**: Use exact RGB values from POM (see technical-constraints.md)
 
 ### POM CSS Validation Rules
+
 **CRITICAL**: Follow ultimate CSS validation approach outlined in `pom-css-rules.md`:
+
 - **Functional Equivalence**: Test structure and reasonable variance, not pixel perfection
 - **Tolerance-Based Validation**: Typography ±20px, Colors ±10 RGB, Layout ±16px
 - **NO CSS Injection**: Never use `!important`, style injection, or cascade manipulation
 - **Reference-First**: Always use Jace as immutable reference for comparison
 
 ### Visual Verification
+
 Use Puppeteer MCP for immediate feedback:
+
 ```javascript
 await puppeteer_screenshot({ name: 'current-state', width: 1200, height: 800 });
-await puppeteer_evaluate({ script: `getComputedStyle(document.querySelector('.btn-primary')).backgroundColor` });
+await puppeteer_evaluate({
+  script: `getComputedStyle(document.querySelector('.btn-primary')).backgroundColor`,
+});
 ```
 
 ## Design System Usage (MANDATORY)
 
 ### Design Token Architecture
+
 The project uses a unified design token system. **ALL styling MUST use these tokens**:
 
 #### Required Token Usage:
+
 ```css
 /* Colors - Use these Tailwind classes ONLY */
 bg-background     /* rgb(40, 40, 40) - main background */
@@ -183,24 +204,28 @@ text-muted       /* rgb(156, 163, 175) - muted text */
 ```
 
 #### Component Patterns (ENFORCE THESE):
+
 ```astro
 <!-- ✅ CORRECT: Using design tokens -->
 <Button variant="primary" size="lg" class="bg-accent text-accent-text">
-
-<!-- ❌ WRONG: Custom CSS or hardcoded values -->
-<button style="background: #FFDC61; padding: 12px;">
-<div class="bg-yellow-400">  <!-- Don't use arbitrary Tailwind colors -->
+  <!-- ❌ WRONG: Custom CSS or hardcoded values -->
+  <button style="background: #FFDC61; padding: 12px;">
+    <div class="bg-yellow-400"><!-- Don't use arbitrary Tailwind colors --></div></button
+  >
+</Button>
 ```
 
 ### Design System Files (NEVER MODIFY WITHOUT APPROVAL):
+
 - `src/config/design-system.ts` - Master token definitions
-- `src/styles/design-tokens.css` - Generated CSS variables  
+- `src/styles/design-tokens.css` - Generated CSS variables
 - `tailwind.config.mjs` - Tailwind integration
 - `src/types/components.ts` - TypeScript interfaces
 
 ## Component Standards Reference
 
 ### Component Interface Requirements:
+
 Every component MUST follow this pattern:
 
 ```typescript
@@ -214,6 +239,7 @@ export interface Props extends BaseComponentProps {
 ```
 
 ### Accessibility Requirements (NON-NEGOTIABLE):
+
 - **ARIA Labels**: All interactive elements need `aria-label` or `aria-labelledby`
 - **Focus Management**: Implement `focus-visible` and keyboard navigation
 - **Touch Targets**: Minimum 44px height/width for mobile
@@ -221,6 +247,7 @@ export interface Props extends BaseComponentProps {
 - **Color Contrast**: WCAG 2.1 AA compliance (4.5:1 ratio minimum)
 
 ### Performance Requirements:
+
 - **Client Directives**: Use appropriate Astro islands (`client:visible`, `client:idle`, `client:load`)
 - **Bundle Size**: Monitor impact with `npm run perf:analyze`
 - **Image Optimization**: Use Astro's Image component for all images
@@ -229,6 +256,7 @@ export interface Props extends BaseComponentProps {
 ## Quality Assurance Protocol (MANDATORY)
 
 ### Pre-Development Checklist:
+
 ```bash
 # 1. Check current state
 npm run dev  # Verify everything works
@@ -236,11 +264,12 @@ npm run dev  # Verify everything works
 # 2. Run baseline tests
 cd tests && node unified-test.js ralph  # Must show 99.9% property success
 
-# 3. Check performance baseline  
+# 3. Check performance baseline
 npm run perf:analyze  # All budgets must be within limits
 ```
 
 ### Post-Development Validation (REQUIRED):
+
 ```bash
 # 1. Code quality validation
 npm run validate  # Must pass: type-check + lint + format
@@ -256,6 +285,7 @@ npm run perf:analyze  # Budgets must not exceed limits
 ```
 
 ### Quality Gates (CANNOT BE BYPASSED):
+
 - ✅ **TypeScript**: No compilation errors, strict mode enabled
 - ✅ **ESLint**: No errors, warnings reviewed and justified
 - ✅ **POM Tests**: 99.9% property-level success rate maintained
@@ -264,7 +294,9 @@ npm run perf:analyze  # Budgets must not exceed limits
 - ✅ **Accessibility**: WCAG 2.1 AA compliance maintained
 
 ### Emergency Procedures:
+
 If any quality gate fails:
+
 1. **STOP all development immediately**
 2. **Revert changes** to last known good state
 3. **Analyze failure** with appropriate tools
@@ -386,30 +418,35 @@ The project maintains style parity between implementations using:
 **Ralph Web**: AI-Native Private Equity Platform website - Astro.js implementation with Tailwind CSS and comprehensive POM testing for pixel-perfect style parity.
 
 ### Development Workflow
+
 1. **Development**: `npm run dev` (port 4321)
 2. **Build**: `npm run build` → `docs/` folder
 3. **Test**: `cd tests && node unified-test.js ralph`
 4. **Deploy**: `git push` → GitHub Pages
 
 ### Testing & Servers
+
 - **Ralph**: http://localhost:4321/ralph-web/ (development)
 - **Jace Reference**: http://localhost:8081/ (static archive)
 - **Production**: https://zitrono.github.io/ralph-web/
 - **POM Testing**: 189+ elements, 3,500+ CSS properties validated
 
 ## Key Files
+
 - **POM**: `tests/jace-ai-site.pom.js` - Testing definitions
-- **Test**: `tests/unified-test.js` - Main test runner  
+- **Test**: `tests/unified-test.js` - Main test runner
 - **Layout**: `src/layouts/Layout.astro` - Global styles
 - **Config**: `tailwind.config.mjs`, `package.json`
 
 ## Common Issues
+
 - **Font**: Check `@font-face` in Layout.astro, ensure Geist loads
 - **Selectors**: Verify POM class expectations match implementation
 - **Mobile**: Header must be exactly 64px height
 - **Testing**: Always fix implementation to match POM, not vice versa
 
 ## Mobile Requirements
+
 - **Header**: Exactly 64px height (immutable)
 - **Touch Targets**: Minimum 44px height
 - **Menu**: Hamburger menu with overlay on mobile
@@ -417,14 +454,18 @@ The project maintains style parity between implementations using:
 - **Compatibility**: 87% mobile compatibility achieved
 
 ## Tools
+
 - Use Puppeteer MCP for UI feedback instead of writing scripts
 
 ## Terminology
+
 - **jace**: Original reference site (jace.ai)
 - **ralph**: Our implementation (https://zitrono.github.io/ralph-web/)
 
 ## POM Policy
+
 **Single POM File**: All testing logic in `jace-ai-site.pom.js`
+
 - Ralph/jace selector mappings with `jaceSelector` for differences
 - Mark ralph-only elements with `unique: true`
 - 121 CSS properties tracked, 189+ elements validated

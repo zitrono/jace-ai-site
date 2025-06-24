@@ -16,22 +16,22 @@ All components use the design system tokens defined in `src/config/design-system
 
 ```typescript
 // Colors
-bg-background          // Main background
-bg-card               // Card backgrounds  
-text-primary          // Primary text
-text-secondary        // Secondary text
-text-accent           // Accent text
-bg-accent             // Accent background
-text-accent-foreground // Accent foreground
+bg - background; // Main background
+bg - card; // Card backgrounds
+text - primary; // Primary text
+text - secondary; // Secondary text
+text - accent; // Accent text
+bg - accent; // Accent background
+text - accent - foreground; // Accent foreground
 
 // Spacing
-section-sm, section-base, section-lg  // Section spacing
-card-gap, card-padding                // Card spacing
-button-x                              // Button padding
+(section - sm, section - base, section - lg); // Section spacing
+(card - gap, card - padding); // Card spacing
+button - x; // Button padding
 
 // Typography
-font-sans                             // Primary font family
-text-hero, text-lg, text-base         // Font sizes
+font - sans; // Primary font family
+(text - hero, text - lg, text - base); // Font sizes
 ```
 
 ## Component Categories
@@ -39,6 +39,7 @@ text-hero, text-lg, text-base         // Font sizes
 ### Layout Components
 
 #### Section
+
 **File**: `src/components/layout/Section.astro`
 **Purpose**: Consistent section spacing and backgrounds
 
@@ -49,37 +50,41 @@ text-hero, text-lg, text-base         // Font sizes
 ```
 
 **Props**:
+
 - `spacing`: 'sm' | 'base' | 'lg' - Section padding
 - `background`: 'primary' | 'secondary' | 'card' - Background color
 - `class`: string - Additional CSS classes
 
 #### Header
+
 **File**: `src/components/layout/Header.astro`
 **Purpose**: Site navigation with mobile menu
 
 **Features**:
+
 - Responsive navigation
 - Mobile hamburger menu
 - CTA integration
 - Logo with custom font
 
 #### Footer
+
 **File**: `src/components/layout/Footer.astro`
 **Purpose**: Site footer with links and branding
 
 ### Primitive Components
 
 #### Button
+
 **File**: `src/components/primitives/Button.astro`
 **Purpose**: Consistent button styling and behavior
 
 ```astro
-<Button variant="primary" size="lg" href="/contact">
-  Get Started
-</Button>
+<Button variant="primary" size="lg" href="/contact">Get Started</Button>
 ```
 
 **Props**:
+
 - `variant`: 'primary' | 'secondary' | 'outline' | 'ghost'
 - `size`: 'sm' | 'base' | 'lg'
 - `href`: string - Link destination (optional)
@@ -88,12 +93,14 @@ text-hero, text-lg, text-base         // Font sizes
 - `onclick`: string - JavaScript handler
 
 **Design Tokens Used**:
+
 - Colors: `bg-accent`, `text-accent-foreground`
 - Spacing: `button-x`, `px-6`, `py-3`
 - Typography: `text-button`, `font-medium`
 - Border: `rounded-button`
 
 #### Card
+
 **File**: `src/components/primitives/Card.astro`
 **Purpose**: Consistent card container styling
 
@@ -105,24 +112,22 @@ text-hero, text-lg, text-base         // Font sizes
 ```
 
 **Props**:
+
 - `variant`: 'default' | 'elevated' | 'outlined'
 - `padding`: 'sm' | 'base' | 'lg'
 - `background`: 'card' | 'secondary'
 
 #### Input
+
 **File**: `src/components/primitives/Input.astro`
 **Purpose**: Form input with consistent styling
 
 ```astro
-<Input 
-  type="email" 
-  placeholder="Enter email"
-  label="Email Address"
-  required
-/>
+<Input type="email" placeholder="Enter email" label="Email Address" required />
 ```
 
 #### Icon
+
 **File**: `src/components/primitives/Icon.astro`
 **Purpose**: SVG icon rendering with consistent sizing
 
@@ -133,78 +138,89 @@ text-hero, text-lg, text-base         // Font sizes
 ### Feature Components
 
 #### Hero
+
 **File**: `src/components/features/Hero.astro`
 **Purpose**: Landing page hero section
 
 **Features**:
+
 - Gradient text effects
 - Badge certifications
 - Primary CTA
 - Responsive layout
 
 #### CTA (Call to Action)
+
 **File**: `src/components/features/CTA.astro`
 **Purpose**: Conversion-focused sections
 
 #### FAQ
+
 **File**: `src/components/features/FAQ.astro`
 **Purpose**: Expandable question/answer sections
 
 **Features**:
+
 - Accordion-style interaction
 - Smooth animations
 - Keyboard navigation
 
 #### Features
+
 **File**: `src/components/features/Features.astro`
 **Purpose**: Product feature showcase
 
 #### TestimonialsNew
+
 **File**: `src/components/features/TestimonialsNew.astro`
 **Purpose**: Customer testimonial display
 
 #### Companies
+
 **File**: `src/components/features/Companies.astro`
 **Purpose**: Company logo showcase
 
 #### Video
+
 **File**: `src/components/features/Video.astro`
 **Purpose**: Video content with gradient overlay
 
 #### Pricing
+
 **File**: `src/components/features/Pricing.astro`
 **Purpose**: Pricing table display
 
 ### Utility Components
 
 #### CookieConsent
+
 **File**: `src/components/utils/CookieConsent.astro`
 **Purpose**: GDPR compliant cookie consent banner
 
 ```astro
-<CookieConsent 
-  position="bottom-left"
-  title="Cookie Preferences"
-  privacyLink="/privacy"
-/>
+<CookieConsent position="bottom-left" title="Cookie Preferences" privacyLink="/privacy" />
 ```
 
 **Features**:
+
 - Configurable positioning
 - Smooth show/hide animations
 - Accept/reject/settings options
 
 #### LoginModal
+
 **File**: `src/components/utils/LoginModal.astro`
 **Purpose**: Beta access modal dialog
 
 **Features**:
+
 - Accessible modal with focus management
 - Keyboard navigation (ESC to close, Tab trap)
 - Backdrop blur effect
 - Email contact integration
 
 #### OptimizedImage
+
 **File**: `src/components/utils/OptimizedImage.astro`
 **Purpose**: Performance-optimized image component
 
@@ -220,6 +236,7 @@ text-hero, text-lg, text-base         // Font sizes
 ```
 
 **Features**:
+
 - Multiple format support (WebP, AVIF, etc.)
 - Responsive sizes
 - Lazy loading by default
@@ -238,42 +255,70 @@ text-hero, text-lg, text-base         // Font sizes
 
 ```astro
 <!-- Backgrounds -->
-<div class="bg-background">    <!-- Main page background -->
-<div class="bg-card">         <!-- Card/container background -->
-<div class="bg-accent">       <!-- Accent/brand background -->
+<div class="bg-background">
+  <!-- Main page background -->
+  <div class="bg-card">
+    <!-- Card/container background -->
+    <div class="bg-accent">
+      <!-- Accent/brand background -->
 
-<!-- Text -->
-<p class="text-primary">      <!-- Primary text -->
-<p class="text-secondary">    <!-- Secondary/muted text -->
-<p class="text-accent">       <!-- Accent text -->
+      <!-- Text -->
+      <p class="text-primary">
+        <!-- Primary text -->
+        <p class="text-secondary">
+          <!-- Secondary/muted text -->
+          <p class="text-accent">
+            <!-- Accent text -->
 
-<!-- Borders -->
-<div class="border-gray-700"> <!-- Subtle borders -->
-<div class="border-accent">   <!-- Accent borders -->
+            <!-- Borders -->
+            <div class="border-gray-700">
+              <!-- Subtle borders -->
+              <div class="border-accent"><!-- Accent borders --></div>
+            </div>
+          </p>
+        </p>
+      </p>
+    </div>
+  </div>
+</div>
 ```
 
 ### Spacing Patterns
 
 ```astro
 <!-- Sections -->
-<section class="py-section-base">  <!-- Standard section padding -->
-<section class="py-section-lg">    <!-- Large section padding -->
+<section class="py-section-base">
+  <!-- Standard section padding -->
+  <section class="py-section-lg">
+    <!-- Large section padding -->
 
-<!-- Cards -->
-<div class="p-card-padding">       <!-- Standard card padding -->
-<div class="gap-card-gap">         <!-- Card grid gaps -->
+    <!-- Cards -->
+    <div class="p-card-padding">
+      <!-- Standard card padding -->
+      <div class="gap-card-gap">
+        <!-- Card grid gaps -->
 
-<!-- Buttons -->
-<button class="px-button-x">       <!-- Button horizontal padding -->
+        <!-- Buttons -->
+        <button class="px-button-x"> <!-- Button horizontal padding --></button>
+      </div>
+    </div>
+  </section>
+</section>
 ```
 
 ### Typography Scale
 
 ```astro
-<h1 class="text-hero">        <!-- Hero titles -->
-<h2 class="text-2xl">         <!-- Section titles -->
-<p class="text-base">         <!-- Body text -->
-<small class="text-sm">       <!-- Small text -->
+<h1 class="text-hero">
+  <!-- Hero titles -->
+  <h2 class="text-2xl">
+    <!-- Section titles -->
+    <p class="text-base">
+      <!-- Body text -->
+      <small class="text-sm"> <!-- Small text --></small>
+    </p>
+  </h2>
+</h1>
 ```
 
 ## Responsive Design
@@ -283,11 +328,14 @@ All components follow mobile-first responsive design:
 ```astro
 <!-- Mobile first, then larger screens -->
 <div class="text-sm md:text-base lg:text-lg">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-<div class="px-4 md:px-6 lg:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div class="px-4 md:px-6 lg:px-8"></div>
+  </div>
+</div>
 ```
 
 Standard breakpoints:
+
 - `xs: 375px` - Small phones
 - `sm: 640px` - Large phones
 - `md: 768px` - Tablets
@@ -302,11 +350,14 @@ Use Tailwind's built-in transitions and custom animations:
 ```astro
 <!-- Transitions -->
 <div class="transition-colors duration-200">
-<button class="transition-all duration-300 hover:scale-105">
-
-<!-- Custom animations -->
-<div class="animate-fade-in">      <!-- Fade in effect -->
-<div class="animate-slide-down">   <!-- Slide down effect -->
+  <button class="transition-all duration-300 hover:scale-105">
+    <!-- Custom animations -->
+    <div class="animate-fade-in">
+      <!-- Fade in effect -->
+      <div class="animate-slide-down"><!-- Slide down effect --></div>
+    </div></button
+  >
+</div>
 ```
 
 ## Testing Integration

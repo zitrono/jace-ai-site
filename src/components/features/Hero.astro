@@ -16,7 +16,7 @@ export interface Props {
 
 const {
   class: className = '',
-  title = 'See Tomorrow\'s Opportunities Today',
+  title = "See Tomorrow's Opportunities Today",
   subtitle = 'AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead.',
   ctaText = 'Book a Demo',
   ctaHref = '/ralph-web/#',
@@ -48,7 +48,9 @@ const {
     )
   }
 
-  <div class="mx-auto max-w-7xl px-6 md:pt-section-base lg:flex lg:items-center lg:gap-x-20 lg:px-8 lg:pt-32">
+  <div
+    class="mx-auto max-w-7xl px-6 md:pt-section-base lg:flex lg:items-center lg:gap-x-20 lg:px-8 lg:pt-32"
+  >
     <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto lg:w-5/12">
       <h1
         class="text-hero font-bold leading-tight lg:mt-10 pb-2 text-pretty gradient-hero-title max-sm:text-center"
@@ -70,23 +72,27 @@ const {
       </div>
 
       <!-- Trust indicators -->
-      {showTrustIndicators && (
-        <div class="mt-8 flex items-center justify-center lg:justify-start space-x-8">
-          <div class="text-sm text-text-muted">
-            <span class="font-medium">Trusted by 50+ PE firms</span>
+      {
+        showTrustIndicators && (
+          <div class="mt-8 flex items-center justify-center lg:justify-start space-x-8">
+            <div class="text-sm text-text-muted">
+              <span class="font-medium">Trusted by 50+ PE firms</span>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <!-- Support features (hidden but available for testing) -->
-      {showSupportFeatures && (
-        <div class="sr-only" aria-label="Support features">
-          <h3>24/7 support</h3>
-          <h3>Money-back guarantee</h3>
-          <h3>Privacy protection</h3>
-          <h3>Secure checkout</h3>
-        </div>
-      )}
+      {
+        showSupportFeatures && (
+          <div class="sr-only" aria-label="Support features">
+            <h3>24/7 support</h3>
+            <h3>Money-back guarantee</h3>
+            <h3>Privacy protection</h3>
+            <h3>Secure checkout</h3>
+          </div>
+        )
+      }
     </div>
 
     <!-- Demo video placeholder -->

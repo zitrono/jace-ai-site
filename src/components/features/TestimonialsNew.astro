@@ -32,46 +32,52 @@ const {
   testimonials = [
     {
       id: 'blackstone-first-mover',
-      quote: 'This is a transformational technology. You have to be the first mover in your industry.',
+      quote:
+        'This is a transformational technology. You have to be the first mover in your industry.',
       author: 'Stephen Schwarzman',
       title: 'Chairman, CEO & Co-Founder',
-      company: 'Blackstone'
+      company: 'Blackstone',
     },
     {
       id: 'vista-ai-transformation',
-      quote: 'We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.',
+      quote:
+        'We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.',
       author: 'Robert F. Smith',
       title: 'Founder, Chairman & CEO',
-      company: 'Vista Equity Partners'
+      company: 'Vista Equity Partners',
     },
     {
       id: 'eqt-competitive-edge',
-      quote: 'Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry.',
+      quote:
+        'Being creative and embracing new tools such as Artificial intelligence will be vital for investors in an increasingly competitive private equity industry.',
       author: 'Christian Sinding',
       title: 'CEO',
-      company: 'EQT'
+      company: 'EQT',
     },
     {
       id: 'kkr-tectonic-shift',
-      quote: 'Artificial intelligence today, it\'s not a fad. It\'s really a tectonic shift in terms of general purpose technology evolution, similar to electrification or Internet.',
+      quote:
+        "Artificial intelligence today, it's not a fad. It's really a tectonic shift in terms of general purpose technology evolution, similar to electrification or Internet.",
       author: 'Waldemar Szlezak',
       title: 'Partner & Global Head of Digital Infrastructure',
-      company: 'KKR'
+      company: 'KKR',
     },
     {
       id: 'apollo-digital-value',
-      quote: 'A greater emphasis on generating value through digital capabilities in portfolio companies was necessary.',
+      quote:
+        'A greater emphasis on generating value through digital capabilities in portfolio companies was necessary.',
       author: 'David Sambur',
       title: 'Partner & Co-Head of Equity',
-      company: 'Apollo Global Management'
+      company: 'Apollo Global Management',
     },
     {
       id: 'cvc-opportunity-danger',
-      quote: 'There is a huge opportunity coming our way, but that means there is also real danger for those that are not prepared.',
+      quote:
+        'There is a huge opportunity coming our way, but that means there is also real danger for those that are not prepared.',
       author: 'Jean-Rémy Roussel',
       title: 'Managing Partner',
-      company: 'CVC Capital Partners'
-    }
+      company: 'CVC Capital Partners',
+    },
   ],
 } = Astro.props;
 
@@ -82,7 +88,11 @@ const gridClasses = {
 };
 ---
 
-<Section class={`py-section-lg sm:py-32 bg-primary ${className}`} as="section" aria-labelledby="testimonials-title">
+<Section
+  class={`py-section-lg sm:py-32 bg-primary ${className}`}
+  as="section"
+  aria-labelledby="testimonials-title"
+>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl sm:text-center">
       <h2 class="text-base font-semibold text-primary-yellow">
@@ -102,21 +112,30 @@ const gridClasses = {
       role="list"
       aria-label="Industry testimonials"
     >
-      {testimonials.slice(0, columns * 2).map((testimonial) => (
-        <Card class="group relative p-8 hover:scale-105 transition-transform duration-300" hover={false} role="listitem">
-          <div class="absolute top-6 left-6 text-4xl text-primary-yellow opacity-50" aria-hidden="true">"</div>
-          <blockquote class="relative mt-8">
-            <p class="text-lg leading-relaxed text-white font-medium">
-              {testimonial.quote}
-            </p>
-          </blockquote>
-          <figcaption class="mt-8 pt-6 border-t border-neutral-600">
-            <div class="text-xl font-bold text-primary-yellow">{testimonial.author}</div>
-            <div class="text-sm text-text-muted mt-1">{testimonial.title}</div>
-            <div class="text-sm text-text-muted">{testimonial.company}</div>
-          </figcaption>
-        </Card>
-      ))}
+      {
+        testimonials.slice(0, columns * 2).map((testimonial) => (
+          <Card
+            class="group relative p-8 hover:scale-105 transition-transform duration-300"
+            hover={false}
+            role="listitem"
+          >
+            <div
+              class="absolute top-6 left-6 text-4xl text-primary-yellow opacity-50"
+              aria-hidden="true"
+            >
+              "
+            </div>
+            <blockquote class="relative mt-8">
+              <p class="text-lg leading-relaxed text-white font-medium">{testimonial.quote}</p>
+            </blockquote>
+            <figcaption class="mt-8 pt-6 border-t border-neutral-600">
+              <div class="text-xl font-bold text-primary-yellow">{testimonial.author}</div>
+              <div class="text-sm text-text-muted mt-1">{testimonial.title}</div>
+              <div class="text-sm text-text-muted">{testimonial.company}</div>
+            </figcaption>
+          </Card>
+        ))
+      }
     </div>
   </div>
 </Section>

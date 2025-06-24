@@ -3,7 +3,7 @@
  * Initializes all managers and handles global functionality
  */
 
-import { onDOMReady, addEventListenerSafe } from './dom-utils';
+import { onDOMReady } from './dom-utils';
 import { MobileMenuManager } from './mobile-menu';
 import { FAQManager } from './faq-toggle';
 import { CookieConsentManager } from './cookie-consent';
@@ -36,7 +36,7 @@ class AppManager {
       // Set up additional functionality
       this.setupBookDemoButtons();
       this.preloadCriticalResources();
-      
+
       console.log('Ralph application initialized successfully');
     });
   }
@@ -48,7 +48,7 @@ class AppManager {
     // Use event delegation for better performance
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      
+
       if (
         target.tagName === 'BUTTON' &&
         (target.textContent?.includes('Book a Demo') || target.textContent?.includes('Book Demo'))
@@ -64,9 +64,11 @@ class AppManager {
    */
   private handleBookDemo(): void {
     const subject = encodeURIComponent('Ralph Demo Request');
-    const body = encodeURIComponent('Hello, I would like to schedule a demo of Ralph for my PE firm.');
+    const body = encodeURIComponent(
+      'Hello, I would like to schedule a demo of Ralph for my PE firm.'
+    );
     const mailtoUrl = `mailto:Konstantin@beneficious.com?subject=${subject}&body=${body}`;
-    
+
     window.location.href = mailtoUrl;
   }
 

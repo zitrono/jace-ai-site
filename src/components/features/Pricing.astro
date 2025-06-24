@@ -37,7 +37,7 @@ const {
   title = 'Enterprise-Ready Pricing',
   subtitle = 'Transparent pricing that scales with your portfolio',
   showBothPlans = true,
-  currency = 'EUR',
+  currency: _currency = 'EUR',
   plans = [
     {
       id: 'essential',
@@ -83,7 +83,12 @@ const {
 } = Astro.props;
 ---
 
-<Section id="pricing" class={`py-20 bg-primary ${className}`} as="section" aria-labelledby="pricing-title">
+<Section
+  id="pricing"
+  class={`py-20 bg-primary ${className}`}
+  as="section"
+  aria-labelledby="pricing-title"
+>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 id="pricing-title" class="heading-2">
@@ -95,60 +100,63 @@ const {
     </div>
 
     <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-4xl mx-auto">
-      {plans.filter((_, index) => showBothPlans || index === 1).map((plan) => (
-        <Card 
-          class={`relative ${plan.highlighted ? 'ring-2 ring-primary-yellow' : 'ring-1 ring-neutral-600'}`}
-          hover={false}
-        >
-          {plan.highlighted && (
-            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-              <span class="bg-primary-yellow text-text-inverted px-4 py-1 rounded-full text-sm font-medium">
-                Most Popular
-              </span>
-            </div>
-          )}
-          
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-white">{plan.name}</h3>
-            <p class="mt-4 text-text-muted">{plan.description}</p>
-            
-            <div class="mt-8">
-              <span class="text-5xl font-bold text-white">{plan.price}</span>
-              <span class="text-text-muted">{plan.period}</span>
-            </div>
-
-            <ul class="mt-8 space-y-4" role="list">
-              {plan.features.map((feature) => (
-                <li class="flex items-start" role="listitem">
-                  <Icon 
-                    name="check" 
-                    class={`${feature.included ? 'text-emerald-500' : 'text-text-muted'} flex-shrink-0 mt-0.5`}
-                    aria-label={feature.included ? 'Included' : 'Not included'}
-                  />
-                  <span class={`ml-3 ${feature.included ? 'text-text-primary' : 'text-text-muted line-through'}`}>
-                    {feature.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {plan.additionalInfo && (
-              <p class="mt-6 text-sm text-text-muted">{plan.additionalInfo}</p>
-            )}
-
-            <Button 
-              variant={plan.ctaVariant} 
-              class="mt-8 w-full" 
-              aria-label={`${plan.ctaText} for ${plan.name} plan`}
+      {
+        plans
+          .filter((_, index) => showBothPlans || index === 1)
+          .map((plan) => (
+            <Card
+              class={`relative ${plan.highlighted ? 'ring-2 ring-primary-yellow' : 'ring-1 ring-neutral-600'}`}
+              hover={false}
             >
-              {plan.ctaText}
-            </Button>
-          </div>
-        </Card>
-      ))}
+              {plan.highlighted && (
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span class="bg-primary-yellow text-text-inverted px-4 py-1 rounded-full text-sm font-medium">
+                    Most Popular
+                  </span>
+                </div>
+              )}
 
-    </div>
+              <div class="p-6">
+                <h3 class="text-2xl font-bold text-white">{plan.name}</h3>
+                <p class="mt-4 text-text-muted">{plan.description}</p>
 
+                <div class="mt-8">
+                  <span class="text-5xl font-bold text-white">{plan.price}</span>
+                  <span class="text-text-muted">{plan.period}</span>
+                </div>
+
+                <ul class="mt-8 space-y-4" role="list">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-start" role="listitem">
+                      <Icon
+                        name="check"
+                        class={`${feature.included ? 'text-emerald-500' : 'text-text-muted'} flex-shrink-0 mt-0.5`}
+                        aria-label={feature.included ? 'Included' : 'Not included'}
+                      />
+                      <span
+                        class={`ml-3 ${feature.included ? 'text-text-primary' : 'text-text-muted line-through'}`}
+                      >
+                        {feature.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {plan.additionalInfo && (
+                  <p class="mt-6 text-sm text-text-muted">{plan.additionalInfo}</p>
+                )}
+
+                <Button
+                  variant={plan.ctaVariant}
+                  class="mt-8 w-full"
+                  aria-label={`${plan.ctaText} for ${plan.name} plan`}
+                >
+                  {plan.ctaText}
+                </Button>
+              </div>
+            </Card>
+          ))
+      }
     </div>
 
     <!-- Support Features (hidden but available for testing) -->

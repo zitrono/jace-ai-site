@@ -19,7 +19,9 @@ type ElementWithClasses = HTMLElement & {
  * Mobile menu functionality
  */
 function initializeMobileMenu(): void {
-  const mobileMenuButton = document.getElementById('mobile-menu-button') as HTMLButtonElement | null;
+  const mobileMenuButton = document.getElementById(
+    'mobile-menu-button'
+  ) as HTMLButtonElement | null;
   const mobileMenuClose = document.getElementById('mobile-menu-close') as HTMLButtonElement | null;
   const mobileMenu = document.getElementById('mobile-menu') as ElementWithClasses | null;
 
@@ -84,7 +86,7 @@ type ConsentValue = 'accepted' | 'rejected' | 'settings';
 
 function showCookieBanner(): void {
   const banner = document.getElementById('cookie-banner') as HTMLElement | null;
-  
+
   if (banner && !localStorage.getItem('cookieConsent')) {
     // Show banner after a short delay
     setTimeout(() => {
@@ -96,7 +98,7 @@ function showCookieBanner(): void {
 
 function hideCookieBanner(): void {
   const banner = document.getElementById('cookie-banner') as HTMLElement | null;
-  
+
   if (banner) {
     banner.style.opacity = '0';
     banner.style.transform = 'translateY(100vh)';

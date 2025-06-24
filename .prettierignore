@@ -33,3 +33,7 @@ temp/
 # Coverage
 coverage/
 .nyc_output/
+
+# Markdown files with complex code snippets
+PERFORMANCE_OPTIMIZATIONS.md
+pom-css-rules.md

@@ -18,7 +18,7 @@ interface Props extends BaseComponentProps {
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-const { 
+const {
   variant = 'default',
   legacyVariant,
   hover = false,
@@ -97,13 +97,18 @@ const classes = [
   .join(' ');
 
 // Data attributes
-const dataAttributes = data ? Object.entries(data).reduce((acc, [key, value]) => {
-  acc[`data-${key}`] = value;
-  return acc;
-}, {} as Record<string, string>) : {};
+const dataAttributes = data
+  ? Object.entries(data).reduce(
+      (acc, [key, value]) => {
+        acc[`data-${key}`] = value;
+        return acc;
+      },
+      {} as Record<string, string>
+    )
+  : {};
 ---
 
-<div 
+<div
   class={classes}
   style={style}
   tabindex={clickable ? 0 : undefined}

@@ -1,1 +1,0 @@
-import"./hoisted.BossScMO.js";window.location.href="/ralph-web/#product";

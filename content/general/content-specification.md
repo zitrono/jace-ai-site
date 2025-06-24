@@ -5,36 +5,42 @@
 **Site URL**: https://zitrono.github.io/ralph-web/
 
 ## Purpose
+
 This document contains the definitive, approved content for the Ralph website. All content must be implemented exactly as specified. Changes require Q&A approval process.
 
 ## Navigation Structure
 
 ### Primary Navigation [Updated: 2025-01-23 via Q83]
+
 1. **Product** (7 chars) - Scroll to Features/Product section on homepage
-2. **Pricing** (7 chars) - Scroll to Pricing section on homepage  
+2. **Pricing** (7 chars) - Scroll to Pricing section on homepage
 3. **Learn** (5 chars) - Separate page maintained
 4. **Log In** (6 chars) - Stub functionality
 5. **[Book a Demo]** (CTA button)
 
 ### Footer Links
+
 - About
 - Privacy Policy
-- Terms of Service  
+- Terms of Service
 - Contact
 
 ## Brand Messaging Framework
 
 ### Core Positioning
+
 - **One-liner**: "See Around Corners in Every Deal"
 - **Tagline**: "Autonomous AI agents for predictive PE intelligence"
 - **Category**: Predictive PE Intelligence
 
 ### Value Propositions
+
 - **Primary**: 30-45 day predictive advantage
-- **Secondary**: 85% prediction accuracy  
+- **Secondary**: 85% prediction accuracy
 - **Tertiary**: 70% time savings
 
 ### Elevator Pitches
+
 - **Main**: "Ralph unleashes autonomous AI agents that continuously analyze your portfolio data at superhuman scale and speed, delivering predictive insights that help PE firms identify opportunities and risks 30-45 days before competitors."
 - **About Page**: "Ralph's multi-agent teams work like your best analysts - but at 1000x the speed and scale"
 - **Product Page**: "Meet the AI agents that transform how PE firms see opportunities"
@@ -43,6 +49,7 @@ This document contains the definitive, approved content for the Ralph website. A
 ## Homepage Content [Updated: 2025-01-23 via Q83]
 
 **Single-Page Experience Structure**:
+
 1. Hero Section
 2. Social Proof Section ("The AI Adoption Paradox")
 3. Why Ralph Section (Competitive Differentiation)
@@ -53,11 +60,13 @@ This document contains the definitive, approved content for the Ralph website. A
 8. Progressive CTAs throughout (Newsletter → Guide → Demo)
 
 ### Hero Section
+
 - **Headline**: "See Tomorrow's Opportunities Today" [5 words ✓] [Updated: 2025-01-23 via Q74]
 - **Subtitle**: "AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead." [15 words ✓] [Updated: 2025-01-23 via Q75]
 - **CTA**: "Book a Demo" [3 words ✓]
 
 ### Social Proof Section: "The AI Adoption Paradox"
+
 - **Statistics Display**:
   - "82% of PE firms have adopted AI"
   - "Only 5% have scaled successfully"
@@ -67,6 +76,7 @@ This document contains the definitive, approved content for the Ralph website. A
 - **Source Attribution**: "Sources: Deloitte, BCG, Industry Reports" [small text]
 
 ### Why Ralph Section [Updated: 2025-01-23 via Q78]
+
 - **Title**: "Why Ralph Works Where Others Fail"
 - **Subtitle**: "While competitors force AI to guess at messy data, Ralph first makes every data source intelligent and agent-compatible."
 - **Visual Concept**: Split-screen comparison showing traditional AI vs Ralph's intelligent data infrastructure
@@ -78,6 +88,7 @@ This document contains the definitive, approved content for the Ralph website. A
 **Integration**: Combines six core features with Product page 4-step process
 
 #### Six Core Features
+
 1. **Deal Intelligence**
    - "AI agents analyze deal data from every angle, surfacing insights and patterns human teams might miss during evaluation." [18 words ✓]
 
@@ -99,18 +110,22 @@ This document contains the definitive, approved content for the Ralph website. A
 #### Four-Step Process (Integrated from Product Page)
 
 **1. Agent Preparation**
+
 - **Headline**: "Your data sources become intelligent feeds for specialized AI teams"
 - **Explanation**: "Connect your data rooms, CRM, and portfolio reports - Ralph handles any format. Specialized agents process and structure this information, creating a unified intelligence layer. Your messy data becomes a strategic asset ready for analysis."
 
 **2. On-Demand Agents**
+
 - **Headline**: "Expert agents ready to analyze any deal or portfolio question"
 - **Explanation**: "Ask any question about your deals or portfolio companies. Expert agents instantly analyze relevant data, cross-reference information, and deliver comprehensive insights. Like having your best analysts available 24/7, but 1000x faster."
 
 **3. Autonomous Agents**
+
 - **Headline**: "Tireless agents work round-the-clock seeking opportunities"
 - **Explanation**: "While you focus on strategy, autonomous agents monitor your entire portfolio continuously. They track performance changes, identify emerging risks, and spot opportunities across all your data sources. You're alerted only when something needs your attention."
 
 **4. Strategic Insights**
+
 - **Headline**: "Collective agent intelligence delivers tomorrow's insights today"
 - **Explanation**: "Receive actionable intelligence that helps you see around corners. Agents synthesize patterns across deals, predict market movements, and recommend strategic options. Make decisions with confidence, knowing you have insights competitors won't see for weeks."
 
@@ -137,6 +152,7 @@ This document contains the definitive, approved content for the Ralph website. A
 ### Pricing Structure
 
 #### Essential - €150,000/year
+
 - 3 data sources included
 - Up to 5 users
 - Up to 20 portfolio companies
@@ -147,6 +163,7 @@ This document contains the definitive, approved content for the Ralph website. A
 - Additional data sources: €25,000 each
 
 #### Enterprise - €250,000/year
+
 - 10 data sources included
 - Unlimited users
 - Unlimited portfolio companies
@@ -161,6 +178,7 @@ This document contains the definitive, approved content for the Ralph website. A
 **Section Anchor**: `#pricing` for navigation scroll target
 
 ### FAQ Section
+
 **Title**: "Frequently asked questions"
 **Subtitle**: "Everything you need to know about Ralph's security and deployment"
 
@@ -206,6 +224,7 @@ Enterprise customers get a dedicated customer success manager, 24/7 technical su
 Absolutely. Many clients start with 3-5 portfolio companies to test and refine the approach. This lets you validate value before full deployment and helps your team learn the system. You can expand to additional companies quarterly as you see results.
 
 ## ~~Product Page Content~~ [Deprecated: 2025-01-23 via Q83]
+
 **Status**: Content moved to Features/Product section on homepage
 **Redirect**: Product page should redirect to homepage#product anchor
 
@@ -215,6 +234,7 @@ Absolutely. Many clients start with 3-5 portfolio companies to test and refine t
 **Subtitle**: "Practical guides and insights for PE professionals leveraging AI"
 
 ### Newsletter Section
+
 - **Headline**: "Get weekly AI insights for PE"
 - **Subtext**: "Join PE leaders getting practical AI strategies delivered to their inbox every week."
 - **Form**: Email input + "Subscribe" button
@@ -231,60 +251,72 @@ Absolutely. Many clients start with 3-5 portfolio companies to test and refine t
    - Learn how autonomous agents can scan thousands of data points to identify emerging risks before they impact performance. Real-world examples from portfolio monitoring.
 
 ### Missing Article (Specified)
+
 4. **"From Data Chaos to First Insight: A 48-Hour Guide"**
    - **Status**: Missing from current implementation
    - **Requirement**: Needs to be developed and published
 
 ### Page CTA Section
+
 - **Headline**: "Ready to see Ralph in action?"
 - **Button**: "Book a Demo"
 
 ## About Page Content
 
 ### Company Mission
+
 "Ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot opportunities and risks weeks before others, making better decisions inevitable."
 
 ### Founder: Konstantin Andreyev
+
 **Positioning**: "Entrepreneur and AI investor focused on making AI genuinely useful for professionals. Ralph represents years of research into how AI can augment human decision-making in high-stakes environments."
 
 ### Building the Team
+
 We're assembling a world-class team to revolutionize private equity. Current openings:
+
 - VP of Sales (B2B enterprise SaaS)
 - Head of Customer Success
 - Lead AI Engineer
 - VP of Product
 
 ### Advisors & Partners
+
 - **Title**: "Advisors & Partners"
 - **Content**: "We're building relationships with leading PE firms and industry experts. Announcements coming soon."
 - **Visual**: Subtle placeholder boxes or "?" silhouettes
 
 ### Contact
+
 - **Location**: Berlin, Germany
 - **Email**: Konstantin@beneficious.com
 
 ## Technical Implementation Notes
 
 ### Hidden Sections
+
 - Video Section (hidden)
 - Company Logos Section (hidden)
 - Hero Trust Indicators (hidden)
 - Support Features Row (hidden)
 
 ### Current Status
+
 - Newsletter signup: Only on Learn page
 - Login functionality: Stub showing "Invalid email or password. Ralph is currently in private beta."
 - Missing 4th Learn article needs development
 
 ### Footer Content
+
 - **Left**: © 2025 Beneficious. All rights reserved.
 - **Right**: Privacy Policy | Terms of Service | Contact
 
 ## Content Optimization Priorities
 
 Based on agent analysis reports, highest priority improvement areas:
+
 1. **Hero messaging** - ✅ Completed via Q74-Q75
-2. **Competitive differentiation** - ✅ Completed via Q76-Q78  
+2. **Competitive differentiation** - ✅ Completed via Q76-Q78
 3. **~~Collective learning positioning~~** - ❌ Removed via Q79 (no current capability)
 4. **FAQ expansion** - ✅ Completed via Q80-Q81 (added implementation/process questions)
 5. **Conversion paths** - ✅ Completed via Q82 (progressive engagement ladder)
@@ -292,22 +324,27 @@ Based on agent analysis reports, highest priority improvement areas:
 ## Progressive Conversion Strategy [Updated: 2025-01-23 via Q82]
 
 ### Conversion Ladder Implementation
+
 **Level 1 - Newsletter Signup** (Lowest friction)
+
 - **CTA**: "Get weekly AI insights for PE"
 - **Placement**: Learn page, blog articles, footer emphasis
 - **Target**: Information seekers, early-stage researchers
 
-**Level 2 - Gated Content** (Qualified interest)  
+**Level 2 - Gated Content** (Qualified interest)
+
 - **CTA**: "Download: The PE Executive's Guide to AI Implementation"
 - **Placement**: Homepage secondary CTA, product page, after FAQ section
 - **Target**: Serious evaluators ready for detailed information
 
 **Level 3 - Demo Booking** (Sales-ready)
+
 - **CTA**: "Book a Demo"
 - **Placement**: Hero primary CTA, pricing page, after competitive section
 - **Target**: Decision-makers ready for sales conversation
 
 ### CTA Placement Strategy
+
 - **Homepage Hero**: Primary "Book a Demo" + Secondary "Download Guide"
 - **Deep Pages**: Match CTA intensity to page depth and content engagement
 - **Blog/Learn**: Newsletter signup emphasis with demo as secondary option

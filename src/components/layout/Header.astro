@@ -186,32 +186,21 @@ const headerClasses = [
   {/* Mobile Menu Overlay - Performance optimized with client:media */}
   <div
     id="mobile-menu"
-    class="hidden fixed inset-0 z-50 lg:hidden"
+    class="hidden fixed inset-0 z-50 lg:hidden bg-transparent"
     role="dialog"
     aria-modal="true"
     aria-labelledby="mobile-menu-title"
     data-mobile-menu-overlay
   >
     {/* Backdrop */}
-    <div class="fixed inset-0 bg-black/50" aria-hidden="true"></div>
+    <div class="fixed inset-0 bg-neutral-700 z-40" aria-hidden="true"></div>
 
     {/* Menu Panel */}
     <div
-      class="fixed right-0 top-0 bottom-0 w-full bg-neutral-700 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out"
+      class="fixed right-0 top-0 bottom-0 w-full h-screen bg-neutral-700 bg-opacity-100 p-6 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out rounded-none z-50"
       data-mobile-menu-panel
     >
-      <div class="flex items-center justify-between mb-8">
-        {
-          showLogo && (
-            <a
-              href={logoHref}
-              class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-            >
-              <span class="sr-only">{logoText}</span>
-              <span class="text-text-primary font-bold text-2xl">{logoText}</span>
-            </a>
-          )
-        }
+      <div class="flex items-center justify-end mb-0">
         <button
           id="mobile-menu-close"
           type="button"
@@ -237,7 +226,7 @@ const headerClasses = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="nav-link text-lg text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium py-3 px-2 rounded-base min-h-[44px] flex items-center focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+              class="mobile-nav-link text-[18px] text-text-primary hover:text-primary-yellow transition-colors duration-200 font-normal p-0 rounded-none min-h-0 block leading-10 focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
               {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
             >
               {link.text}
@@ -247,18 +236,18 @@ const headerClasses = [
 
         {
           showCta && (
-            <div class="pt-6 border-t border-neutral-600 flex flex-row gap-4">
+            <div class="mt-6 flex flex-row gap-3">
               <Button
                 variant="secondary"
                 id="mobile-login-button"
-                class="flex-1 text-center min-h-[44px] focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+                class="flex-1 text-center h-10 min-h-0 text-base focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
               >
                 {loginText}
               </Button>
               <Button
                 variant="primary"
                 size="lg"
-                class="flex-1 min-h-[44px] focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+                class="flex-1 h-10 min-h-0 text-base focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
               >
                 {ctaText}
               </Button>

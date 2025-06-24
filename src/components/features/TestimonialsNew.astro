@@ -10,6 +10,7 @@ interface Testimonial {
   title: string;
   company: string;
   avatar?: string;
+  logo?: string;
 }
 
 export interface Props {
@@ -37,6 +38,7 @@ const {
       author: 'Stephen Schwarzman',
       title: 'Chairman, CEO & Co-Founder',
       company: 'Blackstone',
+      logo: '/ralph-web/logos/blackstone-logo.svg',
     },
     {
       id: 'vista-ai-transformation',
@@ -45,6 +47,7 @@ const {
       author: 'Robert F. Smith',
       title: 'Founder, Chairman & CEO',
       company: 'Vista Equity Partners',
+      logo: '/ralph-web/logos/vista-logo.svg',
     },
     {
       id: 'eqt-competitive-edge',
@@ -53,6 +56,7 @@ const {
       author: 'Christian Sinding',
       title: 'CEO',
       company: 'EQT',
+      logo: '/ralph-web/logos/eqt-logo.svg',
     },
     {
       id: 'kkr-tectonic-shift',
@@ -61,6 +65,7 @@ const {
       author: 'Waldemar Szlezak',
       title: 'Partner & Global Head of Digital Infrastructure',
       company: 'KKR',
+      logo: '/ralph-web/logos/kkr.png',
     },
     {
       id: 'apollo-digital-value',
@@ -69,6 +74,7 @@ const {
       author: 'David Sambur',
       title: 'Partner & Co-Head of Equity',
       company: 'Apollo Global Management',
+      logo: '/ralph-web/logos/apollo-global.svg',
     },
     {
       id: 'cvc-opportunity-danger',
@@ -77,6 +83,7 @@ const {
       author: 'Jean-Rémy Roussel',
       title: 'Managing Partner',
       company: 'CVC Capital Partners',
+      logo: '/ralph-web/logos/cvc-capital.svg',
     },
   ],
 } = Astro.props;
@@ -115,23 +122,41 @@ const gridClasses = {
       {
         testimonials.slice(0, columns * 2).map((testimonial) => (
           <Card
-            class="group relative p-8 hover:scale-105 transition-transform duration-300"
+            class="group relative p-8 hover:scale-105 transition-all duration-300 bg-gradient-to-b from-neutral-700/50 to-neutral-800/50 border border-neutral-600/30 hover:border-primary-yellow/30"
             hover={false}
             role="listitem"
           >
+            {/* Logo positioned at top right */}
+            {testimonial.logo && _showLogos && (
+              <div class="absolute top-6 right-6 w-20 h-10 flex items-center justify-end">
+                <img
+                  src={testimonial.logo}
+                  alt={`${testimonial.company} logo`}
+                  class="max-w-full max-h-full object-contain opacity-60 group-hover:opacity-80 transition-opacity duration-300 filter brightness-0 invert"
+                />
+              </div>
+            )}
+
+            {/* Quote mark */}
             <div
               class="absolute top-6 left-6 text-4xl text-primary-yellow opacity-50"
               aria-hidden="true"
             >
               "
             </div>
-            <blockquote class="relative mt-8">
+
+            {/* Quote content with adjusted spacing for logo */}
+            <blockquote class="relative mt-12 mb-8">
               <p class="text-lg leading-relaxed text-white font-medium">{testimonial.quote}</p>
             </blockquote>
-            <figcaption class="mt-8 pt-6 border-t border-neutral-600">
-              <div class="text-xl font-bold text-primary-yellow">{testimonial.author}</div>
-              <div class="text-sm text-text-muted mt-1">{testimonial.title}</div>
-              <div class="text-sm text-text-muted">{testimonial.company}</div>
+
+            {/* Author info */}
+            <figcaption class="pt-6 border-t border-neutral-600/50">
+              <div class="space-y-1">
+                <div class="text-lg font-bold text-primary-yellow">{testimonial.author}</div>
+                <div class="text-sm text-text-muted">{testimonial.title}</div>
+                <div class="text-sm text-text-muted font-medium">{testimonial.company}</div>
+              </div>
             </figcaption>
           </Card>
         ))

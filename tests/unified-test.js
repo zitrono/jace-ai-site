@@ -214,8 +214,19 @@ async function runComprehensivePropertyTests(pom, page, target) {
         }
       }
       
-      if (name === 'footer' && properties.borderWidth && !properties.borderWidth.match(/^\d+px$/)) {
+      if (name === 'footer' && properties.borderWidth && !properties.borderWidth.match(/^(\d+px\s*)+$/)) {
         propertyErrors.push(`${name}.borderWidth: Invalid size value "${properties.borderWidth}"`);
+      }
+      
+      // Check button font sizes
+      if (name === 'ctaButton' && pom.expectedStyles.typography?.button?.primary) {
+        const expected = pom.expectedStyles.typography.button.primary;
+        if (expected.fontSize && !properties.fontSize.match(expected.fontSize)) {
+          propertyErrors.push(`${name}.fontSize: Expected ${expected.fontSize}, got "${properties.fontSize}"`);
+        }
+        if (expected.fontWeight && !properties.fontWeight.match(expected.fontWeight)) {
+          propertyErrors.push(`${name}.fontWeight: Expected ${expected.fontWeight}, got "${properties.fontWeight}"`);
+        }
       }
       
     } catch (error) {

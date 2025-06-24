@@ -4,19 +4,19 @@
  */
 
 import { onDOMReady } from './dom-utils';
-import { MobileMenuManager } from './mobile-menu';
+// import { MobileMenuManager } from './mobile-menu';
 import { FAQManager } from './faq-toggle';
 import { CookieConsentManager } from './cookie-consent';
 import { ModalManager } from './modal-manager';
 
 class AppManager {
-  private mobileMenu: MobileMenuManager;
+  // private mobileMenu: MobileMenuManager;
   private faqManager: FAQManager;
   private cookieConsent: CookieConsentManager;
   private modalManager: ModalManager;
 
   constructor() {
-    this.mobileMenu = new MobileMenuManager();
+    // this.mobileMenu = new MobileMenuManager();
     this.faqManager = new FAQManager();
     this.cookieConsent = new CookieConsentManager();
     this.modalManager = new ModalManager();
@@ -28,7 +28,7 @@ class AppManager {
   public init(): void {
     onDOMReady(() => {
       // Initialize all managers
-      this.mobileMenu.init();
+      // this.mobileMenu.init(); // Using Header.astro's implementation instead
       this.faqManager.init();
       this.cookieConsent.init();
       this.modalManager.init();

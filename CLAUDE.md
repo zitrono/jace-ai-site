@@ -74,6 +74,37 @@ src/components/
 - ❌ Add dependencies without performance impact analysis
 - ❌ Skip accessibility requirements (ARIA, focus management)
 - ❌ Use `any` types or skip TypeScript validation
+- ❌ Use `!important` or override CSS cascade without justification
+- ❌ Create conflicting class names that break CSS specificity
+
+### 🎨 CSS Cascade Integrity (CRITICAL)
+
+**CSS Cascade Management is Sacred** - Maintain clean, predictable CSS specificity:
+
+#### CSS Best Practices:
+
+1. **Specificity Hierarchy**: Use semantic class names with clear specificity
+   - Base classes: `.nav-link` (general styling)
+   - Variant classes: `.mobile-nav-link` (specific overrides)
+   - State classes: `.is-active`, `.is-open` (temporary states)
+
+2. **Avoid Cascade Conflicts**:
+   - Never use `!important` except for utility overrides
+   - Create specific classes rather than nested selectors
+   - Use design tokens for all values (colors, spacing, etc.)
+   - Document any necessary overrides with comments
+
+3. **Class Naming Strategy**:
+   - Component-specific: `.component-name`
+   - Variant-specific: `.component-name--variant`
+   - Context-specific: `.context-component-name`
+   - Example: `.nav-link` → `.mobile-nav-link` → `.mobile-nav-link--active`
+
+4. **Style Organization**:
+   - Global styles in `Layout.astro` only
+   - Component styles via Tailwind utilities
+   - Override styles via specific class names
+   - No inline styles or style attributes
 
 ### 🔧 Development Workflow (REQUIRED)
 
@@ -158,11 +189,21 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 
 ### Critical Requirements
 
+- **Dev Server**: Tests run against `http://localhost:4321/ralph-web/` - ensure dev server is running
 - **Testing**: Run `cd tests && node unified-test.js ralph` before/after any changes
 - **Success Criteria**: 189+ elements pass, 3,500+ CSS properties pass
 - **Mobile Header**: Exactly 64px height (immutable)
 - **Selectors**: Hero CTA: `main button.btn-primary.btn-lg`, Header CTA: `header button.btn-primary`
 - **Colors**: Use exact RGB values from POM (see technical-constraints.md)
+
+### Development Server Setup
+
+The POM tests run against the local development server for immediate feedback:
+
+- **Start dev server**: `npm run dev` (must run on port 4321)
+- **If port 4321 is occupied**: Kill the process with `lsof -ti:4321 | xargs kill -9` then restart
+- **Test URL**: `http://localhost:4321/ralph-web/`
+- **Changes reflect immediately**: No build/deploy needed for testing
 
 ### POM CSS Validation Rules
 

@@ -466,6 +466,12 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         }
       }
 
+      /* Mobile menu CTA button - ensures proper font size and no wrapping */
+      .mobile-cta-button {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+      }
+
       /* FAQ transition styles for smooth expand/collapse */
       .faq-content {
         transition:

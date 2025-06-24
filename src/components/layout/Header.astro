@@ -253,10 +253,11 @@ const headerClasses = [
                 {/* CTA Button - matching Jace's exact styling */}
                 <button
                   type="button"
-                  class="flex-1 h-10 text-base bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
+                  class="flex-1 h-10 bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800 mobile-cta-button"
                   style="background-color: rgb(255, 220, 97); color: rgb(40, 40, 40); border-radius: 8px;"
                 >
-                  Get Started for Free
+                  <span class="hidden min-[360px]:inline">{ctaText}</span>
+                  <span class="inline min-[360px]:hidden">Book Demo</span>
                 </button>
               </div>
             </>

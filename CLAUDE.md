@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Never change pom without my approval
 - The project is now named "ralph-web" and publishes to https://zitrono.github.io/ralph-web/
 - Package name has been updated from "jace-ai-astro" to "ralph-web"
-- Jace.ai local archive: http://localhost:8081/ (static copy with working hamburger menu and FAQ functionality)
+- **Reference site (Jace)**: http://localhost:8081/ - Static archive for visual parity comparison
+  - Required for POM testing and visual validation
 
 ## CRITICAL: REFACTORING STANDARDS (2025-06-23)
 
@@ -195,6 +196,7 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 - **Mobile Header**: Exactly 64px height (immutable)
 - **Selectors**: Hero CTA: `main button.btn-primary.btn-lg`, Header CTA: `header button.btn-primary`
 - **Colors**: Use exact RGB values from POM (see technical-constraints.md)
+- **CONTENT POLICY**: POM validates ONLY UI/visual properties (CSS, layout, styling). POM MUST NOT validate text content, copy, or language-specific content. Focus on visual parity, not textual parity.
 
 ### Development Server Setup
 
@@ -213,6 +215,25 @@ The POM tests run against the local development server for immediate feedback:
 - **Tolerance-Based Validation**: Typography ±20px, Colors ±10 RGB, Layout ±16px
 - **NO CSS Injection**: Never use `!important`, style injection, or cascade manipulation
 - **Reference-First**: Always use Jace as immutable reference for comparison
+
+### Enhanced POM Process (PROVEN EFFECTIVE 2025-06-24)
+
+**Multi-Layer Element Detection**: When validating complex UI components (e.g., mobile menus):
+- Identify ALL layers: overlays, backdrops, panels, content containers
+- Measure the correct element: panels for width, overlays for transparency
+- Reference actual measurements, not assumptions
+- Example: Jace mobile menu has transparent overlay + 320px max-width panel
+
+**Visual Property Validation**: Beyond structure, validate visual properties:
+- Background colors must match exactly (not just "dark")
+- Layout patterns (horizontal vs vertical) must be verified
+- Responsive behavior: max-width constraints with full-width fallbacks
+
+**Root Cause Analysis**: When POM tests pass but visual parity fails:
+1. Check if measuring correct elements (panel vs backdrop)
+2. Verify selector specificity matches implementation
+3. Test at multiple viewports for responsive edge cases
+4. Use screenshots for visual regression, not just property validation
 
 ### Visual Verification
 

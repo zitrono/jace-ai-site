@@ -75,12 +75,16 @@ This document contains the definitive, approved content for the Ralph website. A
 - **Supporting Line**: "Private beta launching Q1 2025 • Enterprise-ready infrastructure"
 - **Source Attribution**: "Sources: Deloitte, BCG, Industry Reports" [small text]
 
-### Why Ralph Section [Updated: 2025-01-23 via Q78]
+### Why Ralph Section [Updated: 2025-01-23 via Q78, Q85]
 
 - **Title**: "Why Ralph Works Where Others Fail"
 - **Subtitle**: "While competitors force AI to guess at messy data, Ralph first makes every data source intelligent and agent-compatible."
 - **Visual Concept**: Split-screen comparison showing traditional AI vs Ralph's intelligent data infrastructure
 - **Position**: Between Social Proof and Features sections
+- **Data Coverage Indicator**: [Added: 2025-01-25 via Q85]
+  - Text: "Complete PE data intelligence: 4 deal stages × 5 security levels = 100% coverage"
+  - Position: Below Ralph's box in the comparison
+  - Style: Small text with accent color highlights for numbers
 
 ### Features/Product Section [Updated: 2025-01-23 via Q83]
 
@@ -255,6 +259,19 @@ Absolutely. Many clients start with 3-5 portfolio companies to test and refine t
 4. **"From Data Chaos to First Insight: A 48-Hour Guide"**
    - **Status**: Missing from current implementation
    - **Requirement**: Needs to be developed and published
+
+### New Article [Added: 2025-01-25 via Q85]
+
+5. **"The Complete PE Data Landscape: What Ralph Sees That Others Miss"**
+   - **Purpose**: Showcase Ralph's comprehensive data coverage across all PE stages and security levels
+   - **Content**: Interactive presentation of the PE Data Source Classification Matrix
+   - **Key Sections**:
+     - Overview of the 4x5 data matrix (4 deal stages × 5 security levels)
+     - Deep dive into each stage with specific data sources
+     - Security level explanations with real-world examples
+     - How Ralph transforms each data type into predictive intelligence
+     - Case studies showing value from different data combinations
+   - **CTA**: "See how Ralph handles your specific data sources - Book a Demo"
 
 ### Page CTA Section
 

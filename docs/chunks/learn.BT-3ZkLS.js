@@ -1,4 +1,4 @@
-import{a as createComponent,d as renderComponent,r as renderTemplate,m as maybeRenderHead}from"./vendor-astro.MOr6Lc0B.js";import"kleur/colors";import"html-escaper";import{$ as $$Layout}from"./Layout.t0UCtgxf.js";import{a as $$Header,b as $$Footer}from"./components.aNg6J2Ft.js";import{$ as $$Button}from"./primitives.CpQc7f5s.js";const $$Learn=createComponent(((e,t,r)=>renderTemplate`${renderComponent(e,"Layout",$$Layout,{title:"Learn | Ralph - AI-Native Private Equity Platform"},{default:e=>renderTemplate` ${maybeRenderHead()}<div class="min-h-screen"> ${renderComponent(e,"Header",$$Header,{})} <main id="main" role="main"> <!-- Hero Section --> <section class="relative pt-24 pb-12 bg-primary"> <div class="mx-auto max-w-7xl px-6 lg:px-8"> <div class="mx-auto max-w-4xl text-center"> <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">Learn</h1> <p class="mt-6 text-xl text-gray-300">
+import{a as createComponent,d as renderComponent,r as renderTemplate,m as maybeRenderHead}from"./vendor-astro.Py5qEdIi.js";import"kleur/colors";import"html-escaper";import{$ as $$Layout}from"./Layout.EJJfF_wx.js";import{a as $$Header,b as $$Footer}from"./components.DnGME_Om.js";import{$ as $$Button}from"./primitives.EoTFzAW3.js";const $$Learn=createComponent(((e,t,a)=>renderTemplate`${renderComponent(e,"Layout",$$Layout,{title:"Learn | Ralph - AI-Native Private Equity Platform"},{default:e=>renderTemplate` ${maybeRenderHead()}<div class="min-h-screen"> ${renderComponent(e,"Header",$$Header,{})} <main id="main" role="main"> <!-- Hero Section --> <section class="relative pt-24 pb-12 bg-primary"> <div class="mx-auto max-w-7xl px-6 lg:px-8"> <div class="mx-auto max-w-4xl text-center"> <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">Learn</h1> <p class="mt-6 text-xl text-gray-300">
 Practical guides and insights for PE professionals leveraging AI
 </p> </div> </div> </section> <!-- Newsletter CTA --> <section class="py-12 bg-primary"> <div class="mx-auto max-w-4xl px-6 lg:px-8"> <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-8 text-center"> <h2 class="text-2xl font-bold text-white mb-4">Get weekly AI insights for PE</h2> <p class="text-white/90 mb-6">
 Join PE leaders getting practical AI strategies delivered to their inbox every week.
@@ -23,6 +23,12 @@ Finding Hidden Risks in 30 Minutes with AI Agents
 Learn how autonomous agents can scan thousands of data points to identify emerging
                 risks before they impact performance. Real-world examples from portfolio monitoring.
 </p> <a href="/ralph-web/learn/finding-hidden-risks-30-minutes" class="text-yellow-400 font-semibold hover:text-yellow-300">
+Read more →
+</a> </article> <!-- Article 4: PE Data Landscape --> <article class="bg-card rounded-lg p-8 hover:bg-secondary transition-colors"> <h3 class="text-2xl font-bold text-white mb-4">
+The Complete PE Data Landscape: What Ralph Sees That Others Miss
+</h3> <p class="text-gray-300 mb-6">
+Explore the comprehensive 4×5 matrix of PE data sources across all deal stages and security levels. Understand how Ralph transforms 100% of your data into predictive intelligence.
+</p> <a href="/ralph-web/learn/pe-data-landscape" class="text-yellow-400 font-semibold hover:text-yellow-300">
 Read more →
 </a> </article> </div> </div> </section> <!-- CTA Section --> <section class="py-20 bg-primary"> <div class="mx-auto max-w-7xl px-6 lg:px-8"> <div class="mx-auto max-w-2xl text-center"> <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-8">
 Ready to see Ralph in action?

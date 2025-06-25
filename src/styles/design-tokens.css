@@ -111,9 +111,7 @@
   background-color: var(--color-primary-yellow);
 }
 
-.bg-neutral-700 {
-  background-color: var(--color-neutral-700);
-}
+/* bg-neutral-700 handled by Tailwind config */
 
 .text-primary {
   color: var(--color-text-primary);

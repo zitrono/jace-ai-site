@@ -239,14 +239,14 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         --pom-mobile-touch-target: 44px;
       }
 
-      /* iOS horizontal scroll prevention */
+      /* iOS horizontal scroll prevention - moved to specific containers */
       html {
-        overflow-x: hidden;
+        /* overflow-x removed to allow sticky positioning */
         touch-action: pan-y pinch-zoom;
       }
       
       body {
-        overflow-x: hidden;
+        /* overflow-x removed to allow sticky positioning */
         touch-action: pan-y pinch-zoom;
         position: relative;
         width: 100%;
@@ -256,6 +256,25 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       body {
         background-color: var(--pom-bg-body);
         font-family: var(--font-primary);
+      }
+
+      /* Overflow protection for specific containers */
+      /* This prevents horizontal scroll while allowing sticky header */
+      main {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      /* Any section that might have animated or wide content */
+      section {
+        overflow-x: hidden;
+      }
+
+      /* Specific protection for common overflow areas */
+      .testimonials-container,
+      .logo-scroller,
+      .carousel-container {
+        overflow-x: hidden;
       }
 
       /* Hero subtitle color */
@@ -269,22 +288,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         backdrop-filter: blur(12px);
       }
 
-      /* Background utilities */
-      .bg-primary {
-        background-color: var(--pom-bg-body);
-      }
-
-      .bg-secondary {
-        background-color: var(--pom-bg-secondary);
-      }
-
-      .bg-card {
-        background-color: var(--pom-bg-card);
-      }
-
-      .bg-accent {
-        background-color: var(--pom-accent);
-      }
+      /* Note: Background utilities are handled by Tailwind config mapping to design tokens */
 
       /* Text color utilities */
       .text-accent {

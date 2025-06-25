@@ -1,249 +1,131 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+AI development guide for ralph-web. **Keep this file concise - focus on essential rules only.**
 
-## Important Rules
+## 🚫 NEVER DO
+- Change POM without approval
+- Create `.css` files or `<style>` blocks  
+- Use hardcoded values instead of design tokens
+- Skip TypeScript interfaces or use `any` types
+- Create custom implementations of Animation/State/Focus managers
+- Modify content without Q&A process (see `/content/general/`)
+- Use `!important` except for accessibility
+
+## ✅ ALWAYS DO
+- Run `npm run validate` before commits
+- Maintain 99.9% POM compliance (test: `cd tests && node unified-test.js ralph`)
+- Use design tokens: `bg-background`, `text-primary`, etc.
+- Follow component structure: `primitives/`, `layout/`, `features/`, `utils/`
+- Use Enhanced Component Template (see below)
+- Clean up animations/state subscriptions
+
+## 📁 Architecture Standards
+
+### Component Organization
+```
+src/components/
+├── primitives/   # Button, Card, Input, Icon
+├── layout/       # Header, Footer, Section  
+├── features/     # Hero, FAQ, Pricing
+└── utils/        # CookieConsent, LoginModal
+```
+
+### Design Tokens (MANDATORY)
+- Colors: `bg-background`, `bg-accent`, `text-primary`, `text-secondary`
+- See: `src/config/design-system.ts` for full list
+
+### Content Management
+- Process defined in: `/content/general/claude.md`
+- Never modify: `content-specification.md` or `qa-decisions.md` directly
+
+## 🔧 Quick Reference
+
+### Development
+```bash
+npm run dev                           # Start dev (port 4321)
+cd tests && node unified-test.js ralph # Test POM compliance
+npm run validate                      # Type-check + lint + format
+npm run build                         # Production build
+```
+
+### URLs
+- Dev: http://localhost:4321/ralph-web/
+- Jace Reference: http://localhost:8081/
+- Production: https://zitrono.github.io/ralph-web/
+
+### Key Files
+- POM: `tests/jace-ai-site.pom.js`
+- Layout/Global styles: `src/layouts/Layout.astro`
+- Design system: `src/config/design-system.ts`
+
+## 🎯 Component Template
+
+Use this for ALL new components:
+
+```astro
+---
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
+  variant?: 'primary' | 'secondary';
+  // Add specific props with JSDoc
+}
+
+const { variant = 'primary', class: className = '', ...rest } = Astro.props;
+---
+
+<div class={`component-base ${variant} ${className}`} {...rest}>
+  <slot />
+</div>
+
+<!-- See Enterprise Utility Systems section for enhanced template with animations/state -->
+```
+
+## 🏗️ Enterprise Utilities
+
+### Required Patterns
+1. **Animation Manager**: Use `fadeIn()`, `slideDown()`, etc. with cleanup
+2. **State Manager**: Centralized state with `registerState()`, `subscribe()`
+3. **Focus Manager**: Accessibility-compliant focus traps for modals
+
+### Integration Example
+```typescript
+import { fadeIn, ANIMATION_CONFIG } from '@/utils/animation-manager';
+import { initializeStateManager } from '@/utils/state-manager';
+
+const cleanup = fadeIn(element, { duration: ANIMATION_CONFIG.DURATION });
+// CRITICAL: Always cleanup
+cleanup.cleanup();
+```
+
+## 📊 Quality Gates
+- TypeScript: 100% strict mode coverage
+- POM: 99.9% property success (2,458+ properties)
+- Bundle: JS <500KB, CSS <200KB
+- Accessibility: WCAG 2.1 AA (95%+)
+
+## 🚨 POM Testing
+- **Sacred Rule**: Fix implementation to match POM, never modify POM
+- **Mobile**: Header must be exactly 64px
+- **Selectors**: Hero CTA: `main button.btn-primary.btn-lg`
+
+---
+For detailed information, see:
+- Enterprise architecture: Search for "Enterprise Utility Systems" below
+- Content management: `/content/general/claude.md`
+- Technical constraints: `/content/general/technical-constraints.md`
+
+# ————————————————————————————————————————
+# DETAILED REFERENCE (preserved for context)
+# ————————————————————————————————————————
+
+## Important Rules (Original)
 
 - Never change pom without my approval
 - The project is now named "ralph-web" and publishes to https://zitrono.github.io/ralph-web/
 - Package name has been updated from "jace-ai-astro" to "ralph-web"
 - **Reference site (Jace)**: http://localhost:8081/ - Static archive for visual parity comparison
   - Required for POM testing and visual validation
-
-## CRITICAL: ENTERPRISE ARCHITECTURE STANDARDS (2025-06-24)
-
-This project has undergone comprehensive refactoring to enterprise-grade standards with centralized utility systems. **ALL FUTURE DEVELOPMENT MUST MAINTAIN THESE STANDARDS**:
-
-### ⚡ Architecture Standards (IMMUTABLE)
-
-#### 1. **Component Organization** - NEVER violate this structure:
-
-```
-src/components/
-├── primitives/   # Button, Card, Input, Icon - reusable UI elements
-├── layout/       # Header, Footer, Section - page structure
-├── features/     # Hero, FAQ, Pricing - feature-specific components
-└── utils/        # CookieConsent, LoginModal - utility components
-```
-
-#### 2. **TypeScript Requirements** - ALL components MUST have:
-
-- **Complete interface definitions** extending BaseComponentProps
-- **Proper prop destructuring** with TypeScript types
-- **JSDoc documentation** with usage examples
-- **No any types** - use proper type definitions
-
-#### 3. **CSS Architecture** - ZERO TOLERANCE for violations:
-
-- **100% Utility-First**: Use ONLY Tailwind utilities + design tokens
-- **NO custom CSS**: No `<style>` blocks, no components.css files
-- **Design Token Usage**: All colors/spacing via `bg-background`, `text-primary`, etc.
-- **NO inline styles**: Use Tailwind classes or design tokens exclusively
-- **NO !important**: Only accessibility-required !important declarations allowed
-
-### 🎯 Development Standards (MANDATORY)
-
-#### 4. **File Creation Rules**:
-
-- **NEW COMPONENTS**: Must use Enhanced Component Template with utility integration
-- **NO NEW CSS FILES**: Use design tokens and Tailwind utilities only
-- **UTILITY INTEGRATION**: Components MUST use Animation/State/Focus Managers
-- **DOCUMENTATION**: Every component needs JSDoc with props and examples
-- **INDEX FILES**: Update appropriate index.ts for exports
-
-#### 5. **Code Quality Gates**:
-
-- **Pre-commit validation**: `npm run validate` must pass (type-check + lint + format)
-- **POM compliance**: 99.9% property-level success rate required
-- **Build success**: `npm run build` must complete without warnings
-- **Performance budgets**: All categories must stay within established limits
-
-#### 6. **Performance Standards**:
-
-- **Bundle size limits**: JS <500KB, CSS <200KB, Total <2MB
-- **Lighthouse scores**: 95+ in all categories
-- **Accessibility**: WCAG 2.1 AA compliance maintained
-- **Core Web Vitals**: LCP <2.5s, FID <100ms, CLS <0.1
-
-### 🚨 ABSOLUTELY FORBIDDEN
-
-#### 7. **Never Do These**:
-
-- ❌ Create new `.css` files or add `<style>` blocks
-- ❌ Use hardcoded colors/spacing instead of design tokens
-- ❌ Add components without TypeScript interfaces
-- ❌ Create custom animations instead of using Animation Manager
-- ❌ Implement manual state tracking instead of State Manager
-- ❌ Build custom focus traps instead of Focus Manager
-- ❌ Skip utility cleanup functions (causes memory leaks)
-- ❌ Modify the design token system without approval
-- ❌ Break POM compliance (must maintain 99.9% success)
-- ❌ Use `any` types or skip TypeScript validation
-- ❌ Use `!important` except for accessibility requirements
-
-### 🎨 CSS Cascade Integrity (CRITICAL)
-
-**CSS Cascade Management is Sacred** - Maintain clean, predictable CSS specificity:
-
-#### CSS Best Practices:
-
-1. **Specificity Hierarchy**: Use semantic class names with clear specificity
-   - Base classes: `.nav-link` (general styling)
-   - Variant classes: `.mobile-nav-link` (specific overrides)
-   - State classes: `.is-active`, `.is-open` (temporary states)
-
-2. **Avoid Cascade Conflicts**:
-   - Never use `!important` except for utility overrides
-   - Create specific classes rather than nested selectors
-   - Use design tokens for all values (colors, spacing, etc.)
-   - Document any necessary overrides with comments
-
-3. **Class Naming Strategy**:
-   - Component-specific: `.component-name`
-   - Variant-specific: `.component-name--variant`
-   - Context-specific: `.context-component-name`
-   - Example: `.nav-link` → `.mobile-nav-link` → `.mobile-nav-link--active`
-
-4. **Style Organization**:
-   - Global styles in `Layout.astro` only
-   - Component styles via Tailwind utilities
-   - Override styles via specific class names
-   - No inline styles or style attributes
-
-### 🔧 Development Workflow (REQUIRED)
-
-#### 8. **Every Change Must**:
-
-1. **Start with**: `npm run dev` and verify current state
-2. **Check compliance**: Run POM tests before changes
-3. **Plan utilities**: Identify needed Animation/State/Focus Manager integration
-4. **Make changes**: Following architecture standards and utility patterns
-5. **Validate**: `npm run validate` must pass
-6. **Test POM**: Re-run POM tests - 99.9% success required
-7. **Build verification**: `npm run build` must succeed
-8. **Performance check**: Verify utility cleanup prevents memory leaks
-
-#### 9. **DEPRECATED: Basic Component Template**
-
-**⚠️ USE ENHANCED TEMPLATE BELOW**: All new components must use the Enhanced Component Template with utility integration. Basic template shown for reference only:
-
-```astro
----
-// DEPRECATED - Use Enhanced Template below for all new components
-import type { BaseComponentProps } from '@/types/components';
-export interface Props extends BaseComponentProps {
-  variant?: 'primary' | 'secondary';
-}
-const { variant = 'primary', class: className = '', ...rest } = Astro.props;
----
-<element class={`base-classes variant-${variant} ${className}`} {...rest}>
-  <slot />
-</element>
-```
-
-**MANDATORY**: All new components MUST use the Enhanced Component Template in the Enterprise Utility Systems section below.
-
-### 📊 Quality Metrics (MAINTAINED)
-
-#### 10. **Success Criteria** - These MUST be maintained:
-
-- ✅ **TypeScript Coverage**: 100% with strict mode
-- ✅ **POM Compliance**: 99.9% property-level success (2,458+ properties)
-- ✅ **CSS Architecture**: Zero `<style>` blocks, zero inappropriate `!important`
-- ✅ **Utility Integration**: All components use centralized systems
-- ✅ **Bundle Performance**: All budgets <50% utilization
-- ✅ **Accessibility Score**: 95%+ WCAG 2.1 AA compliance
-- ✅ **Zero Technical Debt**: No code duplication, proper cleanup
-- ✅ **Documentation**: 100% component coverage with examples
-
-**VIOLATION OF THESE STANDARDS IS NOT PERMITTED** - they represent significant engineering investment and must be preserved.
-
-## Content Management (CRITICAL - READ FIRST)
-
-**SINGLE SOURCE OF TRUTH**: All website content management MUST follow the structured documentation system in `/content/general/`:
-
-1. **`content/general/claude.md`** - Content management rules and process (THIS IS THE LAW)
-2. **`content/general/content-specification.md`** - Current approved website content (NEVER modify directly)
-3. **`content/general/qa-decisions.md`** - Verbatim Q&A history (NEVER modify existing entries)
-4. **`content/general/technical-constraints.md`** - POM requirements and template limits (IMMUTABLE)
-
-**MANDATORY PROCESS FOR ALL CONTENT CHANGES**:
-
-- Read `content/general/claude.md` for complete content management protocol
-- ALWAYS identify highest-priority content area before suggesting changes
-- Present strategic options using Q&A format (never implement directly)
-- Wait for explicit approval before any modifications
-- Record ALL decisions verbatim in `qa-decisions.md`
-- Update `content-specification.md` only after approved Q&A
-
-**NEVER**:
-
-- Modify website content without going through the Q&A process
-- Change content-specification.md directly
-- Alter existing Q&A entries
-- Ignore technical constraints from POM requirements
-
-## POM Testing & Style Compliance
-
-**POM is Sacred**: The POM (jace-ai-site.pom.js) is the single source of truth. NEVER modify styles without verifying against POM.
-
-### Critical Requirements
-
-- **Dev Server**: Tests run against `http://localhost:4321/ralph-web/` - ensure dev server is running
-- **Testing**: Run `cd tests && node unified-test.js ralph` before/after any changes
-- **Success Criteria**: 189+ elements pass, 3,500+ CSS properties pass
-- **Mobile Header**: Exactly 64px height (immutable)
-- **Selectors**: Hero CTA: `main button.btn-primary.btn-lg`, Header CTA: `header button.btn-primary`
-- **Colors**: Use exact RGB values from POM (see technical-constraints.md)
-- **CONTENT POLICY**: POM validates ONLY UI/visual properties (CSS, layout, styling). POM MUST NOT validate text content, copy, or language-specific content. Focus on visual parity, not textual parity.
-
-### Development Server Setup
-
-The POM tests run against the local development server for immediate feedback:
-
-- **Start dev server**: `npm run dev` (must run on port 4321)
-- **If port 4321 is occupied**: Kill the process with `lsof -ti:4321 | xargs kill -9` then restart
-- **Test URL**: `http://localhost:4321/ralph-web/`
-- **Changes reflect immediately**: No build/deploy needed for testing
-
-### POM CSS Validation Rules
-
-**CRITICAL**: Follow ultimate CSS validation approach outlined in `pom-css-rules.md`:
-
-- **Functional Equivalence**: Test structure and reasonable variance, not pixel perfection
-- **Tolerance-Based Validation**: Typography ±20px, Colors ±10 RGB, Layout ±16px
-- **NO CSS Injection**: Never use `!important`, style injection, or cascade manipulation
-- **Reference-First**: Always use Jace as immutable reference for comparison
-
-### Enhanced POM Process (PROVEN EFFECTIVE 2025-06-24)
-
-**Multi-Layer Element Detection**: When validating complex UI components (e.g., mobile menus):
-- Identify ALL layers: overlays, backdrops, panels, content containers
-- Measure the correct element: panels for width, overlays for transparency
-- Reference actual measurements, not assumptions
-- Example: Jace mobile menu has transparent overlay + 320px max-width panel
-
-**Visual Property Validation**: Beyond structure, validate visual properties:
-- Background colors must match exactly (not just "dark")
-- Layout patterns (horizontal vs vertical) must be verified
-- Responsive behavior: max-width constraints with full-width fallbacks
-
-**Root Cause Analysis**: When POM tests pass but visual parity fails:
-1. Check if measuring correct elements (panel vs backdrop)
-2. Verify selector specificity matches implementation
-3. Test at multiple viewports for responsive edge cases
-4. Use screenshots for visual regression, not just property validation
-
-### Visual Verification
-
-Use Puppeteer MCP for immediate feedback:
-
-```javascript
-await puppeteer_screenshot({ name: 'current-state', width: 1200, height: 800 });
-await puppeteer_evaluate({
-  script: `getComputedStyle(document.querySelector('.btn-primary')).backgroundColor`,
-});
-```
 
 ## Design System Usage (MANDATORY)
 
@@ -776,7 +658,20 @@ The repository contains two main components:
 1. **Development**: `npm run dev` - Live reload development server
 2. **Build**: `npm run build` - Creates production build in `docs/` folder
 3. **Test**: `cd tests && npm run test:ralph` - Validates build against POM
-4. **Deploy**: `git add docs && git commit && git push` - Deploys to GitHub Pages
+4. **Deploy**: From repository root: `git add docs && git commit && git push`
+
+**Git commands must run from repository root** (`/Users/zitrono/dev/web/ralph-web/`):
+```bash
+# Wrong - from tests/ subdirectory:
+git add ../src/components/file.ts  # Error: path outside repository
+
+# Correct - from repository root:
+cd /Users/zitrono/dev/web/ralph-web
+git add src/components/file.ts
+
+# Alternative - use -C flag:
+git -C /Users/zitrono/dev/web/ralph-web add src/components/file.ts
+```
 
 ### Testing Suite (`tests/`)
 

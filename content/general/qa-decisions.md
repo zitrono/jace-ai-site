@@ -648,3 +648,37 @@ All four explanations approved
 6. CVC Capital Partners - Jean-Rémy Roussel on opportunity and danger
 
 **Rationale**: Demonstrates widespread PE industry consensus on AI importance, builds stronger credibility through diversity of top-tier firms, each quote adds unique perspective on AI transformation
+
+## Q85: How should we integrate the PE Data Source Classification Matrix into the Ralph website?
+
+**Priority Analysis**: This addresses a key credibility gap - Ralph claims to process "100% of portfolio data" but doesn't show HOW. The matrix provides concrete proof of comprehensive data handling across all PE stages and security levels, potentially improving conversion by demonstrating deep PE understanding.
+
+**Option A: Full Intelligence Fabric Section**
+- Impact: Strong credibility boost, demonstrates comprehensive coverage
+- Pros: Visual proof of 100% data claim, differentiates from competitors, educates prospects
+- Cons: Adds complexity to homepage, requires significant development, may overwhelm visitors
+- Constraint check: Would add ~40 lines to homepage, mobile implementation needs careful design
+
+**Option B: Simplified Visual Indicator + Learn Article**
+- Impact: Subtle credibility enhancement without complexity
+- Pros: Maintains homepage simplicity, provides depth for interested prospects, easier to implement
+- Cons: Less immediate impact, requires additional Learn content creation
+- Constraint check: Minimal homepage addition (3-4 lines), fully mobile-compatible
+
+**Option C: FAQ Enhancement Only**
+- Impact: Answers key objection about data coverage
+- Pros: No homepage changes, quick to implement, maintains current flow
+- Cons: Misses visual storytelling opportunity, buried in FAQ section
+- Constraint check: Adds one FAQ item within existing structure
+
+**Option D: Features Section Integration**
+- Impact: Strengthens existing "How Ralph Works" section
+- Pros: Logical placement, enhances current content, no new sections needed
+- Cons: May disrupt current feature focus, needs careful integration
+- Constraint check: Would modify existing Features section, ~10-15 lines addition
+
+**Decision**: Option B - Simplified Visual Indicator + Learn Article
+
+**Implementation**: Add subtle credibility indicator to Why Ralph section and create comprehensive Learn article showcasing the full data matrix
+
+**Rationale**: Balances homepage simplicity with depth for serious evaluators. Maintains clean user experience while providing proof of comprehensive data coverage for those who need it.

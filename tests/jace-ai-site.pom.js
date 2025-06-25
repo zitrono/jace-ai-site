@@ -258,6 +258,12 @@ export class JaceAISitePOM {
         },
         video: '.aspect-video, [class*="video"]',
         videoTitle: 'h3',
+        // Ralph-specific: Gradient overlays to fade tiled pattern into background
+        patternGradientOverlay: {
+          selector: '.absolute.inset-0.-z-10.bg-gradient-to-b',
+          unique: true, // Ralph enhancement - smoother pattern fade
+          description: 'Ralph adds gradient overlays to fade the tiled background pattern smoothly into the dark background',
+        },
       },
 
       // 3. Navigation - 100% STRUCTURAL MAPPING
@@ -441,24 +447,36 @@ export class JaceAISitePOM {
       // 11. Mobile Menu System (from pom_extension.md)
       mobileMenu: {
         overlay: {
-          selector: '#mobile-menu, .mobile-menu-overlay',
-          jaceSelector: '#mobile-menu-overlay', // Our custom implementation
+          selector: '#mobile-menu',
+          jaceSelector: '[id*="headlessui-dialog"]',
         },
         backdrop: {
-          selector: '.mobile-menu-backdrop',
-          jaceSelector: '#mobile-menu-overlay > div:first-child', // Backdrop div
+          selector: '[data-backdrop]',
+          jaceSelector: 'div[class*="fixed inset-0"][class*="bg-black"]',
+        },
+        panel: {
+          selector: '[data-mobile-menu-panel]',
+          jaceSelector: 'div[class*="fixed"][class*="right-0"][class*="max-w-xs"]',
+        },
+        logo: {
+          selector: '#mobile-menu a[href="/ralph-web/"]',
+          jaceSelector: '#mobile-menu-panel a[href="/"]',
         },
         closeButton: {
           selector: 'button[aria-label="Close menu"]',
           jaceSelector: '#mobile-menu-overlay button[onclick="closeMobileMenu()"]',
         },
-        drawer: {
-          selector: '.mobile-nav-drawer',
-          jaceSelector: '#mobile-menu-overlay > div:last-child', // Menu content div
+        navLinks: {
+          selector: '#mobile-menu nav a',
+          jaceSelector: 'nav a[class*="block"][class*="rounded-lg"]',
         },
-        mobileLinks: {
-          selector: '.mobile-nav-item, .md\\:hidden',
-          jaceSelector: '#mobile-menu-overlay nav a',
+        loginButton: {
+          selector: '#mobile-menu button:first-of-type',
+          jaceSelector: 'button[class*="bg-gray"]',
+        },
+        ctaButton: {
+          selector: '#mobile-menu button:last-of-type',
+          jaceSelector: 'button[class*="bg-indigo"]',
         },
         mobileOnly: '.md\\:hidden, .lg\\:hidden',
       },
@@ -632,6 +650,12 @@ export class JaceAISitePOM {
     backgrounds: {
       body: 'rgb(40, 40, 40)', // Dark gray background
       heroGradient: /radial-gradient/,
+      // Ralph-specific enhancement: Pattern fade gradients
+      patternFadeGradient: {
+        unique: true,
+        description: 'Ralph adds gradient overlays to fade tiled pattern smoothly into background',
+        expectedValue: /bg-gradient-to-[bt].*from-transparent.*to-background/,
+      },
     },
 
     // Typography
@@ -818,19 +842,63 @@ export class JaceAISitePOM {
     },
     mobileMenu: {
       overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Ralph uses semi-transparent backdrop
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent backdrop
         position: 'fixed',
         inset: '0',
         zIndex: '50',
       },
       panel: {
-        backgroundColor: 'rgb(65, 65, 65)', // Lighter gray for visual parity with Jace
+        backgroundColor: 'rgb(40, 40, 40)', // Main background color matching body
         position: 'fixed',
         right: '0',
         top: '0',
         bottom: '0',
         width: '100%',
+        maxWidth: '320px', // max-w-xs
+        padding: '24px', // p-6
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', // shadow-2xl
       },
+      navigation: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      },
+      navLinks: {
+        display: 'block',
+        padding: '8px 12px', // py-2 px-3
+        fontSize: '16px', // text-base
+        fontWeight: '600', // font-semibold
+        lineHeight: '28px', // leading-7
+        color: 'rgb(255, 255, 255)',
+        borderRadius: '8px', // rounded-lg
+        ':hover': {
+          backgroundColor: 'rgb(64, 64, 64)', // hover:bg-neutral-700
+        }
+      },
+      scrollLock: {
+        body: {
+          overflow: 'hidden', // Body scroll locked when menu open
+        }
+      },
+      logo: {
+        display: 'block', // Always visible in mobile menu
+        fontSize: '24px', // text-2xl
+        fontWeight: '700', // font-bold
+        color: 'rgb(255, 255, 255)',
+      },
+      closeButton: {
+        padding: '10px', // p-2.5
+        margin: '-10px', // -m-2.5
+        borderRadius: '6px', // rounded-md
+      },
+      ctaButtons: {
+        width: '100%',
+        borderRadius: '6px', // rounded-md
+        padding: '8px 12px', // py-2 px-3
+        fontSize: '14px', // text-sm
+        fontWeight: '600', // font-semibold
+        marginTop: 'auto', // Pushed to bottom
+      }
     },
   };
 

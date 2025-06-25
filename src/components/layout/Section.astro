@@ -1,11 +1,17 @@
 ---
 /**
  * Section - Flexible layout section with background and spacing variants
+ * 
+ * The padded prop controls horizontal padding:
+ * - padded=true (default): px-6 lg:px-8 (24px mobile, 32px desktop)
+ * - padded=false: px-4 (16px consistent) for content alignment
+ * 
  * @example
  * <Section 
  *   background="primary"
  *   spacing="lg"
  *   maxWidth="2xl"
+ *   padded={false}
  *   as="section"
  * >
  *   Content here
@@ -25,7 +31,7 @@ export interface Props extends BaseComponentProps {
   id?: string;
   /** Semantic HTML element to use */
   as?: 'section' | 'div' | 'article' | 'main' | 'aside' | 'header' | 'footer';
-  /** Whether to add horizontal padding */
+  /** Whether to use full padding (px-6 lg:px-8) or minimal padding (px-4) */
   padded?: boolean;
   /** Custom ARIA label */
   ariaLabel?: string;
@@ -79,7 +85,7 @@ const sectionClasses = [backgroundClasses[background], spacingClasses[spacing], 
   .filter(Boolean)
   .join(' ');
 
-const containerClasses = ['mx-auto', maxWidthClasses[maxWidth], padded && 'px-6 lg:px-8']
+const containerClasses = ['mx-auto', maxWidthClasses[maxWidth], padded ? 'px-6 lg:px-8' : 'px-4']
   .filter(Boolean)
   .join(' ');
 

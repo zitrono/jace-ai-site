@@ -1,4 +1,6 @@
 ---
+import LoginModal from '../components/utils/LoginModal.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -311,15 +313,15 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       @media (max-width: 640px) {
         /* Reduce header padding on mobile */
         header nav > div {
-          padding-top: 0.75rem;
-          padding-bottom: 0.75rem;
+          padding-top: var(--spacing-sm);
+          padding-bottom: var(--spacing-sm);
         }
 
         /* Ensure hamburger menu button is properly sized */
         #mobile-menu-button {
           min-width: 40px;
           min-height: 40px;
-          padding: 0.5rem;
+          padding: var(--spacing-xs);
         }
       }
 
@@ -330,8 +332,8 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Ensure consistent header height when scrolled */
       header.scrolled nav > div {
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
+        padding-top: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
       }
 
       /* Typography utilities */
@@ -363,17 +365,11 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       }
 
       .heading-2 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -0.025em;
-        color: var(--color-text-primary);
-      }
-
-      @media (min-width: 640px) {
-        .heading-2 {
-          font-size: 2.25rem;
-        }
+        font-size: 1rem; /* 16px - matches POM requirement */
+        font-weight: 600; /* 600 - matches POM requirement */
+        line-height: 1.75;
+        letter-spacing: normal;
+        color: var(--pom-accent); /* Use accent yellow - matches POM requirement */
       }
 
       .heading-3 {
@@ -420,7 +416,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       .badge {
         display: inline-flex;
         align-items: center;
-        padding: 0.25rem 0.75rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
         border-radius: 9999px;
         font-size: 0.875rem;
         font-weight: 500;
@@ -584,12 +580,18 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       }
 
       /* Accessibility: Minimum touch target sizes */
+      /* Apply only to interactive elements, not text links */
       button,
       .btn,
-      [role='button'],
-      a {
+      [role='button'] {
         min-height: 44px;
         min-width: 44px;
+      }
+      
+      /* Touch targets for navigation links */
+      nav a,
+      .touch-manipulation {
+        min-height: 44px;
       }
 
       /* Exception for inline links in text */
@@ -686,6 +688,10 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
     <div aria-live="assertive" aria-atomic="true" class="sr-live-polite" id="alert-messages"></div>
 
     <slot />
+    
+    <!-- Global Login Modal -->
+    <LoginModal />
+    
     <script>
       // Legacy functionality - now handled by centralized state management
       // This is preserved for backward compatibility only

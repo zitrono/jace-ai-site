@@ -60,13 +60,13 @@ const {
 // Determine actual disabled state
 const isDisabled = disabled || state === 'disabled' || loading;
 
-// Size classes using Tailwind utilities - POM compliant font sizes
+// Size classes using design tokens - POM compliant font sizes
 const sizeClasses = {
-  xs: 'h-8 px-3 text-xs', // 14px - POM compliant
-  sm: 'h-9 px-4 text-xs', // 14px - POM compliant (was text-sm)
-  md: 'h-10 px-6 text-xs', // 14px - POM compliant
-  lg: 'h-11 px-8 text-xs', // 14px - POM compliant for hero CTA
-  xl: 'h-12 px-10 text-xs', // 14px - POM compliant (consistent with all sizes)
+  xs: 'h-8 px-xs text-xs', // Using design token spacing-xs (8px)
+  sm: 'h-9 px-sm text-xs', // Using design token spacing-sm (16px)
+  md: 'h-10 px-base text-xs', // Using design token spacing-base (24px)
+  lg: 'h-11 px-lg text-xs', // Using design token spacing-lg (32px)
+  xl: 'h-12 px-xl text-xs', // Using design token spacing-xl (48px)
 };
 
 // Variant classes using design tokens

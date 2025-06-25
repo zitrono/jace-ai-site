@@ -214,6 +214,56 @@ async function runComprehensivePropertyTests(pom, page, target) {
 
       propertiesTested = Object.keys(properties).length;
 
+      // NEW: Check requiredStyles if defined in selector
+      if (selectorDef && typeof selectorDef === 'object' && selectorDef.requiredStyles) {
+        for (const [styleProp, expectedValue] of Object.entries(selectorDef.requiredStyles)) {
+          const actualValue = properties[styleProp];
+          
+          // Handle regex patterns
+          if (expectedValue instanceof RegExp) {
+            if (!expectedValue.test(actualValue)) {
+              propertyErrors.push(
+                `${name}.${styleProp}: Expected to match ${expectedValue}, got "${actualValue}"`
+              );
+            }
+          } 
+          // Handle exact matches
+          else if (actualValue !== expectedValue) {
+            propertyErrors.push(
+              `${name}.${styleProp}: Expected "${expectedValue}", got "${actualValue}"`
+            );
+          }
+        }
+      }
+
+      // Also check for requiredStyles in hero, navigation, etc. sections
+      const allSelectors = pom.selectors;
+      for (const [sectionName, section] of Object.entries(allSelectors)) {
+        if (typeof section === 'object') {
+          for (const [elementName, elementDef] of Object.entries(section)) {
+            // Check if this matches our current element
+            const elementSelector = pom.getSelector(elementDef);
+            if (elementSelector === selector && elementDef.requiredStyles) {
+              for (const [styleProp, expectedValue] of Object.entries(elementDef.requiredStyles)) {
+                const actualValue = properties[styleProp];
+                
+                if (expectedValue instanceof RegExp) {
+                  if (!expectedValue.test(actualValue)) {
+                    propertyErrors.push(
+                      `${sectionName}.${elementName}.${styleProp}: Expected to match ${expectedValue}, got "${actualValue}"`
+                    );
+                  }
+                } else if (actualValue !== expectedValue) {
+                  propertyErrors.push(
+                    `${sectionName}.${elementName}.${styleProp}: Expected "${expectedValue}", got "${actualValue}"`
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+
       // Validate specific properties based on expected styles
       if (name === 'heroTitle' && pom.expectedStyles.typography?.heroTitle) {
         const expected = pom.expectedStyles.typography.heroTitle;

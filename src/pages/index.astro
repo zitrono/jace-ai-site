@@ -6,6 +6,7 @@ import Features from '../components/features/Features.astro';
 import Pricing from '../components/features/Pricing.astro';
 import CTA from '../components/features/CTA.astro';
 import FAQ from '../components/features/FAQ.astro';
+import Section from '../components/layout/Section.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieConsent from '../components/utils/CookieConsent.astro';
 import LoginModal from '../components/utils/LoginModal.astro';
@@ -16,18 +17,27 @@ import LoginModal from '../components/utils/LoginModal.astro';
     <Header />
     <main id="main" role="main" tabindex="-1">
       <!-- Hero Section -->
-      <section aria-labelledby="hero-title" class="py-0 bg-background">
+      <Section 
+        aria-labelledby="hero-title" 
+        spacing="xs" 
+        background="primary" 
+        as="section"
+      >
         <Hero
           title="See Tomorrow's Opportunities Today"
           subtitle="AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead."
           ctaText="Book a Demo"
           ctaHref="/ralph-web/#"
         />
-      </section>
+      </Section>
 
       <!-- Social Proof Section - The AI Adoption Paradox -->
-      <section aria-labelledby="social-proof-title" class="py-16 bg-background">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <Section 
+        aria-labelledby="social-proof-title" 
+        spacing="md" 
+        background="primary" 
+        as="section"
+      >
           <div class="text-center mb-12">
             <h2
               id="social-proof-title"
@@ -58,12 +68,15 @@ import LoginModal from '../components/utils/LoginModal.astro';
             </p>
             <p class="mt-2 text-sm text-gray-500">Sources: Deloitte, BCG, Industry Reports</p>
           </div>
-        </div>
-      </section>
+      </Section>
 
       <!-- Why Ralph Section - Competitive Differentiation -->
-      <section aria-labelledby="why-ralph-title" class="py-20 bg-background">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <Section 
+        aria-labelledby="why-ralph-title" 
+        spacing="lg" 
+        background="primary" 
+        as="section"
+      >
           <div class="text-center mb-16">
             <h2
               id="why-ralph-title"
@@ -141,8 +154,7 @@ import LoginModal from '../components/utils/LoginModal.astro';
               </div>
             </div>
           </div>
-        </div>
-      </section>
+      </Section>
 
       <!-- Features/Product Section -->
       <section id="product" aria-labelledby="features-title">

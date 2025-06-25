@@ -100,12 +100,12 @@ const {
 
 <Section
   id="pricing"
-  class={`py-20 ${className}`}
+  class={className}
   as="section"
   aria-labelledby="pricing-title"
   background="primary"
+  spacing="lg"
 >
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 id="pricing-title" class="heading-2">
         {title}
@@ -115,7 +115,7 @@ const {
       </p>
     </div>
 
-    <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-4xl mx-auto">
+    <div class="mt-section-base grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-4xl mx-auto">
       {
         plans
           .filter((_, index) => showBothPlans || index === 1)
@@ -132,7 +132,7 @@ const {
                 </div>
               )}
 
-              <div class="p-6">
+              <div class="p-base">
                 <h3 class="text-2xl font-bold text-white">{plan.name}</h3>
                 <p class="mt-4 text-text-muted">{plan.description}</p>
 
@@ -182,5 +182,4 @@ const {
       <h3>Security compliance</h3>
       <h3>Training included</h3>
     </div>
-  </div>
 </Section>

@@ -43,7 +43,7 @@ export interface Props extends BaseComponentProps {
 const {
   class: className = '',
   sticky = true,
-  transparent = false,
+  transparent: _transparent = false,
   showLogo = true,
   logoText = 'ralph',
   logoHref = '/ralph-web/',
@@ -67,6 +67,8 @@ const headerClasses = [
   'backdrop-blur-sm',
   // Transitions
   'transition-all duration-300',
+  // Top spacing
+  'mt-4',
   className,
 ]
   .filter(Boolean)
@@ -84,12 +86,12 @@ const headerClasses = [
 
   <nav
     id="navigation"
-    class="mx-auto flex max-w-7xl items-center justify-between transition-all p-2"
+    class="w-full transition-all bg-background/50 backdrop-blur-sm"
     role="navigation"
     aria-label="Main navigation"
   >
     <div
-      class="flex items-center justify-between w-full p-4 transition-all bg-background/50 backdrop-blur-sm"
+      class="mx-auto flex items-center justify-between w-full max-w-7xl px-6 py-4 lg:px-8 transition-all"
     >
       {/* Logo */}
       {
@@ -97,7 +99,7 @@ const headerClasses = [
           <div class="flex lg:flex-1">
             <a
               href={logoHref}
-              class="inline-flex items-center -m-1.5 p-1.5 rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+              class="inline-flex items-center rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
             >
               <span class="sr-only">{logoText}</span>
               <span class="text-text-primary font-bold text-2xl">{logoText}</span>
@@ -150,44 +152,49 @@ const headerClasses = [
         </button>
       </div>
 
-      {/* Desktop Navigation */}
-      <nav class="hidden lg:flex lg:gap-x-12" role="navigation" aria-label="Main navigation">
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
-              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-            >
-              {link.text}
-            </a>
-          ))
-        }
-      </nav>
+      {/* Desktop Navigation and CTA Buttons - Grouped together on the right */}
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8">
+        {/* Navigation Links */}
+        <nav class="flex gap-x-8" role="navigation" aria-label="Main navigation">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
+                {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+              >
+                {link.text}
+              </a>
+            ))
+          }
+        </nav>
 
-      {/* Desktop CTA Buttons */}
-      {
-        showCta && (
-          <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-            <Button
-              variant="secondary"
-              id="login-button"
-              data-test="secondary-button"
-              class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
-            >
-              {loginText}
-            </Button>
-            <Button
-              variant="primary"
-              size="lg"
-              data-test="cta-button"
-              class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-            >
-              {ctaText}
-            </Button>
-          </div>
-        )
-      }
+        {/* CTA Buttons */}
+        {
+          showCta && (
+            <div class="flex gap-x-4">
+              <Button
+                variant="secondary"
+                id="login-button"
+                data-test="secondary-button"
+                class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
+                onclick="openLoginModal()"
+              >
+                {loginText}
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                data-test="cta-button"
+                class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+                href="/ralph-web/#"
+              >
+                {ctaText}
+              </Button>
+            </div>
+          )
+        }
+      </div>
     </div>
   </nav>
 </header>

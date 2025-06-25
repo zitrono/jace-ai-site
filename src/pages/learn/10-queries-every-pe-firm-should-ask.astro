@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/layout/Header.astro';
+import Section from '../../components/layout/Section.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Button from '../../components/primitives/Button.astro';
 ---
@@ -10,8 +11,13 @@ import Button from '../../components/primitives/Button.astro';
     <Header />
     <main>
       <!-- Article Header -->
-      <section class="relative pt-24 pb-12 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+        class="relative"
+      >
           <div class="text-center mb-8">
             <a href="/ralph-web/learn" class="text-yellow-400 hover:text-yellow-300 font-semibold">
               ← Back to Learn
@@ -26,11 +32,15 @@ import Button from '../../components/primitives/Button.astro';
             <span>AI Implementation</span>
           </div>
         </div>
-      </section>
+      </Section>
 
       <!-- Article Content -->
-      <section class="py-16 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+      >
           <article class="prose prose-lg prose-invert max-w-none">
             <!-- The $50 Million Question -->
             <h2 class="text-3xl font-bold text-white mb-6">
@@ -332,10 +342,14 @@ import Button from '../../components/primitives/Button.astro';
             </p>
           </article>
         </div>
-      </section>
+      </Section>
 
       <!-- CTA Section -->
-      <section class="py-20 bg-card">
+      <Section 
+        spacing="lg" 
+        background="card" 
+        as="section"
+      >
         <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 class="text-3xl font-bold text-white mb-4">Ready to go beyond basic queries?</h2>
           <p class="text-xl text-gray-300 mb-8">
@@ -343,7 +357,7 @@ import Button from '../../components/primitives/Button.astro';
           </p>
           <Button variant="primary" size="lg" href="/ralph-web/#">Book a Demo →</Button>
         </div>
-      </section>
+      </Section>
     </main>
     <Footer />
   </div>

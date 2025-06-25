@@ -139,7 +139,7 @@ const positionClasses = {
     }, { silent: true });
 
     // Subscribe to cookie consent state changes
-    const unsubscribe = stateManager.subscribe('cookieConsent', (newState, oldState, source) => {
+    const unsubscribe = stateManager.subscribe('cookieConsent', (newState, oldState, _source) => {
       // Handle visibility changes
       if (newState.isVisible !== oldState.isVisible) {
         if (newState.isVisible) {
@@ -321,12 +321,12 @@ const positionClasses = {
   }
 
   // Initialize when browser is idle
-  let cleanup = null;
+  let _cleanup = null;
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      cleanup = initializeCookieConsent();
+      _cleanup = initializeCookieConsent();
     });
   } else {
-    cleanup = initializeCookieConsent();
+    _cleanup = initializeCookieConsent();
   }
 </script>

@@ -87,7 +87,7 @@ const {
           {navigationLinks.map((link) => (
             <a
               href={link.href}
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-neutral-700"
+              class="block rounded-lg px-0 py-2 text-base font-semibold leading-7 text-white hover:bg-neutral-700 hover:px-3 transition-all duration-200"
               onclick="closeMobileMenu()"
               {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
             >
@@ -102,7 +102,7 @@ const {
             <button
               type="button"
               class="w-full rounded-md bg-neutral-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-neutral-400"
-              onclick="window.location.href='/ralph-web/#'"
+              onclick="openLoginModal(); closeMobileMenu();"
             >
               {loginText}
             </button>

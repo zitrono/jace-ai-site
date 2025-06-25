@@ -49,8 +49,8 @@ const {
   subtitle = "Everything you need to know about Ralph's security and deployment",
   contactEmail = 'Konstantin@beneficious.com',
   showContactCTA = true,
-  animated = true,
-  allowMultiple = true,
+  animated: _animated = true,
+  allowMultiple: _allowMultiple = true,
   faqs = [
     {
       id: 'confidentiality',
@@ -137,8 +137,7 @@ const {
 const componentId = 'faq-component';
 ---
 
-<Section class={`py-20 ${className}`} as="section" aria-labelledby="faq-title" background="primary">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+<Section class={className} as="section" aria-labelledby="faq-title" background="primary" spacing="lg" maxWidth="2xl">
     <div class="mx-auto max-w-2xl text-center">
       <h2 id="faq-title" class="heading-2">
         {title}
@@ -148,11 +147,11 @@ const componentId = 'faq-component';
       </p>
     </div>
 
-    <div class="mt-16 max-w-3xl mx-auto">
+    <div class="mt-section-base">
       <!-- Progressive Enhancement: FAQ works without JS, enhanced with animations -->
       <div class="space-y-4" role="list" id="faq-container" data-component-id={componentId}>
         {
-          faqs.map((faq, index) => (
+          faqs.map((faq, _index) => (
             <Card hover={false} class="faq-item" role="listitem" data-faq-id={faq.id}>
               <button
                 class="w-full text-left flex items-center justify-between group min-h-[44px] p-2 -m-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-600 text-high-contrast"
@@ -187,7 +186,7 @@ const componentId = 'faq-component';
 
       {
         showContactCTA && (
-          <div class="mt-12 text-center">
+          <div class="mt-section-sm text-center">
             <p class="text-text-muted">
               Still have a question in mind?
               <a
@@ -201,7 +200,6 @@ const componentId = 'faq-component';
         )
       }
     </div>
-  </div>
 </Section>
 
 <!-- Enhanced FAQ functionality with animations and state management -->

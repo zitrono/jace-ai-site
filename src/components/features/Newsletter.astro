@@ -1,0 +1,137 @@
+---
+/**
+ * Newsletter - Professional B2B newsletter signup component
+ * @example
+ * <Newsletter 
+ *   title="Executive AI Intelligence Brief"
+ *   subtitle="Strategic insights for PE decision makers"
+ *   variant="enterprise"
+ * />
+ */
+
+import Button from '../primitives/Button.astro';
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
+  /** Newsletter title */
+  title?: string;
+  /** Newsletter subtitle/description */
+  subtitle?: string;
+  /** Visual variant */
+  variant?: 'default' | 'enterprise' | 'compact';
+  /** Placeholder text for email input */
+  placeholder?: string;
+  /** Submit button text */
+  buttonText?: string;
+  /** Whether to show subscriber count */
+  showCount?: boolean;
+  /** Subscriber count text */
+  countText?: string;
+}
+
+const {
+  class: className = '',
+  title = 'Executive AI Intelligence Brief',
+  subtitle = 'Strategic insights for PE decision makers delivered weekly. Join 10,000+ industry leaders staying ahead of AI transformation.',
+  variant = 'enterprise',
+  placeholder = 'Enter your business email',
+  buttonText = 'Subscribe',
+  showCount = true,
+  countText = '10,000+ PE leaders receive our insights',
+} = Astro.props;
+---
+
+{variant === 'enterprise' ? (
+  <div class={`bg-background border border-accent/20 rounded-lg overflow-hidden ${className}`}>
+    <div class="border-l-4 border-accent bg-card/30 px-8 py-10">
+      <div class="max-w-2xl">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 mt-1">
+            <div class="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-primary mb-2">
+              {title}
+            </h3>
+            <p class="text-secondary text-sm mb-6">
+              {subtitle}
+            </p>
+            <form class="flex flex-col sm:flex-row gap-3 mb-3">
+              <input
+                type="email"
+                placeholder={placeholder}
+                required
+                class="flex-1 px-4 py-3 bg-background border border-neutral-600 rounded-md text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
+              />
+              <Button variant="primary" type="submit" class="whitespace-nowrap px-6">
+                {buttonText}
+              </Button>
+            </form>
+            {showCount && (
+              <p class="text-xs text-muted flex items-center">
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                {countText}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+) : variant === 'compact' ? (
+  <div class={`bg-card border border-neutral-600 rounded-lg p-6 ${className}`}>
+    <div class="text-center max-w-md mx-auto">
+      <h3 class="text-lg font-bold text-primary mb-2">
+        {title}
+      </h3>
+      <p class="text-secondary text-sm mb-4">
+        {subtitle}
+      </p>
+      <form class="flex flex-col gap-3">
+        <input
+          type="email"
+          placeholder={placeholder}
+          required
+          class="px-4 py-2 bg-background border border-neutral-600 rounded-md text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+        />
+        <Button variant="primary" type="submit" size="sm">
+          {buttonText}
+        </Button>
+      </form>
+      {showCount && (
+        <p class="text-xs text-muted mt-3">
+          {countText}
+        </p>
+      )}
+    </div>
+  </div>
+) : (
+  <div class={`bg-accent/10 border border-accent/20 rounded-lg p-8 text-center ${className}`}>
+    <h3 class="text-2xl font-bold text-primary mb-4">
+      {title}
+    </h3>
+    <p class="text-secondary mb-6">
+      {subtitle}
+    </p>
+    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+      <input
+        type="email"
+        placeholder={placeholder}
+        required
+        class="flex-1 px-4 py-2 rounded-md bg-background border border-neutral-600 text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent"
+      />
+      <Button variant="primary" type="submit">
+        {buttonText}
+      </Button>
+    </form>
+    {showCount && (
+      <p class="text-sm text-muted mt-4">
+        {countText}
+      </p>
+    )}
+  </div>
+)}

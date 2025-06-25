@@ -130,12 +130,12 @@ const gridClasses = {
 
 <Section
   id="features"
-  class={`py-20 ${className}`}
+  class={className}
   as="section"
   aria-labelledby="features-title"
   background="primary"
+  spacing="lg"
 >
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
     {
       (title || subtitle) && (
         <div class="mx-auto max-w-2xl text-center mb-16">
@@ -150,7 +150,7 @@ const gridClasses = {
     }
 
     <!-- Six Core Features -->
-    <div class={`mt-16 grid gap-8 ${gridClasses[columns]}`}>
+    <div class={`mt-section-base grid gap-8 ${gridClasses[columns]}`}>
       {
         features.slice(0, columns === 4 ? 4 : features.length).map((feature) => (
           <Card hover>
@@ -165,8 +165,8 @@ const gridClasses = {
     </div>
 
     <!-- Four-Step Process -->
-    <div class="mt-20">
-      <h3 class="text-2xl font-bold text-center text-white mb-12">Ralph's Four-Step Process</h3>
+    <div class="mt-section-lg">
+      <h3 class="text-2xl font-bold text-center text-white mb-section-sm">Ralph's Four-Step Process</h3>
       <div class="space-y-12">
         {
           processSteps.map((step, index) => (
@@ -194,5 +194,4 @@ const gridClasses = {
         }
       </div>
     </div>
-  </div>
 </Section>

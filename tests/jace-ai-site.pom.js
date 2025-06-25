@@ -1,6 +1,12 @@
 // Consolidated Page Object Model for jace.ai
 // This is the single source of truth for all jace.ai testing
 // Covers all elements from pom_extension.md with 100% validated coverage
+//
+// STYLE REQUIREMENTS PATTERN:
+// Each selector can include:
+//   - requiredStyles: Object with CSS property values that must match
+//   - suggestedTailwind: String of Tailwind classes that achieve the required styles
+// This provides a single source of truth for both element selection AND styling
 
 export class JaceAISitePOM {
   constructor(page, siteType = 'auto') {
@@ -234,17 +240,43 @@ export class JaceAISitePOM {
         title: {
           jaceSelector: 'h1[class*="lg:mt-10"][class*="pb-2"]',
           selector: 'h1[class*="lg:mt-10"][class*="pb-2"], h1.text-hero[class*="lg:mt-10"]',
+          // Style requirements based on Jace reference
+          requiredStyles: {
+            fontSize: '60px',
+            fontWeight: '600',
+            lineHeight: '60px',
+            letterSpacing: '-1.5px',
+            fontFamily: /Geist|Inter/
+          },
+          // Tailwind classes that achieve these styles
+          suggestedTailwind: 'text-[60px] font-semibold leading-[60px] tracking-[-1.5px]'
         },
         // Both follow h1 + p pattern
         subtitle: {
           jaceSelector: 'h1 + p[class*="text-"]',
           selector: 'h1 + p[class*="text-"], h1 + p',
+          requiredStyles: {
+            fontSize: '18px',
+            fontWeight: '400',
+            lineHeight: '28px',
+            color: 'rgba(255, 246, 238, 0.72)'
+          },
+          suggestedTailwind: 'text-lg font-normal leading-7 text-secondary'
         },
         // Primary CTA mapping - Jace: bg-surface-highlight, Ralph: bg-primary-yellow
         ctaButton: {
           jaceSelector: 'button[class*="bg-surface-highlight"][class*="text-text-body-inverted"]',
           selector:
             'button[class*="bg-primary-yellow"][class*="btn-primary"], button[class*="bg-surface-highlight"]',
+          requiredStyles: {
+            fontSize: '14px',
+            fontWeight: '500',
+            backgroundColor: 'rgb(255, 220, 97)',
+            color: 'rgb(41, 48, 69)',
+            borderRadius: '6px',
+            padding: '0px 24px'
+          },
+          suggestedTailwind: 'btn-primary text-sm font-medium bg-accent text-accent-text px-6 rounded-md'
         },
         ctaButtonHero: {
           jaceSelector: 'main button[class*="bg-surface-highlight"][class*="h-10"]',
@@ -278,6 +310,12 @@ export class JaceAISitePOM {
         navLinks: {
           jaceSelector: 'nav a[class*="text-md/6"][class*="font-semibold"]',
           selector: 'nav a[class*="nav-link"], nav a[class*="text-md/6"]',
+          requiredStyles: {
+            fontSize: '16px',
+            fontWeight: '600',
+            lineHeight: '24px'
+          },
+          suggestedTailwind: 'text-base font-semibold leading-6'
         },
         features: 'a[href="/"]',
         company: 'a[href="/about"]',
@@ -607,6 +645,12 @@ export class JaceAISitePOM {
         sectionTitles: {
           selector: 'h2.heading-2',
           jaceSelector: 'h2.text-base\\/7.font-semibold.text-highlight-yellow',
+          requiredStyles: {
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'rgb(255, 220, 97)'
+          },
+          suggestedTailwind: 'text-base font-semibold text-accent'
         },
         pricingTitle: {
           selector: 'h2.heading-2',

@@ -1,8 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/layout/Header.astro';
+import Section from '../../components/layout/Section.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Button from '../../components/primitives/Button.astro';
+import Newsletter from '../../components/features/Newsletter.astro';
 ---
 
 <Layout title="Finding Hidden Risks in 30 Minutes with AI Agents | Ralph">
@@ -10,8 +12,13 @@ import Button from '../../components/primitives/Button.astro';
     <Header />
     <main>
       <!-- Article Header -->
-      <section class="relative pt-24 pb-12 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+        class="relative"
+      >
           <div class="text-center mb-8">
             <a href="/ralph-web/learn" class="text-yellow-400 hover:text-yellow-300 font-semibold">
               ← Back to Learn
@@ -26,11 +33,15 @@ import Button from '../../components/primitives/Button.astro';
             <span>Risk Management</span>
           </div>
         </div>
-      </section>
+      </Section>
 
       <!-- Article Content -->
-      <section class="py-16 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+      >
           <article class="prose prose-lg prose-invert max-w-none">
             <!-- The Monday Morning That Changed Everything -->
             <h2 class="text-3xl font-bold text-white mb-6">
@@ -476,10 +487,14 @@ import Button from '../../components/primitives/Button.astro';
             </p>
           </article>
         </div>
-      </section>
+      </Section>
 
       <!-- CTA Section -->
-      <section class="py-20" class="bg-card">
+      <Section 
+        spacing="lg" 
+        background="card" 
+        as="section"
+      >
         <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 class="text-3xl font-bold text-white mb-4">
             See how Ralph agents can monitor all your portfolios 24/7
@@ -491,29 +506,25 @@ import Button from '../../components/primitives/Button.astro';
           <Button variant="primary" size="lg" href="/ralph-web/#">Book a Demo →</Button>
           <p class="text-gray-400 mt-4">See your portfolio's hidden risks in real-time.</p>
         </div>
-      </section>
+      </Section>
 
       <!-- Newsletter Signup -->
-      <section class="py-16 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
-          <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-8 text-center">
-            <h3 class="text-2xl font-bold text-white mb-4">
-              Ready to stop missing critical risks?
-            </h3>
-            <p class="text-white/90 mb-6">
-              Join 500+ PE professionals receiving weekly AI risk alerts.
-            </p>
-            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="flex-1 px-4 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-              <Button variant="primary" type="submit">Subscribe to Risk Intelligence →</Button>
-            </form>
-          </div>
+      <Section 
+        spacing="md" 
+        background="secondary" 
+        as="section"
+        maxWidth="lg"
+      >
+          <Newsletter 
+            title="AI Risk Intelligence Brief"
+            subtitle="Stay ahead of portfolio risks with AI-powered monitoring. Weekly insights on risk detection patterns, early warning indicators, and proactive management strategies from leading PE firms."
+            variant="enterprise"
+            placeholder="Enter your business email"
+            buttonText="Subscribe to Risk Intelligence"
+            countText="500+ PE professionals receive our risk alerts"
+          />
         </div>
-      </section>
+      </Section>
     </main>
     <Footer />
   </div>

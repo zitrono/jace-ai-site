@@ -97,7 +97,7 @@ export class StateManager {
   private subscriptions: Map<string, StateSubscription[]> = new Map();
   private scrollLockStack: string[] = [];
   private storedScrollPosition: number = 0;
-  private globalFunctions: Map<string, Function> = new Map();
+  private globalFunctions: Map<string, (() => void)> = new Map();
   private cleanupQueue: (() => void)[] = [];
 
   private constructor() {
@@ -308,7 +308,7 @@ export class StateManager {
   /**
    * Register a global function (for backward compatibility)
    */
-  public registerGlobalFunction(name: string, fn: Function): void {
+  public registerGlobalFunction(name: string, fn: (() => void)): void {
     this.globalFunctions.set(name, fn);
     (window as any)[name] = fn;
   }

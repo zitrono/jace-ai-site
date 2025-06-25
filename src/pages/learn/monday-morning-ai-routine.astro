@@ -1,8 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/layout/Header.astro';
+import Section from '../../components/layout/Section.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Button from '../../components/primitives/Button.astro';
+import Newsletter from '../../components/features/Newsletter.astro';
 ---
 
 <Layout title="The Monday Morning AI Routine for Deal Partners | Ralph">
@@ -10,27 +12,35 @@ import Button from '../../components/primitives/Button.astro';
     <Header />
     <main>
       <!-- Article Header -->
-      <section class="relative pt-24 pb-12 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
-          <div class="text-center mb-8">
-            <a href="/ralph-web/learn" class="text-yellow-400 hover:text-yellow-300 font-semibold">
-              ← Back to Learn
-            </a>
-          </div>
-          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
-            The Monday Morning AI Routine for Deal Partners
-          </h1>
-          <div class="flex items-center justify-center gap-4 text-gray-400">
-            <span>10 min read</span>
-            <span>•</span>
-            <span>AI Strategy</span>
-          </div>
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+        class="relative"
+      >
+        <div class="text-center mb-8">
+          <a href="/ralph-web/learn" class="text-yellow-400 hover:text-yellow-300 font-semibold">
+            ← Back to Learn
+          </a>
         </div>
-      </section>
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
+          The Monday Morning AI Routine for Deal Partners
+        </h1>
+        <div class="flex items-center justify-center gap-4 text-gray-400">
+          <span>10 min read</span>
+          <span>•</span>
+          <span>AI Strategy</span>
+        </div>
+      </Section>
 
       <!-- Article Content -->
-      <section class="py-16 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <Section 
+        spacing="md" 
+        background="primary" 
+        as="section"
+        maxWidth="lg"
+      >
           <article class="prose prose-lg prose-invert max-w-none">
             <!-- The Choice -->
             <h2 class="text-3xl font-bold text-white mb-6">The Choice</h2>
@@ -272,27 +282,24 @@ import Button from '../../components/primitives/Button.astro';
           </p>
           <Button variant="primary" size="lg" href="/ralph-web/#">Book a Demo</Button>
         </div>
-      </section>
+      </Section>
 
       <!-- Newsletter Signup -->
-      <section class="py-16 bg-primary">
-        <div class="mx-auto max-w-4xl px-6 lg:px-8">
-          <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-8 text-center">
-            <h3 class="text-2xl font-bold text-white mb-4">Get weekly AI insights for PE</h3>
-            <p class="text-white/90 mb-6">
-              Join 10,000+ PE leaders getting weekly AI transformation strategies.
-            </p>
-            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="flex-1 px-4 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-              <Button variant="primary" type="submit">Subscribe</Button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <Section 
+        spacing="md" 
+        background="secondary" 
+        as="section"
+        maxWidth="lg"
+      >
+        <Newsletter 
+          title="Weekly AI Insights for PE Leaders"
+          subtitle="Practical AI implementation strategies, deal intelligence techniques, and portfolio optimization insights delivered every Monday. Join partners at leading firms staying ahead of the AI transformation."
+          variant="enterprise"
+          placeholder="Enter your business email"
+          buttonText="Subscribe"
+          countText="10,000+ PE leaders receive our AI intelligence brief"
+        />
+      </Section>
     </main>
     <Footer />
   </div>

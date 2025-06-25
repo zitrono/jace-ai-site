@@ -1,270 +1,306 @@
 ---
 /**
- * LoginModal - Modal dialog for private beta access requests
+ * LoginModal - Professional login modal with form validation and error handling
  * @example
- * <LoginModal
- *   title="Private Beta Access"
- *   contactEmail="contact@example.com"
- *   message="Ralph is currently in private beta."
- * />
+ * <LoginModal />
  */
 
 import Button from '../primitives/Button.astro';
 import type { BaseComponentProps } from '@/types/components';
 
 export interface Props extends BaseComponentProps {
-  /** Modal title */
-  title?: string;
-  /** Main message content */
-  message?: string;
-  /** Contact email for beta access requests */
-  contactEmail?: string;
-  /** HTML id attribute */
-  id?: string;
+  /** Whether to show the modal by default */
+  open?: boolean;
 }
 
 const {
   class: className = '',
-  title = 'Private Beta Access',
-  message = 'Ralph is currently in private beta. Please contact us for access to our AI-powered private equity platform.',
-  contactEmail = 'Konstantin@beneficious.com',
-  id = 'login-modal',
+  open = false,
 } = Astro.props;
 ---
 
-<div
-  id={id}
-  class={`hidden fixed inset-0 z-50 flex items-center justify-center animate-fade-in ${className}`}
+<!-- Modal Overlay -->
+<div 
+  id="loginModal" 
+  class={`fixed inset-0 z-50 ${open ? '' : 'hidden'} ${className}`}
+  aria-labelledby="loginModalTitle"
   role="dialog"
   aria-modal="true"
-  aria-labelledby="modal-title"
-  aria-describedby="modal-description"
 >
-  <div
-    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
-    onclick="closeLoginModal()"
-    aria-hidden="true"
-  >
-  </div>
-  <div class="relative bg-card rounded-lg p-8 max-w-md w-full mx-4 border border-gray-700">
-    <button
-      onclick="closeLoginModal()"
-      class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-      aria-label="Close modal"
-      tabindex="0"
-    >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
+  <!-- Backdrop -->
+  <div 
+    class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+    id="loginBackdrop"
+  ></div>
 
-    <div class="text-center">
-      <h2 id="modal-title" class="text-2xl font-bold text-white mb-4">{title}</h2>
-      <p id="modal-description" class="text-secondary mb-6">
-        {message}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <Button variant="secondary" onclick="closeLoginModal()" class="flex-1">Close</Button>
-        <Button
-          variant="primary"
-          href={`mailto:${contactEmail}?subject=Ralph%20Beta%20Access%20Request&body=Hello%2C%20I%20would%20like%20to%20request%20access%20to%20Ralph%27s%20private%20beta.`}
-          class="flex-1"
+  <!-- Modal Content -->
+  <div class="fixed inset-0 z-10 overflow-y-auto">
+    <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+      <div 
+        class="relative transform overflow-hidden rounded-lg bg-background border border-accent/20 shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md"
+        id="loginModalContent"
+      >
+        <!-- Close Button -->
+        <button
+          type="button"
+          class="absolute right-4 top-4 text-muted hover:text-primary transition-colors z-10"
+          id="closeLoginModal"
+          aria-label="Close login modal"
         >
-          Request Access
-        </Button>
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Modal Header and Form -->
+        <div class="border-l-4 border-accent bg-card/30 px-8 py-10">
+          <!-- Logo and Title -->
+          <div class="text-center mb-8">
+            <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-background font-bold" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <h2 id="loginModalTitle" class="text-xl font-bold text-primary mb-2">Sign In to Ralph</h2>
+            <p class="text-secondary text-sm">Access your PE intelligence platform</p>
+          </div>
+
+          <!-- Login Form -->
+          <form id="modalLoginForm" class="space-y-6">
+            <!-- Username Field -->
+            <div>
+              <label for="modalUsername" class="block text-sm font-medium text-primary mb-2">
+                Username or Email
+              </label>
+              <input
+                type="text"
+                id="modalUsername"
+                name="username"
+                required
+                class="w-full px-4 py-3 bg-background border border-neutral-600 rounded-md text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
+                placeholder="Enter your username or email"
+              />
+            </div>
+
+            <!-- Password Field -->
+            <div>
+              <label for="modalPassword" class="block text-sm font-medium text-primary mb-2">
+                Password
+              </label>
+              <div class="relative">
+                <input
+                  type="password"
+                  id="modalPassword"
+                  name="password"
+                  required
+                  class="w-full px-4 py-3 bg-background border border-neutral-600 rounded-md text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors pr-12"
+                  placeholder="Enter your password"
+                />
+                <button
+                  type="button"
+                  id="modalTogglePassword"
+                  class="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-primary transition-colors"
+                >
+                  <svg id="modalEyeIcon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="modalErrorMessage" class="hidden bg-red-900/20 border border-red-500/30 rounded-md p-3">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <span id="modalErrorText" class="text-sm text-red-400"></span>
+              </div>
+            </div>
+
+            <!-- Remember Me -->
+            <div class="flex items-center">
+              <input type="checkbox" id="modalRememberMe" class="w-4 h-4 text-accent bg-background border-neutral-600 rounded focus:ring-accent focus:ring-2">
+              <label for="modalRememberMe" class="ml-2 text-sm text-secondary">Remember me</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+              <Button 
+                type="submit" 
+                variant="primary" 
+                size="lg" 
+                class="w-full relative"
+                id="modalLoginButton"
+              >
+                <span id="modalLoginButtonText">Sign In</span>
+                <div id="modalLoginSpinner" class="hidden absolute inset-0 flex items-center justify-center">
+                  <svg class="animate-spin w-5 h-5 text-background" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+              </Button>
+            </div>
+          </form>
+
+          <!-- Alternative Actions -->
+          <div class="mt-6 pt-6 border-t border-neutral-600 space-y-3">
+            <button
+              type="button"
+              class="w-full text-sm text-accent hover:text-accent/80 transition-colors"
+              onclick="window.location.href='/ralph-web/login'"
+            >
+              Forgot password?
+            </button>
+            <div class="text-center text-xs text-muted">
+              Don't have an account? 
+              <a href="/ralph-web/#" class="text-accent hover:text-accent/80">Request demo access</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Performance-optimized modal with centralized state and focus management -->
-<script type="module">
-  import { fadeIn, fadeOut, initAnimationSystem } from '../../utils/animation-manager.js';
-  import { initializeStateManager } from '../../utils/state-manager.js';
-  import { FocusManager } from '../../utils/focus-manager.js';
+<!-- Client-side JavaScript -->
+<script>
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Modal elements
+    const loginModal = document.getElementById('loginModal');
+    const loginBackdrop = document.getElementById('loginBackdrop');
+    const closeLoginModalBtn = document.getElementById('closeLoginModal');
+    const modalLoginForm = document.getElementById('modalLoginForm');
+    const modalUsernameInput = document.getElementById('modalUsername');
+    const modalPasswordInput = document.getElementById('modalPassword');
+    const modalTogglePasswordBtn = document.getElementById('modalTogglePassword');
+    const modalEyeIcon = document.getElementById('modalEyeIcon');
+    const modalErrorMessage = document.getElementById('modalErrorMessage');
+    const modalErrorText = document.getElementById('modalErrorText');
+    const modalLoginButton = document.getElementById('modalLoginButton');
+    const modalLoginButtonText = document.getElementById('modalLoginButtonText');
+    const modalLoginSpinner = document.getElementById('modalLoginSpinner');
 
-  // Optimized modal functionality with centralized state and focus management
-  function initializeLoginModal() {
-    // Initialize systems
-    initAnimationSystem();
-    const stateManager = initializeStateManager();
-    
-    const modal = document.getElementById('login-modal');
-    if (!modal) return;
+    // Global functions for external access
+    window.openLoginModal = () => {
+      loginModal?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      // Focus first input
+      setTimeout(() => modalUsernameInput?.focus(), 100);
+    };
 
-    // Initialize focus manager for modal
-    const focusManager = new FocusManager(modal, {
-      autoFocus: false, // We'll handle focus manually after animation
-      handleEscape: false, // State manager handles escape globally
-      onEscape: () => {
-        stateManager.setState('loginModal', { isOpen: false }, { source: 'focus-manager-escape' });
-      }
-    });
-    
-    // Connect focus manager to state manager
-    focusManager.setStateManager(stateManager, 'loginModal');
+    window.closeLoginModal = () => {
+      loginModal?.classList.add('hidden');
+      document.body.style.overflow = '';
+      // Clear form
+      modalLoginForm?.reset();
+      modalErrorMessage?.classList.add('hidden');
+    };
 
-    let modalAnimation = null;
+    // Maintain backward compatibility for existing calls
+    window.showLoginModal = window.openLoginModal;
 
-    // Subscribe to login modal state changes
-    const unsubscribe = stateManager.subscribe('loginModal', (newState, oldState, source) => {
-      // Handle state-driven UI updates
-      if (newState.isOpen !== oldState.isOpen) {
-        if (newState.isOpen) {
-          performShowModal();
-        } else {
-          performHideModal();
-        }
-      }
-      
-      // Handle animation state
-      if (newState.isAnimating !== oldState.isAnimating) {
-        if (newState.isAnimating) {
-          modal.classList.add('is-animating');
-        } else {
-          modal.classList.remove('is-animating');
-        }
-      }
-      
-      // Handle focus management based on state changes
-      if (newState.isOpen !== oldState.isOpen) {
-        if (newState.isOpen) {
-          // Store focus when opening
-          focusManager.storeFocus();
-          // Enable focus trap after animation completes
-          if (!newState.isAnimating) {
-            focusManager.enableFocusTrap();
-          }
-        } else {
-          // Disable focus trap and restore focus when closing
-          focusManager.disableFocusTrap();
-          focusManager.restoreFocus();
-        }
+    // Close modal handlers
+    closeLoginModalBtn?.addEventListener('click', window.closeLoginModal);
+    loginBackdrop?.addEventListener('click', window.closeLoginModal);
+
+    // Escape key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !loginModal?.classList.contains('hidden')) {
+        window.closeLoginModal();
       }
     });
 
-    // Show modal implementation
-    const performShowModal = () => {
-      const state = stateManager.getState('loginModal');
-      if (state.isOpen && state.isAnimating) return; // Prevent race conditions
+    // Password visibility toggle
+    modalTogglePasswordBtn?.addEventListener('click', () => {
+      const isPassword = modalPasswordInput.type === 'password';
+      modalPasswordInput.type = isPassword ? 'text' : 'password';
       
-      // Update state to show animating
-      stateManager.setState('loginModal', { isAnimating: true }, { source: 'show-start' });
-      
-      // Clean up any existing animation
-      if (modalAnimation) {
-        modalAnimation.cleanup();
-        modalAnimation = null;
-      }
+      // Update eye icon
+      modalEyeIcon.innerHTML = isPassword ? 
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>' :
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+    });
 
-      // Use centralized scroll lock
-      stateManager.lockBodyScroll('loginModal', {
-        storePosition: true,
-        preventTouch: true,
-        className: 'modal-open'
-      });
-
-      // Show modal with animation
-      modal.classList.remove('hidden');
-      modalAnimation = fadeIn(modal, {
-        duration: 300,
-        onComplete: () => {
-          // Enable focus trap and focus first element
-          focusManager.enableFocusTrap();
-          
-          // Update state - animation complete
-          stateManager.setState('loginModal', { isAnimating: false }, { source: 'show-complete' });
-          modalAnimation = null;
+    // Hide error message when user starts typing
+    [modalUsernameInput, modalPasswordInput].forEach(input => {
+      input?.addEventListener('input', () => {
+        if (!modalErrorMessage?.classList.contains('hidden')) {
+          modalErrorMessage.classList.add('hidden');
         }
       });
-    };
+    });
 
-    // Hide modal implementation
-    const performHideModal = () => {
-      const state = stateManager.getState('loginModal');
-      if (!state.isOpen && state.isAnimating) return; // Prevent race conditions
+    // Form submission handler
+    modalLoginForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
       
-      // Update state to show animating
-      stateManager.setState('loginModal', { isAnimating: true }, { source: 'hide-start' });
-      
-      // Clean up any existing animation
-      if (modalAnimation) {
-        modalAnimation.cleanup();
-        modalAnimation = null;
+      const username = modalUsernameInput.value.trim();
+      const password = modalPasswordInput.value;
+
+      // Basic client-side validation
+      if (!username || !password) {
+        showModalError('Please enter both username and password.');
+        return;
       }
 
-      // Hide modal with animation
-      modalAnimation = fadeOut(modal, {
-        duration: 300,
-        onComplete: () => {
-          modal.classList.add('hidden');
-          
-          // Use centralized scroll unlock
-          stateManager.unlockBodyScroll('loginModal');
-          
-          // Update state - animation complete
-          stateManager.setState('loginModal', { 
-            isAnimating: false
-          }, { source: 'hide-complete' });
-          modalAnimation = null;
-        }
-      });
-    };
+      // Show loading state
+      setModalLoadingState(true);
 
-    // Public show/hide functions (for backward compatibility)
-    const showLoginModal = () => {
-      stateManager.setState('loginModal', { isOpen: true }, { source: 'user-action' });
-    };
+      try {
+        // Simulate authentication with delay (1.5-2.5 seconds)
+        const delay = Math.random() * 1000 + 1500;
+        await new Promise(resolve => setTimeout(resolve, delay));
 
-    const closeLoginModal = () => {
-      stateManager.setState('loginModal', { isOpen: false }, { source: 'user-action' });
-    };
+        // Always return authentication error for demo purposes
+        throw new Error('Invalid username or password. Please check your credentials and try again.');
 
-    // Register global functions for backward compatibility
-    stateManager.registerGlobalFunction('showLoginModal', showLoginModal);
-    stateManager.registerGlobalFunction('closeLoginModal', closeLoginModal);
-
-    // Focus management is now handled by the centralized FocusManager
-
-    // State manager handles escape key globally, but we can also listen for state changes from it
-    const globalUnsubscribe = stateManager.subscribe('loginModal', (newState, oldState, source) => {
-      if (source === 'escape-key' && newState.isOpen === false) {
-        // State manager triggered close via escape, UI will update automatically
+      } catch (error) {
+        showModalError(error.message);
+      } finally {
+        setModalLoadingState(false);
       }
     });
 
-    // Cleanup function
-    const cleanup = () => {
-      if (modalAnimation) {
-        modalAnimation.cleanup();
-        modalAnimation = null;
+    // Show error message
+    function showModalError(message) {
+      modalErrorText.textContent = message;
+      modalErrorMessage?.classList.remove('hidden');
+      
+      // Shake animation for the form
+      modalLoginForm.style.animation = 'shake 0.5s';
+      setTimeout(() => {
+        modalLoginForm.style.animation = '';
+      }, 500);
+    }
+
+    // Loading state management
+    function setModalLoadingState(loading) {
+      modalLoginButton.disabled = loading;
+      
+      if (loading) {
+        modalLoginButtonText?.classList.add('invisible');
+        modalLoginSpinner?.classList.remove('hidden');
+        modalLoginButton?.classList.add('opacity-75', 'cursor-not-allowed');
+      } else {
+        modalLoginButtonText?.classList.remove('invisible');
+        modalLoginSpinner?.classList.add('hidden');
+        modalLoginButton?.classList.remove('opacity-75', 'cursor-not-allowed');
       }
-      focusManager.destroy();
-      unsubscribe();
-      globalUnsubscribe();
-      stateManager.unlockBodyScroll('loginModal');
-      stateManager.unregisterGlobalFunction('showLoginModal');
-      stateManager.unregisterGlobalFunction('closeLoginModal');
-    };
+    }
 
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', cleanup);
-    
-    // Return cleanup for external use
-    return cleanup;
-  }
-
-  // Initialize immediately for interactive modal
-  let cleanup = null;
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      cleanup = initializeLoginModal();
-    });
-  } else {
-    cleanup = initializeLoginModal();
-  }
+    // Add CSS for shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+        20%, 40%, 60%, 80% { transform: translateX(2px); }
+      }
+    `;
+    document.head.appendChild(style);
+  });
 </script>

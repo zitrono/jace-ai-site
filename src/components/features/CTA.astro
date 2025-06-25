@@ -1,16 +1,33 @@
 ---
-// CTA section component - matching original "Start saving 90%" block
+/**
+ * CTA - Call-to-action section component with gradient background
+ * @example
+ * <CTA 
+ *   title="Ready to transform your portfolio intelligence?"
+ *   subtitle="See what Ralph can do for your firm."
+ *   ctaText="Book a Demo"
+ *   ctaHref="/contact"
+ * />
+ */
+
 import Button from '../primitives/Button.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Title text for the CTA section */
   title?: string;
+  /** Subtitle text */
   subtitle?: string;
+  /** Text for the CTA button */
   ctaText?: string;
+  /** Link for the CTA button */
   ctaHref?: string;
+  /** Background style variant */
   background?: 'gradient' | 'solid';
+  /** Whether to show the radial gradient pattern */
   showPattern?: boolean;
+  /** Layout variant */
   variant?: 'default' | 'compact';
 }
 
@@ -32,7 +49,7 @@ const {
       class={`mx-auto ${variant === 'compact' ? 'mt-12 max-w-4xl' : 'mt-20 max-w-7xl sm:mt-32'} sm:px-6 lg:px-8 overflow-hidden`}
     >
       <div
-        class="cta-gradient-container relative isolate overflow-hidden px-6 py-20 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-24"
+        class="relative isolate overflow-hidden px-6 py-20 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-24 bg-gradient-cta-section"
       >
         <h2
           class="mx-auto max-w-xl text-center text-4xl font-semibold tracking-tight text-text-inverted sm:text-5xl"
@@ -54,7 +71,7 @@ const {
             <svg
               viewBox="0 0 1024 1024"
               aria-hidden="true"
-              class="cta-pattern-svg absolute left-1/2 top-1/2 -z-10 size-[64rem] max-w-none -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              class="absolute left-1/2 top-1/2 -z-10 size-[64rem] max-w-[100vw] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             >
               <circle
                 r="512"
@@ -72,8 +89,8 @@ const {
                   gradientUnits="userSpaceOnUse"
                   gradientTransform="translate(512 512) rotate(90) scale(512)"
                 >
-                  <stop stop-color="rgba(196, 164, 221, 0.8)" />
-                  <stop offset="1" stop-color="rgba(248, 174, 207, 0.2)" stop-opacity="0" />
+                  <stop stop-color="rgba(139, 92, 246, 0.8)" />
+                  <stop offset="1" stop-color="rgba(67, 56, 202, 0.2)" stop-opacity="0" />
                 </radialGradient>
               </defs>
             </svg>
@@ -83,13 +100,3 @@ const {
     </div>
   </div>
 </Section>
-
-<style>
-  .cta-gradient-container {
-    background: linear-gradient(135deg, rgb(196, 164, 221), rgb(248, 174, 207), rgb(255, 220, 97));
-  }
-
-  .cta-pattern-svg {
-    max-width: 100vw;
-  }
-</style>

@@ -2,7 +2,9 @@
 // Primitive Icon component for consistent SVG icons
 // Provides a single source for all icon SVGs with consistent styling
 
-export interface Props {
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   name:
     | 'check'
     | 'chevron-down'
@@ -22,6 +24,7 @@ const {
   class: className = '',
   size = 'base',
   'aria-hidden': ariaHidden = true,
+  ...rest
 } = Astro.props;
 
 const sizeClasses = {
@@ -51,6 +54,7 @@ const iconPaths = {
   stroke="currentColor"
   viewBox="0 0 24 24"
   aria-hidden={ariaHidden}
+  {...rest}
 >
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPaths[name]}></path>
 </svg>

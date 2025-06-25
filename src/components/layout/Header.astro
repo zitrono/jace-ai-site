@@ -1,11 +1,21 @@
 ---
-// Enhanced Header component with TypeScript interface and accessibility improvements
-import Button from '../primitives/Button.astro';
-import type { HTMLAttributes } from 'astro/types';
+/**
+ * Header - Main site header with navigation and CTA buttons
+ * @example
+ * <Header 
+ *   logoText="ralph"
+ *   logoHref="/ralph-web/"
+ *   sticky={true}
+ *   showCta={true}
+ *   ctaText="Book a Demo"
+ * />
+ */
 
-export interface HeaderProps extends HTMLAttributes<'header'> {
-  /** Additional CSS classes */
-  class?: string;
+import Button from '../primitives/Button.astro';
+import MobileMenu from './MobileMenu.astro';
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   /** Whether the header should stick to the top when scrolling */
   sticky?: boolean;
   /** Whether the header should have a transparent background */
@@ -81,8 +91,7 @@ const headerClasses = [
     aria-label="Main navigation"
   >
     <div
-      class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all duration-300"
-      style="height: 64px;"
+      class="flex items-center justify-between w-full px-6 py-3 lg:px-8 lg:py-4 transition-all duration-300 h-mobile-header-inner"
     >
       {/* Logo */}
       {
@@ -106,7 +115,7 @@ const headerClasses = [
             <Button
               variant="primary"
               size="sm"
-              class="text-xs sm:text-sm min-h-[44px] min-w-[44px] touch-manipulation"
+              class="min-h-[44px] min-w-[44px] touch-manipulation"
             >
               <span class="hidden min-[360px]:inline">{ctaText}</span>
               <span class="inline min-[360px]:hidden">Book Demo</span>
@@ -121,6 +130,7 @@ const headerClasses = [
           id="mobile-menu-button"
           type="button"
           class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+          onclick="openMobileMenu()"
           aria-label="Open main menu"
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -182,215 +192,12 @@ const headerClasses = [
       }
     </div>
   </nav>
-
-  {/* Mobile Menu Overlay - Matching Jace structure exactly */}
-  <div
-    id="mobile-menu"
-    class="hidden fixed inset-0 z-50 lg:hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="mobile-menu-title"
-    data-mobile-menu-overlay
-  >
-    {/* Transparent overlay - matches Jace's rgba(0,0,0,0) */}
-    <div class="fixed inset-0 bg-transparent" aria-hidden="true"></div>
-
-    {/* Menu Panel - Max 320px width, full width on smaller screens */}
-    <div
-      class="fixed right-0 top-0 bottom-0 w-full max-w-[320px] h-screen bg-neutral-700 p-6 overflow-auto transform translate-x-full transition-transform duration-300 ease-in-out z-50"
-      data-mobile-menu-panel
-      style="background-color: rgb(40, 40, 40);"
-    >
-      <div class="flex justify-end mb-6">
-        <button
-          id="mobile-menu-close"
-          type="button"
-          class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-          aria-label="Close menu"
-        >
-          <svg
-            class="size-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-
-      <nav class="flex flex-col" role="navigation" aria-label="Mobile navigation">
-        <h2 id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</h2>
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-lg text-white hover:text-gray-300 transition-colors duration-200 font-normal block leading-10 mobile-nav-link focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-800"
-              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-            >
-              {link.text}
-            </a>
-          ))
-        }
-
-        {
-          showCta && (
-            <>
-              {/* Button container - responsive layout like Jace */}
-              <div class="mt-6 flex flex-row gap-3 w-full">
-                {/* Login button - hidden at very small viewports like Jace */}
-                <button
-                  type="button"
-                  id="mobile-login-button"
-                  class="hidden min-[360px]:flex flex-1 items-center justify-center text-base bg-neutral-600 text-white rounded-lg hover:bg-neutral-500 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-800"
-                  style="background-color: rgb(65, 65, 65); color: rgb(255, 246, 238); font-size: 16px; border-radius: 8px; padding: 10px 24px;"
-                >
-                  {loginText}
-                </button>
-                
-                {/* CTA Button - full width at small viewports, shared width at larger viewports */}
-                <button
-                  type="button"
-                  class="flex-1 h-10 bg-yellow-400 text-neutral-900 rounded-lg font-medium hover:bg-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-neutral-800 mobile-cta-button"
-                  style="background-color: rgb(255, 220, 97); color: rgb(40, 40, 40); border-radius: 8px;"
-                >
-                  <span class="hidden min-[360px]:inline">{ctaText}</span>
-                  <span class="inline min-[360px]:hidden">Book Demo</span>
-                </button>
-              </div>
-            </>
-          )
-        }
-      </nav>
-    </div>
-  </div>
-
-  <!-- Performance-optimized mobile menu script -->
-  <script>
-    // Mobile menu functionality optimized for performance
-    function initializeMobileMenu() {
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenuClose = document.getElementById('mobile-menu-close');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const mobileMenuPanel = document.querySelector('[data-mobile-menu-panel]');
-
-      if (!mobileMenuButton || !mobileMenu || !mobileMenuPanel) return;
-
-      // Performance-optimized show/hide with hardware acceleration
-      const showMenu = () => {
-        // Use will-change for better performance
-        mobileMenuPanel.style.willChange = 'transform';
-        mobileMenu.classList.remove('hidden');
-
-        requestAnimationFrame(() => {
-          mobileMenuPanel.style.transform = 'translateX(0)';
-          mobileMenuButton.setAttribute('aria-expanded', 'true');
-
-          // Focus management
-          const firstFocusable = mobileMenu.querySelector('a, button');
-          if (firstFocusable) firstFocusable.focus();
-
-          // Prevent body scroll
-          document.body.style.overflow = 'hidden';
-        });
-      };
-
-      const hideMenu = () => {
-        mobileMenuPanel.style.transform = 'translateX(100%)';
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-
-        // Restore body scroll
-        document.body.style.overflow = '';
-
-        setTimeout(() => {
-          mobileMenu.classList.add('hidden');
-          mobileMenuPanel.style.willChange = 'auto';
-
-          // Return focus to menu button
-          if (mobileMenuButton) mobileMenuButton.focus();
-        }, 300);
-      };
-
-      // Event listeners with performance optimizations
-      mobileMenuButton.addEventListener('click', showMenu, { passive: true });
-
-      if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', hideMenu, { passive: true });
-      }
-
-      // Optimized backdrop click handling
-      mobileMenu.addEventListener(
-        'click',
-        (e) => {
-          if (e.target === mobileMenu || e.target.hasAttribute('data-mobile-menu-overlay')) {
-            hideMenu();
-          }
-        },
-        { passive: true }
-      );
-
-      // Keyboard handling
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-          hideMenu();
-        }
-      });
-
-      // Touch handling for mobile swipe-to-close
-      let startX = 0;
-      let currentX = 0;
-      let isDragging = false;
-
-      const handleTouchStart = (e) => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-        mobileMenuPanel.style.transition = 'none';
-      };
-
-      const handleTouchMove = (e) => {
-        if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const deltaX = currentX - startX;
-
-        if (deltaX > 0) {
-          const translateX = Math.min(deltaX, window.innerWidth);
-          mobileMenuPanel.style.transform = `translateX(${translateX}px)`;
-        }
-      };
-
-      const handleTouchEnd = () => {
-        if (!isDragging) return;
-        isDragging = false;
-
-        const deltaX = currentX - startX;
-        mobileMenuPanel.style.transition = '';
-
-        if (deltaX > window.innerWidth * 0.3) {
-          hideMenu();
-        } else {
-          mobileMenuPanel.style.transform = 'translateX(0)';
-        }
-      };
-
-      if ('ontouchstart' in window) {
-        mobileMenuPanel.addEventListener('touchstart', handleTouchStart, { passive: true });
-        mobileMenuPanel.addEventListener('touchmove', handleTouchMove, { passive: true });
-        mobileMenuPanel.addEventListener('touchend', handleTouchEnd, { passive: true });
-      }
-
-      // Cleanup on page unload
-      window.addEventListener('beforeunload', () => {
-        document.body.style.overflow = '';
-      });
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeMobileMenu);
-    } else {
-      initializeMobileMenu();
-    }
-  </script>
 </header>
+
+<!-- Mobile Menu Component - Outside header to prevent positioning conflicts -->
+<MobileMenu 
+  navigationLinks={navLinks}
+  showCta={showCta}
+  ctaText={ctaText}
+  loginText={loginText}
+/>

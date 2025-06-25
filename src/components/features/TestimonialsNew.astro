@@ -1,7 +1,20 @@
 ---
-// Testimonials section - PE leader quotes with design tokens
+/**
+ * TestimonialsNew - Testimonials section with PE leader quotes
+ * @example
+ * <TestimonialsNew 
+ *   title="Leading PE Firms Are Embracing AI"
+ *   subtitle="Industry Leaders on AI Adoption"
+ *   columns={3}
+ *   testimonials={[
+ *     { id: 't1', quote: 'Quote', author: 'Name', title: 'Title', company: 'Company' }
+ *   ]}
+ * />
+ */
+
 import Card from '../primitives/Card.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
 interface Testimonial {
   id: string;
@@ -13,13 +26,18 @@ interface Testimonial {
   logo?: string;
 }
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Section title */
   title?: string;
+  /** Section subtitle */
   subtitle?: string;
+  /** Layout style (currently only grid supported) */
   layout?: 'grid' | 'carousel';
+  /** Number of columns in the grid */
   columns?: 1 | 2 | 3;
+  /** Whether to show company logos */
   showLogos?: boolean;
+  /** Array of testimonial items */
   testimonials?: Testimonial[];
 }
 

@@ -1,9 +1,20 @@
 ---
-// Pricing section component with comprehensive TypeScript interface
+/**
+ * Pricing - Pricing plans section with feature comparison
+ * @example
+ * <Pricing 
+ *   title="Enterprise-Ready Pricing"
+ *   subtitle="Transparent pricing that scales"
+ *   showBothPlans={true}
+ *   currency="EUR"
+ * />
+ */
+
 import Button from '../primitives/Button.astro';
 import Card from '../primitives/Card.astro';
 import Icon from '../primitives/Icon.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
 interface PricingFeature {
   text: string;
@@ -23,12 +34,16 @@ interface PricingPlan {
   highlighted?: boolean;
 }
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Section title */
   title?: string;
+  /** Section subtitle */
   subtitle?: string;
+  /** Array of pricing plans */
   plans?: PricingPlan[];
+  /** Whether to show both pricing plans */
   showBothPlans?: boolean;
+  /** Currency to display */
   currency?: 'EUR' | 'USD';
 }
 

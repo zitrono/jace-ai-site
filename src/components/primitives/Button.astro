@@ -60,25 +60,25 @@ const {
 // Determine actual disabled state
 const isDisabled = disabled || state === 'disabled' || loading;
 
-// Size classes using Tailwind utilities
+// Size classes using Tailwind utilities - POM compliant font sizes
 const sizeClasses = {
-  xs: 'h-8 px-3 text-xs',
-  sm: 'h-9 px-4 text-sm',
-  md: 'h-10 px-6 text-sm', // POM compatible height
-  lg: 'h-11 px-8 text-base',
-  xl: 'h-12 px-10 text-lg',
+  xs: 'h-8 px-3 text-xs', // 14px - POM compliant
+  sm: 'h-9 px-4 text-xs', // 14px - POM compliant (was text-sm)
+  md: 'h-10 px-6 text-xs', // 14px - POM compliant
+  lg: 'h-11 px-8 text-xs', // 14px - POM compliant for hero CTA
+  xl: 'h-12 px-10 text-xs', // 14px - POM compliant (consistent with all sizes)
 };
 
 // Variant classes using design tokens
 const variantClasses = {
   primary:
-    'bg-primary-yellow text-pom-accent-text hover:bg-primary-yellow-hover focus:ring-primary-yellow/50 border-transparent',
+    'bg-accent text-accent-text hover:bg-accent/90 focus:ring-accent/50 border-transparent',
   secondary:
-    'bg-neutral-600 text-pom-text-secondary hover:bg-neutral-500 focus:ring-neutral-500/50 border-neutral-600',
+    'bg-secondary text-white hover:bg-secondary/80 focus:ring-secondary/50 border-secondary',
   outline:
-    'bg-transparent text-pom-text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
+    'bg-transparent text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
   ghost:
-    'bg-transparent text-pom-text-secondary hover:bg-neutral-600 focus:ring-neutral-500/50 border-transparent',
+    'bg-transparent text-secondary hover:bg-neutral-600 focus:ring-neutral-500/50 border-transparent',
   danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 border-transparent',
 };
 
@@ -216,36 +216,3 @@ const ariaAttributes = {
     </button>
   )
 }
-
-<!-- POM compatibility styles only - all other styles are Tailwind utilities -->
-<style>
-  /* POM compatibility - maintain exact selectors and properties */
-  .btn-primary {
-    background-color: var(--pom-accent);
-    color: var(--pom-accent-text);
-    padding: var(--pom-btn-padding);
-    height: var(--pom-btn-height);
-    border-radius: var(--pom-btn-radius);
-  }
-
-  .btn-secondary {
-    background-color: var(--pom-bg-secondary);
-    color: var(--pom-text-secondary);
-    padding: var(--pom-btn-padding);
-    height: var(--pom-btn-height);
-    border-radius: var(--pom-btn-radius);
-  }
-
-  .btn-sm {
-    height: 32px;
-    padding: 0 16px;
-    font-size: 14px;
-  }
-
-  .btn-lg {
-    height: var(--pom-btn-height);
-    padding: var(--pom-btn-padding);
-    border-radius: 8px;
-    font-size: 16px;
-  }
-</style>

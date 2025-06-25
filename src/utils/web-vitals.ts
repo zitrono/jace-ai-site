@@ -14,7 +14,7 @@
  *   enableAnalytics: true,
  *   thresholds: {
  *     CLS: 0.1,
- *     FID: 100,
+ *     INP: 200,
  *     LCP: 2500
  *   }
  * });
@@ -29,7 +29,7 @@ export interface WebVitalsConfig {
   /** Custom performance thresholds */
   thresholds?: {
     CLS?: number;
-    FID?: number;
+    INP?: number; // Replaced FID with INP (official Core Web Vital as of March 2024)
     LCP?: number;
     FCP?: number;
     TTFB?: number;
@@ -53,7 +53,7 @@ export interface WebVitalsMetric {
 // Default performance thresholds based on Core Web Vitals recommendations
 const DEFAULT_THRESHOLDS = {
   CLS: 0.1, // Cumulative Layout Shift
-  FID: 100, // First Input Delay (ms)
+  INP: 200, // Interaction to Next Paint (ms) - replaced FID in March 2024
   LCP: 2500, // Largest Contentful Paint (ms)
   FCP: 1800, // First Contentful Paint (ms)
   TTFB: 800, // Time to First Byte (ms)
@@ -179,7 +179,7 @@ export class PerformanceBudget {
   getSummary(): Record<string, WebVitalsMetric | undefined> {
     return {
       CLS: this.metrics.get('CLS'),
-      FID: this.metrics.get('FID'),
+      INP: this.metrics.get('INP'),
       LCP: this.metrics.get('LCP'),
       FCP: this.metrics.get('FCP'),
       TTFB: this.metrics.get('TTFB'),
@@ -223,16 +223,16 @@ export async function initWebVitals(config: WebVitalsConfig = {}): Promise<Perfo
 
   // Dynamically import web-vitals library to avoid blocking
   try {
-    const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
+    const { getCLS, getINP, getFCP, getLCP, getTTFB } = await import('web-vitals');
 
     // Set up metric collection with debouncing
     const debouncedRecord = debounce((metric: WebVitalsMetric) => {
       budget.recordMetric(metric);
     }, 100);
 
-    // Register all Core Web Vitals
+    // Register all Core Web Vitals (INP replaced FID in March 2024)
     getCLS(debouncedRecord);
-    getFID(debouncedRecord);
+    getINP(debouncedRecord);
     getFCP(debouncedRecord);
     getLCP(debouncedRecord);
     getTTFB(debouncedRecord);

@@ -10,9 +10,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Reference site (Jace)**: http://localhost:8081/ - Static archive for visual parity comparison
   - Required for POM testing and visual validation
 
-## CRITICAL: REFACTORING STANDARDS (2025-06-23)
+## CRITICAL: ENTERPRISE ARCHITECTURE STANDARDS (2025-06-24)
 
-This project has undergone comprehensive refactoring to enterprise-grade standards. **ALL FUTURE DEVELOPMENT MUST MAINTAIN THESE STANDARDS**:
+This project has undergone comprehensive refactoring to enterprise-grade standards with centralized utility systems. **ALL FUTURE DEVELOPMENT MUST MAINTAIN THESE STANDARDS**:
 
 ### ⚡ Architecture Standards (IMMUTABLE)
 
@@ -36,16 +36,18 @@ src/components/
 #### 3. **CSS Architecture** - ZERO TOLERANCE for violations:
 
 - **100% Utility-First**: Use ONLY Tailwind utilities + design tokens
-- **NO custom CSS**: No `<style>` blocks, no components.css
+- **NO custom CSS**: No `<style>` blocks, no components.css files
 - **Design Token Usage**: All colors/spacing via `bg-background`, `text-primary`, etc.
 - **NO inline styles**: Use Tailwind classes or design tokens exclusively
+- **NO !important**: Only accessibility-required !important declarations allowed
 
 ### 🎯 Development Standards (MANDATORY)
 
 #### 4. **File Creation Rules**:
 
-- **NEW COMPONENTS**: Must use component template with full TypeScript interface
+- **NEW COMPONENTS**: Must use Enhanced Component Template with utility integration
 - **NO NEW CSS FILES**: Use design tokens and Tailwind utilities only
+- **UTILITY INTEGRATION**: Components MUST use Animation/State/Focus Managers
 - **DOCUMENTATION**: Every component needs JSDoc with props and examples
 - **INDEX FILES**: Update appropriate index.ts for exports
 
@@ -70,13 +72,14 @@ src/components/
 - ❌ Create new `.css` files or add `<style>` blocks
 - ❌ Use hardcoded colors/spacing instead of design tokens
 - ❌ Add components without TypeScript interfaces
+- ❌ Create custom animations instead of using Animation Manager
+- ❌ Implement manual state tracking instead of State Manager
+- ❌ Build custom focus traps instead of Focus Manager
+- ❌ Skip utility cleanup functions (causes memory leaks)
 - ❌ Modify the design token system without approval
 - ❌ Break POM compliance (must maintain 99.9% success)
-- ❌ Add dependencies without performance impact analysis
-- ❌ Skip accessibility requirements (ARIA, focus management)
 - ❌ Use `any` types or skip TypeScript validation
-- ❌ Use `!important` or override CSS cascade without justification
-- ❌ Create conflicting class names that break CSS specificity
+- ❌ Use `!important` except for accessibility requirements
 
 ### 🎨 CSS Cascade Integrity (CRITICAL)
 
@@ -113,37 +116,32 @@ src/components/
 
 1. **Start with**: `npm run dev` and verify current state
 2. **Check compliance**: Run POM tests before changes
-3. **Make changes**: Following architecture standards above
-4. **Validate**: `npm run validate` must pass
-5. **Test POM**: Re-run POM tests - 99.9% success required
-6. **Build verification**: `npm run build` must succeed
-7. **Performance check**: `npm run perf:analyze` - budgets maintained
+3. **Plan utilities**: Identify needed Animation/State/Focus Manager integration
+4. **Make changes**: Following architecture standards and utility patterns
+5. **Validate**: `npm run validate` must pass
+6. **Test POM**: Re-run POM tests - 99.9% success required
+7. **Build verification**: `npm run build` must succeed
+8. **Performance check**: Verify utility cleanup prevents memory leaks
 
-#### 9. **Component Development Template**:
+#### 9. **DEPRECATED: Basic Component Template**
+
+**⚠️ USE ENHANCED TEMPLATE BELOW**: All new components must use the Enhanced Component Template with utility integration. Basic template shown for reference only:
 
 ```astro
 ---
-/**
- * ComponentName - Brief description
- * @example
- * <ComponentName variant="primary" size="lg">Content</ComponentName>
- */
-
+// DEPRECATED - Use Enhanced Template below for all new components
 import type { BaseComponentProps } from '@/types/components';
-
 export interface Props extends BaseComponentProps {
   variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
-  // Document all props with types
 }
-
-const { variant = 'primary', size = 'md', class: className = '', ...rest } = Astro.props;
+const { variant = 'primary', class: className = '', ...rest } = Astro.props;
 ---
-
-<element class={`base-classes variant-${variant} size-${size} ${className}`} {...rest}>
+<element class={`base-classes variant-${variant} ${className}`} {...rest}>
   <slot />
 </element>
 ```
+
+**MANDATORY**: All new components MUST use the Enhanced Component Template in the Enterprise Utility Systems section below.
 
 ### 📊 Quality Metrics (MAINTAINED)
 
@@ -151,10 +149,11 @@ const { variant = 'primary', size = 'md', class: className = '', ...rest } = Ast
 
 - ✅ **TypeScript Coverage**: 100% with strict mode
 - ✅ **POM Compliance**: 99.9% property-level success (2,458+ properties)
+- ✅ **CSS Architecture**: Zero `<style>` blocks, zero inappropriate `!important`
+- ✅ **Utility Integration**: All components use centralized systems
 - ✅ **Bundle Performance**: All budgets <50% utilization
 - ✅ **Accessibility Score**: 95%+ WCAG 2.1 AA compliance
-- ✅ **Build Performance**: <2 second builds
-- ✅ **Zero Technical Debt**: No code smells, no duplication
+- ✅ **Zero Technical Debt**: No code duplication, proper cleanup
 - ✅ **Documentation**: 100% component coverage with examples
 
 **VIOLATION OF THESE STANDARDS IS NOT PERMITTED** - they represent significant engineering investment and must be preserved.
@@ -366,6 +365,389 @@ If any quality gate fails:
 5. **Re-run full validation** before proceeding
 
 **Remember**: The standards introduced by the comprehensive refactoring represent significant engineering investment. Maintaining them is not optional - it's essential for project success and team productivity.
+
+## 🔧 Enterprise Utility Systems (MANDATORY 2025-06-24)
+
+The project includes centralized utility systems that are **PART OF THE IMMUTABLE ARCHITECTURE**. **ALL COMPONENTS MUST USE THESE UTILITIES** instead of creating custom implementations:
+
+### 🎬 Animation Manager (`src/utils/animation-manager.ts`)
+
+Provides standardized animations with cleanup and accessibility support:
+
+#### Required Usage Pattern:
+
+```typescript
+import { fadeIn, slideDown, mobileMenuSlideIn, ANIMATION_CONFIG } from '@/utils/animation-manager';
+
+// Standard 300ms animations
+const cleanup = fadeIn(element, {
+  duration: ANIMATION_CONFIG.DURATION, // Always use standard duration
+  onComplete: () => {
+    // Handle completion
+  }
+});
+
+// CRITICAL: Always cleanup animations to prevent memory leaks
+cleanup.cleanup();
+```
+
+#### Available Animation Functions:
+
+- `fadeIn()` / `fadeOut()` - Opacity transitions
+- `slideUp()` / `slideDown()` - FAQ-style height animations
+- `mobileMenuSlideIn()` / `mobileMenuSlideOut()` - Menu slide animations
+- `cookieBannerSlideUp()` / `cookieBannerSlideDown()` - Banner animations
+
+#### Animation Standards (MANDATORY):
+
+- **Default Duration**: 300ms for all animations (`ANIMATION_CONFIG.DURATION`)
+- **Easing**: `cubic-bezier(0.4, 0, 0.2, 1)` (built-in)
+- **Accessibility**: Automatically respects `prefers-reduced-motion`
+- **Performance**: Uses `will-change` optimization automatically
+- **Memory Management**: Always call `cleanup()` to prevent leaks
+
+### 🏗️ State Manager (`src/utils/state-manager.ts`)
+
+Centralized state management with scroll lock coordination:
+
+#### Required Usage Pattern:
+
+```typescript
+import { initializeStateManager } from '@/utils/state-manager';
+
+// Initialize in script section
+const stateManager = initializeStateManager();
+
+// Register component state
+stateManager.registerState('myComponent', {
+  isOpen: false,
+  isAnimating: false
+});
+
+// Subscribe to state changes
+const unsubscribe = stateManager.subscribe('myComponent', (newState, oldState, source) => {
+  // Update UI based on state changes
+  if (newState.isOpen !== oldState.isOpen) {
+    // Handle open/close logic
+  }
+});
+
+// Update state
+stateManager.setState('myComponent', { isOpen: true }, { source: 'user-action' });
+
+// CRITICAL: Always cleanup subscriptions
+unsubscribe();
+```
+
+#### State Manager Features (USE THESE):
+
+- **Scroll Lock Coordination**: `lockBodyScroll()` / `unlockBodyScroll()`
+- **Global Escape Handling**: Automatically handles escape key for modals/menus
+- **State Synchronization**: Ensures consistent state across components
+- **Batch Updates**: `batchStateUpdates()` for performance
+- **Memory Management**: Automatic cleanup on page unload
+
+### 🎯 Focus Manager (`src/utils/focus-manager.ts`)
+
+Accessibility-compliant focus management for modals and overlays:
+
+#### Required Usage Pattern:
+
+```typescript
+import { FocusManager } from '@/utils/focus-manager';
+
+// Create focus manager for modal/menu
+const focusManager = new FocusManager(containerElement, {
+  autoFocus: true,
+  handleEscape: true,
+  onEscape: () => {
+    // Handle escape key
+  }
+});
+
+// Enable focus trap when showing modal
+focusManager.storeFocus(); // Store current focus
+focusManager.enableFocusTrap();
+
+// Disable when hiding modal
+focusManager.disableFocusTrap();
+focusManager.restoreFocus(); // Restore previous focus
+
+// CRITICAL: Always cleanup
+focusManager.destroy();
+```
+
+#### Focus Management Features (MANDATORY FOR ACCESSIBILITY):
+
+- **Focus Trapping**: Keeps keyboard focus within modals/menus
+- **Focus Restoration**: Returns focus to original element
+- **Keyboard Navigation**: Tab/Shift+Tab support with wrapping
+- **Escape Handling**: Consistent escape key behavior
+- **State Integration**: Works with State Manager for coordination
+
+### 🎨 Enhanced Component Template (UPDATED)
+
+ALL new components MUST use this enhanced template with utility integration:
+
+```astro
+---
+/**
+ * ComponentName - Brief description of the component
+ * 
+ * Uses centralized utilities for animations, state, and focus management.
+ * Follows enterprise architecture patterns for maintainability.
+ * 
+ * @example
+ * <ComponentName 
+ *   variant="primary" 
+ *   size="lg"
+ *   animated={true}
+ * >
+ *   Content goes here
+ * </ComponentName>
+ */
+
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
+  /** Visual variant of the component */
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  /** Size variant */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Whether the component uses animations */
+  animated?: boolean;
+  /** Whether the component manages state */
+  stateful?: boolean;
+  /** Whether to handle accessibility focus */
+  focusManaged?: boolean;
+  /** Callback for state changes */
+  onStateChange?: (state: any) => void;
+}
+
+const { 
+  variant = 'primary', 
+  size = 'md',
+  animated = false,
+  stateful = false,
+  focusManaged = false,
+  class: className = '', 
+  ...rest 
+} = Astro.props;
+
+// Generate component ID for state management
+const componentId = `component-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+  class={`component-base ${variant} ${size} ${className}`}
+  data-component-id={componentId}
+  {...(focusManaged && { 'data-focus-container': 'true' })}
+  {...rest}
+>
+  <slot />
+</div>
+
+{animated && (
+  <script type="module" define:vars={{ componentId, stateful, focusManaged }}>
+    // Import utility systems
+    import { initAnimationSystem } from '../../utils/animation-manager.js';
+    import { initializeStateManager } from '../../utils/state-manager.js';
+    import { FocusManager } from '../../utils/focus-manager.js';
+
+    // Initialize systems if component uses them
+    function initializeComponent() {
+      let stateManager = null;
+      let focusManager = null;
+      let cleanup = null;
+
+      // Initialize animation system
+      if (animated) {
+        initAnimationSystem();
+      }
+
+      // Initialize state management
+      if (stateful) {
+        stateManager = initializeStateManager();
+        stateManager.registerState(componentId, {
+          // Define initial state here
+        });
+      }
+
+      // Initialize focus management
+      if (focusManaged) {
+        const container = document.querySelector(`[data-component-id="${componentId}"]`);
+        if (container) {
+          focusManager = new FocusManager(container);
+          if (stateManager) {
+            focusManager.setStateManager(stateManager, componentId);
+          }
+        }
+      }
+
+      // Component-specific logic here
+      
+      // Return cleanup function
+      cleanup = () => {
+        focusManager?.destroy();
+        stateManager?.unregisterComponent(componentId);
+      };
+      
+      return cleanup;
+    }
+
+    // Initialize when ready
+    let componentCleanup = null;
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        componentCleanup = initializeComponent();
+      });
+    } else {
+      componentCleanup = initializeComponent();
+    }
+
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+      componentCleanup?.();
+    });
+  </script>
+)}
+```
+
+### 🚀 Utility System Integration Rules (ENFORCED)
+
+#### Mandatory Integration Patterns:
+
+1. **State-Driven UI Updates**: ALL component state changes must go through State Manager
+2. **Animation Cleanup**: EVERY animation must have its cleanup function called
+3. **Focus Management**: ALL modals/overlays MUST use Focus Manager
+4. **Consistent Timing**: Use `ANIMATION_CONFIG.DURATION` for all animations
+5. **Memory Management**: Components MUST cleanup resources on unmount
+
+#### Integration Example (Mobile Menu Pattern):
+
+```typescript
+// 1. Initialize all systems together
+const stateManager = initializeStateManager();
+const focusManager = new FocusManager(menuElement);
+focusManager.setStateManager(stateManager, 'mobileMenu');
+
+// 2. State-driven animations
+stateManager.subscribe('mobileMenu', (newState, oldState) => {
+  if (newState.isOpen !== oldState.isOpen) {
+    if (newState.isOpen) {
+      const cleanup = mobileMenuSlideIn(panel, {
+        duration: ANIMATION_CONFIG.DURATION,
+        onComplete: () => {
+          focusManager.enableFocusTrap();
+          stateManager.setState('mobileMenu', { isAnimating: false });
+        }
+      });
+    }
+  }
+});
+
+// 3. Coordinated cleanup
+const cleanup = () => {
+  focusManager.destroy();
+  stateManager.unregisterComponent('mobileMenu');
+};
+```
+
+### 📋 Pre-Commit Hook Integration (RECOMMENDED)
+
+Add to `package.json` for automated quality assurance:
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run validate && cd tests && node unified-test.js ralph"
+    }
+  },
+  "scripts": {
+    "validate": "npm run type-check && npm run lint && npm run format",
+    "type-check": "astro check",
+    "lint": "eslint . --ext .ts,.astro",
+    "format": "prettier --write ."
+  }
+}
+```
+
+### ⚡ Performance Optimization Standards (NEW)
+
+#### Utility System Performance Requirements:
+
+1. **Animation Performance**: All animations use `will-change` optimization
+2. **State Updates**: Batch updates when possible using `batchStateUpdates()`
+3. **Memory Management**: WeakMap usage for automatic garbage collection
+4. **Event Listeners**: Automatic cleanup on page unload/visibility change
+5. **Bundle Impact**: Utilities are tree-shakable and optimize for minimal footprint
+
+#### Performance Monitoring:
+
+```bash
+# Check utility impact on bundle size
+npm run perf:analyze
+
+# Ensure utilities don't exceed performance budgets:
+# - Animation Manager: <15KB
+# - State Manager: <20KB  
+# - Focus Manager: <12KB
+# - Total Utility Impact: <50KB
+```
+
+### 🎯 Development Workflow Enhancement (MANDATORY)
+
+#### Enhanced Development Checklist:
+
+```bash
+# 1. Standard setup
+npm run dev
+
+# 2. Enhanced validation including utility usage
+npm run validate:enhanced  # (if available)
+
+# 3. Utility-specific testing
+npm run test:utilities    # (if available) 
+
+# 4. POM compliance with utility integration
+cd tests && node unified-test.js ralph
+
+# 5. Performance impact verification
+npm run perf:analyze
+```
+
+#### Component Development with Utilities:
+
+1. **Plan Utility Usage**: Identify which utilities (animation, state, focus) are needed
+2. **Implement Integration**: Use proper initialization and cleanup patterns
+3. **Test Accessibility**: Verify focus management works correctly
+4. **Validate Performance**: Ensure animations are smooth and cleanup works
+5. **POM Compliance**: Test that utilities don't break visual parity
+
+### 🔒 Utility System Constraints (IMMUTABLE)
+
+#### Never Do These:
+
+- ❌ Create custom animation logic instead of using Animation Manager
+- ❌ Implement manual scroll locking instead of State Manager coordination
+- ❌ Build custom focus traps instead of using Focus Manager
+- ❌ Skip cleanup functions for animations or state subscriptions
+- ❌ Use different animation durations without justification
+- ❌ Implement global state without using State Manager
+- ❌ Add accessibility features without using Focus Manager patterns
+
+#### Always Do These:
+
+- ✅ Initialize utility systems at component startup
+- ✅ Use standard animation durations and easing
+- ✅ Implement proper cleanup in all components
+- ✅ Subscribe to state changes rather than polling state
+- ✅ Use Focus Manager for all modal/overlay interactions
+- ✅ Coordinate scroll locking through State Manager
+- ✅ Test utility integration with POM validation
+
+**These utility systems represent the next evolution of the enterprise architecture. They are now PART OF THE IMMUTABLE STANDARDS and must be used consistently across all components.**
 
 ## Project Overview
 

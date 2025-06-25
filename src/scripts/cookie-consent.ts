@@ -1,4 +1,8 @@
 /**
+ * @deprecated - Cookie consent functionality has been moved to unified animation system
+ * This file is preserved for git history and potential future reference
+ * DO NOT IMPORT OR USE - Use /src/utils/animation-manager.ts instead
+ * 
  * Cookie Consent Module
  * Handles cookie banner display and consent management
  */

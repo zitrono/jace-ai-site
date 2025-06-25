@@ -100,41 +100,51 @@ interface BorderRadius {
   full: string;
 }
 
+interface ComponentSizes {
+  mobileHeaderHeight: string;
+  buttonPadding: {
+    sm: string;
+    base: string;
+    lg: string;
+  };
+}
+
 export interface DesignSystem {
   colors: Colors;
   spacing: Spacing;
   typography: Typography;
   borderRadius: BorderRadius;
+  components: ComponentSizes;
 }
 
 export const designSystem: DesignSystem = {
   colors: {
-    // Brand colors
+    // Brand colors - exact POM values
     primary: {
-      yellow: '#FFDC61', // rgb(255, 220, 97) - Original CTA yellow
-      yellowHover: '#FFE580', // Lighter yellow for hover
+      yellow: 'rgb(255, 220, 97)', // Exact POM CTA yellow
+      yellowHover: 'rgb(255, 229, 128)', // Lighter yellow for hover
     },
 
-    // Neutral colors (unified gray scale)
+    // Neutral colors - exact POM values for compliance
     neutral: {
-      900: '#0A0A0A', // Darkest
-      800: '#1A1A1A',
-      700: '#282828', // rgb(40, 40, 40) - Original background
-      600: '#414141', // rgb(65, 65, 65) - Secondary button
-      500: '#525252',
-      400: '#737373',
-      300: '#A3A3A3',
-      200: '#D4D4D4',
-      100: '#F5F5F5',
-      50: '#FAFAFA', // Lightest
+      900: 'rgb(10, 10, 10)', // Darkest
+      800: 'rgb(26, 26, 26)',
+      700: 'rgb(40, 40, 40)', // Main background - exact POM value
+      600: 'rgb(65, 65, 65)', // Secondary areas - exact POM value
+      500: 'rgb(82, 82, 82)',
+      400: 'rgb(115, 115, 115)',
+      300: 'rgb(163, 163, 163)',
+      200: 'rgb(212, 212, 212)',
+      100: 'rgb(245, 245, 245)',
+      50: 'rgb(250, 250, 250)', // Lightest
     },
 
-    // Semantic colors
+    // Semantic colors - exact POM values
     text: {
-      primary: '#FFFFFF',
-      secondary: 'rgba(255, 246, 238, 0.72)', // Original subtitle
-      muted: '#9CA3AF', // gray-400 equivalent
-      inverted: '#293044', // rgb(41, 48, 69) - Text on yellow
+      primary: 'rgb(255, 255, 255)', // Main text - exact POM value
+      secondary: 'rgba(255, 246, 238, 0.72)', // Subtitle - exact POM value
+      muted: 'rgb(156, 163, 175)', // Muted text - exact POM value
+      inverted: 'rgb(40, 40, 40)', // Text on yellow backgrounds
     },
 
     // Gradients
@@ -194,6 +204,15 @@ export const designSystem: DesignSystem = {
     lg: '0.75rem', // 12px
     xl: '1rem', // 16px
     full: '9999px',
+  },
+
+  components: {
+    mobileHeaderHeight: '64px', // POM exact value - immutable
+    buttonPadding: {
+      sm: '8px 16px',
+      base: '10px 24px', // POM exact value for mobile buttons
+      lg: '12px 32px',
+    },
   },
 };
 

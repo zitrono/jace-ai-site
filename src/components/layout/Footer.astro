@@ -1,10 +1,18 @@
 ---
-// Enhanced Footer component with TypeScript interface and accessibility improvements
-import type { HTMLAttributes } from 'astro/types';
+/**
+ * Footer - Site footer with navigation links and copyright
+ * @example
+ * <Footer 
+ *   companyName="Beneficious"
+ *   contactEmail="contact@example.com"
+ *   showLinks={true}
+ *   background="primary"
+ * />
+ */
 
-export interface FooterProps extends HTMLAttributes<'footer'> {
-  /** Additional CSS classes */
-  class?: string;
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   /** Company name for copyright */
   companyName?: string;
   /** Copyright year (defaults to current year) */

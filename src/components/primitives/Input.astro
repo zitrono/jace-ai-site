@@ -126,7 +126,7 @@ const labelSizeClasses = {
 
 // State classes
 const stateClasses = {
-  default: 'border-neutral-600 focus:border-primary-yellow focus:ring-primary-yellow/50',
+  default: 'border-neutral-600 focus:border-accent focus:ring-accent/50',
   error: 'border-red-500 focus:border-red-500 focus:ring-red-500/50',
   success: 'border-green-500 focus:border-green-500 focus:ring-green-500/50',
   warning: 'border-yellow-500 focus:border-yellow-500 focus:ring-yellow-500/50',
@@ -143,12 +143,22 @@ const stateIconClasses = {
 // Combine input classes
 const inputClasses = [
   // Base styles
-  'block w-full rounded-md border bg-neutral-700 text-pom-text-primary',
-  'placeholder:text-pom-text-muted',
+  'block w-full rounded-md border bg-neutral-700 text-primary',
+  'placeholder:text-muted',
   'transition-colors duration-200',
   'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-700',
   'disabled:opacity-50 disabled:cursor-not-allowed',
   'readonly:bg-neutral-600 readonly:cursor-default',
+  // Enhanced focus styles
+  'focus:shadow-[0_0_0_3px_var(--tw-ring-color)]',
+  // Cross-browser appearance fixes
+  '[&[type="search"]::-webkit-search-decoration]:appearance-none',
+  '[&[type="search"]::-webkit-search-cancel-button]:appearance-none',
+  '[&[type="search"]::-webkit-search-results-button]:appearance-none',
+  '[&[type="search"]::-webkit-search-results-decoration]:appearance-none',
+  '[&[type="number"]::-webkit-outer-spin-button]:appearance-none',
+  '[&[type="number"]::-webkit-inner-spin-button]:appearance-none',
+  '[&[type="number"]]:[-moz-appearance:textfield]',
   // Size classes
   sizeClasses[size],
   // State classes
@@ -163,7 +173,7 @@ const inputClasses = [
 
 // Label classes
 const labelClasses = [
-  'block font-medium text-pom-text-primary mb-1',
+  'block font-medium text-primary mb-1',
   labelSizeClasses[size],
   labelHidden && 'sr-only',
 ]
@@ -179,7 +189,7 @@ const helperClasses = [
       ? 'text-green-500'
       : state === 'warning'
         ? 'text-yellow-500'
-        : 'text-pom-text-muted',
+        : 'text-muted',
 ]
   .filter(Boolean)
   .join(' ');
@@ -318,29 +328,3 @@ const inputAttributes = {
     )
   }
 </div>
-
-<style>
-  /* Enhanced focus styles for better accessibility */
-  input:focus {
-    box-shadow: 0 0 0 3px var(--tw-ring-color);
-  }
-
-  /* Ensure consistent appearance across browsers */
-  input[type='search']::-webkit-search-decoration,
-  input[type='search']::-webkit-search-cancel-button,
-  input[type='search']::-webkit-search-results-button,
-  input[type='search']::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
-
-  /* Number input spinner styling */
-  input[type='number']::-webkit-outer-spin-button,
-  input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
-</style>

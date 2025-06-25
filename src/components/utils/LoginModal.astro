@@ -1,21 +1,18 @@
 ---
 /**
- * Login modal component for private beta access
- * Provides accessible modal with focus management and keyboard navigation
- *
+ * LoginModal - Modal dialog for private beta access requests
  * @example
- * ```astro
  * <LoginModal
  *   title="Private Beta Access"
  *   contactEmail="contact@example.com"
+ *   message="Ralph is currently in private beta."
  * />
- * ```
  */
-import Button from '../primitives/Button.astro';
 
-interface Props {
-  /** Additional CSS classes */
-  class?: string;
+import Button from '../primitives/Button.astro';
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   /** Modal title */
   title?: string;
   /** Main message content */
@@ -84,109 +81,190 @@ const {
   </div>
 </div>
 
-<!-- Performance-optimized modal -->
-<script>
-  // Optimized modal functionality with proper performance considerations
+<!-- Performance-optimized modal with centralized state and focus management -->
+<script type="module">
+  import { fadeIn, fadeOut, initAnimationSystem } from '../../utils/animation-manager.js';
+  import { initializeStateManager } from '../../utils/state-manager.js';
+  import { FocusManager } from '../../utils/focus-manager.js';
+
+  // Optimized modal functionality with centralized state and focus management
   function initializeLoginModal() {
-    // Global functions for modal control with performance optimizations
-    window.showLoginModal = function () {
-      const modal = document.getElementById('login-modal');
-      if (modal) {
-        // Use requestAnimationFrame for smooth UI updates
-        requestAnimationFrame(() => {
-          modal.classList.remove('hidden');
-          // Add fade-in animation
-          modal.style.opacity = '0';
-          modal.offsetHeight; // Force reflow
-          modal.style.opacity = '1';
+    // Initialize systems
+    initAnimationSystem();
+    const stateManager = initializeStateManager();
+    
+    const modal = document.getElementById('login-modal');
+    if (!modal) return;
 
-          // Enhanced focus management
-          const firstButton = modal.querySelector('button:not([disabled])');
-          if (firstButton) {
-            firstButton.focus();
-          }
-
-          // Store the previously focused element for return focus
-          const activeElement = document.activeElement;
-          modal.setAttribute(
-            'data-previous-focus',
-            activeElement ? activeElement.id || activeElement.tagName : ''
-          );
-
-          // Prevent body scroll when modal is open
-          document.body.style.overflow = 'hidden';
-        });
+    // Initialize focus manager for modal
+    const focusManager = new FocusManager(modal, {
+      autoFocus: false, // We'll handle focus manually after animation
+      handleEscape: false, // State manager handles escape globally
+      onEscape: () => {
+        stateManager.setState('loginModal', { isOpen: false }, { source: 'focus-manager-escape' });
       }
-    };
+    });
+    
+    // Connect focus manager to state manager
+    focusManager.setStateManager(stateManager, 'loginModal');
 
-    window.closeLoginModal = function () {
-      const modal = document.getElementById('login-modal');
-      if (modal) {
-        // Add fade-out animation
-        modal.style.opacity = '0';
+    let modalAnimation = null;
 
-        setTimeout(() => {
-          modal.classList.add('hidden');
-          modal.style.opacity = '';
-
-          // Restore body scroll
-          document.body.style.overflow = '';
-
-          // Return focus to previously focused element
-          const previousFocus = modal.getAttribute('data-previous-focus');
-          if (previousFocus) {
-            const elementToFocus =
-              document.getElementById(previousFocus) ||
-              document.querySelector(previousFocus.toLowerCase());
-            if (elementToFocus && elementToFocus.focus) {
-              elementToFocus.focus();
-            }
-          }
-        }, 150); // Match animation duration
-      }
-    };
-
-    // Enhanced keyboard handling with performance optimizations
-    const handleKeydown = function (e) {
-      const modal = document.getElementById('login-modal');
-      if (!modal || modal.classList.contains('hidden')) return;
-
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        window.closeLoginModal();
-        return;
-      }
-
-      // Optimized focus trap - keep focus within modal
-      if (e.key === 'Tab') {
-        const focusableElements = modal.querySelectorAll(
-          'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
-        );
-
-        if (focusableElements.length === 0) return;
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey && document.activeElement === firstElement) {
-          e.preventDefault();
-          lastElement.focus();
-        } else if (!e.shiftKey && document.activeElement === lastElement) {
-          e.preventDefault();
-          firstElement.focus();
+    // Subscribe to login modal state changes
+    const unsubscribe = stateManager.subscribe('loginModal', (newState, oldState, source) => {
+      // Handle state-driven UI updates
+      if (newState.isOpen !== oldState.isOpen) {
+        if (newState.isOpen) {
+          performShowModal();
+        } else {
+          performHideModal();
         }
       }
+      
+      // Handle animation state
+      if (newState.isAnimating !== oldState.isAnimating) {
+        if (newState.isAnimating) {
+          modal.classList.add('is-animating');
+        } else {
+          modal.classList.remove('is-animating');
+        }
+      }
+      
+      // Handle focus management based on state changes
+      if (newState.isOpen !== oldState.isOpen) {
+        if (newState.isOpen) {
+          // Store focus when opening
+          focusManager.storeFocus();
+          // Enable focus trap after animation completes
+          if (!newState.isAnimating) {
+            focusManager.enableFocusTrap();
+          }
+        } else {
+          // Disable focus trap and restore focus when closing
+          focusManager.disableFocusTrap();
+          focusManager.restoreFocus();
+        }
+      }
+    });
+
+    // Show modal implementation
+    const performShowModal = () => {
+      const state = stateManager.getState('loginModal');
+      if (state.isOpen && state.isAnimating) return; // Prevent race conditions
+      
+      // Update state to show animating
+      stateManager.setState('loginModal', { isAnimating: true }, { source: 'show-start' });
+      
+      // Clean up any existing animation
+      if (modalAnimation) {
+        modalAnimation.cleanup();
+        modalAnimation = null;
+      }
+
+      // Use centralized scroll lock
+      stateManager.lockBodyScroll('loginModal', {
+        storePosition: true,
+        preventTouch: true,
+        className: 'modal-open'
+      });
+
+      // Show modal with animation
+      modal.classList.remove('hidden');
+      modalAnimation = fadeIn(modal, {
+        duration: 300,
+        onComplete: () => {
+          // Enable focus trap and focus first element
+          focusManager.enableFocusTrap();
+          
+          // Update state - animation complete
+          stateManager.setState('loginModal', { isAnimating: false }, { source: 'show-complete' });
+          modalAnimation = null;
+        }
+      });
     };
 
-    // Use passive event listener for better performance
-    document.addEventListener('keydown', handleKeydown, { passive: false });
+    // Hide modal implementation
+    const performHideModal = () => {
+      const state = stateManager.getState('loginModal');
+      if (!state.isOpen && state.isAnimating) return; // Prevent race conditions
+      
+      // Update state to show animating
+      stateManager.setState('loginModal', { isAnimating: true }, { source: 'hide-start' });
+      
+      // Clean up any existing animation
+      if (modalAnimation) {
+        modalAnimation.cleanup();
+        modalAnimation = null;
+      }
 
-    // Cleanup function for memory management
-    window.addEventListener('beforeunload', () => {
-      document.removeEventListener('keydown', handleKeydown);
+      // Hide modal with animation
+      modalAnimation = fadeOut(modal, {
+        duration: 300,
+        onComplete: () => {
+          modal.classList.add('hidden');
+          
+          // Use centralized scroll unlock
+          stateManager.unlockBodyScroll('loginModal');
+          
+          // Update state - animation complete
+          stateManager.setState('loginModal', { 
+            isAnimating: false
+          }, { source: 'hide-complete' });
+          modalAnimation = null;
+        }
+      });
+    };
+
+    // Public show/hide functions (for backward compatibility)
+    const showLoginModal = () => {
+      stateManager.setState('loginModal', { isOpen: true }, { source: 'user-action' });
+    };
+
+    const closeLoginModal = () => {
+      stateManager.setState('loginModal', { isOpen: false }, { source: 'user-action' });
+    };
+
+    // Register global functions for backward compatibility
+    stateManager.registerGlobalFunction('showLoginModal', showLoginModal);
+    stateManager.registerGlobalFunction('closeLoginModal', closeLoginModal);
+
+    // Focus management is now handled by the centralized FocusManager
+
+    // State manager handles escape key globally, but we can also listen for state changes from it
+    const globalUnsubscribe = stateManager.subscribe('loginModal', (newState, oldState, source) => {
+      if (source === 'escape-key' && newState.isOpen === false) {
+        // State manager triggered close via escape, UI will update automatically
+      }
     });
+
+    // Cleanup function
+    const cleanup = () => {
+      if (modalAnimation) {
+        modalAnimation.cleanup();
+        modalAnimation = null;
+      }
+      focusManager.destroy();
+      unsubscribe();
+      globalUnsubscribe();
+      stateManager.unlockBodyScroll('loginModal');
+      stateManager.unregisterGlobalFunction('showLoginModal');
+      stateManager.unregisterGlobalFunction('closeLoginModal');
+    };
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', cleanup);
+    
+    // Return cleanup for external use
+    return cleanup;
   }
 
   // Initialize immediately for interactive modal
-  initializeLoginModal();
+  let cleanup = null;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      cleanup = initializeLoginModal();
+    });
+  } else {
+    cleanup = initializeLoginModal();
+  }
 </script>

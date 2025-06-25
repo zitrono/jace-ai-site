@@ -12,9 +12,9 @@
  * ```
  */
 
-interface Props {
-  /** Additional CSS classes */
-  class?: string;
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   /** Title of the cookie banner */
   title?: string;
   /** Main message text */
@@ -94,60 +94,146 @@ const positionClasses = {
   </div>
 </div>
 
-<!-- Performance-optimized cookie consent -->
-<script>
-  // Optimized cookie consent functionality with performance considerations
+<!-- Performance-optimized cookie consent with centralized state and focus management -->
+<script type="module">
+  import { cookieBannerSlideUp, cookieBannerSlideDown, initAnimationSystem } from '../../utils/animation-manager.js';
+  import { initializeStateManager } from '../../utils/state-manager.js';
+  import { FocusManager } from '../../utils/focus-manager.js';
+
+  // Optimized cookie consent functionality with centralized state and focus management
   function initializeCookieConsent() {
+    // Initialize systems
+    initAnimationSystem();
+    const stateManager = initializeStateManager();
+    
     // Check if consent was already given to avoid unnecessary operations
-    const consentGiven = localStorage.getItem('cookieConsent');
+    const existingConsent = localStorage.getItem('cookieConsent');
     const banner = document.getElementById('cookie-banner');
 
-    if (consentGiven || !banner) return;
+    if (existingConsent || !banner) return;
 
-    // Performance-optimized banner display with IntersectionObserver
-    const showBannerWithDelay = () => {
-      // Use requestIdleCallback for non-blocking execution
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          setTimeout(() => {
-            if (!localStorage.getItem('cookieConsent')) {
-              requestAnimationFrame(() => {
-                banner.style.opacity = '1';
-                banner.style.transform = 'translateY(0)';
-              });
-            }
-          }, 1000);
-        });
-      } else {
-        // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
-          if (!localStorage.getItem('cookieConsent')) {
-            banner.style.opacity = '1';
-            banner.style.transform = 'translateY(0)';
-          }
-        }, 1000);
+    // Initialize focus manager for cookie banner
+    const focusManager = new FocusManager(banner, {
+      autoFocus: false, // Don't auto-focus banner when it appears
+      handleEscape: true, // Allow escape to close banner
+      onEscape: () => {
+        // Reject cookies when escape is pressed
+        stateManager.setState('cookieConsent', { 
+          consentValue: 'rejected',
+          isVisible: false 
+        }, { source: 'focus-manager-escape' });
       }
-    };
+    });
+    
+    // Connect focus manager to state manager
+    focusManager.setStateManager(stateManager, 'cookieConsent');
 
-    const hideBanner = () => {
-      requestAnimationFrame(() => {
-        banner.style.opacity = '0';
-        banner.style.transform = 'translateY(100vh)';
+    // Store active animation for cleanup
+    let bannerAnimation = null;
 
-        // Remove from DOM after animation for better performance
-        setTimeout(() => {
-          if (banner.parentNode) {
-            banner.parentNode.removeChild(banner);
-          }
-        }, 300);
+    // Initialize cookie consent state
+    stateManager.setState('cookieConsent', { 
+      consentValue: existingConsent || null,
+      isVisible: false,
+      isAnimating: false
+    }, { silent: true });
+
+    // Subscribe to cookie consent state changes
+    const unsubscribe = stateManager.subscribe('cookieConsent', (newState, oldState, source) => {
+      // Handle visibility changes
+      if (newState.isVisible !== oldState.isVisible) {
+        if (newState.isVisible) {
+          performShowBanner();
+        } else {
+          performHideBanner();
+        }
+      }
+      
+      // Handle consent value changes
+      if (newState.consentValue !== oldState.consentValue && newState.consentValue) {
+        handleConsentChange(newState.consentValue);
+      }
+      
+      // Handle animation state
+      if (newState.isAnimating !== oldState.isAnimating) {
+        if (newState.isAnimating) {
+          banner.classList.add('is-animating');
+        } else {
+          banner.classList.remove('is-animating');
+        }
+      }
+      
+      // Handle focus management based on state changes
+      if (newState.isVisible !== oldState.isVisible) {
+        if (newState.isVisible) {
+          // Enable keyboard navigation when banner becomes visible
+          // Note: We don't auto-focus to avoid disrupting user flow
+          focusManager.enableFocusTrap();
+        } else {
+          // Disable focus trap when banner is hidden
+          focusManager.disableFocusTrap();
+        }
+      }
+    });
+
+    // Show banner implementation
+    const performShowBanner = () => {
+      const state = stateManager.getState('cookieConsent');
+      if (state.isVisible && state.isAnimating) return; // Prevent race conditions
+      
+      // Update state to show animating
+      stateManager.setState('cookieConsent', { isAnimating: true }, { source: 'show-start' });
+      
+      // Clean up any existing animation
+      if (bannerAnimation) {
+        bannerAnimation.cleanup();
+        bannerAnimation = null;
+      }
+
+      bannerAnimation = cookieBannerSlideUp(banner, {
+        duration: 300,
+        onComplete: () => {
+          // Update state - animation complete
+          stateManager.setState('cookieConsent', { isAnimating: false }, { source: 'show-complete' });
+          bannerAnimation = null;
+        }
       });
     };
 
-    const setCookieConsent = (value) => {
+    // Hide banner implementation
+    const performHideBanner = () => {
+      const state = stateManager.getState('cookieConsent');
+      if (!state.isVisible && state.isAnimating) return; // Prevent race conditions
+      
+      // Update state to show animating
+      stateManager.setState('cookieConsent', { isAnimating: true }, { source: 'hide-start' });
+      
+      // Clean up any existing animation
+      if (bannerAnimation) {
+        bannerAnimation.cleanup();
+        bannerAnimation = null;
+      }
+
+      bannerAnimation = cookieBannerSlideDown(banner, {
+        duration: 300,
+        onComplete: () => {
+          // Remove from DOM after animation for better performance
+          if (banner.parentNode) {
+            banner.parentNode.removeChild(banner);
+          }
+          
+          // Update state - animation complete
+          stateManager.setState('cookieConsent', { isAnimating: false }, { source: 'hide-complete' });
+          bannerAnimation = null;
+        }
+      });
+    };
+
+    // Handle consent changes
+    const handleConsentChange = (value) => {
       try {
         localStorage.setItem('cookieConsent', value);
-        hideBanner();
-
+        
         // Dispatch custom event for analytics or other tracking
         if ('CustomEvent' in window) {
           const event = new CustomEvent('cookieConsentChanged', {
@@ -157,6 +243,37 @@ const positionClasses = {
         }
       } catch (error) {
         console.warn('Could not save cookie consent preference:', error);
+      }
+    };
+
+    // Set cookie consent function
+    const setCookieConsent = (value) => {
+      stateManager.setState('cookieConsent', { 
+        consentValue: value,
+        isVisible: false 
+      }, { source: 'user-action' });
+    };
+
+    // Performance-optimized banner display with unified animation
+    const showBannerWithDelay = () => {
+      // Use requestIdleCallback for non-blocking execution
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          setTimeout(() => {
+            const currentConsent = localStorage.getItem('cookieConsent');
+            if (!currentConsent) {
+              stateManager.setState('cookieConsent', { isVisible: true }, { source: 'auto-show' });
+            }
+          }, 1000);
+        });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => {
+          const currentConsent = localStorage.getItem('cookieConsent');
+          if (!currentConsent) {
+            stateManager.setState('cookieConsent', { isVisible: true }, { source: 'auto-show' });
+          }
+        }, 1000);
       }
     };
 
@@ -181,26 +298,35 @@ const positionClasses = {
     // Use event delegation for better performance
     banner.addEventListener('click', handleButtonClick, { passive: true });
 
-    // Enhanced keyboard support
-    banner.addEventListener(
-      'keydown',
-      (e) => {
-        if (e.key === 'Escape') {
-          setCookieConsent('rejected');
-        }
-      },
-      { passive: false }
-    );
+    // Keyboard support is now handled by the centralized FocusManager
 
     // Show banner with optimized timing
     showBannerWithDelay();
 
-    // Cleanup function for memory management
-    window.addEventListener('beforeunload', () => {
+    // Cleanup function
+    const cleanup = () => {
+      if (bannerAnimation) {
+        bannerAnimation.cleanup();
+        bannerAnimation = null;
+      }
+      focusManager.destroy();
       banner.removeEventListener('click', handleButtonClick);
-    });
+      unsubscribe();
+    };
+
+    window.addEventListener('beforeunload', cleanup);
+    
+    // Return cleanup for external use
+    return cleanup;
   }
 
   // Initialize when browser is idle
-  initializeCookieConsent();
+  let cleanup = null;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      cleanup = initializeCookieConsent();
+    });
+  } else {
+    cleanup = initializeCookieConsent();
+  }
 </script>

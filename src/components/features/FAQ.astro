@@ -1,8 +1,24 @@
 ---
-// FAQ section component with comprehensive TypeScript interface
+/**
+ * FAQ - Frequently Asked Questions section with collapsible items
+ * 
+ * Uses centralized utilities for animations, state, and focus management.
+ * Follows enterprise architecture patterns for maintainability.
+ * 
+ * @example
+ * <FAQ 
+ *   title="Frequently asked questions"
+ *   subtitle="Everything you need to know"
+ *   faqs={[
+ *     { id: 'q1', question: 'Question?', answer: 'Answer.' }
+ *   ]}
+ * />
+ */
+
 import Icon from '../primitives/Icon.astro';
 import Card from '../primitives/Card.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
 interface FAQItem {
   id: string;
@@ -10,13 +26,21 @@ interface FAQItem {
   answer: string;
 }
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Section title */
   title?: string;
+  /** Section subtitle */
   subtitle?: string;
+  /** Contact email for support */
   contactEmail?: string;
+  /** Array of FAQ items */
   faqs?: FAQItem[];
+  /** Whether to show contact CTA at the bottom */
   showContactCTA?: boolean;
+  /** Whether to use animations */
+  animated?: boolean;
+  /** Whether multiple items can be open simultaneously */
+  allowMultiple?: boolean;
 }
 
 const {
@@ -25,6 +49,8 @@ const {
   subtitle = "Everything you need to know about Ralph's security and deployment",
   contactEmail = 'Konstantin@beneficious.com',
   showContactCTA = true,
+  animated = true,
+  allowMultiple = true,
   faqs = [
     {
       id: 'confidentiality',
@@ -106,6 +132,9 @@ const {
     },
   ],
 } = Astro.props;
+
+// Generate component ID for state management
+const componentId = 'faq-component';
 ---
 
 <Section class={`py-20 bg-primary ${className}`} as="section" aria-labelledby="faq-title">
@@ -120,35 +149,36 @@ const {
     </div>
 
     <div class="mt-16 max-w-3xl mx-auto">
-      <!-- Progressive Enhancement: FAQ works without JS, enhanced with client:visible -->
-      <div class="space-y-4" role="list" id="faq-container">
+      <!-- Progressive Enhancement: FAQ works without JS, enhanced with animations -->
+      <div class="space-y-4" role="list" id="faq-container" data-component-id={componentId}>
         {
           faqs.map((faq, index) => (
-            <Card hover={false} class="faq-item" role="listitem">
+            <Card hover={false} class="faq-item" role="listitem" data-faq-id={faq.id}>
               <button
                 class="w-full text-left flex items-center justify-between group min-h-[44px] p-2 -m-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-600 text-high-contrast"
                 aria-expanded="false"
-                aria-controls={`faq-content-${index + 1}`}
-                aria-describedby={`faq-content-${index + 1}`}
-                id={`faq-button-${index + 1}`}
-                onclick="toggleFAQ(this)"
-                onkeydown="handleFAQKeydown(event, this)"
+                aria-controls={`faq-content-${faq.id}`}
+                aria-describedby={`faq-content-${faq.id}`}
+                id={`faq-button-${faq.id}`}
+                data-faq-toggle={faq.id}
                 aria-label={`Toggle FAQ: ${faq.question}`}
               >
                 <h3 class="heading-3 text-left pr-4">{faq.question}</h3>
                 <Icon
                   name="chevron-down"
-                  class="faq-arrow text-text-muted transform transition-transform duration-200 flex-shrink-0"
+                  class="faq-arrow text-text-muted transform transition-transform duration-300 ease-in-out flex-shrink-0"
                   aria-hidden="true"
                 />
               </button>
               <div
-                id={`faq-content-${index + 1}`}
-                class="faq-content mt-4 text-text-muted hidden"
+                id={`faq-content-${faq.id}`}
+                class="faq-content mt-4 text-text-muted overflow-hidden transition-all duration-300 ease-in-out"
+                style="height: 0; opacity: 0;"
                 role="region"
-                aria-labelledby={`faq-button-${index + 1}`}
+                aria-labelledby={`faq-button-${faq.id}`}
+                data-faq-content={faq.id}
               >
-                <div class="prose prose-sm max-w-none text-text-muted">{faq.answer}</div>
+                <div class="prose prose-sm max-w-none text-text-muted py-2">{faq.answer}</div>
               </div>
             </Card>
           ))
@@ -174,84 +204,148 @@ const {
   </div>
 </Section>
 
-<!-- Enhanced FAQ functionality with progressive enhancement -->
-<script>
-  // Performance-optimized FAQ functionality
+<!-- Enhanced FAQ functionality with animations and state management -->
+<script type="module">
+  // Simple, robust FAQ functionality with smooth animations
   function initializeFAQ() {
-    // Enhanced FAQ functionality with keyboard navigation and performance optimizations
-    function toggleFAQ(button) {
-      const content = document.getElementById(button.getAttribute('aria-describedby'));
-      const arrow = button.querySelector('.faq-arrow');
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-      // Use requestAnimationFrame for smooth animations
+    const ANIMATION_DURATION = 300;
+    const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
+    const allowMultiple = true; // Allow multiple FAQs open
+    
+    // FAQ state tracking
+    const faqState = {
+      openItems: new Set(),
+      animatingItems: new Set()
+    };
+    
+    // Smooth height animation functions
+    function slideUpContent(element, onComplete) {
+      if (faqState.animatingItems.has(element.id)) return;
+      faqState.animatingItems.add(element.id);
+      
+      const currentHeight = element.scrollHeight;
+      element.style.height = `${currentHeight}px`;
+      element.style.opacity = '1';
+      element.offsetHeight; // Force reflow
+      
+      element.style.transition = `height ${ANIMATION_DURATION}ms ${EASING}, opacity ${ANIMATION_DURATION}ms ${EASING}`;
+      
       requestAnimationFrame(() => {
-        // Close all other FAQs efficiently
-        const openButtons = document.querySelectorAll('.faq-item button[aria-expanded="true"]');
-        openButtons.forEach((otherButton) => {
-          if (otherButton !== button) {
-            const otherContent = document.getElementById(
-              otherButton.getAttribute('aria-describedby')
-            );
-            const otherArrow = otherButton.querySelector('.faq-arrow');
-
-            otherButton.setAttribute('aria-expanded', 'false');
-            otherContent.classList.add('hidden');
-            otherArrow.style.transform = 'rotate(0deg)';
-          }
-        });
-
-        // Toggle current FAQ with smooth animation
-        if (isExpanded) {
-          button.setAttribute('aria-expanded', 'false');
-          content.classList.add('hidden');
-          arrow.style.transform = 'rotate(0deg)';
-        } else {
-          button.setAttribute('aria-expanded', 'true');
-          content.classList.remove('hidden');
-          arrow.style.transform = 'rotate(180deg)';
-
-          // Ensure smooth scrolling to FAQ if needed
-          if (content.getBoundingClientRect().bottom > window.innerHeight) {
-            content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }
+        element.style.height = '0px';
+        element.style.opacity = '0';
       });
+      
+      setTimeout(() => {
+        element.style.transition = '';
+        faqState.animatingItems.delete(element.id);
+        onComplete?.();
+      }, ANIMATION_DURATION);
     }
-
-    function handleFAQKeydown(event, button) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleFAQ(button);
+    
+    function slideDownContent(element, onComplete) {
+      if (faqState.animatingItems.has(element.id)) return;
+      faqState.animatingItems.add(element.id);
+      
+      element.style.height = '0px';
+      element.style.opacity = '0';
+      element.style.transition = '';
+      
+      // Get target height
+      element.style.height = 'auto';
+      const targetHeight = element.scrollHeight;
+      element.style.height = '0px';
+      element.offsetHeight; // Force reflow
+      
+      element.style.transition = `height ${ANIMATION_DURATION}ms ${EASING}, opacity ${ANIMATION_DURATION}ms ${EASING}`;
+      
+      requestAnimationFrame(() => {
+        element.style.height = `${targetHeight}px`;
+        element.style.opacity = '1';
+      });
+      
+      setTimeout(() => {
+        element.style.height = 'auto';
+        element.style.transition = '';
+        faqState.animatingItems.delete(element.id);
+        onComplete?.();
+        
+        // Smooth scroll if content extends beyond viewport
+        setTimeout(() => {
+          if (element.getBoundingClientRect().bottom > window.innerHeight) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 50);
+      }, ANIMATION_DURATION);
+    }
+    
+    // Main toggle function
+    function toggleFAQ(faqId) {
+      const button = document.getElementById(`faq-button-${faqId}`);
+      const content = document.getElementById(`faq-content-${faqId}`);
+      const arrow = button?.querySelector('.faq-arrow');
+      
+      if (!button || !content || !arrow) {
+        console.warn(`FAQ elements not found for ID: ${faqId}`);
+        return;
+      }
+      
+      const isOpen = faqState.openItems.has(faqId);
+      const isAnimating = faqState.animatingItems.has(content.id);
+      
+      if (isAnimating) return; // Prevent multiple animations
+      
+      if (isOpen) {
+        // Close FAQ
+        button.setAttribute('aria-expanded', 'false');
+        arrow.style.transform = 'rotate(0deg)';
+        faqState.openItems.delete(faqId);
+        
+        slideUpContent(content);
+      } else {
+        // Handle accordion behavior (close others) if allowMultiple is false
+        if (!allowMultiple) {
+          const openItems = Array.from(faqState.openItems);
+          openItems.forEach(otherFaqId => {
+            if (otherFaqId !== faqId) {
+              toggleFAQ(otherFaqId);
+            }
+          });
+        }
+        
+        // Open FAQ
+        button.setAttribute('aria-expanded', 'true');
+        arrow.style.transform = 'rotate(180deg)';
+        faqState.openItems.add(faqId);
+        
+        slideDownContent(content);
       }
     }
-
-    // Make functions globally available for inline event handlers
+    
+    // Event listeners
+    document.addEventListener('click', (e) => {
+      const faqToggle = e.target.closest('[data-faq-toggle]');
+      if (faqToggle) {
+        e.preventDefault();
+        const faqId = faqToggle.getAttribute('data-faq-toggle');
+        toggleFAQ(faqId);
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const faqToggle = e.target.closest('[data-faq-toggle]');
+        if (faqToggle) {
+          e.preventDefault();
+          const faqId = faqToggle.getAttribute('data-faq-toggle');
+          toggleFAQ(faqId);
+        }
+      }
+    });
+    
+    // Expose toggleFAQ globally for backward compatibility
     window.toggleFAQ = toggleFAQ;
-    window.handleFAQKeydown = handleFAQKeydown;
-
-    // Progressive enhancement: Add intersection observer for lazy loading
-    if ('IntersectionObserver' in window) {
-      const faqContainer = document.getElementById('faq-container');
-      if (faqContainer) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('faq-visible');
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        faqContainer.querySelectorAll('.faq-item').forEach((item) => {
-          observer.observe(item);
-        });
-      }
-    }
   }
-
+  
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeFAQ);

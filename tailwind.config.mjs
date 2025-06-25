@@ -6,43 +6,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Design System Colors
+        // Design System Colors - Single Source of Truth
         primary: {
           yellow: designSystem.colors.primary.yellow,
           'yellow-hover': designSystem.colors.primary.yellowHover,
         },
-        neutral: {
-          700: 'rgb(40, 40, 40)', // POM exact value
-          600: 'rgb(65, 65, 65)', // POM exact value
-          500: 'rgb(82, 82, 82)',
-          400: 'rgb(115, 115, 115)',
-          300: 'rgb(163, 163, 163)',
-          200: 'rgb(212, 212, 212)',
-          100: 'rgb(245, 245, 245)',
-          50: 'rgb(250, 250, 250)',
-          800: 'rgb(26, 26, 26)',
-          900: 'rgb(10, 10, 10)',
-        },
+        neutral: designSystem.colors.neutral,
         text: designSystem.colors.text,
-
-        // POM Background Colors (backwards compatibility)
-        'pom-bg-body': 'rgb(40, 40, 40)',
-        'pom-bg-secondary': 'rgb(65, 65, 65)',
-        'pom-bg-card': 'rgb(53, 53, 53)',
-
-        // POM Text Colors (backwards compatibility)
-        'pom-text-primary': 'rgb(255, 255, 255)',
-        'pom-text-secondary': 'rgba(255, 246, 238, 0.72)',
-        'pom-text-muted': 'rgb(156, 163, 175)',
-        'pom-text-gray': 'rgb(107, 114, 128)',
-
-        // POM Accent Colors (backwards compatibility)
-        'pom-accent': 'rgb(255, 220, 97)',
-        'pom-accent-text': 'rgb(41, 48, 69)',
-
-        // Additional POM Colors (backwards compatibility)
-        'pom-emerald': 'oklch(0.696 0.17 162.48)',
-        'pom-quote': 'oklch(0.21 0.034 264.665)',
 
         // Override Tailwind's yellow to use our brand yellow
         yellow: {
@@ -50,13 +20,17 @@ export default {
           300: designSystem.colors.primary.yellowHover,
         },
 
-        // Map to semantic names
-        surface: {
-          DEFAULT: designSystem.colors.neutral[700],
-          secondary: designSystem.colors.neutral[600],
-          card: 'rgb(53, 53, 53)',
-          highlight: designSystem.colors.primary.yellow,
-        },
+        // Semantic color mapping
+        background: designSystem.colors.neutral[700],
+        secondary: designSystem.colors.neutral[600],
+        accent: designSystem.colors.primary.yellow,
+        'accent-text': designSystem.colors.text.inverted,
+        'text-primary': designSystem.colors.text.primary,
+        'text-secondary': designSystem.colors.text.secondary,
+        'text-muted': designSystem.colors.text.muted,
+
+        // Backward compatibility with existing POM references
+        'primary-yellow': designSystem.colors.primary.yellow,
       },
 
       fontFamily: {

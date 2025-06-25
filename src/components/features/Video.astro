@@ -1,15 +1,32 @@
 ---
-// Video section component with design tokens
-import Section from '../layout/Section.astro';
+/**
+ * Video - Video showcase section with responsive container
+ * @example
+ * <Video 
+ *   title="See Ralph in Action"
+ *   subtitle="Watch the demo"
+ *   videoSrc="/path/to/video.mp4"
+ *   posterImage="/path/to/poster.jpg"
+ * />
+ */
 
-export interface Props {
-  class?: string;
+import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
+  /** Section title */
   title?: string;
+  /** Section subtitle */
   subtitle?: string;
+  /** Video source URL */
   videoSrc?: string;
+  /** Poster image for video */
   posterImage?: string;
+  /** Placeholder text when no video is provided */
   placeholder?: string;
+  /** Video aspect ratio */
   aspectRatio?: '16:9' | '4:3' | '1:1';
+  /** Whether video should autoplay */
   autoplay?: boolean;
 }
 
@@ -25,7 +42,7 @@ const {
 } = Astro.props;
 ---
 
-<Section class={`video-section py-20 ${className}`} as="section">
+<Section class={`py-20 bg-background ${className}`} as="section">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="heading-2">
@@ -37,44 +54,25 @@ const {
     </div>
 
     <div class="mt-16 mx-auto max-w-4xl">
-      <div class="video-gradient-container rounded-lg p-8 text-center" data-test="video-container">
+      <div class="rounded-lg p-8 text-center bg-gradient-video-container" data-test="video-container">
         {
           videoSrc ? (
-            <video class="video-player w-full rounded-lg" controls poster={posterImage}>
+            <video class="w-full rounded-lg aspect-video" controls poster={posterImage}>
               <source src={videoSrc} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           ) : (
-            <div class="video-placeholder bg-gray-800 rounded-lg flex items-center justify-center">
-              <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <div class="bg-neutral-800 rounded-lg flex items-center justify-center aspect-video">
+              <svg class="w-16 h-16 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           )
         }
-        <p class="mt-4 text-white font-medium">
+        <p class="mt-4 text-text-primary font-medium">
           {placeholder}
         </p>
       </div>
     </div>
   </div>
 </Section>
-
-<style>
-  .video-section {
-    background-color: rgb(40, 40, 40);
-  }
-
-  .video-gradient-container {
-    background: linear-gradient(to right bottom, rgb(37, 99, 235), rgb(13, 148, 136));
-    border-radius: 8px;
-  }
-
-  .video-player {
-    aspect-ratio: 16 / 9;
-  }
-
-  .video-placeholder {
-    aspect-ratio: 16 / 9;
-  }
-</style>

@@ -145,7 +145,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
             debug: false,
             thresholds: {
               CLS: 0.1,
-              FID: 100,
+              INP: 200, // Replaced FID with INP (official Core Web Vital as of March 2024)
               LCP: 2500,
               FCP: 1800,
               TTFB: 800,
@@ -240,10 +240,16 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       }
 
       /* iOS horizontal scroll prevention */
-      html,
+      html {
+        overflow-x: hidden;
+        touch-action: pan-y pinch-zoom;
+      }
+      
       body {
         overflow-x: hidden;
         touch-action: pan-y pinch-zoom;
+        position: relative;
+        width: 100%;
       }
 
       /* Apply POM body background and font */
@@ -343,7 +349,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         font-weight: 700;
         line-height: 1.2;
         letter-spacing: -0.025em;
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
       }
 
       @media (min-width: 640px) {
@@ -357,7 +363,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         font-weight: 700;
         line-height: 1.2;
         letter-spacing: -0.025em;
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
       }
 
       @media (min-width: 640px) {
@@ -369,7 +375,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       .heading-3 {
         font-size: 1.25rem;
         font-weight: 600;
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
       }
 
       @media (min-width: 640px) {
@@ -387,19 +393,19 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       }
 
       .text-body {
-        color: rgb(209, 213, 219);
+        color: var(--color-text-muted);
       }
 
       /* Gradient text utilities */
       .gradient-text-primary {
-        background: linear-gradient(to right, rgb(253, 224, 71), rgb(234, 179, 8));
+        background: linear-gradient(to right, var(--color-primary-yellow), var(--color-primary-yellowhover));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
       }
 
       .gradient-hero-title {
-        background: linear-gradient(353deg, rgb(153, 153, 153) 36%, rgb(255, 255, 255) 90%);
+        background: var(--gradient-hero-title);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -425,7 +431,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       /* Navigation utilities */
       .nav-link {
         font-weight: 600;
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
         text-decoration: none;
         transition: color 0.2s;
       }
@@ -438,7 +444,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       .mobile-nav-link {
         font-weight: 500;
         font-family: 'Geist', system-ui, sans-serif;
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
         text-decoration: none;
         transition: color 0.2s;
         -webkit-font-smoothing: antialiased;
@@ -466,11 +472,13 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         }
       }
 
-      /* Mobile menu CTA button - ensures proper font size and no wrapping */
-      .mobile-cta-button {
-        font-size: 16px !important;
-        white-space: nowrap !important;
+      /* POM compliance: CTA button font size override */
+      button.btn-primary.btn-lg,
+      main button.btn-primary.btn-lg,
+      .btn-primary.btn-lg {
+        font-size: 0.875rem !important; /* 14px for POM compliance */
       }
+
 
       /* FAQ transition styles for smooth expand/collapse */
       .faq-content {
@@ -485,11 +493,29 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         transition: transform 0.3s ease-out;
       }
 
-      /* Mobile menu transitions */
-      #mobile-menu {
-        transition:
-          opacity 0.2s ease-out,
-          transform 0.2s ease-out;
+      /* Body scroll lock for mobile menu and modals */
+      /* Using overflow hidden instead of fixed positioning to prevent layout shift */
+      html.mobile-menu-open,
+      body.mobile-menu-open,
+      html.modal-open,
+      body.modal-open,
+      html.scroll-locked,
+      body.scroll-locked {
+        overflow: hidden;
+        /* Prevent iOS bounce scrolling */
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Animation states for centralized state management */
+      .is-animating {
+        will-change: transform, opacity;
+      }
+
+      .is-open {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
       }
 
       /* Accessibility: Screen reader only content */
@@ -548,7 +574,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Enhanced focus for CTA buttons */
       .btn-primary:focus-visible {
-        outline: 3px solid rgb(255, 255, 255);
+        outline: 3px solid var(--color-text-primary);
         outline-offset: 2px;
         box-shadow: 0 0 0 6px var(--pom-accent);
       }
@@ -572,7 +598,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Accessibility: High contrast for better readability */
       .text-high-contrast {
-        color: rgb(255, 255, 255);
+        color: var(--color-text-primary);
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       }
 
@@ -604,7 +630,6 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
         .faq-content,
         .faq-arrow,
-        #mobile-menu,
         header {
           transition: none !important;
         }
@@ -612,7 +637,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Accessibility: Better contrast for muted text */
       .text-muted {
-        color: rgb(209, 213, 219); /* Improved contrast */
+        color: var(--color-text-muted); /* Improved contrast */
       }
 
       /* Accessibility: ARIA live regions */
@@ -658,226 +683,8 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
     <slot />
     <script>
-      // Essential functionality extracted from modular TypeScript files
-      // Mobile menu functionality
-      document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        const showMenu = () => {
-          if (mobileMenu) {
-            const statusMessages = document.getElementById('status-messages');
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.style.opacity = '0';
-            mobileMenu.style.transform = 'translateY(-20px)';
-            mobileMenuButton?.setAttribute('aria-expanded', 'true');
-
-            // Focus trap - move focus to first focusable element in menu
-            const firstFocusable = mobileMenu.querySelector(
-              'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-
-            requestAnimationFrame(() => {
-              mobileMenu.style.opacity = '1';
-              mobileMenu.style.transform = 'translateY(0)';
-
-              // Announce menu opening and focus first element
-              if (statusMessages) {
-                statusMessages.textContent = 'Mobile menu opened';
-              }
-              if (firstFocusable) {
-                firstFocusable.focus();
-              }
-            });
-          }
-        };
-
-        const hideMenu = () => {
-          if (mobileMenu) {
-            const statusMessages = document.getElementById('status-messages');
-            mobileMenu.style.opacity = '0';
-            mobileMenu.style.transform = 'translateY(-20px)';
-            mobileMenuButton?.setAttribute('aria-expanded', 'false');
-
-            // Return focus to menu button
-            if (mobileMenuButton) {
-              mobileMenuButton.focus();
-            }
-
-            // Announce menu closing
-            if (statusMessages) {
-              statusMessages.textContent = 'Mobile menu closed';
-            }
-
-            setTimeout(() => {
-              mobileMenu.classList.add('hidden');
-            }, 200);
-          }
-        };
-
-        if (mobileMenuButton) {
-          mobileMenuButton.addEventListener('click', showMenu);
-        }
-
-        if (mobileMenuClose) {
-          mobileMenuClose.addEventListener('click', hideMenu);
-        }
-
-        if (mobileMenu) {
-          mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu || e.target === mobileMenu.firstElementChild) {
-              hideMenu();
-            }
-          });
-
-          // Keyboard navigation for mobile menu
-          mobileMenu.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-              hideMenu();
-            }
-
-            // Tab trapping
-            if (e.key === 'Tab') {
-              const focusableElements = mobileMenu.querySelectorAll(
-                'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-              );
-              const firstFocusable = focusableElements[0];
-              const lastFocusable = focusableElements[focusableElements.length - 1];
-
-              if (e.shiftKey) {
-                if (document.activeElement === firstFocusable) {
-                  e.preventDefault();
-                  lastFocusable.focus();
-                }
-              } else {
-                if (document.activeElement === lastFocusable) {
-                  e.preventDefault();
-                  firstFocusable.focus();
-                }
-              }
-            }
-          });
-        }
-      });
-
-      // FAQ toggle functionality with accessibility announcements
-      window.toggleFAQ = function (button) {
-        const content = button.nextElementSibling;
-        const arrow = button.querySelector('svg');
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        const statusMessages = document.getElementById('status-messages');
-        const questionText = button.querySelector('h3').textContent;
-
-        if (isExpanded) {
-          content.style.maxHeight = content.scrollHeight + 'px';
-          content.offsetHeight;
-          content.style.maxHeight = '0px';
-          content.style.opacity = '0';
-          arrow.classList.remove('rotate-180');
-          button.setAttribute('aria-expanded', 'false');
-
-          // Announce collapse to screen readers
-          if (statusMessages) {
-            statusMessages.textContent = `FAQ collapsed: ${questionText}`;
-          }
-
-          setTimeout(() => {
-            content.classList.add('hidden');
-          }, 300);
-        } else {
-          content.classList.remove('hidden');
-          content.style.maxHeight = '0px';
-          content.style.opacity = '0';
-          content.offsetHeight;
-          content.style.maxHeight = content.scrollHeight + 'px';
-          content.style.opacity = '1';
-          arrow.classList.add('rotate-180');
-          button.setAttribute('aria-expanded', 'true');
-
-          // Announce expansion to screen readers
-          if (statusMessages) {
-            statusMessages.textContent = `FAQ expanded: ${questionText}`;
-          }
-
-          setTimeout(() => {
-            content.style.maxHeight = 'none';
-          }, 300);
-        }
-      };
-
-      window.handleFAQKeydown = function (event, button) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          toggleFAQ(button);
-        }
-      };
-
-      // Cookie consent functionality
-      function showCookieBanner() {
-        const banner = document.getElementById('cookie-banner');
-        if (banner && !localStorage.getItem('cookieConsent')) {
-          setTimeout(() => {
-            banner.style.opacity = '1';
-            banner.style.transform = 'translateY(0)';
-          }, 1000);
-        }
-      }
-
-      function hideCookieBanner() {
-        const banner = document.getElementById('cookie-banner');
-        if (banner) {
-          banner.style.opacity = '0';
-          banner.style.transform = 'translateY(100vh)';
-        }
-      }
-
-      function setCookieConsent(value) {
-        localStorage.setItem('cookieConsent', value);
-        hideCookieBanner();
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const acceptBtn = document.getElementById('cookie-accept');
-        const rejectBtn = document.getElementById('cookie-reject');
-        const settingsBtn = document.getElementById('cookie-settings');
-
-        if (acceptBtn) {
-          acceptBtn.addEventListener('click', () => setCookieConsent('accepted'));
-        }
-
-        if (rejectBtn) {
-          rejectBtn.addEventListener('click', () => setCookieConsent('rejected'));
-        }
-
-        if (settingsBtn) {
-          settingsBtn.addEventListener('click', () => {
-            setCookieConsent('settings');
-          });
-        }
-
-        showCookieBanner();
-      });
-
-      // Login button functionality
-      document.addEventListener('DOMContentLoaded', () => {
-        const loginButton = document.getElementById('login-button');
-        const mobileLoginButton = document.getElementById('mobile-login-button');
-
-        const showLoginModalFunc = () => {
-          if (typeof showLoginModal === 'function') {
-            showLoginModal();
-          }
-        };
-
-        if (loginButton) {
-          loginButton.addEventListener('click', showLoginModalFunc);
-        }
-
-        if (mobileLoginButton) {
-          mobileLoginButton.addEventListener('click', showLoginModalFunc);
-        }
-      });
+      // Legacy functionality - now handled by centralized state management
+      // This is preserved for backward compatibility only
 
       // Book a Demo button functionality
       document.addEventListener('DOMContentLoaded', () => {

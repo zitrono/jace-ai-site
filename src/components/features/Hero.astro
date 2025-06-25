@@ -1,16 +1,33 @@
 ---
-// Hero section component with complete TypeScript interface
+/**
+ * Hero - Main hero section with title, subtitle, and CTA
+ * @example
+ * <Hero 
+ *   title="See Tomorrow's Opportunities Today"
+ *   subtitle="AI agents transform your data"
+ *   ctaText="Book a Demo"
+ *   ctaHref="#contact"
+ * />
+ */
+
 import Button from '../primitives/Button.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Main hero title */
   title?: string;
+  /** Hero subtitle/description */
   subtitle?: string;
+  /** CTA button text */
   ctaText?: string;
+  /** CTA button link */
   ctaHref?: string;
+  /** Whether to show background pattern */
   showPattern?: boolean;
+  /** Whether to show trust indicators */
   showTrustIndicators?: boolean;
+  /** Whether to show support features */
   showSupportFeatures?: boolean;
 }
 
@@ -53,8 +70,7 @@ const {
   >
     <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto lg:w-5/12">
       <h1
-        class="text-hero font-bold leading-tight lg:mt-10 pb-2 text-pretty gradient-hero-title max-sm:text-center"
-        style="letter-spacing: -1.5px;"
+        class="text-hero font-bold leading-tight lg:mt-10 pb-2 text-pretty gradient-hero-title max-sm:text-center tracking-tighter"
         data-test="hero-title"
       >
         {title}
@@ -66,7 +82,7 @@ const {
         {subtitle}
       </p>
       <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
-        <Button variant="primary" size="lg" data-test="cta-button" href={ctaHref}>
+        <Button variant="primary" size="lg" class="btn-primary btn-lg bg-primary-yellow" data-test="cta-button" onclick={`window.location.href='${ctaHref}'`}>
           {ctaText}
         </Button>
       </div>

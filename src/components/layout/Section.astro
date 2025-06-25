@@ -1,10 +1,20 @@
 ---
-// Enhanced Section component with comprehensive background and spacing variants
-import type { HTMLAttributes } from 'astro/types';
+/**
+ * Section - Flexible layout section with background and spacing variants
+ * @example
+ * <Section 
+ *   background="primary"
+ *   spacing="lg"
+ *   maxWidth="2xl"
+ *   as="section"
+ * >
+ *   Content here
+ * </Section>
+ */
 
-export interface SectionProps extends HTMLAttributes<'section'> {
-  /** Additional CSS classes */
-  class?: string;
+import type { BaseComponentProps } from '@/types/components';
+
+export interface Props extends BaseComponentProps {
   /** Background variant */
   background?: 'primary' | 'secondary' | 'card' | 'gradient' | 'transparent';
   /** Vertical spacing variant */

@@ -1,4 +1,8 @@
 /**
+ * @deprecated - FAQ functionality has been moved to unified animation system
+ * This file is preserved for git history and potential future reference
+ * DO NOT IMPORT OR USE - Use /src/utils/animation-manager.ts instead
+ * 
  * FAQ Toggle Module
  * Handles FAQ accordion functionality with smooth transitions and accessibility
  */

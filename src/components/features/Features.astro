@@ -1,8 +1,21 @@
 ---
-// Features section component
+/**
+ * Features - Features showcase section with grid layout and process steps
+ * @example
+ * <Features 
+ *   title="How Ralph Works"
+ *   subtitle="Meet the AI agents"
+ *   columns={3}
+ *   features={[
+ *     { id: 'f1', icon: 'bar-chart', title: 'Feature', description: 'Description' }
+ *   ]}
+ * />
+ */
+
 import Card from '../primitives/Card.astro';
 import Icon from '../primitives/Icon.astro';
 import Section from '../layout/Section.astro';
+import type { BaseComponentProps } from '@/types/components';
 
 interface Feature {
   id: string;
@@ -11,12 +24,16 @@ interface Feature {
   description: string;
 }
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps {
+  /** Section title */
   title?: string;
+  /** Section subtitle */
   subtitle?: string;
+  /** Layout style (currently only grid supported) */
   layout?: 'grid' | 'list';
+  /** Number of columns in the grid */
   columns?: 1 | 2 | 3 | 4;
+  /** Array of feature items to display */
   features?: Feature[];
 }
 

@@ -12,7 +12,6 @@
  * />
  */
 
-import Card from '../primitives/Card.astro';
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
 
@@ -46,7 +45,7 @@ const {
   title = 'Leading PE Firms Are Embracing AI Transformation',
   subtitle = 'Industry Leaders on AI Adoption',
   layout: _layout = 'grid',
-  columns = 3,
+  _columns = 3,
   showLogos: _showLogos = true,
   testimonials = [
     {
@@ -56,7 +55,7 @@ const {
       author: 'Stephen Schwarzman',
       title: 'Chairman, CEO & Co-Founder',
       company: 'Blackstone',
-      logo: '/ralph-web/logos/The_Blackstone_Group_logo_(2).svg',
+      logo: '/ralph-web/public/logos/The_Blackstone_Group_logo_(2).svg',
     },
     {
       id: 'vista-ai-transformation',
@@ -65,7 +64,7 @@ const {
       author: 'Robert F. Smith',
       title: 'Founder, Chairman & CEO',
       company: 'Vista Equity Partners',
-      logo: '/ralph-web/logos/Vista-Equity-Partners-Header.webp',
+      logo: '/ralph-web/public/logos/Vista_Equity_Partners_logo_2.svg',
     },
     {
       id: 'eqt-competitive-edge',
@@ -74,7 +73,7 @@ const {
       author: 'Christian Sinding',
       title: 'CEO',
       company: 'EQT',
-      logo: '/ralph-web/logos/EQT_(Unternehmen)_logo.svg',
+      logo: '/ralph-web/public/logos/EQT_(Unternehmen)_logo.svg',
     },
     {
       id: 'kkr-tectonic-shift',
@@ -83,7 +82,7 @@ const {
       author: 'Waldemar Szlezak',
       title: 'Partner & Global Head of Digital Infrastructure',
       company: 'KKR',
-      logo: '/ralph-web/logos/Kohlberg_Kravis_Roberts_(logo).svg',
+      logo: '/ralph-web/public/logos/Kohlberg_Kravis_Roberts_(logo).svg',
     },
     {
       id: 'apollo-digital-value',
@@ -92,7 +91,7 @@ const {
       author: 'David Sambur',
       title: 'Partner & Co-Head of Equity',
       company: 'Apollo Global Management',
-      logo: '/ralph-web/logos/Apollo_Global_Management_logo.svg',
+      logo: '/ralph-web/public/logos/Apollo_Global_Management_logo.svg',
     },
     {
       id: 'cvc-opportunity-danger',
@@ -101,16 +100,11 @@ const {
       author: 'Jean-Rémy Roussel',
       title: 'Managing Partner',
       company: 'CVC Capital Partners',
-      logo: '/ralph-web/logos/CVC_Capital_Partners_logo.svg',
+      logo: '/ralph-web/public/logos/CVC_Capital_Partners_logo.svg',
     },
   ],
 } = Astro.props;
 
-const gridClasses = {
-  1: 'grid-cols-1',
-  2: 'grid-cols-1 sm:grid-cols-2',
-  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-};
 ---
 
 <Section
@@ -121,65 +115,60 @@ const gridClasses = {
 >
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl sm:text-center">
-      <h2 class="text-base font-semibold text-primary-yellow">
+      <h2 class="text-base font-semibold text-accent">
         {subtitle}
       </h2>
       <p
         id="testimonials-title"
-        class="mt-2 text-pretty text-3xl font-semibold tracking-tight text-white sm:text-balance sm:text-5xl"
+        class="mt-2 text-pretty text-3xl font-semibold tracking-tight text-primary sm:text-balance sm:text-5xl"
       >
         {title}
       </p>
     </div>
 
-    <!-- Dynamic Testimonials Grid -->
+    <!-- WSJ-Style Testimonials Grid -->
     <div
-      class={`testimonials-grid mx-auto mt-16 grid max-w-7xl gap-8 sm:mt-20 ${gridClasses[columns]}`}
+      class="mx-auto mt-16 grid max-w-7xl gap-8 sm:mt-20 grid-cols-1 lg:grid-cols-2"
       role="list"
       aria-label="Industry testimonials"
     >
       {
-        testimonials.slice(0, columns * 2).map((testimonial) => (
-          <Card
-            class="group relative p-8 hover:scale-105 transition-all duration-300 bg-gradient-to-b from-neutral-700/50 to-neutral-800/50 border border-neutral-600/30 hover:border-primary-yellow/30"
-            hover={false}
+        testimonials.slice(0, 6).map((testimonial) => (
+          <article 
+            class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
             role="listitem"
           >
-            {/* Logo positioned at top right */}
-            {testimonial.logo && _showLogos && (
-              <div class="absolute top-6 right-6 w-20 h-10 flex items-center justify-end">
-                <img
-                  src={testimonial.logo}
-                  alt={`${testimonial.company} logo`}
-                  class={`max-w-full max-h-full object-contain opacity-60 group-hover:opacity-80 transition-opacity duration-300 ${
-                    testimonial.company === 'Blackstone' ? '' : 'filter brightness-0 invert'
-                  }`}
-                />
+            <div class="flex items-start space-x-4">
+              <div class="text-6xl text-gray-300 leading-none font-light">"</div>
+              <div class="flex-1">
+                <blockquote class="text-lg leading-relaxed font-normal italic mb-6 font-['Geist',system-ui,sans-serif]">
+                  {testimonial.quote}
+                </blockquote>
+                <footer class="border-t border-gray-200 pt-4">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <cite class="font-bold text-gray-900 not-italic font-['Geist',system-ui,sans-serif]">
+                        {testimonial.author}
+                      </cite>
+                      <div class="text-sm text-gray-600 font-['Geist',system-ui,sans-serif]">
+                        {testimonial.title}
+                      </div>
+                      <div class="text-sm text-gray-500 font-medium font-['Geist',system-ui,sans-serif]">
+                        {testimonial.company}
+                      </div>
+                    </div>
+                    {testimonial.logo && _showLogos && (
+                      <img 
+                        src={testimonial.logo} 
+                        alt={`${testimonial.company} logo`} 
+                        class="w-24 h-10 object-contain opacity-80"
+                      />
+                    )}
+                  </div>
+                </footer>
               </div>
-            )}
-
-            {/* Quote mark */}
-            <div
-              class="absolute top-6 left-6 text-4xl text-primary-yellow opacity-50"
-              aria-hidden="true"
-            >
-              "
             </div>
-
-            {/* Quote content with adjusted spacing for logo */}
-            <blockquote class="relative mt-12 mb-8">
-              <p class="text-lg leading-relaxed text-white font-medium">{testimonial.quote}</p>
-            </blockquote>
-
-            {/* Author info */}
-            <figcaption class="pt-6 border-t border-neutral-600/50">
-              <div class="space-y-1">
-                <div class="text-lg font-bold text-primary-yellow">{testimonial.author}</div>
-                <div class="text-sm text-text-muted">{testimonial.title}</div>
-                <div class="text-sm text-text-muted font-medium">{testimonial.company}</div>
-              </div>
-            </figcaption>
-          </Card>
+          </article>
         ))
       }
     </div>

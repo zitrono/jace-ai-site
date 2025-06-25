@@ -155,16 +155,18 @@ const headerClasses = [
       {/* Desktop Navigation and CTA Buttons - Grouped together on the right */}
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8">
         {/* Navigation Links */}
-        <nav class="flex gap-x-8" role="navigation" aria-label="Main navigation">
+        <nav class="flex gap-x-4" role="navigation" aria-label="Main navigation">
           {
             navLinks.map((link) => (
-              <a
+              <Button
+                variant="nav"
+                size="md"
                 href={link.href}
-                class="nav-link text-text-primary hover:text-primary-yellow transition-colors duration-200 font-medium focus:outline-none focus:underline focus:underline-offset-4"
+                class="nav-link font-medium"
                 {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
               >
                 {link.text}
-              </a>
+              </Button>
             ))
           }
         </nav>

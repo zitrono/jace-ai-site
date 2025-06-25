@@ -15,6 +15,7 @@ AI development guide for ralph-web. **LLM-optimized - essential rules only.**
 - Maintain 99.9% POM compliance: `cd tests && node unified-test.js ralph`
 - Use design tokens: `bg-background`, `text-primary`, etc.
 - Follow component structure: `primitives/`, `layout/`, `features/`, `utils/`
+- **Normalize component heights**: Use `h-*` classes to ensure consistent alignment across `<a>`, `<button>`, and `<div>` elements
 
 ## 📁 Architecture
 ```

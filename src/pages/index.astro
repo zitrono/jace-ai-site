@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Hero from '../components/features/Hero.astro';
 import Features from '../components/features/Features.astro';
 import Pricing from '../components/features/Pricing.astro';
+import TestimonialsNew from '../components/features/TestimonialsNew.astro';
 import CTA from '../components/features/CTA.astro';
 import FAQ from '../components/features/FAQ.astro';
 import Section from '../components/layout/Section.astro';
@@ -92,26 +93,35 @@ import LoginModal from '../components/utils/LoginModal.astro';
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Others side -->
-            <div class="bg-card rounded-lg p-8">
-              <h3 class="text-xl font-bold text-white mb-4">Traditional AI Solutions</h3>
+            <div class="bg-card border border-red-400/20 rounded-lg p-8 relative">
+              <div class="absolute top-3 right-3">
+                <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Traditional AI Solutions</h3>
+              <p class="text-sm text-red-400 mb-6 font-medium">Limited to 20% of your data</p>
               <ul class="space-y-3 text-gray-300">
-                <li class="flex items-start">
-                  <span class="text-red-400 mr-3">✗</span>
-                  Work only with structured data
+                <li class="flex items-center">
+                  <span class="text-red-400 mr-3 text-lg leading-none flex-shrink-0">✗</span>
+                  <span class="leading-relaxed">Work only with structured data</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-red-400 mr-3">✗</span>
-                  Miss 80% of portfolio insights
+                <li class="flex items-center">
+                  <span class="text-red-400 mr-3 text-lg leading-none flex-shrink-0">✗</span>
+                  <span class="leading-relaxed">Miss 80% of portfolio insights</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-red-400 mr-3">✗</span>
-                  Guess at unstructured information
+                <li class="flex items-center">
+                  <span class="text-red-400 mr-3 text-lg leading-none flex-shrink-0">✗</span>
+                  <span class="leading-relaxed">Guess at unstructured information</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-red-400 mr-3">✗</span>
-                  Limited to spreadsheet analysis
+                <li class="flex items-center">
+                  <span class="text-red-400 mr-3 text-lg leading-none flex-shrink-0">✗</span>
+                  <span class="leading-relaxed">Limited to spreadsheet analysis</span>
                 </li>
               </ul>
+              <div class="mt-6 pt-4 border-t border-red-400/20 text-center">
+                <p class="text-xs text-red-400/80">
+                  Result: Blind spots and missed opportunities
+                </p>
+              </div>
             </div>
 
             <!-- Ralph side -->
@@ -120,21 +130,21 @@ import LoginModal from '../components/utils/LoginModal.astro';
             >
               <h3 class="text-xl font-bold text-primary mb-4">Ralph's Intelligent Infrastructure</h3>
               <ul class="space-y-3 text-secondary">
-                <li class="flex items-start">
-                  <span class="text-green-500 mr-3">✓</span>
-                  Transforms data sources into AI-ready feeds
+                <li class="flex items-center">
+                  <span class="text-green-500 mr-3 text-lg leading-none flex-shrink-0">✓</span>
+                  <span class="leading-relaxed">Transforms data sources into AI-ready feeds</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-green-500 mr-3">✓</span>
-                  Processes 100% of portfolio data
+                <li class="flex items-center">
+                  <span class="text-green-500 mr-3 text-lg leading-none flex-shrink-0">✓</span>
+                  <span class="leading-relaxed">Processes 100% of portfolio data</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-green-500 mr-3">✓</span>
-                  Understands unstructured information
+                <li class="flex items-center">
+                  <span class="text-green-500 mr-3 text-lg leading-none flex-shrink-0">✓</span>
+                  <span class="leading-relaxed">Understands unstructured information</span>
                 </li>
-                <li class="flex items-start">
-                  <span class="text-green-500 mr-3">✓</span>
-                  Analyzes emails, documents, conversations
+                <li class="flex items-center">
+                  <span class="text-green-500 mr-3 text-lg leading-none flex-shrink-0">✓</span>
+                  <span class="leading-relaxed">Analyzes emails, documents, conversations</span>
                 </li>
               </ul>
               <!-- Data Coverage Indicator -->
@@ -155,6 +165,13 @@ import LoginModal from '../components/utils/LoginModal.astro';
             </div>
           </div>
       </Section>
+
+      <!-- CEO Testimonials Section -->
+      <TestimonialsNew 
+        title="Leading PE Firms Are Embracing AI Transformation"
+        subtitle="Industry Leaders on AI Adoption"
+        columns={3}
+      />
 
       <!-- Features/Product Section -->
       <section id="product" aria-labelledby="features-title">

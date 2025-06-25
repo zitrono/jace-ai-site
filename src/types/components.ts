@@ -45,7 +45,7 @@ export interface LayoutComponentProps extends BaseComponentProps {
 /**
  * Common button variants
  */
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'nav' | 'danger';
 
 /**
  * Common size variants

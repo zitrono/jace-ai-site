@@ -60,13 +60,13 @@ const {
 // Determine actual disabled state
 const isDisabled = disabled || state === 'disabled' || loading;
 
-// Size classes using design tokens - POM compliant font sizes
+// Size classes using design tokens - Height normalization for alignment
 const sizeClasses = {
-  xs: 'h-8 px-xs text-xs', // Using design token spacing-xs (8px)
-  sm: 'h-9 px-sm text-xs', // Using design token spacing-sm (16px)
-  md: 'h-10 px-base text-xs', // Using design token spacing-base (24px)
-  lg: 'h-11 px-lg text-xs', // Using design token spacing-lg (32px)
-  xl: 'h-12 px-xl text-xs', // Using design token spacing-xl (48px)
+  xs: 'h-8 px-xs text-xs leading-none', // 32px height - minimal buttons
+  sm: 'h-9 px-sm text-sm leading-none', // 36px height - compact buttons  
+  md: 'h-11 px-base text-base font-medium leading-none', // 44px height - standard touch target
+  lg: 'h-12 px-lg text-lg font-medium leading-none', // 48px height - prominent buttons
+  xl: 'h-14 px-xl text-xl font-medium leading-none', // 56px height - hero buttons
 };
 
 // Variant classes using design tokens
@@ -79,6 +79,8 @@ const variantClasses = {
     'bg-transparent text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
   ghost:
     'bg-transparent text-secondary hover:bg-neutral-600 focus:ring-neutral-500/50 border-transparent',
+  nav:
+    'bg-transparent text-text-primary hover:text-primary-yellow focus:ring-primary-yellow/50 border-transparent',
   danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 border-transparent',
 };
 

@@ -1,0 +1,1 @@
+import"../chunks/utils.7AiHOJ0C.js";import"../chunks/components.Bq3x9tZW.js";import"../chunks/features.DJUyNFwR.js";document.addEventListener("DOMContentLoaded",()=>{["/ralph-web/ralph_favicon.svg"].forEach(a=>{const e=document.createElement("link");e.rel="preload",e.as="image",e.href=a,document.head.appendChild(e)})});

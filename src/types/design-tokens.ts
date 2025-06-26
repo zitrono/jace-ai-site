@@ -18,7 +18,7 @@ export const BUTTON_STANDARDS = {
   cta: {
     size: 'md' as const,        // 40px height (h-10) - matches POM reference
     mobileSize: 'sm' as const,  // 36px height (h-9) on mobile for better spacing
-    className: 'btn-primary btn-md',
+    className: 'btn-primary btn-lg',
   },
   // Secondary buttons (Log In, etc.) - matches POM reference
   secondary: {

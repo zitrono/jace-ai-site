@@ -1,0 +1,44 @@
+import{a as createComponent,e as renderComponent,d as renderTemplate,m as maybeRenderHead}from"./vendor-astro.G7WBtArd.js";import"kleur/colors";import"html-escaper";import{$ as $$Layout}from"./Layout.CqW_pEBk.js";import{$ as $$Section}from"./components.CFomnbac.js";const $$Terms=createComponent(((e,t,s)=>renderTemplate`${renderComponent(e,"Layout",$$Layout,{title:"Terms & Conditions | Ralph by Beneficious"},{default:e=>renderTemplate` ${maybeRenderHead()}<main> ${renderComponent(e,"Section",$$Section,{variant:"secondary",className:"py-20"},{default:e=>renderTemplate` <div class="max-w-4xl mx-auto"> <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">Terms & Conditions</h1> <p class="text-lg text-secondary mb-12">Last updated: June 26, 2025</p> <div class="space-y-8 text-secondary"> <section> <h2 class="text-2xl font-semibold text-primary mb-4">1. Agreement to Terms</h2> <p class="mb-4">
+These Terms and Conditions ("Terms") govern your use of Ralph, an AI-powered portfolio management platform provided by Beneficious ("Company," "we," "us," or "our"). By accessing or using Ralph, you agree to be bound by these Terms.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">2. Service Description</h2> <p class="mb-4">
+Ralph is an enterprise software solution that:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Deploys on your own infrastructure (self-hosted or private cloud)</li> <li>Provides AI-powered tools for portfolio management and reporting</li> <li>Operates without accessing or storing your data on our systems</li> <li>Integrates with your existing systems and security protocols</li> </ul> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">3. License and Usage Rights</h2> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">3.1 License Grant</h3> <p class="mb-4">
+Subject to your compliance with these Terms and payment of applicable fees, we grant you a non-exclusive, non-transferable license to use Ralph within your organization.
+</p> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">3.2 Restrictions</h3> <p class="mb-4">You may not:</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Reverse engineer, decompile, or disassemble Ralph</li> <li>Modify, adapt, or create derivative works without permission</li> <li>Sublicense, sell, or distribute Ralph to third parties</li> <li>Use Ralph for any unlawful purpose</li> <li>Remove or alter any proprietary notices</li> </ul> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">4. Data Ownership and Privacy</h2> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">4.1 Your Data</h3> <p class="mb-4">
+You retain all rights, title, and interest in your data. Ralph processes your data solely on your infrastructure, and we have no access to, control over, or rights in your data.
+</p> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">4.2 No Data Collection</h3> <p class="mb-4">
+We do not collect, store, or process any of your business data. Your data never leaves your controlled environment.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">5. Security and Compliance</h2> <p class="mb-4">
+While we develop Ralph with security best practices, you are responsible for:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Configuring and maintaining security within your deployment</li> <li>Ensuring compliance with applicable regulations</li> <li>Managing user access and permissions</li> <li>Implementing appropriate backup and disaster recovery procedures</li> </ul> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">6. Support and Updates</h2> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.1 Support Services</h3> <p class="mb-4">
+Support services are provided according to your subscription tier and may include:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Technical assistance and troubleshooting</li> <li>Software updates and patches</li> <li>Documentation and training resources</li> </ul> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.2 Updates</h3> <p class="mb-4">
+We may provide updates to improve functionality, security, or performance. You control when and how updates are applied to your deployment.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">7. Fees and Payment</h2> <p class="mb-4">
+Fees are determined by your subscription agreement and may include:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Initial setup and deployment fees</li> <li>Annual or monthly subscription fees</li> <li>Additional fees for premium features or support</li> </ul> <p class="mt-4">
+Payment terms are specified in your subscription agreement.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">8. Intellectual Property</h2> <p class="mb-4">
+Ralph and all associated intellectual property rights remain the exclusive property of Beneficious. These Terms do not grant you any rights to our trademarks, trade names, or other brand features.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">9. Warranties and Disclaimers</h2> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.1 Limited Warranty</h3> <p class="mb-4">
+We warrant that Ralph will perform substantially in accordance with its documentation under normal use and circumstances.
+</p> <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.2 Disclaimer</h3> <p class="mb-4 uppercase">
+Except as expressly provided, Ralph is provided "as is" without warranties of any kind. We disclaim all implied warranties, including merchantability, fitness for a particular purpose, and non-infringement.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">10. Limitation of Liability</h2> <p class="mb-4 uppercase">
+To the maximum extent permitted by law, our total liability shall not exceed the fees paid by you in the twelve months preceding the claim. We shall not be liable for any indirect, incidental, special, or consequential damages.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">11. Indemnification</h2> <p class="mb-4">
+You agree to indemnify and hold us harmless from any claims arising from:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Your use of Ralph</li> <li>Your violation of these Terms</li> <li>Your violation of any third-party rights</li> <li>Your data or content</li> </ul> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">12. Termination</h2> <p class="mb-4">
+Either party may terminate these Terms according to the subscription agreement. Upon termination:
+</p> <ul class="list-disc list-inside space-y-2 ml-4"> <li>Your license to use Ralph ends</li> <li>You must cease all use of Ralph</li> <li>You retain ownership of your data</li> <li>Provisions that by their nature should survive termination will remain in effect</li> </ul> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">13. Governing Law</h2> <p class="mb-4">
+These Terms are governed by the laws of [Jurisdiction] without regard to conflict of law principles. Any disputes shall be resolved in the courts of [Jurisdiction].
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">14. Changes to Terms</h2> <p class="mb-4">
+We may update these Terms from time to time. We will notify you of material changes, and your continued use of Ralph constitutes acceptance of the updated Terms.
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">15. Contact Information</h2> <p class="mb-4">
+For questions about these Terms, please contact us at:
+</p> <p class="ml-4">
+Email: <a href="mailto:konstantin@beneficious.com" class="text-accent hover:underline">konstantin@beneficious.com</a><br>
+Company: Beneficious
+</p> </section> <section> <h2 class="text-2xl font-semibold text-primary mb-4">16. Entire Agreement</h2> <p class="mb-4">
+These Terms, together with your subscription agreement and our Privacy Policy, constitute the entire agreement between you and Beneficious regarding Ralph.
+</p> </section> </div> </div> `})} </main> `})}`),"/Users/zitrono/dev/web/ralph-web/src/pages/terms.astro",void 0),$$file="/Users/zitrono/dev/web/ralph-web/src/pages/terms.astro",$$url="/ralph-web/terms";export{$$Terms as default,$$file as file,$$url as url};

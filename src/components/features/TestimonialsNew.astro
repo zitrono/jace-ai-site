@@ -15,6 +15,15 @@
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
 
+// Add WSJ-style font for quotes
+const wsjQuoteStyle = `
+<style>
+  .wsj-quote {
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+</style>
+`;
+
 interface Testimonial {
   id: string;
   quote: string;
@@ -55,7 +64,7 @@ const {
       author: 'Stephen Schwarzman',
       title: 'Chairman, CEO & Co-Founder',
       company: 'Blackstone',
-      logo: '/ralph-web/public/logos/The_Blackstone_Group_logo_(2).svg',
+      logo: '/ralph-web/logos/The_Blackstone_Group_logo_(2).svg',
     },
     {
       id: 'vista-ai-transformation',
@@ -64,7 +73,7 @@ const {
       author: 'Robert F. Smith',
       title: 'Founder, Chairman & CEO',
       company: 'Vista Equity Partners',
-      logo: '/ralph-web/public/logos/Vista_Equity_Partners_logo_2.svg',
+      logo: '/ralph-web/logos/Vista_Equity_Partners_logo_2.svg',
     },
     {
       id: 'eqt-competitive-edge',
@@ -73,7 +82,7 @@ const {
       author: 'Christian Sinding',
       title: 'CEO',
       company: 'EQT',
-      logo: '/ralph-web/public/logos/EQT_(Unternehmen)_logo.svg',
+      logo: '/ralph-web/logos/EQT_(Unternehmen)_logo.svg',
     },
     {
       id: 'kkr-tectonic-shift',
@@ -82,7 +91,7 @@ const {
       author: 'Waldemar Szlezak',
       title: 'Partner & Global Head of Digital Infrastructure',
       company: 'KKR',
-      logo: '/ralph-web/public/logos/Kohlberg_Kravis_Roberts_(logo).svg',
+      logo: '/ralph-web/logos/Kohlberg_Kravis_Roberts_(logo).svg',
     },
     {
       id: 'apollo-digital-value',
@@ -91,7 +100,7 @@ const {
       author: 'David Sambur',
       title: 'Partner & Co-Head of Equity',
       company: 'Apollo Global Management',
-      logo: '/ralph-web/public/logos/Apollo_Global_Management_logo.svg',
+      logo: '/ralph-web/logos/Apollo_Global_Management_logo.svg',
     },
     {
       id: 'cvc-opportunity-danger',
@@ -100,7 +109,7 @@ const {
       author: 'Jean-Rémy Roussel',
       title: 'Managing Partner',
       company: 'CVC Capital Partners',
-      logo: '/ralph-web/public/logos/CVC_Capital_Partners_logo.svg',
+      logo: '/ralph-web/logos/CVC_Capital_Partners_logo.svg',
     },
   ],
 } = Astro.props;
@@ -128,51 +137,45 @@ const {
       </h2>
     </div>
 
-    <!-- WSJ-Style Testimonials Grid -->
+    <!-- Hybrid WSJ + Modern Testimonials Grid (Mobile Optimized) -->
     <div
-      class="mx-auto mt-16 grid max-w-7xl gap-8 sm:mt-20 grid-cols-1 lg:grid-cols-2"
+      class="mx-auto mt-16 grid max-w-7xl gap-4 sm:mt-20 grid-cols-1 lg:grid-cols-2 -mx-4 px-4 lg:mx-0 lg:px-0"
       role="list"
       aria-label="Industry testimonials"
     >
       {
         testimonials.slice(0, 6).map((testimonial) => (
           <article 
-            class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
             role="listitem"
           >
-            <div class="flex items-start space-x-4">
-              <div class="text-6xl text-gray-300 leading-none font-light">"</div>
-              <div class="flex-1">
-                <blockquote class="text-lg leading-relaxed font-normal italic mb-6 font-['Geist',system-ui,sans-serif]">
-                  {testimonial.quote}
-                </blockquote>
-                <footer class="border-t border-gray-200 pt-4">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <cite class="font-bold text-gray-900 not-italic font-['Geist',system-ui,sans-serif]">
-                        {testimonial.author}
-                      </cite>
-                      <div class="text-sm text-gray-600 font-['Geist',system-ui,sans-serif]">
-                        {testimonial.title}
-                      </div>
-                      <div class="text-sm text-gray-500 font-medium font-['Geist',system-ui,sans-serif]">
-                        {testimonial.company}
-                      </div>
-                    </div>
-                    {testimonial.logo && _showLogos && (
-                      <img 
-                        src={testimonial.logo} 
-                        alt={`${testimonial.company} logo`} 
-                        class="w-24 h-10 object-contain opacity-80"
-                      />
-                    )}
+            <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700">
+              "{testimonial.quote}"
+            </blockquote>
+            <footer class="border-t border-gray-200 pt-3">
+              <div class="flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <cite class="font-bold text-gray-900 not-italic text-sm block">
+                    {testimonial.author}
+                  </cite>
+                  <div class="text-xs text-gray-600">
+                    {testimonial.company}
                   </div>
-                </footer>
+                </div>
+                {testimonial.logo && _showLogos && (
+                  <img 
+                    src={testimonial.logo} 
+                    alt={`${testimonial.company} logo`} 
+                    class="w-16 h-6 object-contain opacity-70 flex-shrink-0"
+                  />
+                )}
               </div>
-            </div>
+            </footer>
           </article>
         ))
       }
     </div>
   </div>
 </Section>
+
+<Fragment set:html={wsjQuoteStyle} />

@@ -31,15 +31,15 @@ const {
 } = Astro.props;
 
 const headerClasses = [
-  // Position - add 8px gap from top when sticky to match Jace reference
-  sticky ? 'sticky top-2' : 'relative',
+  // Position - sticky with no gap initially
+  sticky ? 'sticky top-0' : 'relative',
   // Layout and z-index
   'z-20 inset-x-0',
-  // Background and blur
-  'bg-background/50 backdrop-blur-sm',
+  // Desktop retains background/blur, mobile starts transparent
+  'md:bg-background/50 md:backdrop-blur-sm',
   // Transitions
   'transition-all duration-300',
-  // No margin - gap is handled by top-2 (8px) when sticky
+  // Custom class
   headerClass,
 ].filter(Boolean).join(' ');
 ---
@@ -59,12 +59,14 @@ const headerClasses = [
 
   <!-- Main navigation container -->
   <nav
-    class="w-full"
+    class="w-full px-2 sm:px-4 py-0 header-nav-wrapper"
     role="navigation"
     aria-label="Main navigation"
   >
-    <!-- Header element container with enforced alignment -->
-    <div class="header-elements-container mx-auto flex items-center justify-between w-full max-w-7xl px-4 py-1.5 sm:px-6 sm:py-2 md:py-3 lg:px-8">
+    <!-- Inner container that transforms on scroll -->
+    <div class="header-inner-container transition-all duration-300">
+      <!-- Header element container with enforced alignment -->
+      <div class="header-elements-container mx-auto flex items-center justify-between w-full max-w-7xl px-4 py-1 sm:px-6 sm:py-2 md:py-3 lg:px-8">
       <!-- Logo section -->
       <div class="header-logo flex lg:flex-1">
         <slot name="logo" />
@@ -88,13 +90,54 @@ const headerClasses = [
         </div>
       </div>
     </div>
+    </div>
   </nav>
 </header>
 
 <style>
+  /* Mobile-first header nav wrapper */
+  .header-nav-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  /* Initial state - transparent background, no rounded corners */
+  .header-inner-container {
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+  }
+  
+  /* Scrolled state on mobile - glassmorphic effect */
+  @media (max-width: 767px) {
+    header.scrolled .header-nav-wrapper {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    
+    header.scrolled .header-inner-container {
+      border-radius: 16px;
+      background: rgba(40, 40, 40, 0.5);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 8px; /* Additional inner padding when scrolled */
+    }
+  }
+  
+  /* Desktop maintains original behavior */
+  @media (min-width: 768px) {
+    header {
+      background: rgba(40, 40, 40, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+  
   /* Responsive header heights to match Jace reference */
   .header-elements-container {
-    min-height: 80px; /* Mobile default */
+    min-height: 56px; /* Mobile default - more compact like jace */
   }
   
   @media (min-width: 768px) {
@@ -128,3 +171,39 @@ const headerClasses = [
     min-height: var(--header-element-height, 44px) !important;
   }
 </style>
+
+<script>
+  // Header scroll behavior for mobile glassmorphic effect
+  (function() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    
+    let scrollY = 0;
+    let ticking = false;
+    const scrollThreshold = 80; // Trigger after 80px scroll
+    
+    function updateHeader() {
+      if (scrollY > scrollThreshold) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      ticking = false;
+    }
+    
+    function onScroll() {
+      scrollY = window.scrollY;
+      
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }
+    
+    // Initial check
+    onScroll();
+    
+    // Add scroll listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>

@@ -32,36 +32,65 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">Data Collection and Usage</h2>
-            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">What We Don't Collect</h3>
+            <h2 class="text-2xl font-semibold text-primary mb-4">Information We Collect</h2>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Personal Information</h3>
+            <p class="mb-4">We may collect the following types of personal information:</p>
             <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
-              <li>We do not collect, store, or have access to any of your business data</li>
-              <li>We do not use your data to train or improve our models</li>
-              <li>We do not share data between clients</li>
-              <li>We do not analyze your usage patterns or deal information</li>
+              <li><strong>Contact Information:</strong> First name, last name, email address, phone number, company name, job title</li>
+              <li><strong>Account Information:</strong> Username, password, and account preferences</li>
+              <li><strong>Communication Records:</strong> Support tickets, feedback, and correspondence</li>
+              <li><strong>Professional Information:</strong> Company details and role-specific information for service customization</li>
             </ul>
 
-            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">What We May Collect</h3>
-            <p class="mb-4">During the sales and support process, we may collect:</p>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Technical Information</h3>
+            <p class="mb-4">We automatically collect certain technical information:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Usage Data:</strong> IP address, browser type, device identifiers, operating system</li>
+              <li><strong>Website Analytics:</strong> Pages visited, time spent, referral sources (marketing website only)</li>
+              <li><strong>Technical Logs:</strong> Error reports and system performance data (when shared voluntarily)</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">What We Absolutely Do NOT Collect</h3>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Contact information (name, email, company) for communication purposes</li>
-              <li>Technical feedback and bug reports you choose to share</li>
-              <li>General usage feedback for product improvement</li>
-              <li>Support ticket information when you request assistance</li>
+              <li><strong>Business Data:</strong> We never collect, store, or access your deal information, portfolio data, or proprietary business information</li>
+              <li><strong>Usage Analytics from Ralph:</strong> No tracking or analytics within the Ralph application itself</li>
+              <li><strong>Training Data:</strong> We never use your data to train or improve our AI models</li>
+              <li><strong>Cross-Client Data:</strong> We never share or combine data between different client deployments</li>
             </ul>
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">Data Security</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">Security & Compliance</h2>
             <p class="mb-4">
-              Ralph inherits your organization's existing security standards and infrastructure:
+              We implement commercially reasonable technical, administrative, and organizational measures to protect your information from loss, misuse, and unauthorized access:
+            </p>
+            
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Enterprise Security Architecture</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Infrastructure Security:</strong> Ralph inherits and extends your organization's existing security standards</li>
+              <li><strong>Authentication Integration:</strong> Full support for SAML/SSO, identity providers, and multi-factor authentication</li>
+              <li><strong>Monitoring & Compliance:</strong> Compatible with your SIEM tools, audit logging, and compliance frameworks</li>
+              <li><strong>Air-Gapped Support:</strong> Deployable in completely isolated environments with no external connectivity</li>
+              <li><strong>Data Governance:</strong> Respects and enforces your existing data governance policies and procedures</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Security Certifications & Standards</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>SOC 2 Compliance:</strong> We are actively pursuing SOC 2 Type I and Type II certifications</li>
+              <li><strong>Industry Standards:</strong> Built to support various compliance requirements including GDPR, CCPA, and financial regulations</li>
+              <li><strong>Secure Development:</strong> Regular code audits, penetration testing, and encrypted communications</li>
+              <li><strong>Third-Party Assessments:</strong> Independent security reviews and vulnerability assessments</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Data Protection</h3>
+            <p class="mb-4">
+              <strong>Important:</strong> While we implement robust security measures for any data we handle, remember that with Ralph's architecture, your sensitive business data never leaves your controlled environment. You maintain complete control over:
             </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>All security measures are controlled by your IT team</li>
-              <li>Supports integration with your SAML/SSO authentication</li>
-              <li>Compatible with your SIEM and monitoring tools</li>
-              <li>Respects your existing data governance policies</li>
-              <li>Supports air-gapped deployments for ultra-sensitive environments</li>
+              <li>All security configurations and access controls</li>
+              <li>Data encryption, backup, and disaster recovery procedures</li>
+              <li>User permissions and audit trail management</li>
+              <li>Compliance with your industry-specific regulations</li>
             </ul>
           </section>
 
@@ -79,15 +108,27 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">Cookies and Website Analytics</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">Cookies and Tracking Technologies</h2>
             <p class="mb-4">
-              On our marketing website (this site), we may use:
+              We use cookies and similar tracking technologies on our marketing website to improve your experience:
             </p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Essential cookies for website functionality</li>
-              <li>Analytics cookies to understand website traffic (with your consent)</li>
-              <li>No tracking cookies are used within the Ralph application itself</li>
+            
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Types of Cookies We Use</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Essential Cookies:</strong> Required for website functionality, user authentication, and fraud prevention. These cannot be disabled.</li>
+              <li><strong>Functional Cookies:</strong> Remember your preferences, login details, and language settings</li>
+              <li><strong>Analytics Cookies:</strong> Help us understand website traffic and usage patterns (with your consent)</li>
+              <li><strong>Cookie Policy Acceptance:</strong> Track whether you've accepted our cookie usage</li>
             </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Cookie Management</h3>
+            <p class="mb-4">
+              You can control cookie settings through your browser preferences. However, disabling essential cookies may affect website functionality.
+            </p>
+            
+            <p class="mb-4">
+              <strong>Important:</strong> No tracking cookies or analytics are used within the Ralph application itself - only on this marketing website.
+            </p>
           </section>
 
           <section>
@@ -104,16 +145,34 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">Your Rights</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">Your Data Rights</h2>
             <p class="mb-4">
-              You have the right to:
+              You have the following rights regarding your personal information:
             </p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Request information about any personal data we may have (limited to contact information)</li>
-              <li>Request correction or deletion of your contact information</li>
-              <li>Opt-out of marketing communications</li>
-              <li>Control all aspects of data within your Ralph deployment</li>
+            
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Access and Control Rights</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Right to Access:</strong> Request information about what personal data we have about you</li>
+              <li><strong>Right to Correct:</strong> Request correction of inaccurate or incomplete personal information</li>
+              <li><strong>Right to Delete:</strong> Request deletion of your personal information (subject to legal retention requirements)</li>
+              <li><strong>Right to Withdraw Consent:</strong> Withdraw consent for data processing where consent is the legal basis</li>
+              <li><strong>Right to Data Portability:</strong> Request your data in a structured, commonly used format</li>
             </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Communication Preferences</h3>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Marketing Opt-Out:</strong> Unsubscribe from marketing communications at any time</li>
+              <li><strong>Communication Preferences:</strong> Control how and when we contact you</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">Ralph Application Data</h3>
+            <p class="mb-4">
+              For data within your Ralph deployment, you have complete control as the data controller. You can manage user access, data retention, and deletion according to your organization's policies.
+            </p>
+
+            <p class="mb-4">
+              To exercise any of these rights, please contact us at <a href="mailto:privacy@beneficious.com" class="text-accent hover:underline">privacy@beneficious.com</a>.
+            </p>
           </section>
 
           <section>
@@ -124,13 +183,65 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
+            <h2 class="text-2xl font-semibold text-primary mb-4">How We Share Information</h2>
+            <p class="mb-4">
+              We may share your personal information in the following limited circumstances:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Service Providers:</strong> Trusted third parties who provide services on our behalf (hosting, analytics, customer support)</li>
+              <li><strong>Legal Requirements:</strong> When required by law, court order, or to protect our rights and safety</li>
+              <li><strong>Business Transfers:</strong> In connection with mergers, acquisitions, or asset sales (with notice to you)</li>
+              <li><strong>With Your Consent:</strong> Any other sharing will be done only with your explicit consent</li>
+            </ul>
+            <p class="mb-4">
+              <strong>We never sell your personal information to third parties.</strong>
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-semibold text-primary mb-4">Data Retention</h2>
+            <p class="mb-4">
+              We retain personal information only as long as necessary to fulfill the purposes for which it was collected:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Contact Information:</strong> Retained while you have an active business relationship with us</li>
+              <li><strong>Support Communications:</strong> Retained for a reasonable period to provide ongoing support</li>
+              <li><strong>Legal Compliance:</strong> Some information may be retained longer to comply with legal obligations</li>
+              <li><strong>Ralph Application Data:</strong> You control all retention policies for data within your Ralph deployment</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-semibold text-primary mb-4">International Data Transfers</h2>
+            <p class="mb-4">
+              If we transfer your personal information outside your country of residence, we ensure adequate protection through:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Appropriate contractual safeguards and security measures</li>
+              <li>Compliance with applicable data protection laws</li>
+              <li>Industry-standard encryption and security protocols</li>
+            </ul>
+            <p class="mb-4">
+              <strong>Remember:</strong> With Ralph's on-premise deployment model, your business data never crosses international boundaries unless you configure it to do so.
+            </p>
+          </section>
+
+          <section>
             <h2 class="text-2xl font-semibold text-primary mb-4">Contact Us</h2>
             <p class="mb-4">
-              If you have any questions about this Privacy Policy or our practices, please contact us at:
+              If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact us:
             </p>
-            <p class="ml-4">
-              Email: <a href="mailto:konstantin@beneficious.com" class="text-accent hover:underline">konstantin@beneficious.com</a><br>
-              Company: Beneficious
+            <div class="ml-4 mb-4">
+              <p><strong>Privacy Inquiries:</strong><br>
+              Email: <a href="mailto:privacy@beneficious.com" class="text-accent hover:underline">privacy@beneficious.com</a></p>
+              
+              <p class="mt-4"><strong>General Inquiries:</strong><br>
+              Email: <a href="mailto:konstantin@beneficious.com" class="text-accent hover:underline">konstantin@beneficious.com</a></p>
+              
+              <p class="mt-4"><strong>Company:</strong> Beneficious</p>
+            </div>
+            <p class="mb-4">
+              We will respond to privacy-related inquiries within 30 days of receipt.
             </p>
           </section>
         </div>

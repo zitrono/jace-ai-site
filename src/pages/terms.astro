@@ -14,7 +14,13 @@ import Section from '@/components/layout/Section.astro';
           <section>
             <h2 class="text-2xl font-semibold text-primary mb-4">1. Agreement to Terms</h2>
             <p class="mb-4">
-              These Terms and Conditions ("Terms") govern your use of Ralph, an AI-powered portfolio management platform provided by Beneficious ("Company," "we," "us," or "our"). By accessing or using Ralph, you agree to be bound by these Terms.
+              These Terms and Conditions ("Terms") govern your use of Ralph, an AI-powered portfolio management platform provided by Beneficious ("Company," "we," "us," or "our"). By accessing, using, or deploying Ralph, you agree to be bound by these Terms and our Privacy Policy.
+            </p>
+            <p class="mb-4">
+              <strong>Enterprise Agreement:</strong> If you are using Ralph on behalf of an organization, you represent that you have the authority to bind that organization to these Terms, and "you" refers to both you individually and the organization.
+            </p>
+            <p class="mb-4">
+              <strong>Minimum Age:</strong> You must be at least 18 years old to use Ralph. The service is designed for professional use by qualified investment professionals.
             </p>
           </section>
 
@@ -64,33 +70,71 @@ import Section from '@/components/layout/Section.astro';
 
           <section>
             <h2 class="text-2xl font-semibold text-primary mb-4">5. Security and Compliance</h2>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">5.1 Our Security Commitments</h3>
             <p class="mb-4">
-              While we develop Ralph with security best practices, you are responsible for:
+              We develop Ralph using industry-leading security practices:
             </p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Configuring and maintaining security within your deployment</li>
-              <li>Ensuring compliance with applicable regulations</li>
-              <li>Managing user access and permissions</li>
-              <li>Implementing appropriate backup and disaster recovery procedures</li>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Regular security audits and penetration testing</li>
+              <li>Secure development lifecycle with code reviews</li>
+              <li>Pursuit of SOC 2 Type I and Type II certifications</li>
+              <li>Encrypted communications and secure deployment practices</li>
             </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">5.2 Your Security Responsibilities</h3>
+            <p class="mb-4">
+              As the data controller, you are responsible for:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Configuring and maintaining security within your deployment environment</li>
+              <li>Ensuring compliance with applicable financial and data protection regulations</li>
+              <li>Managing user access, permissions, and authentication systems</li>
+              <li>Implementing backup, disaster recovery, and business continuity procedures</li>
+              <li>Monitoring and auditing system access and usage</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">5.3 Compliance Support</h3>
+            <p class="mb-4">
+              Ralph is designed to support compliance with various regulatory frameworks including GDPR, CCPA, and financial industry regulations. However, achieving and maintaining compliance is your responsibility as the deploying organization.
+            </p>
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">6. Support and Updates</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">6. Support and Service Levels</h2>
             <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.1 Support Services</h3>
             <p class="mb-4">
-              Support services are provided according to your subscription tier and may include:
+              We provide comprehensive support services according to your subscription tier:
             </p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Technical assistance and troubleshooting</li>
-              <li>Software updates and patches</li>
-              <li>Documentation and training resources</li>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Technical Support:</strong> Troubleshooting, configuration assistance, and issue resolution</li>
+              <li><strong>Security Updates:</strong> Priority patches for security vulnerabilities</li>
+              <li><strong>Feature Updates:</strong> Regular enhancements and new functionality</li>
+              <li><strong>Documentation:</strong> Comprehensive guides, API documentation, and best practices</li>
+              <li><strong>Training:</strong> User onboarding and administrator training resources</li>
+              <li><strong>Professional Services:</strong> Custom deployment, integration, and optimization services</li>
             </ul>
 
-            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.2 Updates</h3>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.2 Service Level Commitments</h3>
             <p class="mb-4">
-              We may provide updates to improve functionality, security, or performance. You control when and how updates are applied to your deployment.
+              While Ralph operates on your infrastructure, we commit to:
             </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Respond to critical support requests within the timeframes specified in your service agreement</li>
+              <li>Provide advance notice of significant updates or changes</li>
+              <li>Maintain comprehensive documentation and knowledge base</li>
+              <li>Offer escalation paths for urgent technical issues</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">6.3 Update Management</h3>
+            <p class="mb-4">
+              You maintain complete control over update deployment:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>All updates are tested and validated before release</li>
+              <li>You choose when and how to apply updates to your environment</li>
+              <li>Rollback procedures are available for all updates</li>
+              <li>Critical security updates are clearly identified and prioritized</li>
+            </ul>
           </section>
 
           <section>
@@ -116,23 +160,70 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">9. Warranties and Disclaimers</h2>
-            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.1 Limited Warranty</h3>
+            <h2 class="text-2xl font-semibold text-primary mb-4">9. Warranties and Service Guarantees</h2>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.1 Service Warranty</h3>
             <p class="mb-4">
-              We warrant that Ralph will perform substantially in accordance with its documentation under normal use and circumstances.
+              We warrant that Ralph will:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Perform substantially in accordance with its documentation under normal use</li>
+              <li>Be free from material defects that significantly impair its intended functionality</li>
+              <li>Meet the security and performance specifications outlined in your service agreement</li>
+            </ul>
+            <p class="mb-4">
+              If Ralph fails to meet these warranties, we will use commercially reasonable efforts to correct the issue or provide a workaround.
             </p>
 
-            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.2 Disclaimer</h3>
-            <p class="mb-4 uppercase">
-              Except as expressly provided, Ralph is provided "as is" without warranties of any kind. We disclaim all implied warranties, including merchantability, fitness for a particular purpose, and non-infringement.
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.2 Professional Services Warranty</h3>
+            <p class="mb-4">
+              We warrant that our professional services (deployment, training, consulting) will be performed in a professional and workmanlike manner consistent with industry standards.
+            </p>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">9.3 Warranty Disclaimers</h3>
+            <p class="mb-4">
+              <strong>The above warranties are exclusive and in lieu of all other warranties.</strong> To the extent permitted by law, we disclaim all other warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.
+            </p>
+            <p class="mb-4">
+              We do not warrant that Ralph will be error-free or that its use will be uninterrupted, as system performance depends on your infrastructure and configuration.
             </p>
           </section>
 
           <section>
             <h2 class="text-2xl font-semibold text-primary mb-4">10. Limitation of Liability</h2>
-            <p class="mb-4 uppercase">
-              To the maximum extent permitted by law, our total liability shall not exceed the fees paid by you in the twelve months preceding the claim. We shall not be liable for any indirect, incidental, special, or consequential damages.
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">10.1 Liability Cap</h3>
+            <p class="mb-4">
+              <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY FOR ALL CLAIMS ARISING FROM OR RELATED TO THESE TERMS OR RALPH SHALL NOT EXCEED THE GREATER OF:</strong>
             </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>$100,000 USD; OR</li>
+              <li>The total fees paid by you for Ralph in the twelve (12) months immediately preceding the event giving rise to the claim</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">10.2 Excluded Damages</h3>
+            <p class="mb-4">
+              <strong>IN NO EVENT SHALL WE BE LIABLE FOR:</strong>
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</li>
+              <li>LOST PROFITS, REVENUE, OR BUSINESS OPPORTUNITIES</li>
+              <li>DATA LOSS OR CORRUPTION (since your data remains on your systems)</li>
+              <li>BUSINESS INTERRUPTION OR DOWNTIME</li>
+              <li>COSTS OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES</li>
+            </ul>
+            <p class="mb-4">
+              This limitation applies regardless of the form of action, whether in contract, tort, negligence, strict liability, or otherwise, even if we have been advised of the possibility of such damages.
+            </p>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">10.3 Exceptions</h3>
+            <p class="mb-4">
+              These limitations do not apply to:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Our indemnification obligations under Section 11</li>
+              <li>Violations of intellectual property rights</li>
+              <li>Gross negligence or willful misconduct</li>
+              <li>Liabilities that cannot be limited under applicable law</li>
+            </ul>
           </section>
 
           <section>
@@ -162,9 +253,25 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">13. Governing Law</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">13. Dispute Resolution and Governing Law</h2>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">13.1 Governing Law</h3>
             <p class="mb-4">
-              These Terms are governed by the laws of [Jurisdiction] without regard to conflict of law principles. Any disputes shall be resolved in the courts of [Jurisdiction].
+              These Terms are governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of law principles.
+            </p>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">13.2 Dispute Resolution Process</h3>
+            <p class="mb-4">
+              In the event of any dispute, controversy, or claim arising out of or relating to these Terms:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li><strong>Informal Resolution:</strong> The parties will first attempt to resolve the dispute through good faith negotiations for at least 30 days</li>
+              <li><strong>Mediation:</strong> If informal resolution fails, the parties agree to participate in mediation administered by a mutually agreed mediator</li>
+              <li><strong>Arbitration:</strong> If mediation is unsuccessful, disputes will be resolved through binding arbitration under the Commercial Arbitration Rules of the American Arbitration Association</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">13.3 Jurisdiction</h3>
+            <p class="mb-4">
+              For any disputes not subject to arbitration, the parties consent to the exclusive jurisdiction of the state and federal courts located in Delaware, United States.
             </p>
           </section>
 
@@ -176,20 +283,59 @@ import Section from '@/components/layout/Section.astro';
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">15. Contact Information</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">15. Additional Terms for Enterprise Clients</h2>
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">15.1 Data Processing Addendum</h3>
             <p class="mb-4">
-              For questions about these Terms, please contact us at:
+              For enterprise clients subject to data protection regulations (GDPR, CCPA, etc.), a separate Data Processing Addendum may be executed to address specific compliance requirements.
             </p>
-            <p class="ml-4">
-              Email: <a href="mailto:konstantin@beneficious.com" class="text-accent hover:underline">konstantin@beneficious.com</a><br>
-              Company: Beneficious
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">15.2 Service Level Agreement</h3>
+            <p class="mb-4">
+              Enterprise clients may enter into a separate Service Level Agreement (SLA) that defines specific performance metrics, uptime commitments, and remedies.
+            </p>
+
+            <h3 class="text-xl font-semibold text-primary mb-2 mt-4">15.3 Security Addendum</h3>
+            <p class="mb-4">
+              Additional security terms, audit rights, and compliance obligations may be documented in a separate Security Addendum for enterprise deployments.
             </p>
           </section>
 
           <section>
-            <h2 class="text-2xl font-semibold text-primary mb-4">16. Entire Agreement</h2>
+            <h2 class="text-2xl font-semibold text-primary mb-4">16. Contact Information</h2>
             <p class="mb-4">
-              These Terms, together with your subscription agreement and our Privacy Policy, constitute the entire agreement between you and Beneficious regarding Ralph.
+              For questions about these Terms or to discuss enterprise agreements:
+            </p>
+            <div class="ml-4 mb-4">
+              <p><strong>General Inquiries:</strong><br>
+              Email: <a href="mailto:konstantin@beneficious.com" class="text-accent hover:underline">konstantin@beneficious.com</a></p>
+              
+              <p class="mt-4"><strong>Legal and Compliance:</strong><br>
+              Email: <a href="mailto:legal@beneficious.com" class="text-accent hover:underline">legal@beneficious.com</a></p>
+              
+              <p class="mt-4"><strong>Enterprise Sales:</strong><br>
+              Email: <a href="mailto:enterprise@beneficious.com" class="text-accent hover:underline">enterprise@beneficious.com</a></p>
+              
+              <p class="mt-4"><strong>Company:</strong> Beneficious</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-semibold text-primary mb-4">17. Entire Agreement and Modifications</h2>
+            <p class="mb-4">
+              These Terms, together with the following documents (if applicable), constitute the entire agreement between you and Beneficious regarding Ralph:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+              <li>Your executed subscription or license agreement</li>
+              <li>Our Privacy Policy</li>
+              <li>Any applicable Data Processing Addendum</li>
+              <li>Any applicable Service Level Agreement</li>
+              <li>Any applicable Security Addendum</li>
+            </ul>
+            <p class="mb-4">
+              In the event of conflict between these documents, the order of precedence is: (1) executed agreements, (2) addenda, (3) these Terms, (4) Privacy Policy.
+            </p>
+            <p class="mb-4">
+              No modification of these Terms will be effective unless in writing and signed by both parties, except for updates to these Terms as described in Section 14.
             </p>
           </section>
         </div>

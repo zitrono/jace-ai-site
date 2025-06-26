@@ -137,7 +137,7 @@ const headerClasses = [
   
   /* Responsive header heights to match Jace reference */
   .header-elements-container {
-    min-height: 56px; /* Mobile default - more compact like jace */
+    min-height: var(--header-height); /* Use design token - 64px for POM compliance */
   }
   
   @media (min-width: 768px) {

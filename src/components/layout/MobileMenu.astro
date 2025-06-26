@@ -46,7 +46,7 @@ const {
 <!-- Mobile Menu Container -->
 <div 
   id="mobile-menu" 
-  class="hidden fixed inset-0 z-50 lg:hidden" 
+  class="hidden fixed inset-0 z-50" 
   data-mobile-menu-overlay
   {...rest}
 >
@@ -132,12 +132,15 @@ const {
     const menuButton = document.getElementById('mobile-menu-button');
     
     if (menu) {
-      menu.classList.remove('hidden');
-      // Proper scroll lock - just overflow hidden like Jace
-      document.body.style.overflow = 'hidden';
-      
-      if (menuButton) {
-        menuButton.setAttribute('aria-expanded', 'true');
+      // Only open on mobile/tablet viewports
+      if (window.innerWidth < 1024) { // lg breakpoint
+        menu.classList.remove('hidden');
+        // Proper scroll lock - just overflow hidden like Jace
+        document.body.style.overflow = 'hidden';
+        
+        if (menuButton) {
+          menuButton.setAttribute('aria-expanded', 'true');
+        }
       }
     }
   }

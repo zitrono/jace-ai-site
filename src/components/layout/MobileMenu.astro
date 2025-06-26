@@ -60,14 +60,14 @@ const {
   
   <!-- Menu Panel - Right-aligned drawer -->
   <div 
-    class={`fixed right-0 top-0 h-full w-full max-w-xs bg-background p-6 shadow-2xl ${className}`}
+    class={`fixed right-0 top-0 h-full w-full sm:max-w-xs bg-background p-6 shadow-2xl ${className}`}
     data-mobile-menu-panel
   >
     <!-- Content container with proper flex layout -->
     <div class="flex h-full flex-col">
       <!-- Header with logo and close button -->
       <div class="flex items-center justify-between">
-        <a href="/ralph-web/" class="text-[1.375rem] font-bold text-white lg:hidden">
+        <a href="/ralph-web/" class="text-[1.375rem] font-bold text-white mobile-menu-logo">
           ralph
         </a>
         <button
@@ -182,5 +182,33 @@ const {
   
   updateViewportHeight();
   window.addEventListener('resize', updateViewportHeight);
+  
+  // Control logo visibility based on mobile browser detection
+  function updateLogoVisibility() {
+    const logo = document.querySelector('.mobile-menu-logo');
+    if (logo) {
+      // Detect if we're on a mobile device/browser
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
+                       (window.innerWidth <= 768 && 'ontouchstart' in window);
+      
+      // Show logo only on mobile devices where menu will be fullscreen
+      if (isMobile) {
+        logo.style.display = 'block';
+      } else {
+        logo.style.display = 'none';
+      }
+    }
+  }
+  
+  // Update on load and resize
+  updateLogoVisibility();
+  window.addEventListener('resize', updateLogoVisibility);
+  
+  // Also update when menu opens
+  const originalOpen = window.openMobileMenu;
+  window.openMobileMenu = function() {
+    originalOpen();
+    updateLogoVisibility();
+  };
 </script>
 

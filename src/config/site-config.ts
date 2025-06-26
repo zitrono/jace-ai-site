@@ -46,7 +46,7 @@ export const siteConfig = {
   
   // Private beta
   privateBeta: {
-    launchDate: 'Q1 2025',
+    launchDate: 'Q3 2025',
     isActive: false,
   },
   

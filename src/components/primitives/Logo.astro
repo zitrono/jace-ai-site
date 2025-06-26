@@ -1,0 +1,18 @@
+---
+/**
+ * Logo - Displays the ralph logo with emphasized LP (Limited Partner)
+ * 
+ * @example
+ * <Logo class="text-2xl" />
+ */
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span class={className}>
+  ra<span class="underline decoration-accent decoration-[3px] underline-offset-4">lp</span>h
+</span>

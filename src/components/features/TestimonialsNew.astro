@@ -124,8 +124,8 @@ const {
   padded={false}
   maxWidth="full"
 >
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl sm:text-center">
+  <div class="mx-auto max-w-7xl">
+    <div class="mx-auto max-w-2xl sm:text-center px-6 lg:px-8">
       <p class="text-base font-semibold leading-7 text-accent">
         {subtitle}
       </p>
@@ -139,14 +139,14 @@ const {
 
     <!-- Hybrid WSJ + Modern Testimonials Grid (Mobile Optimized) -->
     <div
-      class="mx-auto mt-16 grid max-w-7xl gap-4 sm:mt-20 grid-cols-1 lg:grid-cols-2 -mx-4 px-4 lg:mx-0 lg:px-0"
+      class="mx-auto mt-16 grid max-w-7xl gap-4 sm:mt-20 grid-cols-1 lg:grid-cols-2 px-6 lg:px-8"
       role="list"
       aria-label="Industry testimonials"
     >
       {
         testimonials.slice(0, 6).map((testimonial) => (
           <article 
-            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
+            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300 -mx-6 lg:mx-0"
             role="listitem"
           >
             <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700">

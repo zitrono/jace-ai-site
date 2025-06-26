@@ -1,1 +1,0 @@
-import"./hoisted.DCchfIFk.js";import"../chunks/utils.7AiHOJ0C.js";import"../chunks/components.DbiDu1YL.js";window.location.href="/ralph-web/#pricing";

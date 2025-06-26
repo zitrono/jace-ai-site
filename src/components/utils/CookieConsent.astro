@@ -47,6 +47,7 @@ const positionClasses = {
 <div
   id={id}
   class={`opacity-0 translate-y-full transition-all duration-300 ease-in-out fixed inset-x-0 bottom-0 z-40 ${className}`}
+  style="display: none;"
   data-testid="cookie-consent-banner"
 >
   <div
@@ -94,239 +95,103 @@ const positionClasses = {
   </div>
 </div>
 
-<!-- Performance-optimized cookie consent with centralized state and focus management -->
-<script type="module">
-  import { cookieBannerSlideUp, cookieBannerSlideDown, initAnimationSystem } from '../../utils/animation-manager.js';
-  import { initializeStateManager } from '../../utils/state-manager.js';
-  import { FocusManager } from '../../utils/focus-manager.js';
-
-  // Optimized cookie consent functionality with centralized state and focus management
-  function initializeCookieConsent() {
-    // Initialize systems
-    initAnimationSystem();
-    const stateManager = initializeStateManager();
+<!-- Simplified cookie consent implementation compliant with CLAUDE.md -->
+<script is:inline>
+  // Self-contained cookie consent functionality using Tailwind transitions
+  (function() {
+    'use strict';
     
-    // Check if consent was already given to avoid unnecessary operations
+    // Check if consent was already given
     const existingConsent = localStorage.getItem('cookieConsent');
     const banner = document.getElementById('cookie-banner');
 
     if (existingConsent || !banner) return;
 
-    // Initialize focus manager for cookie banner
-    const focusManager = new FocusManager(banner, {
-      autoFocus: false, // Don't auto-focus banner when it appears
-      handleEscape: true, // Allow escape to close banner
-      onEscape: () => {
-        // Reject cookies when escape is pressed
-        stateManager.setState('cookieConsent', { 
-          consentValue: 'rejected',
-          isVisible: false 
-        }, { source: 'focus-manager-escape' });
-      }
-    });
-    
-    // Connect focus manager to state manager
-    focusManager.setStateManager(stateManager, 'cookieConsent');
+    // Simple state management
+    let isVisible = false;
+    let isAnimating = false;
 
-    // Store active animation for cleanup
-    let bannerAnimation = null;
-
-    // Initialize cookie consent state
-    stateManager.setState('cookieConsent', { 
-      consentValue: existingConsent || null,
-      isVisible: false,
-      isAnimating: false
-    }, { silent: true });
-
-    // Subscribe to cookie consent state changes
-    const unsubscribe = stateManager.subscribe('cookieConsent', (newState, oldState, _source) => {
-      // Handle visibility changes
-      if (newState.isVisible !== oldState.isVisible) {
-        if (newState.isVisible) {
-          performShowBanner();
-        } else {
-          performHideBanner();
-        }
-      }
+    // Show banner function using Tailwind classes
+    function showBanner() {
+      if (isVisible || isAnimating) return;
       
-      // Handle consent value changes
-      if (newState.consentValue !== oldState.consentValue && newState.consentValue) {
-        handleConsentChange(newState.consentValue);
-      }
+      isAnimating = true;
+      banner.style.display = 'block';
       
-      // Handle animation state
-      if (newState.isAnimating !== oldState.isAnimating) {
-        if (newState.isAnimating) {
-          banner.classList.add('is-animating');
-        } else {
-          banner.classList.remove('is-animating');
-        }
-      }
+      // Force reflow to ensure transition works
+      banner.offsetHeight;
       
-      // Handle focus management based on state changes
-      if (newState.isVisible !== oldState.isVisible) {
-        if (newState.isVisible) {
-          // Enable keyboard navigation when banner becomes visible
-          // Note: We don't auto-focus to avoid disrupting user flow
-          focusManager.enableFocusTrap();
-        } else {
-          // Disable focus trap when banner is hidden
-          focusManager.disableFocusTrap();
-        }
-      }
-    });
+      // Remove hiding classes to trigger CSS transition
+      banner.classList.remove('opacity-0', 'translate-y-full');
+      banner.classList.add('opacity-100', 'translate-y-0');
+      
+      isVisible = true;
+      setTimeout(() => {
+        isAnimating = false;
+      }, 300);
+    }
 
-    // Show banner implementation
-    const performShowBanner = () => {
-      const state = stateManager.getState('cookieConsent');
-      if (state.isVisible && state.isAnimating) return; // Prevent race conditions
+    // Hide banner function using Tailwind classes
+    function hideBanner() {
+      if (!isVisible || isAnimating) return;
       
-      // Update state to show animating
-      stateManager.setState('cookieConsent', { isAnimating: true }, { source: 'show-start' });
+      isAnimating = true;
       
-      // Clean up any existing animation
-      if (bannerAnimation) {
-        bannerAnimation.cleanup();
-        bannerAnimation = null;
-      }
-
-      bannerAnimation = cookieBannerSlideUp(banner, {
-        duration: 300,
-        onComplete: () => {
-          // Update state - animation complete
-          stateManager.setState('cookieConsent', { isAnimating: false }, { source: 'show-complete' });
-          bannerAnimation = null;
-        }
-      });
-    };
-
-    // Hide banner implementation
-    const performHideBanner = () => {
-      const state = stateManager.getState('cookieConsent');
-      if (!state.isVisible && state.isAnimating) return; // Prevent race conditions
+      // Add hiding classes to trigger CSS transition
+      banner.classList.remove('opacity-100', 'translate-y-0');
+      banner.classList.add('opacity-0', 'translate-y-full');
       
-      // Update state to show animating
-      stateManager.setState('cookieConsent', { isAnimating: true }, { source: 'hide-start' });
-      
-      // Clean up any existing animation
-      if (bannerAnimation) {
-        bannerAnimation.cleanup();
-        bannerAnimation = null;
-      }
+      isVisible = false;
+      setTimeout(() => {
+        isAnimating = false;
+        banner.style.display = 'none';
+      }, 300);
+    }
 
-      bannerAnimation = cookieBannerSlideDown(banner, {
-        duration: 300,
-        onComplete: () => {
-          // Remove from DOM after animation for better performance
-          if (banner.parentNode) {
-            banner.parentNode.removeChild(banner);
-          }
-          
-          // Update state - animation complete
-          stateManager.setState('cookieConsent', { isAnimating: false }, { source: 'hide-complete' });
-          bannerAnimation = null;
-        }
-      });
-    };
-
-    // Handle consent changes
-    const handleConsentChange = (value) => {
+    // Handle consent
+    function setCookieConsent(value) {
       try {
         localStorage.setItem('cookieConsent', value);
         
-        // Dispatch custom event for analytics or other tracking
+        // Dispatch custom event
         if ('CustomEvent' in window) {
           const event = new CustomEvent('cookieConsentChanged', {
             detail: { consent: value },
           });
           document.dispatchEvent(event);
         }
+        
+        hideBanner();
       } catch (error) {
         console.warn('Could not save cookie consent preference:', error);
       }
-    };
+    }
 
-    // Set cookie consent function
-    const setCookieConsent = (value) => {
-      stateManager.setState('cookieConsent', { 
-        consentValue: value,
-        isVisible: false 
-      }, { source: 'user-action' });
-    };
-
-    // Performance-optimized banner display with unified animation
-    const showBannerWithDelay = () => {
-      // Use requestIdleCallback for non-blocking execution
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          setTimeout(() => {
-            const currentConsent = localStorage.getItem('cookieConsent');
-            if (!currentConsent) {
-              stateManager.setState('cookieConsent', { isVisible: true }, { source: 'auto-show' });
-            }
-          }, 1000);
-        });
-      } else {
-        // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
-          const currentConsent = localStorage.getItem('cookieConsent');
-          if (!currentConsent) {
-            stateManager.setState('cookieConsent', { isVisible: true }, { source: 'auto-show' });
-          }
-        }, 1000);
-      }
-    };
-
-    // Optimized event delegation for better performance
-    const handleButtonClick = (e) => {
-      const target = e.target;
-      if (!target.matches('button')) return;
-
-      switch (target.id) {
-        case 'cookie-accept':
-          setCookieConsent('accepted');
-          break;
-        case 'cookie-reject':
-          setCookieConsent('rejected');
-          break;
-        case 'cookie-settings':
-          setCookieConsent('settings');
-          break;
-      }
-    };
-
-    // Use event delegation for better performance
-    banner.addEventListener('click', handleButtonClick, { passive: true });
-
-    // Keyboard support is now handled by the centralized FocusManager
-
-    // Show banner with optimized timing
-    showBannerWithDelay();
-
-    // Cleanup function
-    const cleanup = () => {
-      if (bannerAnimation) {
-        bannerAnimation.cleanup();
-        bannerAnimation = null;
-      }
-      focusManager.destroy();
-      banner.removeEventListener('click', handleButtonClick);
-      unsubscribe();
-    };
-
-    window.addEventListener('beforeunload', cleanup);
-    
-    // Return cleanup for external use
-    return cleanup;
-  }
-
-  // Initialize when browser is idle
-  let _cleanup = null;
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      _cleanup = initializeCookieConsent();
+    // Button click handlers
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      setCookieConsent('accepted');
     });
-  } else {
-    _cleanup = initializeCookieConsent();
-  }
+    
+    document.getElementById('cookie-reject')?.addEventListener('click', () => {
+      setCookieConsent('rejected');
+    });
+    
+    document.getElementById('cookie-settings')?.addEventListener('click', () => {
+      setCookieConsent('settings');
+    });
+
+    // Keyboard support (Escape key)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isVisible) {
+        setCookieConsent('rejected');
+      }
+    });
+
+    // Show banner after delay
+    setTimeout(() => {
+      if (!localStorage.getItem('cookieConsent')) {
+        showBanner();
+      }
+    }, 1000);
+  })();
 </script>

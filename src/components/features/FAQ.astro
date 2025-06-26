@@ -15,8 +15,6 @@
  * />
  */
 
-import Icon from '../primitives/Icon.astro';
-import Card from '../primitives/Card.astro';
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
 
@@ -46,23 +44,23 @@ export interface Props extends BaseComponentProps {
 const {
   class: className = '',
   title = 'Frequently asked questions',
-  subtitle = "Everything you need to know about Ralph's security and deployment",
-  contactEmail = 'Konstantin@beneficious.com',
-  showContactCTA = true,
+  subtitle = 'Everything you need to know about Ralph\'s security and deployment',
+  contactEmail: _contactEmail = 'Konstantin@beneficious.com',
+  showContactCTA: _showContactCTA = true,
   animated: _animated = true,
   allowMultiple: _allowMultiple = true,
   faqs = [
     {
-      id: 'confidentiality',
+      id: 'data-confidentiality',
       question: 'How does Ralph keep our deal data confidential?',
       answer:
-        "Your data stays on your servers. Ralph's AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.",
+        'Your data stays on your servers. Ralph\'s AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.',
     },
     {
       id: 'on-premise',
       question: 'Can we run Ralph on our own servers?',
       answer:
-        "Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We'll help you set it up.",
+        'Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We\'ll help you set it up.',
     },
     {
       id: 'security-standards',
@@ -74,22 +72,22 @@ const {
       id: 'lp-confidential',
       question: 'How does Ralph handle LP confidential information?',
       answer:
-        "LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph's agents respect your existing data governance policies.",
+        'LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph\'s agents respect your existing data governance policies.',
     },
     {
       id: 'security-integration',
       question: 'Can we integrate Ralph with our existing security tools?',
       answer:
-        "Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We'll work with your IT team to ensure Ralph fits seamlessly into your security stack.",
+        'Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We\'ll work with your IT team to ensure Ralph fits seamlessly into your security stack.',
     },
     {
-      id: 'track-record',
-      question: "What's Ralph's track record on data security?",
+      id: 'security-track-record',
+      question: 'What\'s Ralph\'s track record on data security?',
       answer:
-        "We're in private beta with select PE firms, building security-first from day one. While we don't have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We're happy to share our security documentation.",
+        'We\'re in private beta with select PE firms, building security-first from day one. While we don\'t have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We\'re happy to share our security documentation.',
     },
     {
-      id: 'revoke-access',
+      id: 'access-revocation',
       question: 'How quickly can we revoke access if needed?',
       answer:
         'Immediately. Since Ralph uses your authentication system, you can revoke access the same way you would for any employee - through your identity provider. Data access stops instantly. If you cancel Ralph entirely, just shut down the servers. You retain all your data.',
@@ -98,10 +96,10 @@ const {
       id: 'data-training',
       question: 'Does Ralph use our data to improve its AI models?',
       answer:
-        "No. Your data is never used to train or improve Ralph's models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.",
+        'No. Your data is never used to train or improve Ralph\'s models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.',
     },
     {
-      id: 'implementation-timeline',
+      id: 'implementation-time',
       question: 'How long does Ralph implementation typically take?',
       answer:
         'Most deployments complete within 4-6 weeks. Week 1-2: Infrastructure setup and data source connections. Week 3-4: Agent configuration and testing. Week 5-6: Team training and go-live. Timeline varies based on data complexity and integration requirements.',
@@ -110,7 +108,7 @@ const {
       id: 'technical-infrastructure',
       question: 'What technical infrastructure do we need?',
       answer:
-        "Ralph runs on your cloud infrastructure (AWS, Azure, GCP) or on-premise servers. Minimum requirements: 16GB RAM, 4 CPU cores, 500GB storage for starter deployment. We'll help size your infrastructure based on portfolio size and data volume during the planning phase.",
+        'Ralph runs on your cloud infrastructure (AWS, Azure, GCP) or on-premise servers. Minimum requirements: 16GB RAM, 4 CPU cores, 500GB storage for starter deployment. We\'ll help size your infrastructure based on portfolio size and data volume during the planning phase.',
     },
     {
       id: 'data-integration',
@@ -125,7 +123,7 @@ const {
         'Enterprise customers get a dedicated customer success manager, 24/7 technical support, quarterly strategic reviews, and continuous system monitoring. Essential tier includes email support and self-service resources. All customers receive regular product updates and security patches.',
     },
     {
-      id: 'phased-deployment',
+      id: 'partial-deployment',
       question: 'Can we start with a subset of our portfolio?',
       answer:
         'Absolutely. Many clients start with 3-5 portfolio companies to test and refine the approach. This lets you validate value before full deployment and helps your team learn the system. You can expand to additional companies quarterly as you see results.',
@@ -134,219 +132,130 @@ const {
 } = Astro.props;
 
 // Generate component ID for state management
-const componentId = 'faq-component';
+const _componentId = 'faq-component';
 ---
 
-<Section class={className} as="section" aria-labelledby="faq-title" background="primary" spacing="lg" maxWidth="2xl">
-    <div class="mx-auto max-w-2xl text-center">
-      <p class="text-base font-semibold leading-7 text-accent">
-        {title}
-      </p>
-      <h2 id="faq-title" class="mt-4 text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-        {subtitle}
-      </h2>
-    </div>
-
-    <div class="mt-section-base">
-      <!-- Progressive Enhancement: FAQ works without JS, enhanced with animations -->
-      <div class="space-y-4" role="list" id="faq-container" data-component-id={componentId}>
-        {
-          faqs.map((faq, _index) => (
-            <Card hover={false} class="faq-item" role="listitem" data-faq-id={faq.id}>
-              <button
-                class="w-full text-left flex items-center justify-between group min-h-[44px] p-2 -m-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-600 text-high-contrast"
-                aria-expanded="false"
-                aria-controls={`faq-content-${faq.id}`}
-                aria-describedby={`faq-content-${faq.id}`}
-                id={`faq-button-${faq.id}`}
-                data-faq-toggle={faq.id}
-                aria-label={`Toggle FAQ: ${faq.question}`}
-              >
-                <h3 class="text-xl font-semibold text-primary text-left pr-4">{faq.question}</h3>
-                <Icon
-                  name="chevron-down"
-                  class="faq-arrow text-text-muted transform transition-transform duration-300 ease-in-out flex-shrink-0"
-                  aria-hidden="true"
-                />
-              </button>
-              <div
-                id={`faq-content-${faq.id}`}
-                class="faq-content mt-4 text-text-muted overflow-hidden transition-all duration-300 ease-in-out h-0 opacity-0"
-                role="region"
-                aria-labelledby={`faq-button-${faq.id}`}
-                data-faq-content={faq.id}
-              >
-                <div class="prose prose-sm max-w-none text-text-muted py-2">{faq.answer}</div>
-              </div>
-            </Card>
-          ))
-        }
+<Section class={className} spacing="lg">
+    <div class="mx-auto max-w-4xl">
+      <!-- Header -->
+      <div class="text-center">
+        <h2 class="text-4xl lg:text-5xl font-semibold text-primary">
+          {title}
+        </h2>
+        <p class="mt-3 text-lg text-muted">
+          {subtitle}
+        </p>
       </div>
 
-      {
-        showContactCTA && (
-          <div class="mt-section-sm text-center">
-            <p class="text-text-muted">
-              Still have a question in mind?
-              <a
-                href={`mailto:${contactEmail}`}
-                class="text-primary-yellow hover:text-primary-yellow-hover font-medium focus:outline-none focus:underline transition-colors duration-200"
+      <!-- FAQ List -->
+      <dl class="mt-16 divide-y divide-white/10">
+        {
+          faqs.map((faq, index) => (
+            <div 
+              class={`faq-item ${index === 0 ? 'pt-0' : 'pt-6'} ${index === faqs.length - 1 ? 'pb-0' : 'pb-6'}`}
+              data-faq-item
+            >
+              <dt>
+                <button 
+                  class="group flex w-full items-start justify-between text-left text-primary cursor-pointer"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={`faq-answer-${index}`}
+                  data-faq-button
+                >
+                  <span class="text-lg leading-7 font-medium">{faq.question}</span>
+                  <span class="ml-6 flex h-7 items-center relative">
+                    <!-- Plus icon (shown when collapsed) -->
+                    <svg 
+                      class="size-6 transition-opacity duration-200"
+                      data-icon="plus"
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke-width="1.5" 
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                    </svg>
+                    <!-- Minus icon (hidden by default) -->
+                    <svg 
+                      class="size-6 transition-opacity duration-200 opacity-0 absolute inset-0"
+                      data-icon="minus"
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke-width="1.5" 
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12" />
+                    </svg>
+                  </span>
+                </button>
+              </dt>
+              <dd 
+                id={`faq-answer-${index}`}
+                class="mt-2 pr-12 text-base text-secondary leading-6 overflow-hidden transition-all duration-300"
+                style="max-height: 0;"
+                data-faq-answer
+                aria-hidden="true"
               >
-                Contact us
-              </a>
-            </p>
-          </div>
-        )
-      }
+                <div class="pb-4">
+                  {faq.answer}
+                </div>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
 </Section>
 
-<!-- Enhanced FAQ functionality with animations and state management -->
-<script type="module">
-  // Simple, robust FAQ functionality with smooth animations
-  function initializeFAQ() {
-    const ANIMATION_DURATION = 300;
-    const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
-    const allowMultiple = true; // Allow multiple FAQs open
-    
-    // FAQ state tracking
-    const faqState = {
-      openItems: new Set(),
-      animatingItems: new Set()
-    };
-    
-    // Smooth height animation functions
-    function slideUpContent(element, onComplete) {
-      if (faqState.animatingItems.has(element.id)) return;
-      faqState.animatingItems.add(element.id);
-      
-      const currentHeight = element.scrollHeight;
-      element.style.height = `${currentHeight}px`;
-      element.style.opacity = '1';
-      element.offsetHeight; // Force reflow
-      
-      element.style.transition = `height ${ANIMATION_DURATION}ms ${EASING}, opacity ${ANIMATION_DURATION}ms ${EASING}`;
-      
-      requestAnimationFrame(() => {
-        element.style.height = '0px';
-        element.style.opacity = '0';
-      });
-      
-      setTimeout(() => {
-        element.style.transition = '';
-        faqState.animatingItems.delete(element.id);
-        onComplete?.();
-      }, ANIMATION_DURATION);
-    }
-    
-    function slideDownContent(element, onComplete) {
-      if (faqState.animatingItems.has(element.id)) return;
-      faqState.animatingItems.add(element.id);
-      
-      element.style.height = '0px';
-      element.style.opacity = '0';
-      element.style.transition = '';
-      
-      // Get target height
-      element.style.height = 'auto';
-      const targetHeight = element.scrollHeight;
-      element.style.height = '0px';
-      element.offsetHeight; // Force reflow
-      
-      element.style.transition = `height ${ANIMATION_DURATION}ms ${EASING}, opacity ${ANIMATION_DURATION}ms ${EASING}`;
-      
-      requestAnimationFrame(() => {
-        element.style.height = `${targetHeight}px`;
-        element.style.opacity = '1';
-      });
-      
-      setTimeout(() => {
-        element.style.height = 'auto';
-        element.style.transition = '';
-        faqState.animatingItems.delete(element.id);
-        onComplete?.();
-        
-        // Smooth scroll if content extends beyond viewport
-        setTimeout(() => {
-          if (element.getBoundingClientRect().bottom > window.innerHeight) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }, 50);
-      }, ANIMATION_DURATION);
-    }
-    
-    // Main toggle function
-    function toggleFAQ(faqId) {
-      const button = document.getElementById(`faq-button-${faqId}`);
-      const content = document.getElementById(`faq-content-${faqId}`);
-      const arrow = button?.querySelector('.faq-arrow');
-      
-      if (!button || !content || !arrow) {
-        console.warn(`FAQ elements not found for ID: ${faqId}`);
-        return;
-      }
-      
-      const isOpen = faqState.openItems.has(faqId);
-      const isAnimating = faqState.animatingItems.has(content.id);
-      
-      if (isAnimating) return; // Prevent multiple animations
-      
-      if (isOpen) {
-        // Close FAQ
-        button.setAttribute('aria-expanded', 'false');
-        arrow.style.transform = 'rotate(0deg)';
-        faqState.openItems.delete(faqId);
-        
-        slideUpContent(content);
-      } else {
-        // Handle accordion behavior (close others) if allowMultiple is false
-        if (!allowMultiple) {
-          const openItems = Array.from(faqState.openItems);
-          openItems.forEach(otherFaqId => {
-            if (otherFaqId !== faqId) {
-              toggleFAQ(otherFaqId);
-            }
-          });
-        }
-        
-        // Open FAQ
-        button.setAttribute('aria-expanded', 'true');
-        arrow.style.transform = 'rotate(180deg)';
-        faqState.openItems.add(faqId);
-        
-        slideDownContent(content);
-      }
-    }
-    
-    // Event listeners
-    document.addEventListener('click', (e) => {
-      const faqToggle = e.target.closest('[data-faq-toggle]');
-      if (faqToggle) {
-        e.preventDefault();
-        const faqId = faqToggle.getAttribute('data-faq-toggle');
-        toggleFAQ(faqId);
-      }
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        const faqToggle = e.target.closest('[data-faq-toggle]');
-        if (faqToggle) {
-          e.preventDefault();
-          const faqId = faqToggle.getAttribute('data-faq-toggle');
-          toggleFAQ(faqId);
-        }
-      }
-    });
-    
-    // Expose toggleFAQ globally for backward compatibility
-    window.toggleFAQ = toggleFAQ;
+<style>
+  /* Ensure smooth height transitions */
+  [data-faq-answer] {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
   }
   
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeFAQ);
-  } else {
-    initializeFAQ();
+  [data-faq-answer][aria-hidden="false"] {
+    opacity: 1;
   }
+  
+  [data-faq-answer][aria-hidden="true"] {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  // Client-side accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('[data-faq-button]');
+    
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('[data-faq-item]');
+        const answer = item?.querySelector('[data-faq-answer]') as HTMLElement;
+        const plusIcon = button.querySelector('[data-icon="plus"]') as HTMLElement;
+        const minusIcon = button.querySelector('[data-icon="minus"]') as HTMLElement;
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        if (answer) {
+          if (isExpanded) {
+            // Collapse
+            answer.style.maxHeight = '0';
+            answer.setAttribute('aria-hidden', 'true');
+            button.setAttribute('aria-expanded', 'false');
+            plusIcon.classList.remove('opacity-0');
+            minusIcon.classList.add('opacity-0');
+          } else {
+            // Expand
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.setAttribute('aria-hidden', 'false');
+            button.setAttribute('aria-expanded', 'true');
+            plusIcon.classList.add('opacity-0');
+            minusIcon.classList.remove('opacity-0');
+          }
+        }
+      });
+    });
+  });
 </script>

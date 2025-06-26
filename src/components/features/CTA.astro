@@ -14,6 +14,7 @@
 import Button from '../primitives/Button.astro';
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
+import { siteConfig } from '@/config/site-config';
 
 export interface Props extends BaseComponentProps {
   /** Title text for the CTA section */
@@ -38,8 +39,8 @@ const {
   class: className = '',
   title = 'Transform your portfolio intelligence with Ralph',
   subtitle = 'Join leading PE firms using AI to identify opportunities 30+ days before competitors. See how Ralph delivers predictive insights across your entire deal lifecycle.',
-  ctaText = 'Book Demo',
-  ctaHref = '/ralph-web/#',
+  ctaText = siteConfig.demo.text,
+  ctaHref = siteConfig.demo.url,
   variant = 'enterprise',
   showCompliance = true,
   secondaryCtaText = 'Download Executive Brief',
@@ -70,7 +71,7 @@ const {
               )}
             </div>
             <div class="flex-shrink-0 flex flex-col sm:flex-row gap-4">
-              <Button variant="primary" size="lg" href={ctaHref} class="whitespace-nowrap">
+              <Button variant="primary" size="md" href={ctaHref} class="whitespace-nowrap">
                 {ctaText}
               </Button>
               {secondaryCtaText && (
@@ -92,7 +93,7 @@ const {
             {subtitle}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="primary" size="lg" href={ctaHref}>
+            <Button variant="primary" size="md" href={ctaHref}>
               {ctaText}
             </Button>
             {secondaryCtaText && (
@@ -113,7 +114,7 @@ const {
             {subtitle}
           </p>
           <div class="mt-10 flex justify-center">
-            <Button variant="primary" size="lg" href={ctaHref}>
+            <Button variant="primary" size="md" href={ctaHref}>
               {ctaText}
             </Button>
           </div>

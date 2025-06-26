@@ -230,16 +230,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       }
 
       /* Additional Layout-specific CSS Variables */
-      :root {
-        /* Additional POM variables not in design system */
-        --pom-btn-height-sm: 32px;
-        --pom-btn-radius-lg: 8px;
-        --pom-font-subtitle-color: rgba(255, 246, 238, 0.72);
-        --pom-section-padding-top: 96px;
-        --pom-section-padding-bottom: 128px;
-        --pom-mobile-header-height: 64px;
-        --pom-mobile-touch-target: 44px;
-      }
+      /* Legacy CSS variables removed - all values now in design system */
 
       /* iOS horizontal scroll prevention - moved to specific containers */
       html {
@@ -292,22 +283,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
 
       /* Note: Background utilities are handled by Tailwind config mapping to design tokens */
 
-      /* Text color utilities */
-      .text-accent {
-        color: var(--pom-accent);
-      }
-
-      .text-accent-text {
-        color: var(--pom-accent-text);
-      }
-
-      .text-secondary {
-        color: var(--pom-text-secondary);
-      }
-
-      .text-muted {
-        color: var(--pom-text-muted);
-      }
+      /* Text color utilities moved to Tailwind config */
 
       /* Mobile-specific header adjustments */
       @media (max-width: 640px) {
@@ -364,37 +340,11 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         }
       }
 
-      .heading-2 {
-        font-size: 1rem; /* 16px - matches POM requirement */
-        font-weight: 600; /* 600 - matches POM requirement */
-        line-height: 1.75;
-        letter-spacing: normal;
-        color: var(--pom-accent); /* Use accent yellow - matches POM requirement */
-      }
+      /* Heading styles moved to Tailwind utilities in components */
 
-      .heading-3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--color-text-primary);
-      }
+      /* Duplicate text utilities removed - use Tailwind's text-secondary and text-muted */
 
-      @media (min-width: 640px) {
-        .heading-3 {
-          font-size: 1.5rem;
-        }
-      }
-
-      .text-text-secondary {
-        color: var(--pom-text-secondary);
-      }
-
-      .text-text-muted {
-        color: var(--pom-text-muted);
-      }
-
-      .text-body {
-        color: var(--color-text-muted);
-      }
+      /* Unused text-body class removed */
 
       /* Gradient text utilities */
       .gradient-text-primary {
@@ -472,12 +422,7 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         }
       }
 
-      /* POM compliance: CTA button font size override */
-      button.btn-primary.btn-lg,
-      main button.btn-primary.btn-lg,
-      .btn-primary.btn-lg {
-        font-size: 0.875rem !important; /* 14px for POM compliance */
-      }
+      /* Design tokens handle button sizing through HeaderButton component */
 
 
       /* FAQ transition styles for smooth expand/collapse */
@@ -579,20 +524,8 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
         box-shadow: 0 0 0 6px var(--pom-accent);
       }
 
-      /* Accessibility: Minimum touch target sizes */
-      /* Apply only to interactive elements, not text links */
-      button,
-      .btn,
-      [role='button'] {
-        min-height: 44px;
-        min-width: 44px;
-      }
-      
-      /* Touch targets for navigation links */
-      nav a,
-      .touch-manipulation {
-        min-height: 44px;
-      }
+      /* Touch target sizes moved to component-specific classes */
+      /* Components should use min-h-[44px] or touch-manipulation class */
 
       /* Exception for inline links in text */
       p a,
@@ -696,20 +629,8 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
       // Legacy functionality - now handled by centralized state management
       // This is preserved for backward compatibility only
 
-      // Book a Demo button functionality
+      // Initialize on DOM ready
       document.addEventListener('DOMContentLoaded', () => {
-        document.addEventListener('click', (e) => {
-          const target = e.target;
-          if (
-            target.tagName === 'BUTTON' &&
-            (target.textContent.includes('Book a Demo') || target.textContent.includes('Book Demo'))
-          ) {
-            e.preventDefault();
-            window.location.href =
-              'mailto:Konstantin@beneficious.com?subject=Ralph Demo Request&body=Hello, I would like to schedule a demo of Ralph for my PE firm.';
-          }
-        });
-
         // Preload critical resources
         const criticalImages = ['/ralph-web/ralph_favicon.svg'];
 

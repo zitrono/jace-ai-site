@@ -46,7 +46,7 @@ This document contains the definitive, approved content for the Ralph website. A
 - **Product Page**: "Meet the AI agents that transform how PE firms see opportunities"
 - **Footer**: "Autonomous AI agents for predictive PE intelligence"
 
-## Homepage Content [Updated: 2025-01-23 via Q83]
+## Homepage Content [Updated: 2025-01-23 via Q83, 2025-01-25 via Q88]
 
 **Single-Page Experience Structure**:
 
@@ -65,15 +65,15 @@ This document contains the definitive, approved content for the Ralph website. A
 - **Subtitle**: "AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead." [15 words ✓] [Updated: 2025-01-23 via Q75]
 - **CTA**: "Book a Demo" [3 words ✓]
 
-### Social Proof Section: "The AI Adoption Paradox"
+### Social Proof Section: "The AI Adoption Paradox" [Updated: 2025-01-25 via Q86, Q87]
 
 - **Statistics Display**:
-  - "82% of PE firms have adopted AI"
-  - "Only 5% have scaled successfully"
-  - "80% of portfolio data remains untapped"
+  - "€8.2 trillion global PE market"
+  - "20-30% of deal flow analyzed today"
+  - "30-45 days faster with AI"
   - "Ralph bridges this gap"
-- **Supporting Line**: "Private beta launching Q1 2025 • Enterprise-ready infrastructure"
-- **Source Attribution**: "Sources: Deloitte, BCG, Industry Reports" [small text]
+- **Source Attribution**: "Sources: McKinsey Global Private Markets Review 2024, Deloitte PE AI Adoption Study" [small text]
+- **Supporting Line**: "Private beta launching Q3 2025 • Enterprise-ready infrastructure"
 
 ### Why Ralph Section [Updated: 2025-01-23 via Q78, Q85]
 

@@ -15,6 +15,7 @@ import Card from '../primitives/Card.astro';
 import Icon from '../primitives/Icon.astro';
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
+import { siteConfig } from '@/config/site-config';
 
 interface PricingFeature {
   text: string;
@@ -107,12 +108,12 @@ const {
   spacing="lg"
 >
     <div class="mx-auto max-w-2xl text-center">
-      <h2 id="pricing-title" class="heading-2">
+      <p class="text-base font-semibold leading-7 text-accent">
         {title}
-      </h2>
-      <p class="mt-4 text-lg text-text-muted">
-        {subtitle}
       </p>
+      <h2 id="pricing-title" class="mt-4 text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+        {subtitle}
+      </h2>
     </div>
 
     <div class="mt-section-base grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-4xl mx-auto">
@@ -164,8 +165,10 @@ const {
 
                 <Button
                   variant={plan.ctaVariant}
+                  size="md"
                   class="mt-8 w-full"
                   aria-label={`${plan.ctaText} for ${plan.name} plan`}
+                  href={siteConfig.demo.url}
                 >
                   {plan.ctaText}
                 </Button>

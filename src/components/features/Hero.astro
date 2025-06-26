@@ -13,6 +13,7 @@
 import Button from '../primitives/Button.astro';
 import Section from '../layout/Section.astro';
 import type { BaseComponentProps } from '@/types/components';
+import { siteConfig, getButtonAction } from '@/config/site-config';
 
 export interface Props extends BaseComponentProps {
   /** Main hero title */
@@ -35,15 +36,15 @@ const {
   class: className = '',
   title = "See Tomorrow's Opportunities Today",
   subtitle = 'AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead.',
-  ctaText = 'Book a Demo',
-  ctaHref = '/ralph-web/#',
+  ctaText = siteConfig.demo.text,
+  ctaHref: _ctaHref = siteConfig.demo.url,
   showPattern = true,
   showTrustIndicators = false,
   showSupportFeatures = true,
 } = Astro.props;
 ---
 
-<Section class={`relative isolate lg:mt-[-5.6em] max-md:pt-4 ${className}`} as="section">
+<Section class={`relative isolate ${className}`} as="section" spacing="lg">
   <!-- Background pattern -->
   {
     showPattern && (
@@ -72,23 +73,29 @@ const {
   }
 
   <div
-    class="md:pt-section-base lg:flex lg:items-center lg:gap-x-20 lg:pt-32"
+    class="lg:flex lg:items-center lg:gap-x-20"
   >
     <div class="lg:flex-auto lg:w-5/12">
       <h1
-        class="text-hero font-bold leading-tight lg:mt-10 pb-2 text-pretty gradient-hero-title max-sm:text-center tracking-tighter"
+        class="text-hero font-bold leading-tight pb-2 text-pretty gradient-hero-title max-sm:text-center tracking-tighter"
         data-test="hero-title"
       >
         {title}
       </h1>
       <p
-        class="mt-4 max-md:mb-12 text-pretty text-lg font-normal leading-7 max-sm:text-center text-secondary"
+        class="mt-4 max-md:mb-12 text-pretty text-xl font-normal leading-7 max-sm:text-center text-secondary"
         data-test="hero-subtitle"
       >
         {subtitle}
       </p>
       <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
-        <Button variant="primary" size="lg" class="btn-primary btn-lg bg-primary-yellow" data-test="cta-button" onclick={`window.location.href='${ctaHref}'`}>
+        <Button 
+          variant="primary" 
+          size="md" 
+          class="btn-primary btn-md bg-primary-yellow" 
+          data-test="cta-button" 
+          {...getButtonAction('bookDemo')}
+        >
           {ctaText}
         </Button>
       </div>

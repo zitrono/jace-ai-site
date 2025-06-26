@@ -1,0 +1,130 @@
+---
+/**
+ * HeaderLayout - Layout container that enforces header alignment constraints
+ * 
+ * Provides consistent structure and ensures all header elements align properly.
+ * Uses CSS custom properties to enforce design token compliance.
+ * 
+ * @example
+ * <HeaderLayout>
+ *   <div slot="logo">Logo</div>
+ *   <div slot="navigation">Nav items</div>
+ *   <div slot="actions">CTA buttons</div>
+ * </HeaderLayout>
+ */
+
+import type { BaseComponentProps } from '@/types/components';
+import { HEADER_CSS_VARS } from '@/types/design-tokens';
+
+interface Props extends BaseComponentProps {
+  /** Whether header should stick to top */
+  sticky?: boolean;
+  /** Additional header classes */
+  headerClass?: string;
+}
+
+const {
+  sticky = true,
+  headerClass = '',
+  class: _className = '',
+  ...rest
+} = Astro.props;
+
+const headerClasses = [
+  // Position - add 8px gap from top when sticky to match Jace reference
+  sticky ? 'sticky top-2' : 'relative',
+  // Layout and z-index
+  'z-20 inset-x-0',
+  // Background and blur
+  'bg-background/50 backdrop-blur-sm',
+  // Transitions
+  'transition-all duration-300',
+  // No margin - gap is handled by top-2 (8px) when sticky
+  headerClass,
+].filter(Boolean).join(' ');
+---
+
+<header 
+  class={headerClasses} 
+  style={Object.entries(HEADER_CSS_VARS).map(([key, value]) => `${key}:${value}`).join(';')}
+  {...rest}
+>
+  <!-- Skip link for accessibility -->
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:rounded-base focus:bg-primary-yellow focus:px-component-base focus:py-component-sm focus:text-text-inverted focus:no-underline focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+  >
+    Skip to main content
+  </a>
+
+  <!-- Main navigation container -->
+  <nav
+    class="w-full"
+    role="navigation"
+    aria-label="Main navigation"
+  >
+    <!-- Header element container with enforced alignment -->
+    <div class="header-elements-container mx-auto flex items-center justify-between w-full max-w-7xl px-6 py-2 md:py-3 lg:px-8">
+      <!-- Logo section -->
+      <div class="header-logo flex lg:flex-1">
+        <slot name="logo" />
+      </div>
+
+      <!-- Mobile elements (hidden on desktop) -->
+      <div class="header-mobile">
+        <slot name="mobile" />
+      </div>
+
+      <!-- Desktop navigation and actions (hidden on mobile) -->
+      <div class="header-desktop hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8">
+        <!-- Navigation links -->
+        <div class="header-navigation">
+          <slot name="navigation" />
+        </div>
+
+        <!-- Action buttons -->
+        <div class="header-actions">
+          <slot name="actions" />
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Responsive header heights to match Jace reference */
+  .header-elements-container {
+    min-height: 80px; /* Mobile default */
+  }
+  
+  @media (min-width: 768px) {
+    .header-elements-container {
+      min-height: 81.25px; /* Tablet */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .header-elements-container {
+      min-height: 88px; /* Desktop and larger */
+    }
+  }
+
+  /* Ensure all interactive elements have consistent height */
+  .header-navigation > *,
+  .header-actions > *,
+  .header-mobile > * {
+    height: var(--header-element-height, 44px);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  /* Font sizes now handled by design tokens in HeaderButton component */
+
+  /* Prevent height override for header elements */
+  .header-navigation > *:not(.header-skip),
+  .header-actions > *:not(.header-skip),
+  .header-mobile > *:not(.header-skip) {
+    min-height: var(--header-element-height, 44px) !important;
+  }
+</style>

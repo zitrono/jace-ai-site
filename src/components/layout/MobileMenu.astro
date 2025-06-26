@@ -15,6 +15,8 @@
  */
 
 import type { BaseComponentProps } from '@/types/components';
+import Button from '../primitives/Button.astro';
+import { getButtonAction } from '@/config/site-config';
 
 export interface Props extends BaseComponentProps {
   /** Navigation links to display */
@@ -99,20 +101,23 @@ const {
         <!-- CTA buttons at bottom -->
         {showCta && (
           <div class="mt-auto space-y-2 py-6">
-            <button
-              type="button"
-              class="w-full rounded-md bg-neutral-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-neutral-400"
-              onclick="openLoginModal(); closeMobileMenu();"
+            <Button
+              variant="secondary"
+              size="md"
+              fullWidth={true}
+              {...getButtonAction('mobileLogin')}
             >
               {loginText}
-            </button>
-            <button
-              type="button"
-              class="w-full rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-text shadow-sm hover:bg-yellow-300"
-              onclick="window.location.href='/ralph-web/#'"
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
+              fullWidth={true}
+              {...getButtonAction('bookDemo')}
+              onclick="closeMobileMenu();"
             >
               {ctaText}
-            </button>
+            </Button>
           </div>
         )}
       </nav>

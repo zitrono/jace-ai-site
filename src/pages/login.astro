@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Button from '../components/primitives/Button.astro';
+import { siteConfig } from '@/config/site-config';
 ---
 
 <Layout title="Login | Ralph - AI-Native Private Equity Platform">
@@ -117,7 +118,7 @@ import Button from '../components/primitives/Button.astro';
                   Don't have an account?
                 </p>
                 <div class="space-y-3">
-                  <Button variant="secondary" size="md" class="w-full" href="/ralph-web/#">
+                  <Button variant="secondary" size="md" class="w-full" href={siteConfig.demo.url}>
                     Request Demo Access
                   </Button>
                   <Button variant="tertiary" size="sm" class="w-full" href="/ralph-web/">

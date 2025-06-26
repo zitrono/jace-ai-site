@@ -9,13 +9,18 @@ AI development guide for ralph-web. **LLM-optimized - essential rules only.**
 - Skip TypeScript interfaces or use `any` types
 - Modify content without Q&A process (see `/content/general/`)
 - Use `!important` or break CSS cascade specificity rules
+- **Define same CSS property in multiple locations** (e.g., design tokens + global CSS)
+- **Mix global CSS with component styles** - components own their styles
+- **Wrap feature components in Section** - they self-manage sections (causes double-wrapping)
 
 ## ✅ ALWAYS DO
 - Run `npm run validate` before commits
 - Maintain 99.9% POM compliance: `cd tests && node unified-test.js ralph`
 - Use design tokens: `bg-background`, `text-primary`, etc.
 - Follow component structure: `primitives/`, `layout/`, `features/`, `utils/`
-- **Normalize component heights**: Use `h-*` classes to ensure consistent alignment across `<a>`, `<button>`, and `<div>` elements
+- **Check if component has internal Section before wrapping**: `grep -l "Section" src/components/features/*.astro`
+- **Use semantic HTML for accessibility only**: `<section id="pricing"><Pricing /></section>`
+- **Let feature components self-manage sections**: Hero, Features, etc. include their own Section
 
 ## 📁 Architecture
 ```
@@ -48,7 +53,7 @@ npm run build                         # Production build
 
 ### URLs & Files
 - Dev: http://localhost:4321/ralph-web/
-- Jace: http://localhost:8081/
+- Jace: http://localhost:8081/jace-copy/
 - Production: https://zitrono.github.io/ralph-web/
 - POM: `tests/jace-ai-site.pom.js`
 - Layout: `src/layouts/Layout.astro`

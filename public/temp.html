@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Style Options</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'background': 'rgb(40, 40, 40)',
+                        'card': 'rgb(53, 53, 53)',
+                        'secondary': 'rgb(65, 65, 65)',
+                        'accent': 'rgb(255, 220, 97)',
+                        'primary': 'rgb(255, 255, 255)',
+                        'muted': 'rgb(156, 163, 175)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-primary min-h-screen p-8">
+    <div class="max-w-7xl mx-auto space-y-16">
+        <h1 class="text-4xl font-bold text-center text-accent mb-12">Testimonial Style Options</h1>
+
+        <!-- Style 1: WSJ Editorial Style -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 1: WSJ Editorial Style</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <article class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-6xl text-gray-300 leading-none font-serif">"</div>
+                        <div class="flex-1">
+                            <blockquote class="text-lg leading-relaxed font-serif italic mb-6">
+                                This is a transformational technology. You have to be the first mover in your industry.
+                            </blockquote>
+                            <footer class="border-t border-gray-200 pt-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <cite class="font-bold text-gray-900 not-italic">Stephen Schwarzman</cite>
+                                        <div class="text-sm text-gray-600">Chairman, CEO & Co-Founder</div>
+                                        <div class="text-sm text-gray-500 font-medium">Blackstone</div>
+                                    </div>
+                                    <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-16 h-8 object-contain opacity-60">
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="text-6xl text-gray-300 leading-none font-serif">"</div>
+                        <div class="flex-1">
+                            <blockquote class="text-lg leading-relaxed font-serif italic mb-6">
+                                We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.
+                            </blockquote>
+                            <footer class="border-t border-gray-200 pt-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <cite class="font-bold text-gray-900 not-italic">Robert F. Smith</cite>
+                                        <div class="text-sm text-gray-600">Founder, Chairman & CEO</div>
+                                        <div class="text-sm text-gray-500 font-medium">Vista Equity Partners</div>
+                                    </div>
+                                    <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-16 h-8 object-contain opacity-60 filter brightness-0 invert">
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Style 2: Modern Card with Floating Quote -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 2: Modern Card with Floating Quote</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="relative bg-card border border-accent/20 rounded-xl p-6 group hover:border-accent/40 transition-all duration-300">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                        <span class="text-background font-bold text-lg">"</span>
+                    </div>
+                    <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="absolute top-4 right-4 w-12 h-6 object-contain opacity-50">
+                    <blockquote class="text-primary mb-6 pt-4 leading-relaxed">
+                        "This is a transformational technology. You have to be the first mover in your industry."
+                    </blockquote>
+                    <footer class="border-t border-accent/20 pt-4">
+                        <div class="font-bold text-accent text-sm">Stephen Schwarzman</div>
+                        <div class="text-muted text-xs">Chairman, CEO & Co-Founder, Blackstone</div>
+                    </footer>
+                </div>
+
+                <div class="relative bg-card border border-accent/20 rounded-xl p-6 group hover:border-accent/40 transition-all duration-300">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                        <span class="text-background font-bold text-lg">"</span>
+                    </div>
+                    <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="absolute top-4 right-4 w-12 h-6 object-contain opacity-50 filter brightness-0 invert">
+                    <blockquote class="text-primary mb-6 pt-4 leading-relaxed">
+                        "We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes."
+                    </blockquote>
+                    <footer class="border-t border-accent/20 pt-4">
+                        <div class="font-bold text-accent text-sm">Robert F. Smith</div>
+                        <div class="text-muted text-xs">Founder, Chairman & CEO, Vista Equity Partners</div>
+                    </footer>
+                </div>
+
+                <div class="relative bg-card border border-accent/20 rounded-xl p-6 group hover:border-accent/40 transition-all duration-300">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                        <span class="text-background font-bold text-lg">"</span>
+                    </div>
+                    <img src="/ralph-web/logos/kkr-final.svg" alt="KKR" class="absolute top-4 right-4 w-12 h-6 object-contain opacity-50 filter brightness-0 invert">
+                    <blockquote class="text-primary mb-6 pt-4 leading-relaxed">
+                        "Artificial intelligence today, it's not a fad. It's really a tectonic shift in terms of general purpose technology evolution."
+                    </blockquote>
+                    <footer class="border-t border-accent/20 pt-4">
+                        <div class="font-bold text-accent text-sm">Waldemar Szlezak</div>
+                        <div class="text-muted text-xs">Partner & Global Head of Digital Infrastructure, KKR</div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- Style 3: Minimal Clean Lines (Reference Site Inspired) -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 3: Minimal Clean Lines</h2>
+            <div class="space-y-8">
+                <div class="border-l-4 border-accent pl-8 py-6">
+                    <blockquote class="text-xl text-primary mb-4 font-light leading-relaxed">
+                        "This is a transformational technology. You have to be the first mover in your industry."
+                    </blockquote>
+                    <footer class="flex items-center justify-between">
+                        <div>
+                            <cite class="text-accent font-semibold not-italic">Stephen Schwarzman</cite>
+                            <div class="text-muted text-sm">Chairman, CEO & Co-Founder, Blackstone</div>
+                        </div>
+                        <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-20 h-10 object-contain opacity-40">
+                    </footer>
+                </div>
+
+                <div class="border-l-4 border-accent pl-8 py-6">
+                    <blockquote class="text-xl text-primary mb-4 font-light leading-relaxed">
+                        "We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes."
+                    </blockquote>
+                    <footer class="flex items-center justify-between">
+                        <div>
+                            <cite class="text-accent font-semibold not-italic">Robert F. Smith</cite>
+                            <div class="text-muted text-sm">Founder, Chairman & CEO, Vista Equity Partners</div>
+                        </div>
+                        <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-20 h-10 object-contain opacity-40 filter brightness-0 invert">
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- Style 4: Magazine Feature Style -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 4: Magazine Feature Style</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <article class="relative">
+                    <div class="absolute -top-8 -left-8 text-9xl text-accent/20 font-serif leading-none">"</div>
+                    <div class="relative z-10 bg-card/50 p-8 rounded-lg backdrop-blur-sm">
+                        <blockquote class="text-2xl text-primary mb-8 leading-relaxed font-light">
+                            This is a transformational technology. You have to be the first mover in your industry.
+                        </blockquote>
+                        <footer class="flex items-end justify-between border-t border-accent/20 pt-6">
+                            <div>
+                                <cite class="text-accent font-bold text-lg not-italic block">Stephen Schwarzman</cite>
+                                <div class="text-muted text-sm">Chairman, CEO & Co-Founder</div>
+                                <div class="text-accent/80 text-sm font-medium">Blackstone</div>
+                            </div>
+                            <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-24 h-12 object-contain opacity-60">
+                        </footer>
+                    </div>
+                </article>
+
+                <article class="relative">
+                    <div class="absolute -top-8 -left-8 text-9xl text-accent/20 font-serif leading-none">"</div>
+                    <div class="relative z-10 bg-card/50 p-8 rounded-lg backdrop-blur-sm">
+                        <blockquote class="text-2xl text-primary mb-8 leading-relaxed font-light">
+                            We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.
+                        </blockquote>
+                        <footer class="flex items-end justify-between border-t border-accent/20 pt-6">
+                            <div>
+                                <cite class="text-accent font-bold text-lg not-italic block">Robert F. Smith</cite>
+                                <div class="text-muted text-sm">Founder, Chairman & CEO</div>
+                                <div class="text-accent/80 text-sm font-medium">Vista Equity Partners</div>
+                            </div>
+                            <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-24 h-12 object-contain opacity-60 filter brightness-0 invert">
+                        </footer>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Style 5: Corporate Prestige -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 5: Corporate Prestige</h2>
+            <div class="bg-secondary/30 p-12 rounded-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-12 h-6 object-contain">
+                        </div>
+                        <blockquote class="text-primary mb-4 italic leading-relaxed">
+                            "This is a transformational technology. You have to be the first mover in your industry."
+                        </blockquote>
+                        <footer>
+                            <cite class="text-accent font-bold text-sm not-italic block">Stephen Schwarzman</cite>
+                            <div class="text-muted text-xs">Chairman, CEO & Co-Founder</div>
+                        </footer>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-12 h-6 object-contain filter brightness-0 invert">
+                        </div>
+                        <blockquote class="text-primary mb-4 italic leading-relaxed">
+                            "We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation."
+                        </blockquote>
+                        <footer>
+                            <cite class="text-accent font-bold text-sm not-italic block">Robert F. Smith</cite>
+                            <div class="text-muted text-xs">Founder, Chairman & CEO</div>
+                        </footer>
+                    </div>
+
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <img src="/ralph-web/logos/kkr-final.svg" alt="KKR" class="w-12 h-6 object-contain filter brightness-0 invert">
+                        </div>
+                        <blockquote class="text-primary mb-4 italic leading-relaxed">
+                            "Artificial intelligence today, it's not a fad. It's really a tectonic shift in terms of general purpose technology evolution."
+                        </blockquote>
+                        <footer>
+                            <cite class="text-accent font-bold text-sm not-italic block">Waldemar Szlezak</cite>
+                            <div class="text-muted text-xs">Partner & Global Head, KKR</div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Style 6: Financial Times Pullquote -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 6: Financial Times Pullquote</h2>
+            <div class="space-y-12">
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative bg-gradient-to-r from-card/50 to-secondary/30 p-8 rounded-lg border-l-8 border-accent">
+                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-accent text-background rounded-full flex items-center justify-center font-bold text-lg">"</div>
+                        <blockquote class="text-2xl text-primary font-medium leading-relaxed mb-6 pl-8">
+                            This is a transformational technology. You have to be the first mover in your industry.
+                        </blockquote>
+                        <footer class="flex items-center justify-between border-t border-accent/20 pt-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                                    <span class="text-accent font-bold text-lg">SS</span>
+                                </div>
+                                <div>
+                                    <cite class="text-accent font-bold not-italic block">Stephen Schwarzman</cite>
+                                    <div class="text-muted text-sm">Chairman, CEO & Co-Founder, Blackstone</div>
+                                </div>
+                            </div>
+                            <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-20 h-10 object-contain opacity-50">
+                        </footer>
+                    </div>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative bg-gradient-to-r from-card/50 to-secondary/30 p-8 rounded-lg border-l-8 border-accent">
+                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-accent text-background rounded-full flex items-center justify-center font-bold text-lg">"</div>
+                        <blockquote class="text-2xl text-primary font-medium leading-relaxed mb-6 pl-8">
+                            We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.
+                        </blockquote>
+                        <footer class="flex items-center justify-between border-t border-accent/20 pt-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                                    <span class="text-accent font-bold text-lg">RS</span>
+                                </div>
+                                <div>
+                                    <cite class="text-accent font-bold not-italic block">Robert F. Smith</cite>
+                                    <div class="text-muted text-sm">Founder, Chairman & CEO, Vista Equity Partners</div>
+                                </div>
+                            </div>
+                            <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-20 h-10 object-contain opacity-50 filter brightness-0 invert">
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Style 7: Reference Site Inspired (Clean Cards) -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-bold text-accent border-b border-accent/30 pb-2">Style 7: Reference Site Inspired (Clean Cards)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white text-gray-900 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-4xl text-gray-300 font-serif">"</div>
+                        <img src="/ralph-web/logos/blackstone-final.svg" alt="Blackstone" class="w-16 h-8 object-contain opacity-60">
+                    </div>
+                    <blockquote class="text-lg text-gray-800 leading-relaxed mb-6">
+                        This is a transformational technology. You have to be the first mover in your industry.
+                    </blockquote>
+                    <footer>
+                        <cite class="text-gray-900 font-bold not-italic block">Stephen Schwarzman</cite>
+                        <div class="text-gray-600 text-sm">Chairman, CEO & Co-Founder</div>
+                        <div class="text-gray-500 text-sm">Blackstone</div>
+                    </footer>
+                </div>
+
+                <div class="bg-white text-gray-900 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="text-4xl text-gray-300 font-serif">"</div>
+                        <img src="/ralph-web/logos/vista-final.svg" alt="Vista" class="w-16 h-8 object-contain opacity-60 filter brightness-0 invert">
+                    </div>
+                    <blockquote class="text-lg text-gray-800 leading-relaxed mb-6">
+                        We have adopted generative artificial intelligence not just as a tool but as a pivotal component of our value creation and underwriting processes.
+                    </blockquote>
+                    <footer>
+                        <cite class="text-gray-900 font-bold not-italic block">Robert F. Smith</cite>
+                        <div class="text-gray-600 text-sm">Founder, Chairman & CEO</div>
+                        <div class="text-gray-500 text-sm">Vista Equity Partners</div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="bg-accent/10 border border-accent/20 p-6 rounded-lg">
+            <h2 class="text-xl font-bold mb-3 text-accent">Style Recommendations</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <h3 class="font-semibold text-primary mb-2">Most Professional & Credible:</h3>
+                    <ul class="space-y-1 text-muted">
+                        <li>• Style 1: WSJ Editorial (newspaper authority)</li>
+                        <li>• Style 6: Financial Times Pullquote (executive focus)</li>
+                        <li>• Style 7: Reference Site Inspired (clean, modern)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-primary mb-2">Most Visually Distinctive:</h3>
+                    <ul class="space-y-1 text-muted">
+                        <li>• Style 2: Modern Card with Floating Quote</li>
+                        <li>• Style 4: Magazine Feature Style</li>
+                        <li>• Style 6: Financial Times Pullquote</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-accent/5 rounded border border-accent/20">
+                <p class="text-accent font-semibold mb-2">Top Recommendation:</p>
+                <p class="text-primary text-sm">
+                    <strong>Style 6 (Financial Times Pullquote)</strong> combines WSJ's editorial credibility with modern visual appeal. 
+                    The large quote format with executive initials adds gravitas while the accent border creates visual hierarchy 
+                    that draws attention without being flashy.
+                </p>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="text-center py-8">
+            <a href="/ralph-web/" class="inline-flex items-center text-accent hover:text-accent/80 transition-colors">
+                ← Back to Ralph
+            </a>
+        </div>
+    </div>
+</body>
+</html>

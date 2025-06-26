@@ -176,12 +176,12 @@ export const designSystem: DesignSystem = {
       primary: ['Geist', 'Inter', 'system-ui', 'sans-serif'],
     },
     fontSize: {
-      xs: '0.875rem', // 14px
-      sm: '1rem', // 16px
-      base: '1.125rem', // 18px
-      lg: '1.5rem', // 24px
-      xl: '2rem', // 32px
-      '2xl': '2.5rem', // 40px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px - POM requirement for navigation
+      lg: '1.25rem', // 20px
+      xl: '1.5rem', // 24px
+      '2xl': '2.25rem', // 36px
       '3xl': '3rem', // 48px
       hero: '3.75rem', // 60px
     },

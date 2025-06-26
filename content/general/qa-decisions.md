@@ -682,3 +682,207 @@ All four explanations approved
 **Implementation**: Add subtle credibility indicator to Why Ralph section and create comprehensive Learn article showcasing the full data matrix
 
 **Rationale**: Balances homepage simplicity with depth for serious evaluators. Maintains clean user experience while providing proof of comprehensive data coverage for those who need it.
+
+## Q86: How should we fix the logically inconsistent AI adoption statistics in the Social Proof section?
+
+**Priority Analysis**: The current statistics contain mathematical impossibilities and vague sourcing that undermine credibility with sophisticated PE audiences. From market research, I found properly sourced statistics that tell a more compelling and credible story about the AI opportunity gap in PE.
+
+**Option A: Market Opportunity Focus**
+- Impact: High credibility and urgency creation through market size/growth data
+- Pros: Uses verified McKinsey/Deloitte data, shows massive opportunity, creates FOMO
+- Cons: Less direct about current adoption challenges
+- Constraint check: Fits within existing character limits
+- Proposed stats: 
+  - "€8.2 trillion global PE market"
+  - "Only 20-30% of deal flow analyzed" 
+  - "30-45 days faster with AI"
+  - "Ralph unlocks the rest"
+
+**Option B: Efficiency Gap Narrative**  
+- Impact: High relevance by focusing on operational inefficiencies
+- Pros: Directly addresses PE pain points, uses Vista/BlackRock examples
+- Cons: May seem less visionary
+- Constraint check: Minor text adjustments needed
+- Proposed stats:
+  - "82% of PE firms use AI tools"
+  - "Only 15% achieve full ROI"
+  - "70% of deals still miss red flags"
+  - "Ralph changes the equation"
+
+**Option C: Leader Validation + Market Stats**
+- Impact: Maximum credibility through PE leader quotes + hard data
+- Pros: Combines authority (Schwarzman quote) with opportunity size
+- Cons: Requires more complex layout
+- Constraint check: Would need section redesign
+- Proposed approach: Quote from Schwarzman about being "first mover" + stat about $15T AI value
+
+**Option D: Success Metrics Focus**
+- Impact: High conversion impact through ROI proof points
+- Pros: Shows tangible results, uses real PE examples
+- Cons: May reveal too much about expected outcomes
+- Constraint check: Fits current structure
+- Proposed stats:
+  - "5-15% portfolio returns lift"
+  - "70% faster due diligence"
+  - "2x deal pipeline efficiency"
+  - "Ralph delivers this today"
+
+**Decision**: Option A - Market Opportunity Focus
+
+**Implementation**: Replace current statistics with market opportunity data:
+- "€8.2 trillion" → "global PE market seeking AI transformation"
+- "20-30%" → "of deal flow actually analyzed today"  
+- "30-45 days" → "faster opportunity identification with AI"
+- "Ralph" → "bridges this gap"
+- Sources: McKinsey Global Private Markets Review 2024, Deloitte PE AI Adoption Study
+
+**Rationale**: PE decision-makers respond to market size and competitive dynamics. The €8.2 trillion market size immediately establishes relevance, while "only 20-30% of deal flow analyzed" creates urgency without insulting their current efforts. The "30-45 days faster" metric directly ties to Ralph's core value prop. This approach uses McKinsey/Deloitte data for unassailable credibility while maintaining the visual impact of the current design.
+
+## Q87: How should we reposition the "Private beta launching Q1 2025" line relative to the source attribution?
+
+**Priority Analysis**: The current placement of "Private beta launching Q1 2025 • Enterprise-ready infrastructure" before the McKinsey/Deloitte sources creates a visual hierarchy issue where less important information (beta status) appears more prominent than crucial credibility markers (authoritative sources). This undermines the trust-building impact of the statistics.
+
+**Option A: Swap Order - Sources First**
+- Impact: Immediate credibility boost by leading with authoritative sources
+- Pros: McKinsey/Deloitte names provide instant validation, follows journalistic convention
+- Cons: Beta launch info becomes less prominent
+- Constraint check: Simple line swap, no design changes needed
+- Implementation: Move sources above beta status line
+
+**Option B: Remove Beta Status Line**
+- Impact: Cleaner, more professional presentation focused on market opportunity
+- Pros: Eliminates potentially concerning "beta" language, streamlines message
+- Cons: Loses launch timeline communication
+- Constraint check: Reduces content, improves visual hierarchy
+- Implementation: Delete the beta status line entirely
+
+**Option C: Integrate Into Single Line**
+- Impact: Maintains all information but improves flow
+- Pros: Keeps launch info while prioritizing sources
+- Cons: May create overly long line
+- Constraint check: Might exceed optimal line length
+- Implementation: "Sources: McKinsey 2024, Deloitte • Private beta Q1 2025"
+
+**Option D: Move Beta Status Elsewhere**
+- Impact: Preserves information while fixing hierarchy issue
+- Pros: Sources get proper prominence, beta info relocated to more appropriate spot
+- Cons: Requires finding new location for beta status
+- Constraint check: May need section restructuring
+- Implementation: Move to hero subtitle or footer
+
+**Decision**: Option A - Swap Order - Sources First (with Q3 update)
+
+**Implementation**: 
+- Swap the order of source attribution and beta status lines
+- Update Q1 2025 to Q3 2025 for the private beta launch
+- Final order:
+  1. Sources: McKinsey Global Private Markets Review 2024, Deloitte PE AI Adoption Study
+  2. Private beta launching Q3 2025 • Enterprise-ready infrastructure
+
+**Rationale**: This minimal change fixes the visual hierarchy by prioritizing authoritative sources (McKinsey/Deloitte) which build immediate credibility. The Q3 timeline update provides more realistic development runway while maintaining urgency. Enterprise-ready messaging following trusted sources feels more credible than preceding them.
+
+## Q88: Is the current homepage section sequence optimal for achieving conversion goals?
+
+**Priority Analysis**: The section sequence directly impacts user journey and conversion. Current implementation differs from content specification in critical ways that may reduce conversion effectiveness. The testimonials appear too early (before showing HOW Ralph works), and there's an extra CTA section not in the spec, potentially diluting the conversion path.
+
+**Current Implementation vs. Specification**:
+
+**Specification Order:**
+1. Hero Section ✓
+2. Social Proof (AI Adoption Paradox) ✓
+3. Why Ralph (Competitive Differentiation) ✓
+4. Features/Product ("How Ralph Works") ✓
+5. Pricing ✓
+6. Testimonials ❌ (Currently appears after Why Ralph, before Features)
+7. FAQ ✓
+8. Progressive CTAs throughout ❌ (Extra CTA section added)
+
+**Option A: Follow Specification Exactly**
+- Impact: Optimal conversion flow - problem → solution → how → pricing → validation → objections
+- Pros: Testimonials after pricing creates validation at decision point, cleaner journey
+- Cons: Requires moving TestimonialsNew component, removing extra CTA section
+- Constraint check: Simple component reordering, no design changes
+- Implementation: Move testimonials after pricing, remove standalone CTA section
+
+**Option B: Keep Current Order with Justification**
+- Impact: Early social proof might build trust sooner
+- Pros: Minimal code changes, testimonials provide early validation
+- Cons: Shows WHO before HOW, may confuse journey, violates approved spec
+- Constraint check: No changes needed
+- Implementation: Document deviation from spec
+
+**Option C: Hybrid Optimization**
+- Impact: Split testimonials - 2-3 early, rest after pricing
+- Pros: Early trust building + validation at decision point
+- Cons: Complex implementation, fragments testimonial impact
+- Constraint check: Requires component modification
+- Implementation: Create two testimonial instances
+
+**Option D: Remove Extra CTA, Keep Early Testimonials**
+- Impact: Cleaner flow while maintaining early social proof
+- Pros: Removes redundant CTA, keeps early validation
+- Cons: Still violates specification order
+- Constraint check: Minor changes only
+- Implementation: Delete CTA section only
+
+**Decision**: Option A - Follow Specification Exactly
+
+**Implementation**: 
+- Move TestimonialsNew component from after "Why Ralph" section to after Pricing section
+- Remove the standalone CTA section (keeping progressive CTAs throughout as specified)
+- Maintain exact order: Hero → Social Proof → Why Ralph → Features → Pricing → Testimonials → FAQ
+
+**Rationale**: The specification order follows proven conversion psychology: Problem awareness (Social Proof stats) → Solution differentiation (Why Ralph) → Feature understanding (How it works) → Investment decision (Pricing) → Validation (Testimonials at decision point) → Objection handling (FAQ). Moving testimonials after pricing creates validation exactly when prospects need it most - at the investment decision point. The extra CTA section creates redundancy since CTAs already exist throughout. Following the approved specification ensures consistency and optimal conversion flow.
+
+## Q89: How should we fix the critical semantic HTML and styling inconsistencies in section titles across the homepage?
+
+**Priority Analysis**: This is a CRITICAL issue affecting SEO, accessibility, and design consistency. 4 out of 5 feature components have semantic HTML violations where pre-titles use `<h2>` tags and main section titles use `<p>` tags - completely backwards from proper semantic structure. This violates WCAG guidelines and confuses screen readers.
+
+**Current Issues Identified:**
+
+**Semantic Violations:**
+- Features, Pricing, FAQ, Testimonials: Pre-title uses `<h2>`, main title uses `<p>` (backwards)
+- Social Proof, Why Ralph: Correct structure (`<h2>` for title)
+
+**Styling Inconsistencies:**
+- Pricing title styling: `text-lg text-text-muted` (too small/muted for main title)
+- Mixed design tokens: Some use `text-white`, others `text-primary`  
+- Inconsistent spacing: `mb-6` vs `mt-4` patterns vary
+
+**Option A: Full Semantic and Styling Standardization**
+- Impact: Fixes accessibility violations, improves SEO, creates consistent design
+- Pros: Proper semantic structure, unified styling system, better screen reader support
+- Cons: Requires updating 4 components, potential POM test impacts
+- Constraint check: Must maintain visual appearance while fixing semantic structure
+- Implementation: Swap semantic tags, standardize all styling patterns
+
+**Option B: Semantic Fix Only**  
+- Impact: Fixes critical accessibility issues but leaves styling inconsistencies
+- Pros: Addresses most urgent problem (semantic structure), minimal visual changes
+- Cons: Still has inconsistent styling across sections
+- Constraint check: Low visual impact, maintains current appearance
+- Implementation: Just swap `<h2>` and `<p>` tags in 4 components
+
+**Option C: Styling Fix Only**
+- Impact: Improves visual consistency but leaves semantic violations
+- Pros: Better visual hierarchy, consistent design tokens
+- Cons: Doesn't fix accessibility violations, incomplete solution
+- Constraint check: Visual changes may affect POM tests
+- Implementation: Standardize styling classes only
+
+**Option D: Gradual Fix (Semantic First, Then Styling)**
+- Impact: Addresses critical issues first, then improves design
+- Pros: Fixes accessibility immediately, allows testing between phases
+- Cons: Requires two implementation phases
+- Constraint check: Lower risk, can validate each phase
+- Implementation: Phase 1: semantic structure, Phase 2: styling consistency
+
+**Decision**: Option A - Full Semantic and Styling Standardization
+
+**Implementation**: 
+- Fix semantic structure: Pre-titles use `<p>`, main titles use `<h2>`
+- Standardize styling: Pre-titles use `text-base font-semibold leading-7 text-accent`, titles use `text-3xl font-bold tracking-tight text-primary sm:text-4xl`
+- Apply standard pattern to Features, Pricing, Testimonials, and FAQ components
+- Maintain visual hierarchy while improving accessibility compliance
+
+**Rationale**: The semantic violations are accessibility compliance failures that could affect the site's usability for screen reader users and SEO rankings. The styling inconsistencies undermine the professional appearance needed for PE decision-makers. A comprehensive fix addresses both issues while creating a maintainable design system standard for future components.

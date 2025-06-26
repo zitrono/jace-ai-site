@@ -60,13 +60,13 @@ const {
 // Determine actual disabled state
 const isDisabled = disabled || state === 'disabled' || loading;
 
-// Size classes using design tokens - Height normalization for alignment
+// Size classes using design tokens - Height normalization for alignment with responsive support
 const sizeClasses = {
   xs: 'h-8 px-xs text-xs leading-none', // 32px height - minimal buttons
-  sm: 'h-9 px-sm text-sm leading-none', // 36px height - compact buttons  
-  md: 'h-11 px-base text-base font-medium leading-none', // 44px height - standard touch target
-  lg: 'h-12 px-lg text-lg font-medium leading-none', // 48px height - prominent buttons
-  xl: 'h-14 px-xl text-xl font-medium leading-none', // 56px height - hero buttons
+  sm: 'h-9 px-sm text-sm leading-none md:h-9 md:px-sm md:text-sm', // 36px height - compact buttons  
+  md: 'h-9 px-sm text-sm leading-none md:h-10 md:px-base md:text-base font-medium', // Responsive: 36px mobile, 40px desktop
+  lg: 'h-10 px-base text-base leading-none md:h-12 md:px-lg md:text-lg font-medium', // Responsive: 40px mobile, 48px desktop
+  xl: 'h-12 px-lg text-lg leading-none md:h-14 md:px-xl md:text-xl font-medium', // Responsive: 48px mobile, 56px desktop
 };
 
 // Variant classes using design tokens
@@ -74,7 +74,7 @@ const variantClasses = {
   primary:
     'bg-accent text-accent-text hover:bg-accent/90 focus:ring-accent/50 border-transparent',
   secondary:
-    'bg-secondary text-white hover:bg-secondary/80 focus:ring-secondary/50 border-secondary',
+    'bg-neutral-800 text-white hover:bg-neutral-700 focus:ring-neutral-700/50 border-transparent',
   outline:
     'bg-transparent text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
   ghost:

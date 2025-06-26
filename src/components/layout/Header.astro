@@ -1,6 +1,10 @@
 ---
 /**
- * Header - Main site header with navigation and CTA buttons
+ * Header - Main site header with systematic alignment enforcement
+ * 
+ * Uses HeaderLayout and HeaderButton components to prevent misalignment.
+ * Follows design token contract system for consistent sizing.
+ * 
  * @example
  * <Header 
  *   logoText="ralph"
@@ -11,9 +15,11 @@
  * />
  */
 
-import Button from '../primitives/Button.astro';
+import HeaderLayout from './HeaderLayout.astro';
+import HeaderButton from './HeaderButton.astro';
 import MobileMenu from './MobileMenu.astro';
 import type { BaseComponentProps } from '@/types/components';
+import { getButtonAction } from '@/config/site-config';
 
 export interface Props extends BaseComponentProps {
   /** Whether the header should stick to the top when scrolling */
@@ -58,148 +64,102 @@ const {
   ...rest
 } = Astro.props;
 
-const headerClasses = [
-  // Position
-  sticky ? 'sticky top-0' : 'relative',
-  // Layout and z-index
-  'z-20 inset-x-0',
-  // Backdrop blur for floating effect
-  'backdrop-blur-sm',
-  // Transitions
-  'transition-all duration-300',
-  // Top spacing
-  'mt-4',
-  className,
-]
-  .filter(Boolean)
-  .join(' ');
 ---
 
-<header class={headerClasses} {...rest}>
-  {/* Skip link for accessibility */}
-  <a
-    href="#main-content"
-    class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:rounded-base focus:bg-primary-yellow focus:px-component-base focus:py-component-sm focus:text-text-inverted focus:no-underline focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-  >
-    Skip to main content
-  </a>
+<HeaderLayout sticky={sticky} headerClass={className} {...rest}>
+  {/* Logo */}
+  {
+    showLogo && (
+      <a
+        slot="logo"
+        href={logoHref}
+        class="inline-flex items-center rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+      >
+        <span class="sr-only">{logoText}</span>
+        <span class="text-text-primary font-bold text-xl sm:text-2xl lg:text-3xl">{logoText}</span>
+      </a>
+    )
+  }
 
-  <nav
-    id="navigation"
-    class="w-full transition-all bg-background/50 backdrop-blur-sm"
-    role="navigation"
-    aria-label="Main navigation"
-  >
-    <div
-      class="mx-auto flex items-center justify-between w-full max-w-7xl px-6 py-4 lg:px-8 transition-all"
-    >
-      {/* Logo */}
-      {
-        showLogo && (
-          <div class="flex lg:flex-1">
-            <a
-              href={logoHref}
-              class="inline-flex items-center rounded-base focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-            >
-              <span class="sr-only">{logoText}</span>
-              <span class="text-text-primary font-bold text-2xl">{logoText}</span>
-            </a>
-          </div>
-        )
-      }
-
-      {/* Mobile CTA Button */}
-      {
-        showCta && (
-          <div class="flex lg:hidden flex-1 justify-end mr-3">
-            <Button
-              variant="primary"
-              size="sm"
-              class="min-h-[44px] min-w-[44px] touch-manipulation"
-            >
-              <span class="hidden min-[360px]:inline">{ctaText}</span>
-              <span class="inline min-[360px]:hidden">Book Demo</span>
-            </Button>
-          </div>
-        )
-      }
-
-      {/* Mobile Menu Button */}
-      <div class="flex lg:hidden">
-        <button
-          id="mobile-menu-button"
-          type="button"
-          class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-          onclick="openMobileMenu()"
-          aria-label="Open main menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-          aria-haspopup="true"
+  {/* Mobile Elements - Container-based slot */}
+  <div slot="mobile" class="flex lg:hidden items-center gap-x-3">
+    {
+      showCta && (
+        <HeaderButton
+          variant="primary"
+          {...getButtonAction('bookDemo')}
+          class="touch-manipulation"
         >
-          <svg
-            class="size-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-          </svg>
-        </button>
-      </div>
+          {ctaText}
+        </HeaderButton>
+      )
+    }
+    
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="inline-flex items-center justify-center rounded-base p-3 text-text-primary min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
+      onclick="openMobileMenu()"
+      aria-label="Open main menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-haspopup="true"
+    >
+      <svg
+        class="size-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+      </svg>
+    </button>
+  </div>
 
-      {/* Desktop Navigation and CTA Buttons - Grouped together on the right */}
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8">
-        {/* Navigation Links */}
-        <nav class="flex gap-x-4" role="navigation" aria-label="Main navigation">
-          {
-            navLinks.map((link) => (
-              <Button
-                variant="nav"
-                size="md"
-                href={link.href}
-                class="nav-link font-medium"
-                {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-              >
-                {link.text}
-              </Button>
-            ))
-          }
-        </nav>
-
-        {/* CTA Buttons */}
-        {
-          showCta && (
-            <div class="flex gap-x-4">
-              <Button
-                variant="secondary"
-                id="login-button"
-                data-test="secondary-button"
-                class="focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-700"
-                onclick="openLoginModal()"
-              >
-                {loginText}
-              </Button>
-              <Button
-                variant="primary"
-                size="lg"
-                data-test="cta-button"
-                class="focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 focus:ring-offset-neutral-700"
-                href="/ralph-web/#"
-              >
-                {ctaText}
-              </Button>
-            </div>
-          )
-        }
-      </div>
-    </div>
+  {/* Desktop Navigation Links - Container-based slot */}
+  <nav slot="navigation" class="flex gap-x-4" role="navigation" aria-label="Main navigation">
+    {
+      navLinks.map((link) => (
+        <HeaderButton
+          variant="nav"
+          href={link.href}
+          class="nav-link"
+          {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+        >
+          {link.text}
+        </HeaderButton>
+      ))
+    }
   </nav>
-</header>
+
+  {/* Desktop CTA Buttons - Container-based slot */}
+  {
+    showCta && (
+      <div slot="actions" class="flex gap-x-4">
+        <HeaderButton
+          variant="secondary"
+          id="login-button"
+          data-test="secondary-button"
+          {...getButtonAction('login')}
+        >
+          {loginText}
+        </HeaderButton>
+        <HeaderButton
+          variant="primary"
+          data-test="cta-button"
+          {...getButtonAction('bookDemo')}
+        >
+          {ctaText}
+        </HeaderButton>
+      </div>
+    )
+  }
+</HeaderLayout>
 
 <!-- Mobile Menu Component - Outside header to prevent positioning conflicts -->
 <MobileMenu 

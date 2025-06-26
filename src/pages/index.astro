@@ -5,32 +5,25 @@ import Hero from '../components/features/Hero.astro';
 import Features from '../components/features/Features.astro';
 import Pricing from '../components/features/Pricing.astro';
 import TestimonialsNew from '../components/features/TestimonialsNew.astro';
-import CTA from '../components/features/CTA.astro';
 import FAQ from '../components/features/FAQ.astro';
 import Section from '../components/layout/Section.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieConsent from '../components/utils/CookieConsent.astro';
 import LoginModal from '../components/utils/LoginModal.astro';
+import { siteConfig } from '@/config/site-config';
 ---
 
 <Layout title="Ralph | AI-Native Private Equity Platform">
   <div class="min-h-screen">
     <Header />
     <main id="main" role="main" tabindex="-1">
-      <!-- Hero Section -->
-      <Section 
-        aria-labelledby="hero-title" 
-        spacing="xs" 
-        background="primary" 
-        as="section"
-      >
-        <Hero
-          title="See Tomorrow's Opportunities Today"
-          subtitle="AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead."
-          ctaText="Book a Demo"
-          ctaHref="/ralph-web/#"
-        />
-      </Section>
+      <!-- Hero Section - Self-managed section -->
+      <Hero
+        title="See Tomorrow's Opportunities Today"
+        subtitle="AI agents transform your unstructured portfolio data into predictive intelligence, revealing opportunities weeks ahead."
+        ctaText="Book a Demo"
+        ctaHref={siteConfig.demo.url}
+      />
 
       <!-- Social Proof Section - The AI Adoption Paradox -->
       <Section 
@@ -48,26 +41,26 @@ import LoginModal from '../components/utils/LoginModal.astro';
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
               <div class="text-center">
-                <div class="text-4xl font-bold text-yellow-400 mb-2">82%</div>
-                <div class="text-gray-300">of PE firms have adopted AI</div>
+                <div class="text-4xl font-bold text-yellow-400 mb-2">€8.2T</div>
+                <div class="text-gray-300">global PE market</div>
               </div>
               <div class="text-center">
-                <div class="text-4xl font-bold text-yellow-400 mb-2">5%</div>
-                <div class="text-gray-300">have scaled successfully</div>
+                <div class="text-4xl font-bold text-yellow-400 mb-2">20-30%</div>
+                <div class="text-gray-300">of deal flow analyzed today</div>
               </div>
               <div class="text-center">
-                <div class="text-4xl font-bold text-yellow-400 mb-2">80%</div>
-                <div class="text-gray-300">of portfolio data remains untapped</div>
+                <div class="text-4xl font-bold text-yellow-400 mb-2">30-45</div>
+                <div class="text-gray-300">days faster with AI</div>
               </div>
               <div class="text-center">
                 <div class="text-4xl font-bold text-white mb-2">Ralph</div>
                 <div class="text-gray-300">bridges this gap</div>
               </div>
             </div>
-            <p class="mt-8 text-lg text-gray-400">
-              Private beta launching Q1 2025 • Enterprise-ready infrastructure
+            <p class="mt-8 text-sm text-gray-500">
+              Sources: McKinsey Global Private Markets Review 2024, Deloitte PE AI Adoption Study
             </p>
-            <p class="mt-2 text-sm text-gray-500">Sources: Deloitte, BCG, Industry Reports</p>
+            <p class="mt-2 text-lg text-gray-400">Private beta launching Q3 2025 • Enterprise-ready infrastructure</p>
           </div>
       </Section>
 
@@ -166,13 +159,6 @@ import LoginModal from '../components/utils/LoginModal.astro';
           </div>
       </Section>
 
-      <!-- CEO Testimonials Section -->
-      <TestimonialsNew 
-        title="Leading PE Firms Are Embracing AI Transformation"
-        subtitle="Industry Leaders on AI Adoption"
-        columns={3}
-      />
-
       <!-- Features/Product Section -->
       <section id="product" aria-labelledby="features-title">
         <Features />
@@ -183,10 +169,12 @@ import LoginModal from '../components/utils/LoginModal.astro';
         <Pricing />
       </section>
 
-      <!-- Call to Action Section -->
-      <section aria-labelledby="cta-title">
-        <CTA />
-      </section>
+      <!-- CEO Testimonials Section -->
+      <TestimonialsNew 
+        title="Leading PE Firms Are Embracing AI Transformation"
+        subtitle="Industry Leaders on AI Adoption"
+        columns={3}
+      />
 
       <!-- FAQ Section -->
       <section aria-labelledby="faq-title">

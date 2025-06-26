@@ -5,6 +5,7 @@ import Section from '../../components/layout/Section.astro';
 import Footer from '../../components/layout/Footer.astro';
 import Button from '../../components/primitives/Button.astro';
 import Newsletter from '../../components/features/Newsletter.astro';
+import { siteConfig } from '@/config/site-config';
 ---
 
 <Layout title="Finding Hidden Risks in 30 Minutes with AI Agents | Ralph">
@@ -503,7 +504,7 @@ import Newsletter from '../../components/features/Newsletter.astro';
             Our AI agents work while you sleep, analyzing millions of data points across your entire
             portfolio. Get alerts before risks become crises.
           </p>
-          <Button variant="primary" size="lg" href="/ralph-web/#">Book a Demo →</Button>
+          <Button variant="primary" size="md" href={siteConfig.demo.url}>Book a Demo →</Button>
           <p class="text-gray-400 mt-4">See your portfolio's hidden risks in real-time.</p>
         </div>
       </Section>

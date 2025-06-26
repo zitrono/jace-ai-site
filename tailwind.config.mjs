@@ -22,15 +22,29 @@ export default {
 
         // Semantic color mapping
         background: designSystem.colors.neutral[700],
-        secondary: designSystem.colors.neutral[600],
         accent: designSystem.colors.primary.yellow,
         'accent-text': designSystem.colors.text.inverted,
-        'text-primary': designSystem.colors.text.primary,
-        'text-secondary': designSystem.colors.text.secondary,
-        'text-muted': designSystem.colors.text.muted,
 
         // Backward compatibility with existing POM references
         'primary-yellow': designSystem.colors.primary.yellow,
+      },
+      
+      textColor: {
+        // Text colors need to be in textColor to generate text-* utilities
+        primary: designSystem.colors.text.primary,
+        secondary: designSystem.colors.text.secondary,
+        muted: designSystem.colors.text.muted,
+        // Also keep the prefixed versions for clarity
+        'text-primary': designSystem.colors.text.primary,
+        'text-secondary': designSystem.colors.text.secondary,
+        'text-muted': designSystem.colors.text.muted,
+      },
+      
+      backgroundColor: {
+        // Background colors for bg-* utilities
+        primary: designSystem.colors.neutral[700],
+        secondary: designSystem.colors.neutral[600],
+        card: designSystem.colors.neutral[500],
       },
 
       fontFamily: {
@@ -85,6 +99,11 @@ export default {
         // Mobile Typography
         'hero-title-mobile': ['2.25rem', { lineHeight: '1.2', fontWeight: '600' }],
         'subtitle-mobile': ['1.125rem', { lineHeight: '1.6' }],
+        
+        // Heading styles from global CSS
+        'heading-2': ['1rem', { lineHeight: '1.75', fontWeight: '600' }],
+        'heading-3': ['1.25rem', { lineHeight: '1.5', fontWeight: '600' }],
+        'heading-3-lg': ['1.5rem', { lineHeight: '1.5', fontWeight: '600' }],
       },
 
       spacing: {

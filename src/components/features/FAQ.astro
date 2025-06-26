@@ -194,7 +194,7 @@ const _componentId = 'faq-component';
               </dt>
               <dd 
                 id={`faq-answer-${index}`}
-                class="mt-2 pr-12 text-base text-secondary leading-6 overflow-hidden transition-all duration-300"
+                class="mt-2 pr-12 text-base text-secondary leading-6 overflow-hidden transition-all duration-300 opacity-0"
                 style="max-height: 0;"
                 data-faq-answer
                 aria-hidden="true"
@@ -210,20 +210,6 @@ const _componentId = 'faq-component';
     </div>
 </Section>
 
-<style>
-  /* Ensure smooth height transitions */
-  [data-faq-answer] {
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-  }
-  
-  [data-faq-answer][aria-hidden="false"] {
-    opacity: 1;
-  }
-  
-  [data-faq-answer][aria-hidden="true"] {
-    opacity: 0;
-  }
-</style>
 
 <script>
   // Client-side accordion functionality
@@ -243,6 +229,7 @@ const _componentId = 'faq-component';
             // Collapse
             answer.style.maxHeight = '0';
             answer.setAttribute('aria-hidden', 'true');
+            answer.classList.add('opacity-0');
             button.setAttribute('aria-expanded', 'false');
             plusIcon.classList.remove('opacity-0');
             minusIcon.classList.add('opacity-0');
@@ -250,6 +237,7 @@ const _componentId = 'faq-component';
             // Expand
             answer.style.maxHeight = answer.scrollHeight + 'px';
             answer.setAttribute('aria-hidden', 'false');
+            answer.classList.remove('opacity-0');
             button.setAttribute('aria-expanded', 'true');
             plusIcon.classList.add('opacity-0');
             minusIcon.classList.remove('opacity-0');

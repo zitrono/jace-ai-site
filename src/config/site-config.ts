@@ -40,7 +40,7 @@ export const siteConfig = {
   demo: {
     url: '/ralph-web/book-demo',
     text: 'Book a Demo',
-    duration: '45 minutes',
+    duration: '30 minutes',
     calendarUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ06HT0qrMIwj3pjMxbe1pOfWf5Vd-L0vnogrpNejuh35QzvZP1Ndas6oENqjlbfQIL822endVG7?gv=true',
   },
   

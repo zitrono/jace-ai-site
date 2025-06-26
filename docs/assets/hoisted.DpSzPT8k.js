@@ -1,1 +1,0 @@
-import"./hoisted.CLmrAjI9.js";import"../chunks/utils.7AiHOJ0C.js";import"../chunks/components.vMVA28IT.js";import"../chunks/features.Dt1ghNkn.js";window.location.href="/ralph-web/#product";

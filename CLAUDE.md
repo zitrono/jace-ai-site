@@ -43,11 +43,12 @@ src/components/
 
 ### Development
 ```bash
-# Start dev server (port 4321 required for POM tests)
-curl -s http://localhost:4321/ralph-web/ > /dev/null || (lsof -ti:4321 | xargs kill -9 2>/dev/null; npm run dev)
+# Start dev server (checks if running, kills any process on 4321, then starts)
+curl -s http://localhost:4321/ralph-web/ >/dev/null 2>&1 || (lsof -ti:4321 | xargs kill -9 2>/dev/null; npm run dev)
 
-cd tests && node unified-test.js ralph # Test POM compliance  
+# Testing & validation
 npm run validate                      # Type-check + lint + format
+cd tests && node unified-test.js ralph # Test POM compliance (requires dev server running)
 npm run build                         # Production build
 ```
 

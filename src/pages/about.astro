@@ -1,114 +1,175 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/layout/Header.astro';
-import Footer from '../components/layout/Footer.astro';
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/layout/Section.astro';
+import Button from '@/components/primitives/Button.astro';
+import { siteConfig } from '@/config/site-config';
 ---
 
-<Layout title="About | Ralph - AI-Native Private Equity Platform">
-  <div class="min-h-screen">
-    <Header />
-    <main>
-      <!-- Hero Section -->
-      <section class="relative pt-24 pb-12 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl text-center">
-            <h1 class="text-5xl font-bold tracking-tight text-white sm:text-6xl">About Ralph</h1>
-            <p class="mt-6 text-xl text-gray-300">
-              Ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot
-              opportunities and risks weeks before others, making better decisions inevitable.
-            </p>
-          </div>
-        </div>
-      </section>
+<Layout title="About | Ralph by Beneficious">
+  <main>
+    <!-- Hero Section -->
+    <Section background="primary" spacing="xl">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-3xl md:text-4xl font-semibold text-primary mb-4">
+          About Ralph
+        </h1>
+        <p class="text-lg text-secondary max-w-3xl mx-auto">
+          Ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot opportunities and risks weeks before others, making better decisions inevitable.
+        </p>
+      </div>
+    </Section>
 
-      <!-- Founder Section -->
-      <section class="py-20 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-white mb-8">Our Founder</h2>
-            <div class="bg-gray-800 rounded-lg p-8">
-              <h3 class="text-2xl font-semibold text-white mb-4">Konstantin Andreyev</h3>
-              <p class="text-gray-300 leading-relaxed">
-                Entrepreneur and AI investor focused on making AI genuinely useful for
-                professionals. Ralph represents years of research into how AI can augment human
-                decision-making in high-stakes environments.
+    <!-- Founder Section -->
+    <Section background="secondary" spacing="lg">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-12 items-start">
+          <!-- Founder Profile -->
+          <div class="lg:col-span-2">
+            <h2 class="text-2xl font-semibold text-primary mb-6">Founder</h2>
+            <div class="bg-card rounded-lg p-8 border border-neutral-700">
+              <h3 class="text-xl font-medium text-primary mb-3">Konstantin Andreyev</h3>
+              <p class="text-secondary leading-relaxed mb-6">
+                Entrepreneur and AI investor focused on making AI genuinely useful for professionals. Ralph represents years of research into how AI can augment human decision-making in high-stakes environments.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Building the Team Section -->
-      <section class="py-20 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-white mb-8">Building the Team</h2>
-            <p class="text-gray-300 mb-8">
-              We're assembling a world-class team to revolutionize private equity. Current openings:
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="bg-gray-800 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-white mb-2">VP of Sales</h3>
-                <p class="text-gray-400">B2B enterprise SaaS</p>
-              </div>
-              <div class="bg-gray-800 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-white mb-2">Head of Customer Success</h3>
-                <p class="text-gray-400">Enterprise client management</p>
-              </div>
-              <div class="bg-gray-800 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-white mb-2">Lead AI Engineer</h3>
-                <p class="text-gray-400">Multi-agent systems</p>
-              </div>
-              <div class="bg-gray-800 rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-white mb-2">VP of Product</h3>
-                <p class="text-gray-400">Enterprise SaaS experience</p>
+              <div class="space-y-3">
+                <div class="flex items-center text-sm text-muted">
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                  </svg>
+                  Berlin, Germany
+                </div>
+                <div class="flex items-center text-sm">
+                  <svg class="w-4 h-4 mr-2 text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002-2h12a2 2 0 002-2V8.118z"/>
+                  </svg>
+                  <a href="mailto:konstantin@beneficious.com" class="text-primary hover:text-accent transition-colors">
+                    konstantin@beneficious.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- Advisors & Partners Section -->
-      <section class="py-20 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-white mb-8">Advisors & Partners</h2>
-            <p class="text-gray-300 mb-8">
-              We're building relationships with leading PE firms and industry experts. Announcements
-              coming soon.
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {
-                [1, 2, 3, 4].map(() => (
-                  <div class="bg-gray-800 rounded-lg p-8 flex items-center justify-center">
-                    <span class="text-4xl text-gray-600">?</span>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact Section -->
-      <section class="py-20 bg-primary">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl font-bold text-white mb-8">Contact</h2>
-            <p class="text-gray-300 mb-4">
-              <strong>Location:</strong> Berlin, Germany
-            </p>
-            <p class="text-gray-300">
-              <strong>Email:</strong>
-              <a
-                href="mailto:Konstantin@beneficious.com"
-                class="text-yellow-400 hover:text-yellow-300">Konstantin@beneficious.com</a
+          <!-- Contact Card -->
+          <div class="space-y-6">
+            <div class="bg-card rounded-lg p-6 border border-neutral-700">
+              <h3 class="text-lg font-medium text-primary mb-4">Get in Touch</h3>
+              <p class="text-secondary text-sm mb-4">
+                Interested in learning more about Ralph or discussing your portfolio intelligence needs?
+              </p>
+              <Button 
+                variant="primary" 
+                size="sm" 
+                href="mailto:konstantin@beneficious.com"
+                class="w-full"
               >
-            </p>
+                Contact Konstantin
+              </Button>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
-    <Footer />
-  </div>
+      </div>
+    </Section>
+
+    <!-- Team Building Section -->
+    <Section background="primary" spacing="lg">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-semibold text-primary mb-6 text-center">Building the Team</h2>
+        <p class="text-secondary text-center mb-8 max-w-2xl mx-auto">
+          We're assembling a world-class team to revolutionize private equity. Current openings:
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-card rounded-lg p-6 border border-neutral-700">
+            <h3 class="text-lg font-medium text-primary mb-2">VP of Sales</h3>
+            <p class="text-secondary text-sm">B2B enterprise SaaS</p>
+          </div>
+          <div class="bg-card rounded-lg p-6 border border-neutral-700">
+            <h3 class="text-lg font-medium text-primary mb-2">Head of Customer Success</h3>
+            <p class="text-secondary text-sm">Enterprise client relationships</p>
+          </div>
+          <div class="bg-card rounded-lg p-6 border border-neutral-700">
+            <h3 class="text-lg font-medium text-primary mb-2">Lead AI Engineer</h3>
+            <p class="text-secondary text-sm">Machine learning & AI systems</p>
+          </div>
+          <div class="bg-card rounded-lg p-6 border border-neutral-700">
+            <h3 class="text-lg font-medium text-primary mb-2">VP of Product</h3>
+            <p class="text-secondary text-sm">Product strategy & roadmap</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <Button 
+            variant="secondary" 
+            size="md" 
+            href="mailto:konstantin@beneficious.com?subject=Career Opportunities"
+          >
+            Explore Opportunities
+          </Button>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Advisors & Partners Section -->
+    <Section background="secondary" spacing="lg">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold text-primary mb-6">Advisors & Partners</h2>
+        <p class="text-secondary mb-8 max-w-2xl mx-auto">
+          We're building relationships with leading PE firms and industry experts. Announcements coming soon.
+        </p>
+        
+        <!-- Placeholder for future advisors -->
+        <div class="grid md:grid-cols-3 gap-6">
+          {[1, 2, 3].map(() => (
+            <div class="bg-card rounded-lg p-8 border border-neutral-700 border-dashed">
+              <div class="w-16 h-16 bg-neutral-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-8 h-8 text-muted" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-medium text-muted mb-2">Coming Soon</h3>
+              <p class="text-secondary text-sm">Industry Expert</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+
+    <!-- Mission Statement -->
+    <Section background="primary" spacing="lg">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold text-primary mb-6">Our Mission</h2>
+        <blockquote class="text-lg text-secondary italic border-l-4 border-accent pl-6 py-4">
+          "To give private equity firms supernatural foresight through AI that works tirelessly to identify opportunities and risks before they become obvious to the market."
+        </blockquote>
+        <div class="mt-8">
+          <Button 
+            variant="primary" 
+            size="lg" 
+            href={siteConfig.demo.url}
+          >
+            See Ralph in Action
+          </Button>
+        </div>
+      </div>
+    </Section>
+  </main>
 </Layout>
+
+<style>
+  /* Professional about page styling */
+  blockquote {
+    @apply bg-card/30 rounded-lg;
+  }
+  
+  /* Contact info emphasis */
+  a[href^="mailto:"] {
+    @apply font-medium;
+  }
+  
+  /* Placeholder styling */
+  .border-dashed {
+    @apply opacity-60;
+  }
+</style>

@@ -173,37 +173,6 @@ const headerClasses = [
 </style>
 
 <script>
-  // Header scroll behavior for mobile glassmorphic effect
-  (function() {
-    const header = document.querySelector('header');
-    if (!header) return;
-    
-    let scrollY = 0;
-    let ticking = false;
-    const scrollThreshold = 80; // Trigger after 80px scroll
-    
-    function updateHeader() {
-      if (scrollY > scrollThreshold) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      ticking = false;
-    }
-    
-    function onScroll() {
-      scrollY = window.scrollY;
-      
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeader);
-        ticking = true;
-      }
-    }
-    
-    // Initial check
-    onScroll();
-    
-    // Add scroll listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
+  import '@/utils/header-scroll-manager';
+  // Initialize header scroll manager (it auto-initializes on import)
 </script>

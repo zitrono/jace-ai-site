@@ -1,18 +1,32 @@
 ---
+import type { BaseComponentProps } from '@/types/components';
+import type { HTMLAttributes } from 'astro/types';
+
 /**
  * Logo - Displays the ralph logo with emphasized LP (Limited Partner)
  * 
  * @example
- * <Logo class="text-2xl" />
+ * <Logo variant="default" />
+ * <Logo variant="mobile" />
  */
 
-export interface Props {
-  class?: string;
+export interface Props extends BaseComponentProps, Omit<HTMLAttributes<'img'>, keyof BaseComponentProps> {
+  variant?: 'default' | 'mobile';
 }
 
-const { class: className = '' } = Astro.props;
+const { variant = 'default', class: className = '', ...rest } = Astro.props;
+
+// Use larger sizes to match reference site
+const sizeClasses = {
+  default: 'h-10 md:h-12 lg:h-14', // 40px, 48px, 56px - much larger
+  mobile: 'h-10' // 40px fixed
+};
 ---
 
-<span class={className} style="font-weight: normal;">
-  ra<span style="text-decoration: underline; text-decoration-color: #FFDC61; text-decoration-thickness: 3px; text-underline-offset: 4px; font-weight: normal;">lp</span>h
-</span>
+<img 
+  src="/ralph-web/src/assets/logos/ralph-logo.svg"
+  alt="ralph"
+  class={`w-auto ${sizeClasses[variant]} ${className}`}
+  loading="eager"
+  {...rest}
+/>

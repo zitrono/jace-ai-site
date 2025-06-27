@@ -1,21 +1,4 @@
 ---
-// Redirect to homepage #product section
-import Layout from '../layouts/Layout.astro';
+// Server-side redirect to homepage #product section
+return Astro.redirect('/ralph-web/#product', 301);
 ---
-
-<Layout title="Product | Ralph - AI-Native Private Equity Platform">
-  <div class="min-h-screen bg-primary flex items-center justify-center">
-    <div class="text-center">
-      <h1 class="text-2xl font-bold text-white mb-4">Redirecting...</h1>
-      <p class="text-gray-300 mb-4">You are being redirected to our product section.</p>
-      <a href="/ralph-web/#product" class="text-yellow-400 hover:text-yellow-300 underline">
-        Click here if you are not redirected automatically.
-      </a>
-    </div>
-  </div>
-</Layout>
-
-<script>
-  // Client-side redirect to homepage with product anchor
-  window.location.href = '/ralph-web/#product';
-</script>

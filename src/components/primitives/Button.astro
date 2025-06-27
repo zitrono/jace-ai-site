@@ -6,6 +6,11 @@ import type {
   SizeVariant,
   ButtonState,
 } from '../../types/components';
+import { 
+  getHeaderButtonClasses,
+  isValidHeaderVariant,
+  type HeaderButtonVariant 
+} from '@/types/design-tokens';
 
 interface Props extends BaseComponentProps, InteractiveComponentProps {
   /** Button variant style */
@@ -32,6 +37,11 @@ interface Props extends BaseComponentProps, InteractiveComponentProps {
   icon?: string;
   /** Right icon slot name */
   rightIcon?: string;
+  /** Force header-specific styling with design token contract */
+  useHeaderContract?: boolean;
+  /** External link properties */
+  target?: string;
+  rel?: string;
 }
 
 const {
@@ -49,6 +59,9 @@ const {
   fullWidth = false,
   icon,
   rightIcon,
+  useHeaderContract = false,
+  target,
+  rel,
   tabIndex,
   ariaLabel,
   ariaDescribedBy,
@@ -91,36 +104,71 @@ const stateClasses = {
   disabled: 'opacity-50 cursor-not-allowed',
 };
 
-// Combine all classes
-const classes = [
-  // Base button styles
-  'inline-flex items-center justify-center',
-  'font-medium rounded-md border',
-  'transition-all duration-200',
-  'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-700',
-  'disabled:opacity-50 disabled:cursor-not-allowed',
-  'active:scale-[0.99]',
-  'cursor-pointer',
-  // Size classes
-  sizeClasses[size],
-  // Variant classes
-  variantClasses[variant],
-  // State classes
-  stateClasses[state],
-  // Full width
-  fullWidth && 'w-full',
-  // Loading state
-  loading && 'cursor-wait',
-  // POM compatibility classes
-  variant === 'primary' && 'btn-primary',
-  variant === 'secondary' && 'btn-secondary',
-  size === 'sm' && 'btn-sm',
-  size === 'lg' && 'btn-lg',
-  // Custom classes
-  className,
-]
-  .filter(Boolean)
-  .join(' ');
+// Generate classes based on whether we're using header contract
+let classes: string;
+
+if (useHeaderContract && isValidHeaderVariant(variant)) {
+  // Use design token contract for header buttons
+  const designClasses = getHeaderButtonClasses(variant as HeaderButtonVariant);
+  classes = [
+    // Base button styles
+    'inline-flex items-center justify-center',
+    'font-medium rounded-md border',
+    'transition-all duration-200',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-700',
+    'disabled:opacity-50 disabled:cursor-not-allowed',
+    'cursor-pointer',
+    'whitespace-nowrap',
+    // Design token classes
+    designClasses,
+    // Variant classes
+    variantClasses[variant],
+    // State classes
+    stateClasses[state],
+    // Full width
+    fullWidth && 'w-full',
+    // Loading state
+    loading && 'cursor-wait',
+    // POM compatibility classes
+    variant === 'primary' && 'btn-primary',
+    variant === 'secondary' && 'btn-secondary',
+    // Custom classes
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+} else {
+  // Standard button classes
+  classes = [
+    // Base button styles
+    'inline-flex items-center justify-center',
+    'font-medium rounded-md border',
+    'transition-all duration-200',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-700',
+    'disabled:opacity-50 disabled:cursor-not-allowed',
+    'active:scale-[0.99]',
+    'cursor-pointer',
+    // Size classes
+    sizeClasses[size],
+    // Variant classes
+    variantClasses[variant],
+    // State classes
+    stateClasses[state],
+    // Full width
+    fullWidth && 'w-full',
+    // Loading state
+    loading && 'cursor-wait',
+    // POM compatibility classes
+    variant === 'primary' && 'btn-primary',
+    variant === 'secondary' && 'btn-secondary',
+    size === 'sm' && 'btn-sm',
+    size === 'lg' && 'btn-lg',
+    // Custom classes
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+}
 
 // Data attributes
 const dataAttributes = data
@@ -153,6 +201,8 @@ const ariaAttributes = {
       tabindex={tabIndex}
       {...ariaAttributes}
       {...dataAttributes}
+      {...(target && { target })}
+      {...(rel && { rel })}
       {...rest}
     >
       {icon && (

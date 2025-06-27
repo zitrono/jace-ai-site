@@ -43,8 +43,9 @@ src/components/
 
 ### Development
 ```bash
-# Start dev server (checks if running, kills any process on 4321, then starts in background)
-curl -s http://localhost:4321/ralph-web/ >/dev/null 2>&1 || (lsof -ti:4321 | xargs kill -9 2>/dev/null; npm run dev &)
+# Start dev server (checks port with nc, gracefully handles existing processes)
+nc -z localhost 4321 2>/dev/null || (lsof -ti:4321 2>/dev/null | xargs kill -9 2>/dev/null; npm run dev > /dev/null 2>&1 &)
+# Alternative: ./scripts/dev-server-manager.sh start
 
 # Testing & validation
 npm run validate                      # Type-check + lint + format

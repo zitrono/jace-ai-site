@@ -54,7 +54,6 @@ const {
   <!-- Backdrop - Semi-transparent overlay -->
   <div 
     class="fixed inset-0 bg-black bg-opacity-50"
-    onclick="closeMobileMenu()"
     aria-label="Close menu"
     data-backdrop
   ></div>
@@ -69,15 +68,15 @@ const {
       <!-- Header with logo and close button -->
       <div class="flex items-center justify-between">
         <a href="/ralph-web/" class="block sm:hidden">
-          <Logo class="text-[1.375rem] text-white" />
+          <Logo variant="mobile" />
         </a>
         <!-- Empty spacer div to keep close button on right when logo is hidden -->
         <div class="hidden sm:block"></div>
         <button
           type="button"
           class="-m-2.5 rounded-md p-2.5 text-white ml-auto"
-          onclick="closeMobileMenu()"
           aria-label="Close menu"
+          data-close-button
         >
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -129,61 +128,19 @@ const {
 </div>
 
 <script>
-  // Global functions for mobile menu (matches Jace implementation)
-  function openMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const menuButton = document.getElementById('mobile-menu-button');
+  import { mobileMenuManager } from '@/utils/mobile-menu-manager';
+  
+  // Expose functions globally for backward compatibility
+  window.openMobileMenu = () => mobileMenuManager.open();
+  window.closeMobileMenu = () => mobileMenuManager.close();
+  
+  // Set up event listeners for close actions
+  document.addEventListener('DOMContentLoaded', () => {
+    const backdrop = document.querySelector('[data-backdrop]');
+    const closeButton = document.querySelector('[data-close-button]');
     
-    if (menu) {
-      // Only open on mobile/tablet viewports
-      if (window.innerWidth < 1024) { // lg breakpoint
-        menu.classList.remove('hidden');
-        // Proper scroll lock - just overflow hidden like Jace
-        document.body.style.overflow = 'hidden';
-        
-        if (menuButton) {
-          menuButton.setAttribute('aria-expanded', 'true');
-        }
-      }
-    }
-  }
-  
-  function closeMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const menuButton = document.getElementById('mobile-menu-button');
-    
-    if (menu) {
-      menu.classList.add('hidden');
-      // Remove scroll lock
-      document.body.style.overflow = '';
-      
-      if (menuButton) {
-        menuButton.setAttribute('aria-expanded', 'false');
-      }
-    }
-  }
-  
-  // Make functions globally available
-  window.openMobileMenu = openMobileMenu;
-  window.closeMobileMenu = closeMobileMenu;
-  
-  // Handle escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const menu = document.getElementById('mobile-menu');
-      if (menu && !menu.classList.contains('hidden')) {
-        closeMobileMenu();
-      }
-    }
+    backdrop?.addEventListener('click', () => mobileMenuManager.close());
+    closeButton?.addEventListener('click', () => mobileMenuManager.close());
   });
-  
-  // iOS viewport height fix
-  function updateViewportHeight() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-  
-  updateViewportHeight();
-  window.addEventListener('resize', updateViewportHeight);
 </script>
 

@@ -146,105 +146,21 @@ import { siteConfig } from '@/config/site-config';
 
   <!-- Client-side JavaScript -->
   <script>
-    // Form elements
-    const loginForm = document.getElementById('loginForm');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const togglePasswordBtn = document.getElementById('togglePassword');
-    const eyeIcon = document.getElementById('eyeIcon');
-    const errorMessage = document.getElementById('errorMessage');
-    const errorText = document.getElementById('errorText');
-    const loginButton = document.getElementById('loginButton');
-    const loginButtonText = document.getElementById('loginButtonText');
-    const loginSpinner = document.getElementById('loginSpinner');
+    import { AuthFormHandler } from '@/scripts/auth-form';
 
-    // Password visibility toggle
-    togglePasswordBtn?.addEventListener('click', () => {
-      const isPassword = passwordInput.type === 'password';
-      passwordInput.type = isPassword ? 'text' : 'password';
-      
-      // Update eye icon
-      eyeIcon.innerHTML = isPassword ? 
-        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>' :
-        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+    // Initialize auth form handler
+    new AuthFormHandler({
+      form: document.getElementById('loginForm') as HTMLFormElement,
+      usernameInput: document.getElementById('username') as HTMLInputElement,
+      passwordInput: document.getElementById('password') as HTMLInputElement,
+      togglePasswordBtn: document.getElementById('togglePassword') as HTMLButtonElement,
+      eyeIcon: document.getElementById('eyeIcon') as unknown as SVGElement,
+      errorMessage: document.getElementById('errorMessage') as HTMLElement,
+      errorText: document.getElementById('errorText') as HTMLElement,
+      loginButton: document.getElementById('loginButton') as HTMLButtonElement,
+      loginButtonText: document.getElementById('loginButtonText') as HTMLElement,
+      loginSpinner: document.getElementById('loginSpinner') as HTMLElement,
+      rememberMeCheckbox: document.getElementById('rememberMe') as HTMLInputElement
     });
-
-    // Hide error message when user starts typing
-    [usernameInput, passwordInput].forEach(input => {
-      input?.addEventListener('input', () => {
-        if (!errorMessage.classList.contains('hidden')) {
-          errorMessage.classList.add('hidden');
-        }
-      });
-    });
-
-    // Form submission handler
-    loginForm?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const username = usernameInput.value.trim();
-      const password = passwordInput.value;
-
-      // Basic client-side validation
-      if (!username || !password) {
-        showError('Please enter both username and password.');
-        return;
-      }
-
-      // Show loading state
-      setLoadingState(true);
-
-      try {
-        // Simulate authentication with delay (1.5-2.5 seconds)
-        const delay = Math.random() * 1000 + 1500;
-        await new Promise(resolve => setTimeout(resolve, delay));
-
-        // Always return authentication error for demo purposes
-        throw new Error('Invalid username or password. Please check your credentials and try again.');
-
-      } catch (error) {
-        showError(error.message);
-      } finally {
-        setLoadingState(false);
-      }
-    });
-
-    // Show error message
-    function showError(message) {
-      errorText.textContent = message;
-      errorMessage.classList.remove('hidden');
-      
-      // Shake animation for the form
-      loginForm.style.animation = 'shake 0.5s';
-      setTimeout(() => {
-        loginForm.style.animation = '';
-      }, 500);
-    }
-
-    // Loading state management
-    function setLoadingState(loading) {
-      loginButton.disabled = loading;
-      
-      if (loading) {
-        loginButtonText.classList.add('invisible');
-        loginSpinner.classList.remove('hidden');
-        loginButton.classList.add('opacity-75', 'cursor-not-allowed');
-      } else {
-        loginButtonText.classList.remove('invisible');
-        loginSpinner.classList.add('hidden');
-        loginButton.classList.remove('opacity-75', 'cursor-not-allowed');
-      }
-    }
-
-    // Add CSS for shake animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-        20%, 40%, 60%, 80% { transform: translateX(2px); }
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 </Layout>

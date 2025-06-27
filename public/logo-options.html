@@ -146,18 +146,127 @@
             color: #FFDC61;
         }
         
-        /* 11. Ultra Bold with Spacing */
-        .ultra-bold-spacing .lp {
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin: 0 4px;
+        /* Base square background style */
+        .square-base .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
         }
         
-        /* 12. Italicized LP */
-        .italicized-lp .lp {
-            font-style: italic;
+        /* 11. Normal Spacing */
+        .normal-spacing {
+            letter-spacing: normal;
+        }
+        .normal-spacing .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 12. Tight Spacing */
+        .tight-spacing {
+            letter-spacing: -0.02em;
+        }
+        .tight-spacing .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 13. Very Tight Spacing */
+        .very-tight-spacing {
+            letter-spacing: -0.04em;
+        }
+        .very-tight-spacing .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 14. Loose Spacing */
+        .loose-spacing {
+            letter-spacing: 0.02em;
+        }
+        .loose-spacing .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 15. Very Loose Spacing */
+        .very-loose-spacing {
+            letter-spacing: 0.04em;
+        }
+        .very-loose-spacing .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 16. Tight with Bold */
+        .tight-bold {
+            letter-spacing: -0.02em;
             font-weight: 800;
-            color: #FFDC61;
+        }
+        .tight-bold .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 800;
+        }
+        
+        /* 17. Loose with Light */
+        .loose-light {
+            letter-spacing: 0.03em;
+            font-weight: 500;
+        }
+        .loose-light .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 500;
+        }
+        
+        /* 18. Monospace Style */
+        .monospace-style {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            letter-spacing: 0.05em;
+        }
+        .monospace-style .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 600;
+        }
+        
+        /* 19. Condensed Style */
+        .condensed-style {
+            font-stretch: condensed;
+            letter-spacing: -0.03em;
+        }
+        .condensed-style .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        
+        /* 20. Wide Style */
+        .wide-style {
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+        .wide-style .lp {
+            background-color: #FFDC61;
+            color: white;
+            padding: 2px 10px;
+            font-weight: 600;
         }
         
         .option-number {
@@ -276,18 +385,74 @@
                 <p class="description">Subtle yellow color only</p>
             </div>
             
-            <!-- Option 11: Ultra Bold with Spacing -->
+            <!-- Option 11: Normal Spacing -->
             <div class="design-option">
                 <span class="option-number">11</span>
-                <div class="logo ultra-bold-spacing">ra<span class="lp">LP</span>h</div>
-                <p class="description">Uppercase with extra spacing</p>
+                <div class="logo normal-spacing">ra<span class="lp">lp</span>h</div>
+                <p class="description">Normal letter spacing</p>
             </div>
             
-            <!-- Option 12: Italicized LP -->
+            <!-- Option 12: Tight Spacing -->
             <div class="design-option">
                 <span class="option-number">12</span>
-                <div class="logo italicized-lp">ra<span class="lp">lp</span>h</div>
-                <p class="description">Italic with yellow accent</p>
+                <div class="logo tight-spacing">ra<span class="lp">lp</span>h</div>
+                <p class="description">Tight letter spacing</p>
+            </div>
+            
+            <!-- Option 13: Very Tight Spacing -->
+            <div class="design-option">
+                <span class="option-number">13</span>
+                <div class="logo very-tight-spacing">ra<span class="lp">lp</span>h</div>
+                <p class="description">Very tight spacing</p>
+            </div>
+            
+            <!-- Option 14: Loose Spacing -->
+            <div class="design-option">
+                <span class="option-number">14</span>
+                <div class="logo loose-spacing">ra<span class="lp">lp</span>h</div>
+                <p class="description">Loose letter spacing</p>
+            </div>
+            
+            <!-- Option 15: Very Loose Spacing -->
+            <div class="design-option">
+                <span class="option-number">15</span>
+                <div class="logo very-loose-spacing">ra<span class="lp">lp</span>h</div>
+                <p class="description">Very loose spacing</p>
+            </div>
+            
+            <!-- Option 16: Tight with Bold -->
+            <div class="design-option">
+                <span class="option-number">16</span>
+                <div class="logo tight-bold">ra<span class="lp">lp</span>h</div>
+                <p class="description">Tight + bold weight</p>
+            </div>
+            
+            <!-- Option 17: Loose with Light -->
+            <div class="design-option">
+                <span class="option-number">17</span>
+                <div class="logo loose-light">ra<span class="lp">lp</span>h</div>
+                <p class="description">Loose + light weight</p>
+            </div>
+            
+            <!-- Option 18: Monospace Style -->
+            <div class="design-option">
+                <span class="option-number">18</span>
+                <div class="logo monospace-style">ra<span class="lp">lp</span>h</div>
+                <p class="description">Monospace font</p>
+            </div>
+            
+            <!-- Option 19: Condensed Style -->
+            <div class="design-option">
+                <span class="option-number">19</span>
+                <div class="logo condensed-style">ra<span class="lp">lp</span>h</div>
+                <p class="description">Condensed style</p>
+            </div>
+            
+            <!-- Option 20: Wide Style -->
+            <div class="design-option">
+                <span class="option-number">20</span>
+                <div class="logo wide-style">ra<span class="lp">lp</span>h</div>
+                <p class="description">Wide letter spacing</p>
             </div>
         </div>
         

@@ -168,37 +168,43 @@ const {
 
 <!-- Client-side JavaScript -->
 <script>
+  import { AuthFormHandler } from '@/scripts/auth-form';
+
   // Wait for DOM to be ready
   document.addEventListener('DOMContentLoaded', () => {
     // Modal elements
     const loginModal = document.getElementById('loginModal');
     const loginBackdrop = document.getElementById('loginBackdrop');
     const closeLoginModalBtn = document.getElementById('closeLoginModal');
-    const modalLoginForm = document.getElementById('modalLoginForm');
-    const modalUsernameInput = document.getElementById('modalUsername');
-    const modalPasswordInput = document.getElementById('modalPassword');
-    const modalTogglePasswordBtn = document.getElementById('modalTogglePassword');
-    const modalEyeIcon = document.getElementById('modalEyeIcon');
-    const modalErrorMessage = document.getElementById('modalErrorMessage');
-    const modalErrorText = document.getElementById('modalErrorText');
-    const modalLoginButton = document.getElementById('modalLoginButton');
-    const modalLoginButtonText = document.getElementById('modalLoginButtonText');
-    const modalLoginSpinner = document.getElementById('modalLoginSpinner');
+
+    // Initialize auth form handler
+    const authHandler = new AuthFormHandler({
+      form: document.getElementById('modalLoginForm') as HTMLFormElement,
+      usernameInput: document.getElementById('modalUsername') as HTMLInputElement,
+      passwordInput: document.getElementById('modalPassword') as HTMLInputElement,
+      togglePasswordBtn: document.getElementById('modalTogglePassword') as HTMLButtonElement,
+      eyeIcon: document.getElementById('modalEyeIcon') as unknown as SVGElement,
+      errorMessage: document.getElementById('modalErrorMessage') as HTMLElement,
+      errorText: document.getElementById('modalErrorText') as HTMLElement,
+      loginButton: document.getElementById('modalLoginButton') as HTMLButtonElement,
+      loginButtonText: document.getElementById('modalLoginButtonText') as HTMLElement,
+      loginSpinner: document.getElementById('modalLoginSpinner') as HTMLElement,
+      rememberMeCheckbox: document.getElementById('modalRememberMe') as HTMLInputElement
+    });
 
     // Global functions for external access
     window.openLoginModal = () => {
       loginModal?.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       // Focus first input
-      setTimeout(() => modalUsernameInput?.focus(), 100);
+      setTimeout(() => authHandler.focus(), 100);
     };
 
     window.closeLoginModal = () => {
       loginModal?.classList.add('hidden');
       document.body.style.overflow = '';
       // Clear form
-      modalLoginForm?.reset();
-      modalErrorMessage?.classList.add('hidden');
+      authHandler.reset();
     };
 
     // Maintain backward compatibility for existing calls
@@ -214,94 +220,5 @@ const {
         window.closeLoginModal();
       }
     });
-
-    // Password visibility toggle
-    modalTogglePasswordBtn?.addEventListener('click', () => {
-      const isPassword = modalPasswordInput.type === 'password';
-      modalPasswordInput.type = isPassword ? 'text' : 'password';
-      
-      // Update eye icon
-      modalEyeIcon.innerHTML = isPassword ? 
-        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>' :
-        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
-    });
-
-    // Hide error message when user starts typing
-    [modalUsernameInput, modalPasswordInput].forEach(input => {
-      input?.addEventListener('input', () => {
-        if (!modalErrorMessage?.classList.contains('hidden')) {
-          modalErrorMessage.classList.add('hidden');
-        }
-      });
-    });
-
-    // Form submission handler
-    modalLoginForm?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const username = modalUsernameInput.value.trim();
-      const password = modalPasswordInput.value;
-
-      // Basic client-side validation
-      if (!username || !password) {
-        showModalError('Please enter both username and password.');
-        return;
-      }
-
-      // Show loading state
-      setModalLoadingState(true);
-
-      try {
-        // Simulate authentication with delay (1.5-2.5 seconds)
-        const delay = Math.random() * 1000 + 1500;
-        await new Promise(resolve => setTimeout(resolve, delay));
-
-        // Always return authentication error for demo purposes
-        throw new Error('Invalid username or password. Please check your credentials and try again.');
-
-      } catch (error) {
-        showModalError(error.message);
-      } finally {
-        setModalLoadingState(false);
-      }
-    });
-
-    // Show error message
-    function showModalError(message) {
-      modalErrorText.textContent = message;
-      modalErrorMessage?.classList.remove('hidden');
-      
-      // Shake animation for the form
-      modalLoginForm.style.animation = 'shake 0.5s';
-      setTimeout(() => {
-        modalLoginForm.style.animation = '';
-      }, 500);
-    }
-
-    // Loading state management
-    function setModalLoadingState(loading) {
-      modalLoginButton.disabled = loading;
-      
-      if (loading) {
-        modalLoginButtonText?.classList.add('invisible');
-        modalLoginSpinner?.classList.remove('hidden');
-        modalLoginButton?.classList.add('opacity-75', 'cursor-not-allowed');
-      } else {
-        modalLoginButtonText?.classList.remove('invisible');
-        modalLoginSpinner?.classList.add('hidden');
-        modalLoginButton?.classList.remove('opacity-75', 'cursor-not-allowed');
-      }
-    }
-
-    // Add CSS for shake animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-        20%, 40%, 60%, 80% { transform: translateX(2px); }
-      }
-    `;
-    document.head.appendChild(style);
   });
 </script>

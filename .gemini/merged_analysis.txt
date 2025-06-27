@@ -1,0 +1,39 @@
+[dotenv@16.6.0] injecting env (6) from ../../../.env
+[dotenv@16.6.0] injecting env (6) from ../../../.env
+[dotenv@16.6.0] injecting env (6) from ../../../.env
+Based on the analysis of the provided code, here is a concise technical summary of the ralph-web codebase:
+
+### 1. Overall Architecture and Design Patterns
+
+The project is a modern static website built with the **Astro framework**. The architecture is front-end focused and follows a well-structured, component-based model. Key architectural characteristics include:
+
+*   **Astro-centric:** The core of the site is built using Astro pages (`.astro` files in `src/pages/`) and components (`src/components/`). This allows for a primarily static output with islands of client-side interactivity where needed.
+*   **Design Token System:** A centralized `design-system.ts` file establishes a single source of truth for all design tokens (colors, spacing, typography). This enforces visual consistency and makes the UI easier to maintain.
+*   **Manager Pattern:** Client-side functionality is organized using a **Manager pattern**. The `AppManager` in `main.ts` initializes and coordinates specialized managers for features like modals (`ModalManager`), FAQs (`FAQManager`), and cookie consent (`CookieConsentManager`). This separates concerns and keeps the global scope clean.
+*   **Centralized Configuration:** A `site-config.ts` file centralizes all site-wide information, such as navigation links, metadata, and button actions, making them easily accessible and type-safe throughout the application.
+
+### 2. State Management Approach
+
+State management is handled by a custom, lightweight, client-side solution implemented in `state-manager.ts`.
+
+*   **Singleton Pattern:** The `StateManager` class is implemented as a **Singleton**, ensuring a single, globally accessible instance for coordinating UI state.
+*   **Centralized Store:** It provides a centralized map of states for different UI components (e.g., `mobileMenu`, `loginModal`). State is managed in a structured way, with clear definitions in the `GlobalUIState` interface.
+*   **Publish/Subscribe Model:** Components can subscribe to state changes using a `subscribe` method and are notified via callbacks. This decoupled approach allows components to react to state updates without being directly coupled to one another.
+*   **Advanced Features:** The manager includes sophisticated features like a **scroll-locking stack** to prevent conflicting scroll locks from multiple components (e.g., a modal and a mobile menu) and batching updates for performance.
+
+### 3. Component Organization
+
+Component organization is logical and follows standard practices for Astro projects.
+
+*   **Functional Grouping:** Components are located in `src/components/` and are broken down into reusable, single-responsibility units (e.g., `Button.astro`, `Header.astro`, `Card.astro`).
+*   **Layouts:** Page structure is defined in `src/layouts/`, separating the overall page shell from the content.
+*   **Props-based Configuration:** Components are configured via props, with base interfaces defined in `src/types/components.ts` to ensure consistency (e.g., `BaseComponentProps`, `InteractiveComponentProps`). This promotes a predictable and type-safe API for all components.
+
+### 4. TypeScript Usage Patterns
+
+TypeScript is used extensively to ensure type safety and improve developer experience.
+
+*   **Strict Typing:** The codebase uses strict and specific TypeScript interfaces and types for all major parts of the application, including design tokens, site configuration, component props, and state.
+*   **Readonly Configurations:** The `as const` assertion is used with configuration objects (`siteConfig`, `BUTTON_STANDARDS`) to create immutable, literal types, preventing accidental modifications and enabling better autocompletion.
+*   **Type-Safe Helpers:** The project uses helper functions (e.g., `getSiteLink`, `getButtonAction`) that leverage TypeScript to provide type-safe ways of accessing configuration and state.
+*   **Utility Types:** The code effectively uses utility types to create flexible and reusable type definitions, such as `ButtonVariant` and `SizeVariant`, which are used across multiple components.

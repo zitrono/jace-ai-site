@@ -31,12 +31,11 @@ const {
 } = Astro.props;
 
 const headerClasses = [
-  // Position - sticky with no gap initially
-  sticky ? 'sticky top-0' : 'relative',
+  // Position - sticky with gap from top
+  sticky ? 'sticky top-2' : 'relative',
   // Layout and z-index
   'z-20 inset-x-0',
-  // Desktop retains background/blur, mobile starts transparent
-  'md:bg-background/50 md:backdrop-blur-sm',
+  // No background at header level - handled by inner container
   // Transitions
   'transition-all duration-300',
   // Custom class
@@ -59,14 +58,14 @@ const headerClasses = [
 
   <!-- Main navigation container -->
   <nav
-    class="w-full px-2 sm:px-4 py-0 header-nav-wrapper"
+    class="w-full header-nav-wrapper"
     role="navigation"
     aria-label="Main navigation"
   >
-    <!-- Inner container that transforms on scroll -->
-    <div class="header-inner-container transition-all duration-300">
+    <!-- Inner container with consistent width -->
+    <div class="header-inner-container mx-auto max-w-7xl">
       <!-- Header element container with enforced alignment -->
-      <div class="header-elements-container mx-auto flex items-center justify-between w-full max-w-7xl px-4 py-1 sm:px-6 sm:py-2 md:py-3 lg:px-8">
+      <div class="header-elements-container flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
       <!-- Logo section -->
       <div class="header-logo flex lg:flex-1">
         <slot name="logo" />
@@ -95,68 +94,47 @@ const headerClasses = [
 </header>
 
 <style>
-  /* Mobile-first header nav wrapper */
+  /* Header nav wrapper with padding for all viewports */
   .header-nav-wrapper {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 8px 16px; /* Side padding for narrow width */
   }
   
-  /* Initial state - transparent background, no rounded corners */
+  /* Glass morphism effect for all viewports with consistent narrow width */
   .header-inner-container {
-    border-radius: 0;
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
+    border-radius: 16px;
+    background: rgba(40, 40, 40, 0.5);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 8px;
+    transition: all 0.3s ease;
+    width: calc(100% - 32px); /* Slightly narrower than viewport */
+    max-width: calc(1280px + 32px); /* Slightly wider than max content width */
+    margin: 0 auto;
   }
   
-  /* Scrolled state on mobile - glassmorphic effect */
-  @media (max-width: 767px) {
-    header.scrolled .header-nav-wrapper {
-      padding-top: 8px;
-      padding-bottom: 8px;
-    }
-    
-    header.scrolled .header-inner-container {
-      border-radius: 16px;
-      background: rgba(40, 40, 40, 0.5);
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      padding: 8px; /* Additional inner padding when scrolled */
-    }
-  }
-  
-  /* Desktop maintains original behavior */
-  @media (min-width: 768px) {
-    header {
-      background: rgba(40, 40, 40, 0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-  }
-  
-  /* Responsive header heights to match Jace reference */
+  /* Responsive header heights scaled down by 20% */
   .header-elements-container {
-    min-height: var(--header-height); /* Use design token - 64px for POM compliance */
+    min-height: 51.2px; /* Mobile: 64px * 0.8 = 51.2px */
   }
   
   @media (min-width: 768px) {
     .header-elements-container {
-      min-height: 81.25px; /* Tablet */
+      min-height: 65px; /* Tablet: 81.25px * 0.8 = 65px */
     }
   }
   
   @media (min-width: 1024px) {
     .header-elements-container {
-      min-height: 88px; /* Desktop and larger */
+      min-height: 70.4px; /* Desktop: 88px * 0.8 = 70.4px */
     }
   }
 
-  /* Ensure all interactive elements have consistent height */
+  /* Ensure all interactive elements have consistent height scaled down by 20% */
   .header-navigation > *,
   .header-actions > *,
   .header-mobile > * {
-    height: var(--header-element-height, 44px);
+    height: 35.2px; /* 44px * 0.8 = 35.2px */
     display: flex;
     align-items: center;
     line-height: 1;
@@ -168,7 +146,7 @@ const headerClasses = [
   .header-navigation > *:not(.header-skip),
   .header-actions > *:not(.header-skip),
   .header-mobile > *:not(.header-skip) {
-    min-height: var(--header-element-height, 44px) !important;
+    min-height: 35.2px !important; /* 44px * 0.8 = 35.2px */
   }
 </style>
 

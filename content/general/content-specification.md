@@ -365,3 +365,14 @@ Based on agent analysis reports, highest priority improvement areas:
 - **Homepage Hero**: Primary "Book a Demo" + Secondary "Download Guide"
 - **Deep Pages**: Match CTA intensity to page depth and content engagement
 - **Blog/Learn**: Newsletter signup emphasis with demo as secondary option
+
+
+## About Page Content [Updated: 2025-01-27 via Q90]
+
+### Mission Quote
+"AI won't replace PE partners, but PE partners with AI will replace those without. We're building autonomous agents that think like your best analysts but work at 1000x the speed—because the future of private equity is human judgment amplified by machine intelligence."
+
+- **Attribution**: Konstantin Andreyev, Founder
+- **Location**: Mission Statement section
+- **Purpose**: Address AI replacement fears while positioning ralph as essential for PE success
+

@@ -1,49 +1,100 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import SubpageLayout from '@/layouts/SubpageLayout.astro';
 import Section from '@/components/layout/Section.astro';
 import Button from '@/components/primitives/Button.astro';
-import { siteConfig } from '@/config/site-config';
+import { getButtonAction } from '@/config/site-config';
+import founderImage from '@/assets/images/team/konstantin-andreyev.png';
 ---
 
-<Layout title="About | Ralph by Beneficious">
+<SubpageLayout title="About | ralph by Beneficious">
   <main>
-    <!-- Hero Section -->
-    <Section background="primary" spacing="xl">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-3xl md:text-4xl font-semibold text-primary mb-4">
-          About Ralph
+    <!-- Enhanced Hero Section -->
+    <Section background="primary" spacing="xl" class="relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 -z-10">
+        <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="about-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect fill="none" stroke="rgba(255, 220, 97, 0.1)" stroke-width="0.5" width="40" height="40"/>
+            </pattern>
+          </defs>
+          <rect fill="url(#about-pattern)" width="100%" height="100%" stroke-width="0" />
+        </svg>
+        <!-- Gradient overlays -->
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-transparent via-transparent to-background/80" />
+      </div>
+
+      <div class="relative max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+          About <span class="bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">ralph</span>
         </h1>
-        <p class="text-lg text-secondary max-w-3xl mx-auto">
-          Ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot opportunities and risks weeks before others, making better decisions inevitable.
+        <p class="text-xl md:text-2xl text-secondary max-w-4xl mx-auto leading-relaxed">
+          ralph gives PE firms supernatural foresight. Our AI agents work 24/7 to spot opportunities and risks weeks before others, making better decisions inevitable.
         </p>
+        <div class="mt-8">
+          <Button 
+            variant="primary" 
+            size="lg" 
+            href="#founder"
+            class="inline-flex items-center gap-2"
+          >
+            Meet Our Founder
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+          </Button>
+        </div>
       </div>
     </Section>
 
-    <!-- Founder Section -->
-    <Section background="secondary" spacing="lg">
-      <div class="max-w-4xl mx-auto">
-        <div class="grid lg:grid-cols-3 gap-12 items-start">
+    <!-- Enhanced Founder Section -->
+    <Section background="secondary" spacing="xl" id="founder">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">Meet Our Founder</h2>
+        
+        <div class="grid lg:grid-cols-5 gap-12 items-start">
           <!-- Founder Profile -->
-          <div class="lg:col-span-2">
-            <h2 class="text-2xl font-semibold text-primary mb-6">Founder</h2>
-            <div class="bg-card rounded-lg p-8 border border-neutral-700">
-              <h3 class="text-xl font-medium text-primary mb-3">Konstantin Andreyev</h3>
-              <p class="text-secondary leading-relaxed mb-6">
-                Entrepreneur and AI investor focused on making AI genuinely useful for professionals. Ralph represents years of research into how AI can augment human decision-making in high-stakes environments.
-              </p>
-              <div class="space-y-3">
-                <div class="flex items-center text-sm text-muted">
-                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                  </svg>
-                  Berlin, Germany
+          <div class="lg:col-span-3">
+            <div class="bg-card rounded-xl p-8 border border-neutral-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <!-- Profile Header -->
+              <div class="flex items-start gap-6 mb-6">
+                <div class="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-accent/20">
+                  <img 
+                    src={founderImage.src} 
+                    alt="Konstantin Andreyev, Founder & CEO of Ralph"
+                    class="w-full h-full object-cover"
+                  />
                 </div>
-                <div class="flex items-center text-sm">
-                  <svg class="w-4 h-4 mr-2 text-muted" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002-2h12a2 2 0 002-2V8.118z"/>
-                  </svg>
-                  <a href="mailto:konstantin@beneficious.com" class="text-primary hover:text-accent transition-colors">
+                <div>
+                  <h3 class="text-2xl font-bold text-primary mb-2">Konstantin Andreyev</h3>
+                  <p class="text-accent font-medium">Founder & CEO</p>
+                </div>
+              </div>
+              
+              <!-- Bio -->
+              <p class="text-secondary leading-relaxed text-lg mb-8">
+                Entrepreneur and AI investor focused on making AI genuinely useful for professionals. ralph represents years of research into how AI can augment human decision-making in high-stakes environments.
+              </p>
+              
+              <!-- Contact Info -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 text-secondary">
+                  <div class="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <span>Berlin, Germany</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                  </div>
+                  <a href="mailto:konstantin@beneficious.com" class="text-primary hover:text-accent transition-colors font-medium">
                     konstantin@beneficious.com
                   </a>
                 </div>
@@ -51,125 +102,274 @@ import { siteConfig } from '@/config/site-config';
             </div>
           </div>
 
-          <!-- Contact Card -->
-          <div class="space-y-6">
-            <div class="bg-card rounded-lg p-6 border border-neutral-700">
-              <h3 class="text-lg font-medium text-primary mb-4">Get in Touch</h3>
-              <p class="text-secondary text-sm mb-4">
-                Interested in learning more about Ralph or discussing your portfolio intelligence needs?
-              </p>
-              <Button 
-                variant="primary" 
-                size="sm" 
-                href="mailto:konstantin@beneficious.com"
-                class="w-full"
-              >
-                Contact Konstantin
-              </Button>
+          <!-- Enhanced Contact Cards -->
+          <div class="lg:col-span-2 space-y-6">
+            <!-- Primary Contact Card -->
+            <div class="bg-gradient-to-br from-accent/10 to-accent/5 rounded-xl p-6 border border-accent/20">
+              <div class="text-center">
+                <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-6 h-6 text-background" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-primary mb-2">Get in Touch</h3>
+                <p class="text-secondary text-sm mb-4">
+                  Interested in learning more about ralph or discussing your portfolio intelligence needs?
+                </p>
+                <Button 
+                  variant="primary" 
+                  size="md" 
+                  href="mailto:konstantin@beneficious.com"
+                  class="w-full"
+                >
+                  Contact Konstantin
+                </Button>
+              </div>
+            </div>
+
+            <!-- Demo Card -->
+            <div class="bg-card rounded-xl p-6 border border-neutral-700">
+              <div class="text-center">
+                <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-primary mb-2">See ralph in Action</h3>
+                <p class="text-secondary text-sm mb-4">
+                  Book a personalized demo to see how ralph can transform your portfolio intelligence.
+                </p>
+                <Button 
+                  variant="primary" 
+                  size="md" 
+                  class="w-full"
+                  {...getButtonAction('bookDemo')}
+                >
+                  Book a Demo
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </Section>
 
-    <!-- Team Building Section -->
-    <Section background="primary" spacing="lg">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold text-primary mb-6 text-center">Building the Team</h2>
-        <p class="text-secondary text-center mb-8 max-w-2xl mx-auto">
-          We're assembling a world-class team to revolutionize private equity. Current openings:
-        </p>
+    <!-- Enhanced Team Building Section -->
+    <Section background="primary" spacing="xl">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">Building the Team</h2>
+          <p class="text-xl text-secondary max-w-3xl mx-auto">
+            We're assembling a world-class team to revolutionize private equity. Join us in shaping the future of AI-powered portfolio intelligence.
+          </p>
+        </div>
         
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-card rounded-lg p-6 border border-neutral-700">
-            <h3 class="text-lg font-medium text-primary mb-2">VP of Sales</h3>
-            <p class="text-secondary text-sm">B2B enterprise SaaS</p>
+        <div class="grid md:grid-cols-2 gap-6 mb-10">
+          <div class="group bg-card rounded-xl p-6 border border-neutral-700 hover:border-accent/30 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-primary mb-2">VP of Sales</h3>
+                <p class="text-secondary text-sm mb-3">B2B enterprise SaaS</p>
+                <p class="text-muted text-xs">Lead our go-to-market strategy and enterprise partnerships</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card rounded-lg p-6 border border-neutral-700">
-            <h3 class="text-lg font-medium text-primary mb-2">Head of Customer Success</h3>
-            <p class="text-secondary text-sm">Enterprise client relationships</p>
+
+          <div class="group bg-card rounded-xl p-6 border border-neutral-700 hover:border-accent/30 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-primary mb-2">Head of Customer Success</h3>
+                <p class="text-secondary text-sm mb-3">Enterprise client relationships</p>
+                <p class="text-muted text-xs">Ensure client success and drive platform adoption</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card rounded-lg p-6 border border-neutral-700">
-            <h3 class="text-lg font-medium text-primary mb-2">Lead AI Engineer</h3>
-            <p class="text-secondary text-sm">Machine learning & AI systems</p>
+
+          <div class="group bg-card rounded-xl p-6 border border-neutral-700 hover:border-accent/30 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-primary mb-2">Lead AI Engineer</h3>
+                <p class="text-secondary text-sm mb-3">Machine learning & AI systems</p>
+                <p class="text-muted text-xs">Build cutting-edge AI agents and inference systems</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card rounded-lg p-6 border border-neutral-700">
-            <h3 class="text-lg font-medium text-primary mb-2">VP of Product</h3>
-            <p class="text-secondary text-sm">Product strategy & roadmap</p>
+
+          <div class="group bg-card rounded-xl p-6 border border-neutral-700 hover:border-accent/30 transition-all duration-300 hover:shadow-lg">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-accent/30 transition-colors">
+                <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-primary mb-2">VP of Product</h3>
+                <p class="text-secondary text-sm mb-3">Product strategy & roadmap</p>
+                <p class="text-muted text-xs">Shape the future of AI-powered portfolio management</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="text-center mt-8">
+        <div class="text-center">
           <Button 
             variant="secondary" 
-            size="md" 
-            href="mailto:konstantin@beneficious.com?subject=Career Opportunities"
+            size="lg" 
+            href="mailto:konstantin@beneficious.com?subject=Career Opportunities at ralph"
+            class="inline-flex items-center gap-2"
           >
-            Explore Opportunities
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"/>
+            </svg>
+            Explore Career Opportunities
           </Button>
         </div>
       </div>
     </Section>
 
-    <!-- Advisors & Partners Section -->
+    <!-- Minimized Advisors Section -->
     <Section background="secondary" spacing="lg">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-2xl font-semibold text-primary mb-6">Advisors & Partners</h2>
-        <p class="text-secondary mb-8 max-w-2xl mx-auto">
-          We're building relationships with leading PE firms and industry experts. Announcements coming soon.
+        <h2 class="text-2xl md:text-3xl font-semibold text-primary mb-4">Advisors & Partners</h2>
+        <p class="text-secondary mb-6">
+          Building relationships with leading PE firms and industry experts.
         </p>
-        
-        <!-- Placeholder for future advisors -->
-        <div class="grid md:grid-cols-3 gap-6">
-          {[1, 2, 3].map(() => (
-            <div class="bg-card rounded-lg p-8 border border-neutral-700 border-dashed">
-              <div class="w-16 h-16 bg-neutral-700 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <svg class="w-8 h-8 text-muted" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <h3 class="text-lg font-medium text-muted mb-2">Coming Soon</h3>
-              <p class="text-secondary text-sm">Industry Expert</p>
-            </div>
-          ))}
+        <div class="inline-flex items-center gap-2 text-muted">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+          </svg>
+          <span>Announcements coming soon</span>
         </div>
       </div>
     </Section>
 
-    <!-- Mission Statement -->
-    <Section background="primary" spacing="lg">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-2xl font-semibold text-primary mb-6">Our Mission</h2>
-        <blockquote class="text-lg text-secondary italic border-l-4 border-accent pl-6 py-4">
-          "To give private equity firms supernatural foresight through AI that works tirelessly to identify opportunities and risks before they become obvious to the market."
-        </blockquote>
-        <div class="mt-8">
+    <!-- Enhanced Mission Statement -->
+    <Section background="primary" spacing="xl">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">Our Mission</h2>
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-accent/5 via-accent/10 to-accent/5 rounded-2xl"></div>
+          <blockquote class="relative bg-card/50 rounded-2xl p-8 md:p-12 border-l-4 border-accent">
+            <svg class="w-8 h-8 text-accent mb-4 mx-auto" fill="currentColor" viewBox="0 0 32 32">
+              <path d="M12 8V4H8v4H4v4h4v4h4v-4h4V8h-4zM20 16v-4h4v4h4v4h-4v4h-4v-4h-4v-4h4z"/>
+            </svg>
+            <p class="text-xl md:text-2xl text-secondary italic leading-relaxed mb-6">
+              "AI won't replace PE partners, but PE partners with AI will replace those without. We're building autonomous agents that think like your best analysts but work at 1000x the speed—because the future of private equity is human judgment amplified by machine intelligence."
+            </p>
+            <div class="flex items-center justify-center gap-2 text-accent font-medium">
+              <div class="w-2 h-2 bg-accent rounded-full"></div>
+              <span>Konstantin Andreyev, Founder</span>
+            </div>
+          </blockquote>
+        </div>
+        
+        <div class="mt-10">
           <Button 
             variant="primary" 
-            size="lg" 
-            href={siteConfig.demo.url}
+            size="xl" 
+            class="inline-flex items-center gap-3"
+            {...getButtonAction('bookDemo')}
           >
-            See Ralph in Action
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            See ralph in Action
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
           </Button>
         </div>
       </div>
     </Section>
   </main>
-</Layout>
+</SubpageLayout>
 
 <style>
-  /* Professional about page styling */
+  /* Enhanced About page styling */
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Enhanced gradient text */
+  .bg-gradient-to-r {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Card hover effects */
+  .group:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Enhanced blockquote */
   blockquote {
-    @apply bg-card/30 rounded-lg;
+    position: relative;
+  }
+  
+  blockquote::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, rgba(255, 220, 97, 0.1), transparent);
+    border-radius: 1rem;
+    z-index: -1;
   }
   
   /* Contact info emphasis */
   a[href^="mailto:"] {
-    @apply font-medium;
+    position: relative;
   }
   
-  /* Placeholder styling */
-  .border-dashed {
-    @apply opacity-60;
+  a[href^="mailto:"]:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  
+  /* Button enhancements */
+  .size-xl {
+    @apply px-8 py-4 text-lg;
+  }
+  
+  /* Responsive improvements */
+  @media (max-width: 768px) {
+    .lg\:col-span-3 {
+      order: 1;
+    }
+    
+    .lg\:col-span-2 {
+      order: 2;
+    }
   }
 </style>

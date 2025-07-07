@@ -1,6 +1,6 @@
 /**
  * State Manager - Centralized state management for ralph-web
- * 
+ *
  * Provides centralized state management for UI components with:
  * - Single source of truth for each piece of state
  * - Body scroll lock coordination
@@ -8,20 +8,20 @@
  * - Proper cleanup management
  * - Memory leak prevention
  * - Race condition prevention
- * 
+ *
  * @example
  * ```typescript
  * import { StateManager } from '@/utils/state-manager';
- * 
+ *
  * // Initialize state manager
  * const stateManager = StateManager.getInstance();
- * 
+ *
  * // Register component state
  * stateManager.registerState('mobileMenu', { isOpen: false });
- * 
+ *
  * // Update state
  * stateManager.setState('mobileMenu', { isOpen: true });
- * 
+ *
  * // Subscribe to state changes
  * const unsubscribe = stateManager.subscribe('mobileMenu', (state) => {
  *   console.log('Mobile menu state:', state);
@@ -54,7 +54,11 @@ export interface StateSubscription {
   cleanup: () => void;
 }
 
-export type StateChangeCallback = (newState: ComponentState, oldState: ComponentState, source?: string) => void;
+export type StateChangeCallback = (
+  newState: ComponentState,
+  oldState: ComponentState,
+  source?: string
+) => void;
 
 export interface ScrollLockOptions {
   /** Whether to store scroll position for restoration */
@@ -97,7 +101,7 @@ export class StateManager {
   private subscriptions: Map<string, StateSubscription[]> = new Map();
   private scrollLockStack: string[] = [];
   private storedScrollPosition: number = 0;
-  private globalFunctions: Map<string, (() => void)> = new Map();
+  private globalFunctions: Map<string, () => void> = new Map();
   private cleanupQueue: (() => void)[] = [];
 
   private constructor() {
@@ -119,11 +123,13 @@ export class StateManager {
    */
   public registerState(componentId: string, initialState: ComponentState): void {
     if (this.states.has(componentId)) {
-      console.warn(`State for component '${componentId}' already registered. Updating with new state.`);
+      console.warn(
+        `State for component '${componentId}' already registered. Updating with new state.`
+      );
     }
-    
+
     this.states.set(componentId, { ...initialState });
-    
+
     // Initialize subscription array if not exists
     if (!this.subscriptions.has(componentId)) {
       this.subscriptions.set(componentId, []);
@@ -135,28 +141,26 @@ export class StateManager {
    */
   public getState<T extends ComponentState = ComponentState>(componentId: string): T | null {
     const state = this.states.get(componentId);
-    return state ? { ...state } as T : null;
+    return state ? ({ ...state } as T) : null;
   }
 
   /**
    * Update component state
    */
   public setState(
-    componentId: string, 
-    newState: Partial<ComponentState>, 
+    componentId: string,
+    newState: Partial<ComponentState>,
     options: StateUpdateOptions = {}
   ): void {
     const { silent = false, merge = true, source } = options;
-    
+
     const currentState = this.states.get(componentId) || {};
     const oldState = { ...currentState };
-    
-    const updatedState = merge 
-      ? { ...currentState, ...newState }
-      : { ...newState };
-    
+
+    const updatedState = merge ? { ...currentState, ...newState } : { ...newState };
+
     this.states.set(componentId, updatedState);
-    
+
     if (!silent) {
       this.notifySubscribers(componentId, updatedState, oldState, source);
     }
@@ -165,31 +169,28 @@ export class StateManager {
   /**
    * Subscribe to state changes for a component
    */
-  public subscribe(
-    componentId: string, 
-    callback: StateChangeCallback
-  ): () => void {
+  public subscribe(componentId: string, callback: StateChangeCallback): () => void {
     const subscriptions = this.subscriptions.get(componentId) || [];
-    
+
     const cleanup = () => {
-      const index = subscriptions.findIndex(sub => sub.callback === callback);
+      const index = subscriptions.findIndex((sub) => sub.callback === callback);
       if (index !== -1) {
         subscriptions.splice(index, 1);
       }
     };
-    
+
     const subscription: StateSubscription = {
       componentId,
       callback,
-      cleanup
+      cleanup,
     };
-    
+
     subscriptions.push(subscription);
     this.subscriptions.set(componentId, subscriptions);
-    
+
     // Add to cleanup queue
     this.cleanupQueue.push(cleanup);
-    
+
     return cleanup;
   }
 
@@ -197,14 +198,14 @@ export class StateManager {
    * Notify all subscribers of state changes
    */
   private notifySubscribers(
-    componentId: string, 
-    newState: ComponentState, 
-    oldState: ComponentState, 
+    componentId: string,
+    newState: ComponentState,
+    oldState: ComponentState,
     source?: string
   ): void {
     const subscriptions = this.subscriptions.get(componentId) || [];
-    
-    subscriptions.forEach(subscription => {
+
+    subscriptions.forEach((subscription) => {
       try {
         subscription.callback(newState, oldState, source);
       } catch (error) {
@@ -218,29 +219,29 @@ export class StateManager {
    */
   public lockBodyScroll(componentId: string, options: ScrollLockOptions = {}): void {
     const { storePosition = true, preventTouch = true, className = 'scroll-locked' } = options;
-    
+
     // Store scroll position if this is the first lock
     if (this.scrollLockStack.length === 0 && storePosition) {
       this.storedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     }
-    
+
     // Add component to lock stack if not already present
     if (!this.scrollLockStack.includes(componentId)) {
       this.scrollLockStack.push(componentId);
     }
-    
+
     // Apply scroll lock styles
     document.body.classList.add(className);
     document.documentElement.classList.add(className);
-    
+
     // Store current scroll position in component state
     this.setState(componentId, { scrollPosition: this.storedScrollPosition });
-    
+
     // Prevent touch scrolling on mobile if requested
     if (preventTouch) {
       document.addEventListener('touchmove', this.preventTouchScroll, { passive: false });
     }
-    
+
     // Update component state
     this.setState(componentId, { hasScrollLock: true });
   }
@@ -250,28 +251,28 @@ export class StateManager {
    */
   public unlockBodyScroll(componentId: string, options: ScrollLockOptions = {}): void {
     const { className = 'scroll-locked' } = options;
-    
+
     // Remove component from lock stack
     const index = this.scrollLockStack.indexOf(componentId);
     if (index !== -1) {
       this.scrollLockStack.splice(index, 1);
     }
-    
+
     // Only unlock if no other components have locks
     if (this.scrollLockStack.length === 0) {
       document.body.classList.remove(className);
       document.documentElement.classList.remove(className);
-      
+
       // Remove touch scroll prevention
       document.removeEventListener('touchmove', this.preventTouchScroll);
-      
+
       // Restore scroll position
       if (this.storedScrollPosition > 0) {
         window.scrollTo(0, this.storedScrollPosition);
         this.storedScrollPosition = 0;
       }
     }
-    
+
     // Update component state
     this.setState(componentId, { hasScrollLock: false });
   }
@@ -282,12 +283,14 @@ export class StateManager {
   private preventTouchScroll = (e: TouchEvent): void => {
     // Allow scrolling within components that should scroll (like mobile menu panels)
     const target = e.target as HTMLElement;
-    if (target.closest('[data-allow-scroll]') || 
-        target.closest('[data-mobile-menu-panel]') || 
-        target.closest('.modal-content')) {
+    if (
+      target.closest('[data-allow-scroll]') ||
+      target.closest('[data-mobile-menu-panel]') ||
+      target.closest('.modal-content')
+    ) {
       return;
     }
-    
+
     e.preventDefault();
   };
 
@@ -308,7 +311,7 @@ export class StateManager {
   /**
    * Register a global function (for backward compatibility)
    */
-  public registerGlobalFunction(name: string, fn: (() => void)): void {
+  public registerGlobalFunction(name: string, fn: () => void): void {
     this.globalFunctions.set(name, fn);
     (window as any)[name] = fn;
   }
@@ -324,19 +327,21 @@ export class StateManager {
   /**
    * Batch state updates for performance
    */
-  public batchStateUpdates(updates: Array<{
-    componentId: string;
-    state: Partial<ComponentState>;
-    options?: StateUpdateOptions;
-  }>): void {
+  public batchStateUpdates(
+    updates: Array<{
+      componentId: string;
+      state: Partial<ComponentState>;
+      options?: StateUpdateOptions;
+    }>
+  ): void {
     // Suppress notifications during batch
     updates.forEach(({ componentId, state, options }) => {
       this.setState(componentId, state, { ...options, silent: true });
     });
-    
+
     // Notify all affected components at once
-    const affectedComponents = new Set(updates.map(u => u.componentId));
-    affectedComponents.forEach(componentId => {
+    const affectedComponents = new Set(updates.map((u) => u.componentId));
+    affectedComponents.forEach((componentId) => {
       const currentState = this.states.get(componentId) || {};
       this.notifySubscribers(componentId, currentState, {}, 'batch-update');
     });
@@ -348,7 +353,7 @@ export class StateManager {
   public resetState(componentId: string, initialState?: ComponentState): void {
     const oldState = this.states.get(componentId) || {};
     const newState = initialState || {};
-    
+
     this.states.set(componentId, newState);
     this.notifySubscribers(componentId, newState, oldState, 'reset');
   }
@@ -359,12 +364,12 @@ export class StateManager {
   public unregisterComponent(componentId: string): void {
     // Clean up state
     this.states.delete(componentId);
-    
+
     // Clean up subscriptions
     const subscriptions = this.subscriptions.get(componentId) || [];
-    subscriptions.forEach(sub => sub.cleanup());
+    subscriptions.forEach((sub) => sub.cleanup());
     this.subscriptions.delete(componentId);
-    
+
     // Remove from scroll lock stack
     const index = this.scrollLockStack.indexOf(componentId);
     if (index !== -1) {
@@ -380,14 +385,14 @@ export class StateManager {
     window.addEventListener('beforeunload', () => {
       this.cleanup();
     });
-    
+
     // Clean up on page visibility change
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         this.cleanup();
       }
     });
-    
+
     // Handle escape key globally for modal/menu closing
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -406,7 +411,7 @@ export class StateManager {
       this.setState('mobileMenu', { isOpen: false }, { source: 'escape-key' });
       return;
     }
-    
+
     const loginModalState = this.getState('loginModal');
     if (loginModalState?.isOpen) {
       this.setState('loginModal', { isOpen: false }, { source: 'escape-key' });
@@ -419,19 +424,19 @@ export class StateManager {
    */
   public cleanup(): void {
     // Release all scroll locks
-    this.scrollLockStack.forEach(componentId => {
+    this.scrollLockStack.forEach((componentId) => {
       this.unlockBodyScroll(componentId);
     });
-    
+
     // Clean up all subscriptions
-    this.cleanupQueue.forEach(cleanup => cleanup());
+    this.cleanupQueue.forEach((cleanup) => cleanup());
     this.cleanupQueue.length = 0;
-    
+
     // Unregister global functions
     this.globalFunctions.forEach((_, name) => {
       this.unregisterGlobalFunction(name);
     });
-    
+
     // Clear all state
     this.states.clear();
     this.subscriptions.clear();
@@ -468,33 +473,33 @@ export function getStateManager(): StateManager {
  */
 export function initializeStateManager(): StateManager {
   const stateManager = StateManager.getInstance();
-  
+
   // Register default UI component states
   stateManager.registerState('mobileMenu', {
     isOpen: false,
     isAnimating: false,
     scrollPosition: 0,
-    hasScrollLock: false
+    hasScrollLock: false,
   });
-  
+
   stateManager.registerState('loginModal', {
     isOpen: false,
     isAnimating: false,
     previousFocus: null,
-    hasScrollLock: false
+    hasScrollLock: false,
   });
-  
+
   stateManager.registerState('cookieConsent', {
     isVisible: false,
     isAnimating: false,
-    consentValue: null
+    consentValue: null,
   });
-  
+
   stateManager.registerState('faq', {
     openItems: new Set<string>(),
-    animatingItems: new Set<string>()
+    animatingItems: new Set<string>(),
   });
-  
+
   return stateManager;
 }
 

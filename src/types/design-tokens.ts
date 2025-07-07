@@ -5,30 +5,30 @@
 
 // Button size mapping to Tailwind classes
 export const BUTTON_SIZE_CLASSES = {
-  xs: 'h-8',   // 32px
-  sm: 'h-9',   // 36px  
-  md: 'h-10',  // 40px - matches POM reference
-  lg: 'h-12',  // 48px
-  xl: 'h-14',  // 56px
+  xs: 'h-8', // 32px
+  sm: 'h-9', // 36px
+  md: 'h-10', // 40px - matches POM reference
+  lg: 'h-12', // 48px
+  xl: 'h-14', // 56px
 } as const;
 
 // Global button configuration for consistency
 export const BUTTON_STANDARDS = {
   // Primary CTA buttons (Book a Demo, etc.) - matches POM reference
   cta: {
-    size: 'md' as const,        // 40px height (h-10) - matches POM reference
-    mobileSize: 'sm' as const,  // 36px height (h-9) on mobile for better spacing
+    size: 'md' as const, // 40px height (h-10) - matches POM reference
+    mobileSize: 'sm' as const, // 36px height (h-9) on mobile for better spacing
     className: 'btn-primary btn-lg',
   },
   // Secondary buttons (Log In, etc.) - matches POM reference
   secondary: {
-    size: 'md' as const,        // 40px height (h-10) - matches POM reference
-    mobileSize: 'sm' as const,  // 36px height (h-9) on mobile for better spacing
+    size: 'md' as const, // 40px height (h-10) - matches POM reference
+    mobileSize: 'sm' as const, // 36px height (h-9) on mobile for better spacing
     className: 'btn-secondary',
   },
   // Navigation links
   nav: {
-    size: 'md' as const,        // 44px height
+    size: 'md' as const, // 44px height
     mobileSize: 'md' as const,
     className: '',
   },
@@ -36,11 +36,11 @@ export const BUTTON_STANDARDS = {
 
 // Header-specific design tokens (immutable)
 export const HEADER_METRICS = {
-  HEIGHT: '64px',           // Total header height
-  ELEMENT_HEIGHT: '44px',   // Standard touch target
-  ELEMENT_FONT: '16px',     // Default element font size
-  ELEMENT_WEIGHT: '500',    // Medium font weight
-  ELEMENT_SPACING: '32px',  // Wider padding to match reference
+  HEIGHT: '64px', // Total header height
+  ELEMENT_HEIGHT: '44px', // Standard touch target
+  ELEMENT_FONT: '16px', // Default element font size
+  ELEMENT_WEIGHT: '500', // Medium font weight
+  ELEMENT_SPACING: '32px', // Wider padding to match reference
 } as const;
 
 // Valid header element configurations (compile-time enforced)
@@ -50,21 +50,21 @@ export type ValidHeaderSize = 'md'; // Only md allowed in header for consistency
 // Header button configuration constraints
 export const HEADER_BUTTON_CONFIG = {
   nav: {
-    height: BUTTON_SIZE_CLASSES.md,   // 44px - consistent nav size
-    padding: 'px-6',                  // 24px horizontal - matches reference
-    font: 'text-base',                // 16px - matches reference nav
-    weight: 'font-normal',            // 400 weight - matches reference
-    leading: 'leading-none',          // Precise text alignment
+    height: BUTTON_SIZE_CLASSES.md, // 44px - consistent nav size
+    padding: 'px-6', // 24px horizontal - matches reference
+    font: 'text-base', // 16px - matches reference nav
+    weight: 'font-normal', // 400 weight - matches reference
+    leading: 'leading-none', // Precise text alignment
   },
   primary: {
-    height: 'h-9 md:h-10',    // Responsive: 36px mobile, 40px desktop
+    height: 'h-9 md:h-10', // Responsive: 36px mobile, 40px desktop
     padding: 'px-sm md:px-6', // Responsive: smaller padding on mobile
     font: 'text-sm md:text-base', // Responsive: 14px mobile, 16px desktop
     weight: 'font-medium',
     leading: 'leading-none',
   },
   secondary: {
-    height: 'h-9 md:h-10',    // Responsive: 36px mobile, 40px desktop
+    height: 'h-9 md:h-10', // Responsive: 36px mobile, 40px desktop
     padding: 'px-sm md:px-6', // Responsive: smaller padding on mobile
     font: 'text-sm md:text-base', // Responsive: 14px mobile, 16px desktop
     weight: 'font-medium',

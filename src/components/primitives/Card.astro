@@ -86,10 +86,12 @@ const classes = [
   // Shadow
   shadowClasses[shadow],
   // Hover effects
-  hover && 'hover:shadow-lg hover:scale-[1.02] hover:bg-secondary transition-colors duration-300 cursor-pointer',
+  hover &&
+    'hover:shadow-lg hover:scale-[1.02] hover:bg-secondary transition-colors duration-300 cursor-pointer',
   clickable && 'cursor-pointer focus:ring-2 focus:ring-accent/50 focus:outline-none',
   // Legacy light variant styles
-  legacyVariant === 'light' && 'bg-white shadow-lg border border-neutral-200 [&_h3]:text-neutral-900 [&_h4]:text-neutral-900 [&_p]:text-neutral-600',
+  legacyVariant === 'light' &&
+    'bg-white shadow-lg border border-neutral-200 [&_h3]:text-neutral-900 [&_h4]:text-neutral-900 [&_p]:text-neutral-600',
   // Custom classes
   className,
 ]

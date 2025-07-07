@@ -28,7 +28,7 @@ export default {
         // Backward compatibility with existing POM references
         'primary-yellow': designSystem.colors.primary.yellow,
       },
-      
+
       textColor: {
         // Text colors need to be in textColor to generate text-* utilities
         primary: designSystem.colors.text.primary,
@@ -39,7 +39,7 @@ export default {
         'text-secondary': designSystem.colors.text.secondary,
         'text-muted': designSystem.colors.text.muted,
       },
-      
+
       backgroundColor: {
         // Background colors for bg-* utilities
         primary: designSystem.colors.neutral[700],
@@ -99,7 +99,7 @@ export default {
         // Mobile Typography
         'hero-title-mobile': ['2.25rem', { lineHeight: '1.2', fontWeight: '600' }],
         'subtitle-mobile': ['1.125rem', { lineHeight: '1.6' }],
-        
+
         // Heading styles from global CSS
         'heading-2': ['1rem', { lineHeight: '1.75', fontWeight: '600' }],
         'heading-3': ['1.25rem', { lineHeight: '1.5', fontWeight: '600' }],
@@ -171,6 +171,12 @@ export default {
           '0%': { transform: 'translateY(-10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+      },
+
+      zIndex: {
+        ...Object.fromEntries(
+          Object.entries(designSystem.zIndex).map(([key, value]) => [key, value.toString()])
+        ),
       },
 
       screens: {

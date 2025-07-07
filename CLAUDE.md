@@ -3,8 +3,9 @@
 AI development guide for ralph-web. **LLM-optimized - essential rules only.**
 
 ## 🚫 NEVER DO
+
 - Change POM without approval
-- Create `.css` files or `<style>` blocks  
+- Create `.css` files or `<style>` blocks
 - Use hardcoded values instead of design tokens
 - Skip TypeScript interfaces or use `any` types
 - Modify content without Q&A process (see `/content/general/`)
@@ -14,6 +15,7 @@ AI development guide for ralph-web. **LLM-optimized - essential rules only.**
 - **Wrap feature components in Section** - they self-manage sections (causes double-wrapping)
 
 ## ✅ ALWAYS DO
+
 - Run `npm run validate` before commits
 - Maintain 99.9% POM compliance: `cd tests && node unified-test.js ralph`
 - Use design tokens: `bg-background`, `text-primary`, etc.
@@ -23,25 +25,29 @@ AI development guide for ralph-web. **LLM-optimized - essential rules only.**
 - **Let feature components self-manage sections**: Hero, Features, etc. include their own Section
 
 ## 📁 Architecture
+
 ```
 src/components/
 ├── primitives/   # Button, Card, Input, Icon
-├── layout/       # Header, Footer, Section  
+├── layout/       # Header, Footer, Section
 ├── features/     # Hero, FAQ, Pricing
 └── utils/        # CookieConsent, LoginModal
 ```
 
 ### Design Tokens
+
 - Colors: `bg-background`, `bg-accent`, `text-primary`, `text-secondary`
 - Full list: `src/config/design-system.ts`
 
 ### Content Management
+
 - Process: `/content/general/claude.md`
 - Never modify `content-specification.md` or `qa-decisions.md` directly
 
 ## 🔧 Quick Reference
 
 ### Development
+
 ```bash
 # Start dev server (checks port with nc, gracefully handles existing processes)
 nc -z localhost 4321 2>/dev/null || (lsof -ti:4321 2>/dev/null | xargs kill -9 2>/dev/null; npm run dev > /dev/null 2>&1 &)
@@ -58,6 +64,7 @@ npm run build                         # Production build
 ```
 
 ### URLs & Files
+
 - Dev: http://localhost:4321/ralph-web/
 - Jace: http://localhost:8081/jace-copy/
 - Production: https://zitrono.github.io/ralph-web/
@@ -66,6 +73,7 @@ npm run build                         # Production build
 - Design: `src/config/design-system.ts`
 
 ## 🎯 Component Template
+
 ```astro
 ---
 import type { BaseComponentProps } from '@/types/components';
@@ -83,21 +91,25 @@ const { variant = 'primary', class: className = '', ...rest } = Astro.props;
 ```
 
 ## 📊 Quality Gates
+
 - TypeScript: 100% strict mode
-- POM: 99.9% success (2,458+ properties)  
+- POM: 99.9% success (2,458+ properties)
 - Bundle: JS <500KB, CSS <200KB
 - Accessibility: WCAG 2.1 AA (95%+)
 
 ## 🚨 POM Rules
+
 - Fix implementation to match POM, never modify POM
 - Mobile header: exactly 64px
 - Hero CTA: `main button.btn-primary.btn-lg`
 
 ## Legacy Reference
+
 - Project: ralph-web → https://zitrono.github.io/ralph-web/
 - Jace reference: http://localhost:8081/ (for POM testing)
 
 ## Design Tokens Reference
+
 ```css
 bg-background     /* rgb(40, 40, 40) - main background */
 bg-secondary      /* rgb(65, 65, 65) - secondary areas */
@@ -109,12 +121,14 @@ text-muted       /* rgb(156, 163, 175) - muted text */
 ```
 
 ### Key System Files
+
 - `src/config/design-system.ts` - Token definitions
 - `src/styles/design-tokens.css` - CSS variables
 - `tailwind.config.mjs` - Tailwind integration
 - `src/types/components.ts` - TypeScript interfaces
 
 ## Requirements Summary
+
 - **Accessibility**: WCAG 2.1 AA, 44px touch targets, ARIA labels
 - **Performance**: Bundle <500KB JS, <200KB CSS
 - **TypeScript**: Strict mode, BaseComponentProps interface

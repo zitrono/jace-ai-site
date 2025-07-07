@@ -2,7 +2,7 @@
 /**
  * CTA - Call-to-action section component with enterprise B2B styling
  * @example
- * <CTA 
+ * <CTA
  *   title="Transform your portfolio intelligence with Ralph"
  *   subtitle="Join leading PE firms using AI to identify opportunities 30+ days before competitors."
  *   ctaText="Book Demo"
@@ -50,76 +50,75 @@ const {
 
 <Section class={className} as="section" background="primary" spacing="lg">
   <div>
-    {variant === 'enterprise' ? (
-      <div class="bg-background border border-accent/20 rounded-lg overflow-hidden">
-        <div class="border-l-4 border-accent bg-card/50 py-section-sm">
-          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 px-base lg:px-lg">
-            <div class="lg:max-w-2xl">
-              <h2 class="text-2xl font-bold text-primary mb-3">
-                {title}
-              </h2>
-              <p class="text-secondary">
-                {subtitle}
-              </p>
-              {showCompliance && (
-                <div class="flex items-center mt-4 text-sm text-muted">
-                  <svg class="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  Enterprise deployment • SOC2 compliant • On-premise available
-                </div>
-              )}
+    {
+      variant === 'enterprise' ? (
+        <div class="bg-background border border-accent/20 rounded-lg overflow-hidden">
+          <div class="border-l-4 border-accent bg-card/50 py-section-sm">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 px-base lg:px-lg">
+              <div class="lg:max-w-2xl">
+                <h2 class="text-2xl font-bold text-primary mb-3">{title}</h2>
+                <p class="text-secondary">{subtitle}</p>
+                {showCompliance && (
+                  <div class="flex items-center mt-4 text-sm text-muted">
+                    <svg class="w-4 h-4 mr-2 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Enterprise deployment • SOC2 compliant • On-premise available
+                  </div>
+                )}
+              </div>
+              <div class="flex-shrink-0 flex flex-col sm:flex-row gap-4">
+                <Button variant="primary" size="md" href={ctaHref} class="whitespace-nowrap">
+                  {ctaText}
+                </Button>
+                {secondaryCtaText && (
+                  <a
+                    href={secondaryCtaHref}
+                    class="text-accent hover:text-accent/80 font-medium self-center whitespace-nowrap"
+                  >
+                    {secondaryCtaText} →
+                  </a>
+                )}
+              </div>
             </div>
-            <div class="flex-shrink-0 flex flex-col sm:flex-row gap-4">
-              <Button variant="primary" size="md" href={ctaHref} class="whitespace-nowrap">
+          </div>
+        </div>
+      ) : variant === 'compact' ? (
+        <div class="bg-card border border-neutral-600 rounded-lg px-lg py-section-sm">
+          <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-primary mb-4">{title}</h2>
+            <p class="text-lg text-secondary mb-8">{subtitle}</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button variant="primary" size="md" href={ctaHref}>
                 {ctaText}
               </Button>
               {secondaryCtaText && (
-                <a href={secondaryCtaHref} class="text-accent hover:text-accent/80 font-medium self-center whitespace-nowrap">
+                <a href={secondaryCtaHref} class="text-accent hover:text-accent/80 font-medium">
                   {secondaryCtaText} →
                 </a>
               )}
             </div>
           </div>
         </div>
-      </div>
-    ) : variant === 'compact' ? (
-      <div class="bg-card border border-neutral-600 rounded-lg px-lg py-section-sm">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="text-3xl font-bold text-primary mb-4">
-            {title}
-          </h2>
-          <p class="text-lg text-secondary mb-8">
-            {subtitle}
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="primary" size="md" href={ctaHref}>
-              {ctaText}
-            </Button>
-            {secondaryCtaText && (
-              <a href={secondaryCtaHref} class="text-accent hover:text-accent/80 font-medium">
-                {secondaryCtaText} →
-              </a>
-            )}
+      ) : (
+        <div class="sm:mt-12">
+          <div class="relative isolate overflow-hidden px-base py-section-base shadow-2xl sm:rounded-3xl sm:px-section-lg xl:py-section-lg bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/20">
+            <h2 class="mx-auto max-w-xl text-center text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
+              {title}
+            </h2>
+            <p class="mx-auto mt-6 max-w-lg text-center text-xl text-secondary">{subtitle}</p>
+            <div class="mt-10 flex justify-center">
+              <Button variant="primary" size="md" href={ctaHref}>
+                {ctaText}
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    ) : (
-      <div class="sm:mt-12">
-        <div class="relative isolate overflow-hidden px-base py-section-base shadow-2xl sm:rounded-3xl sm:px-section-lg xl:py-section-lg bg-gradient-to-r from-accent/20 to-accent/10 border border-accent/20">
-          <h2 class="mx-auto max-w-xl text-center text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
-            {title}
-          </h2>
-          <p class="mx-auto mt-6 max-w-lg text-center text-xl text-secondary">
-            {subtitle}
-          </p>
-          <div class="mt-10 flex justify-center">
-            <Button variant="primary" size="md" href={ctaHref}>
-              {ctaText}
-            </Button>
-          </div>
-        </div>
-      </div>
-    )}
+      )
+    }
   </div>
 </Section>

@@ -2,7 +2,7 @@
 /**
  * Hero - Main hero section with title, subtitle, and CTA
  * @example
- * <Hero 
+ * <Hero
  *   title="See Tomorrow's Opportunities Today"
  *   subtitle="AI agents transform your data"
  *   ctaText="Book a Demo"
@@ -64,17 +64,15 @@ const {
           </defs>
           <rect fill="url(#hero-pattern)" width="100%" height="100%" stroke-width="0" />
         </svg>
-        <!-- Gradient overlays to fade pattern into background -->
-        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
-        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-transparent via-transparent to-background/80"></div>
-        <div class="absolute inset-0 -z-10 bg-gradient-radial from-transparent via-transparent to-background/60"></div>
+        {/* Gradient overlays to fade pattern into background */}
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-transparent via-transparent to-background/80" />
+        <div class="absolute inset-0 -z-10 bg-gradient-radial from-transparent via-transparent to-background/60" />
       </>
     )
   }
 
-  <div
-    class="lg:flex lg:items-center lg:gap-x-20"
-  >
+  <div class="lg:flex lg:items-center lg:gap-x-20">
     <div class="lg:flex-auto lg:w-5/12">
       <h1
         class="text-hero font-bold leading-tight pb-2 text-pretty gradient-hero-title max-sm:text-center tracking-tighter lg:mt-10"
@@ -89,12 +87,7 @@ const {
         {subtitle}
       </p>
       <div class="mt-10 flex items-center justify-center lg:justify-start flex-wrap gap-4">
-        <Button 
-          variant="primary" 
-          size="lg" 
-          data-test="cta-button" 
-          {...getButtonAction('bookDemo')}
-        >
+        <Button variant="primary" size="lg" data-test="cta-button" {...getButtonAction('bookDemo')}>
           {ctaText}
         </Button>
       </div>

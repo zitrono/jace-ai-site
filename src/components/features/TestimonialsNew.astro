@@ -2,7 +2,7 @@
 /**
  * TestimonialsNew - Testimonials section with PE leader quotes
  * @example
- * <TestimonialsNew 
+ * <TestimonialsNew
  *   title="Leading PE Firms Are Embracing AI"
  *   subtitle="Industry Leaders on AI Adoption"
  *   columns={3}
@@ -113,7 +113,6 @@ const {
     },
   ],
 } = Astro.props;
-
 ---
 
 <Section
@@ -145,27 +144,25 @@ const {
     >
       {
         testimonials.slice(0, 6).map((testimonial) => (
-          <article 
-            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300 -mx-6 lg:mx-0"
+          <article
+            class="bg-card text-primary p-4 sm:p-5 lg:p-6 rounded-lg border-l-4 border-accent shadow-md hover:shadow-lg transition-all duration-300 -mx-6 lg:mx-0"
             role="listitem"
           >
-            <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700">
+            <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-secondary">
               "{testimonial.quote}"
             </blockquote>
-            <footer class="border-t border-gray-200 pt-3">
+            <footer class="border-t border-neutral-700 pt-3">
               <div class="flex items-center justify-between gap-3">
                 <div class="min-w-0">
-                  <cite class="font-bold text-gray-900 not-italic text-sm block">
+                  <cite class="font-bold text-primary not-italic text-sm block">
                     {testimonial.author}
                   </cite>
-                  <div class="text-xs text-gray-600">
-                    {testimonial.company}
-                  </div>
+                  <div class="text-xs text-muted">{testimonial.company}</div>
                 </div>
                 {testimonial.logo && _showLogos && (
-                  <img 
-                    src={testimonial.logo} 
-                    alt={`${testimonial.company} logo`} 
+                  <img
+                    src={testimonial.logo}
+                    alt={`${testimonial.company} logo`}
                     class="w-16 h-6 object-contain opacity-70 flex-shrink-0"
                   />
                 )}

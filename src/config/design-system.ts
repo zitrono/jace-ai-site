@@ -109,12 +109,39 @@ interface ComponentSizes {
   };
 }
 
+interface ZIndex {
+  base: number;
+  dropdown: number;
+  header: number;
+  cookieBanner: number;
+  mobileMenu: number;
+  modal: number;
+  popover: number;
+  tooltip: number;
+}
+
+interface Effects {
+  glassmorphism: {
+    background: string;
+    backdropFilter: string;
+    border?: string;
+  };
+  shadows: {
+    sm: string;
+    base: string;
+    lg: string;
+    xl: string;
+  };
+}
+
 export interface DesignSystem {
   colors: Colors;
   spacing: Spacing;
   typography: Typography;
   borderRadius: BorderRadius;
   components: ComponentSizes;
+  zIndex: ZIndex;
+  effects: Effects;
 }
 
 export const designSystem: DesignSystem = {
@@ -212,6 +239,31 @@ export const designSystem: DesignSystem = {
       sm: '8px 16px',
       base: '10px 24px', // POM exact value for mobile buttons
       lg: '12px 32px',
+    },
+  },
+
+  zIndex: {
+    base: 0,
+    dropdown: 10,
+    header: 20,
+    cookieBanner: 30,
+    mobileMenu: 40,
+    modal: 50,
+    popover: 60,
+    tooltip: 70,
+  },
+
+  effects: {
+    glassmorphism: {
+      background: 'rgba(40, 40, 40, 0.5)',
+      backdropFilter: 'blur(40px)',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+    },
+    shadows: {
+      sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      base: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      lg: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+      xl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
     },
   },
 };

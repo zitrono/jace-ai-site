@@ -1,12 +1,12 @@
 ---
 /**
  * Header - Main site header with systematic alignment enforcement
- * 
+ *
  * Uses HeaderLayout and HeaderButton components to prevent misalignment.
  * Follows design token contract system for consistent sizing.
- * 
+ *
  * @example
- * <Header 
+ * <Header
  *   logoText="ralph"
  *   logoHref="/ralph-web/"
  *   sticky={true}
@@ -65,7 +65,6 @@ const {
   loginText = 'Log In',
   ...rest
 } = Astro.props;
-
 ---
 
 <HeaderLayout sticky={sticky} headerClass={className} {...rest}>
@@ -97,7 +96,7 @@ const {
         </Button>
       )
     }
-    
+
     <button
       id="mobile-menu-button"
       type="button"
@@ -131,7 +130,7 @@ const {
           variant="nav"
           href={link.href}
           useHeaderContract={true}
-          class="nav-link"
+          class="font-semibold text-primary hover:text-accent transition-colors duration-200"
           {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
         >
           {link.text}
@@ -167,16 +166,11 @@ const {
 </HeaderLayout>
 
 <!-- Mobile Menu Component - Outside header to prevent positioning conflicts -->
-<MobileMenu 
-  navigationLinks={navLinks}
-  showCta={showCta}
-  ctaText={ctaText}
-  loginText={loginText}
-/>
+<MobileMenu navigationLinks={navLinks} showCta={showCta} ctaText={ctaText} loginText={loginText} />
 
 <script>
   import { mobileMenuManager } from '@/utils/mobile-menu-manager';
-  
+
   document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.getElementById('mobile-menu-button');
     menuButton?.addEventListener('click', () => mobileMenuManager.open());

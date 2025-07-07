@@ -3,7 +3,6 @@
  * Handles form validation, submission, loading states, and error handling
  */
 
-
 export interface AuthFormElements {
   form: HTMLFormElement;
   usernameInput: HTMLInputElement;
@@ -54,7 +53,7 @@ export class AuthFormHandler {
     });
 
     // Hide error message when user starts typing
-    [this.elements.usernameInput, this.elements.passwordInput].forEach(input => {
+    [this.elements.usernameInput, this.elements.passwordInput].forEach((input) => {
       input?.addEventListener('input', () => {
         this.hideError();
       });
@@ -70,11 +69,11 @@ export class AuthFormHandler {
   private togglePasswordVisibility(): void {
     const isPassword = this.elements.passwordInput.type === 'password';
     this.elements.passwordInput.type = isPassword ? 'text' : 'password';
-    
+
     // Update eye icon
-    this.elements.eyeIcon.innerHTML = isPassword ? 
-      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>' :
-      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+    this.elements.eyeIcon.innerHTML = isPassword
+      ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>'
+      : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
   }
 
   private showError(message: string): void {
@@ -90,7 +89,7 @@ export class AuthFormHandler {
 
   private setLoadingState(loading: boolean): void {
     this.isSubmitting = loading;
-    
+
     if (loading) {
       this.elements.loginButton.disabled = true;
       this.elements.loginButtonText.classList.add('opacity-0');
@@ -120,14 +119,14 @@ export class AuthFormHandler {
     try {
       // Simulate authentication with delay (1.5-2.5 seconds)
       const delay = Math.random() * 1000 + 1500;
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
 
       // Always return authentication error for demo purposes
       throw new Error('Invalid username or password. Please check your credentials and try again.');
     } catch (error) {
       // Show error
       this.showError((error as Error).message || 'Invalid username or password. Please try again.');
-      
+
       // Hide loading state
       this.setLoadingState(false);
 

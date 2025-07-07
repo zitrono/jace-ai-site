@@ -1,10 +1,10 @@
 ---
 /**
  * HeaderLayout - Layout container that enforces header alignment constraints
- * 
+ *
  * Provides consistent structure and ensures all header elements align properly.
  * Uses CSS custom properties to enforce design token compliance.
- * 
+ *
  * @example
  * <HeaderLayout>
  *   <div slot="logo">Logo</div>
@@ -23,29 +23,28 @@ interface Props extends BaseComponentProps {
   headerClass?: string;
 }
 
-const {
-  sticky = true,
-  headerClass = '',
-  class: _className = '',
-  ...rest
-} = Astro.props;
+const { sticky = true, headerClass = '', class: _className = '', ...rest } = Astro.props;
 
 const headerClasses = [
   // Position - sticky with gap from top
   sticky ? 'sticky top-2' : 'relative',
   // Layout and z-index
-  'z-20 inset-x-0',
+  'z-header inset-x-0',
   // No background at header level - handled by inner container
   // Transitions
   'transition-all duration-300',
   // Custom class
   headerClass,
-].filter(Boolean).join(' ');
+]
+  .filter(Boolean)
+  .join(' ');
 ---
 
-<header 
-  class={headerClasses} 
-  style={Object.entries(HEADER_CSS_VARS).map(([key, value]) => `${key}:${value}`).join(';')}
+<header
+  class={headerClasses}
+  style={Object.entries(HEADER_CSS_VARS)
+    .map(([key, value]) => `${key}:${value}`)
+    .join(';')}
   {...rest}
 >
   <!-- Skip link for accessibility -->
@@ -57,38 +56,38 @@ const headerClasses = [
   </a>
 
   <!-- Main navigation container -->
-  <nav
-    class="w-full header-nav-wrapper"
-    role="navigation"
-    aria-label="Main navigation"
-  >
+  <nav class="w-full header-nav-wrapper" role="navigation" aria-label="Main navigation">
     <!-- Inner container with consistent width -->
     <div class="header-inner-container mx-auto max-w-7xl">
       <!-- Header element container with enforced alignment -->
-      <div class="header-elements-container flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
-      <!-- Logo section -->
-      <div class="header-logo flex lg:flex-1">
-        <slot name="logo" />
-      </div>
-
-      <!-- Mobile elements (hidden on desktop) -->
-      <div class="header-mobile">
-        <slot name="mobile" />
-      </div>
-
-      <!-- Desktop navigation and actions (hidden on mobile) -->
-      <div class="header-desktop hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8">
-        <!-- Navigation links -->
-        <div class="header-navigation">
-          <slot name="navigation" />
+      <div
+        class="header-elements-container flex items-center justify-between w-full px-4 sm:px-6 lg:px-8"
+      >
+        <!-- Logo section -->
+        <div class="header-logo flex lg:flex-1">
+          <slot name="logo" />
         </div>
 
-        <!-- Action buttons -->
-        <div class="header-actions">
-          <slot name="actions" />
+        <!-- Mobile elements (hidden on desktop) -->
+        <div class="header-mobile">
+          <slot name="mobile" />
+        </div>
+
+        <!-- Desktop navigation and actions (hidden on mobile) -->
+        <div
+          class="header-desktop hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-8"
+        >
+          <!-- Navigation links -->
+          <div class="header-navigation">
+            <slot name="navigation" />
+          </div>
+
+          <!-- Action buttons -->
+          <div class="header-actions">
+            <slot name="actions" />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </nav>
 </header>
@@ -98,32 +97,32 @@ const headerClasses = [
   .header-nav-wrapper {
     padding: 8px 16px; /* Side padding for narrow width */
   }
-  
+
   /* Glass morphism effect for all viewports with consistent narrow width */
   .header-inner-container {
     border-radius: 16px;
-    background: rgba(40, 40, 40, 0.5);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background: var(--glassmorphism-bg);
+    backdrop-filter: var(--glassmorphism-backdrop);
+    -webkit-backdrop-filter: var(--glassmorphism-backdrop);
+    box-shadow: var(--shadow-base);
     padding: 8px;
     transition: all 0.3s ease;
     width: calc(100% - 32px); /* Slightly narrower than viewport */
     max-width: calc(1280px + 32px); /* Slightly wider than max content width */
     margin: 0 auto;
   }
-  
+
   /* Responsive header heights scaled down by 20% */
   .header-elements-container {
     min-height: 51.2px; /* Mobile: 64px * 0.8 = 51.2px */
   }
-  
+
   @media (min-width: 768px) {
     .header-elements-container {
       min-height: 65px; /* Tablet: 81.25px * 0.8 = 65px */
     }
   }
-  
+
   @media (min-width: 1024px) {
     .header-elements-container {
       min-height: 70.4px; /* Desktop: 88px * 0.8 = 70.4px */

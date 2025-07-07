@@ -1,17 +1,17 @@
 /**
  * Animation Manager - Unified animation system for ralph-web
- * 
+ *
  * Provides consistent animations across all components with:
  * - Standardized 300ms duration
  * - Performance-optimized transforms
  * - Proper cleanup mechanisms
  * - Accessibility considerations
  * - Memory leak prevention
- * 
+ *
  * @example
  * ```typescript
  * import { fadeIn, slideUp, createAnimationCleanup } from '@/utils/animation-manager';
- * 
+ *
  * const cleanup = fadeIn(element, { duration: 300 });
  * // Later: cleanup() to prevent memory leaks
  * ```
@@ -63,11 +63,11 @@ export function prefersReducedMotion(): boolean {
  */
 function getEffectiveDuration(duration?: number, respectReducedMotion = true): number {
   const baseDuration = duration ?? ANIMATION_CONFIG.DURATION;
-  
+
   if (respectReducedMotion && prefersReducedMotion()) {
     return ANIMATION_CONFIG.REDUCED_MOTION_DURATION;
   }
-  
+
   return baseDuration;
 }
 
@@ -79,7 +79,7 @@ function createTimeout(callback: () => void, delay: number): number {
     activeTimeouts.delete(timeoutId);
     callback();
   }, delay);
-  
+
   activeTimeouts.add(timeoutId);
   return timeoutId;
 }
@@ -88,7 +88,7 @@ function createTimeout(callback: () => void, delay: number): number {
  * Clean up all active timeouts (for emergency cleanup)
  */
 export function cleanupAllTimeouts(): void {
-  activeTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+  activeTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
   activeTimeouts.clear();
 }
 
@@ -137,19 +137,19 @@ export function fadeIn(
     prepareElementForAnimation(element, ['opacity']);
     element.style.opacity = '0';
     element.style.transition = `opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.opacity = '1';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -162,12 +162,12 @@ export function fadeIn(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -175,7 +175,7 @@ export function fadeIn(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -209,19 +209,19 @@ export function fadeOut(
     // Prepare element
     prepareElementForAnimation(element, ['opacity']);
     element.style.transition = `opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.opacity = '0';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -234,12 +234,12 @@ export function fadeOut(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -247,7 +247,7 @@ export function fadeOut(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -281,24 +281,24 @@ export function slideUp(
     // Prepare element with current height
     const currentHeight = element.offsetHeight;
     prepareElementForAnimation(element, ['transform', 'opacity']);
-    
+
     element.style.height = `${currentHeight}px`;
     element.style.overflow = 'hidden';
     element.style.transition = `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateY(-100%)';
       element.style.opacity = '0';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.height = '';
         element.style.overflow = '';
@@ -314,12 +314,12 @@ export function slideUp(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.height = '';
     element.style.overflow = '';
@@ -330,7 +330,7 @@ export function slideUp(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -363,25 +363,25 @@ export function slideDown(
   const promise = new Promise<void>((resolve) => {
     // Prepare element
     prepareElementForAnimation(element, ['transform', 'opacity']);
-    
+
     element.style.transform = 'translateY(-100%)';
     element.style.opacity = '0';
     element.style.overflow = 'hidden';
     element.style.transition = `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateY(0)';
       element.style.opacity = '1';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.overflow = '';
         element.style.transform = '';
@@ -396,12 +396,12 @@ export function slideDown(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.overflow = '';
     element.style.transform = '';
@@ -411,7 +411,7 @@ export function slideDown(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -446,19 +446,19 @@ export function mobileMenuSlideIn(
     prepareElementForAnimation(element, ['transform']);
     element.style.transform = 'translateX(100%)';
     element.style.transition = `transform ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateX(0)';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -471,12 +471,12 @@ export function mobileMenuSlideIn(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -484,7 +484,7 @@ export function mobileMenuSlideIn(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -518,19 +518,19 @@ export function mobileMenuSlideOut(
     // Prepare element
     prepareElementForAnimation(element, ['transform']);
     element.style.transition = `transform ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateX(100%)';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -543,12 +543,12 @@ export function mobileMenuSlideOut(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -556,7 +556,7 @@ export function mobileMenuSlideOut(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -592,20 +592,20 @@ export function cookieBannerSlideUp(
     element.style.transform = 'translateY(100%)';
     element.style.opacity = '0';
     element.style.transition = `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateY(0)';
       element.style.opacity = '1';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -618,12 +618,12 @@ export function cookieBannerSlideUp(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -631,7 +631,7 @@ export function cookieBannerSlideUp(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -665,20 +665,20 @@ export function cookieBannerSlideDown(
     // Prepare element
     prepareElementForAnimation(element, ['transform', 'opacity']);
     element.style.transition = `transform ${duration}ms ${easing}, opacity ${duration}ms ${easing}`;
-    
+
     // Trigger animation on next frame
     requestAnimationFrame(() => {
       if (resolved) return;
-      
+
       options.onStart?.();
       element.style.transform = 'translateY(100%)';
       element.style.opacity = '0';
-      
+
       // Complete animation
       timeoutId = createTimeout(() => {
         if (resolved) return;
         resolved = true;
-        
+
         cleanupElementAfterAnimation(element);
         element.style.transition = '';
         activeAnimations.delete(element);
@@ -691,12 +691,12 @@ export function cookieBannerSlideDown(
   const cleanup = () => {
     if (resolved) return;
     resolved = true;
-    
+
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       activeTimeouts.delete(timeoutId);
     }
-    
+
     cleanupElementAfterAnimation(element);
     element.style.transition = '';
     activeAnimations.delete(element);
@@ -704,7 +704,7 @@ export function cookieBannerSlideDown(
 
   const animationCleanup = { cleanup, promise };
   activeAnimations.set(element, animationCleanup);
-  
+
   return animationCleanup;
 }
 
@@ -714,7 +714,7 @@ export function cookieBannerSlideDown(
 export function cleanupAllAnimations(): void {
   // Clean up all timeouts
   cleanupAllTimeouts();
-  
+
   // Note: WeakMap doesn't support iteration, so we rely on individual cleanup
   // This is intentional for memory efficiency - WeakMap allows garbage collection
   // of elements when they're no longer referenced elsewhere
@@ -728,7 +728,7 @@ export function initAnimationSystem(): void {
   window.addEventListener('beforeunload', () => {
     cleanupAllAnimations();
   });
-  
+
   // Clean up on page visibility change (tab switching)
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

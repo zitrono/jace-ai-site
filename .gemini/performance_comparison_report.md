@@ -3,27 +3,30 @@
 ## Test Results Summary
 
 ### Test Setup
+
 - **Project**: ralph-web (Astro-based website)
 - **Code Size**: ~84KB of TypeScript and Astro components
 - **Tool**: Gemini CLI via npx
 
 ### Timing Results
 
-| Test Type | Response Time | Notes |
-|-----------|---------------|--------|
-| **Folder Analysis** | ~23 seconds | Direct folder reference |
-| **Merged File Analysis** | ~93 seconds (1m 33s) | Single merged file |
+| Test Type                | Response Time        | Notes                   |
+| ------------------------ | -------------------- | ----------------------- |
+| **Folder Analysis**      | ~23 seconds          | Direct folder reference |
+| **Merged File Analysis** | ~93 seconds (1m 33s) | Single merged file      |
 
 ### Quality Comparison
 
 #### 1. Folder Analysis Output
+
 - **Depth**: Very comprehensive, explored entire directory structure
 - **Process**: Gemini actively navigated through directories, read multiple files
 - **Details**: Provided file-by-file analysis, discovered patterns organically
 - **Length**: ~13KB of detailed analysis
 - **Approach**: Discovery-based, simulated human exploration
 
-#### 2. Merged File Analysis Output  
+#### 2. Merged File Analysis Output
+
 - **Depth**: Good high-level summary but less detailed
 - **Process**: Single file read, analyzed pre-merged content
 - **Details**: Focused on patterns visible in the merged code
@@ -35,7 +38,6 @@
 1. **Performance Surprise**: Folder analysis was 4x faster than merged file
    - Folder: 23 seconds
    - Merged: 93 seconds
-   
 2. **Quality Differences**:
    - Folder analysis provided much more comprehensive insights
    - Folder analysis discovered the project structure and dependencies

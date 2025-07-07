@@ -20,14 +20,13 @@
  * ```
  */
 import { Image } from 'astro:assets';
+import type { BaseComponentProps } from '@/types/components';
 
-interface Props {
+interface Props extends BaseComponentProps {
   /** Image source - can be imported asset or URL string */
   src: ImageMetadata | string;
   /** Alt text for accessibility (required) */
   alt: string;
-  /** Additional CSS classes */
-  class?: string;
   /** Loading strategy - lazy by default for performance */
   loading?: 'lazy' | 'eager';
   /** Image width in pixels */

@@ -1,12 +1,12 @@
 ---
 /**
  * MobileMenu - Mobile navigation menu component
- * 
+ *
  * A responsive navigation menu that displays on mobile devices.
  * Hidden on desktop (lg breakpoint and above).
- * 
+ *
  * @example
- * <MobileMenu 
+ * <MobileMenu
  *   navigationLinks={links}
  *   showCta={true}
  *   ctaText="Book a Demo"
@@ -45,21 +45,12 @@ const {
 ---
 
 <!-- Mobile Menu Container -->
-<div 
-  id="mobile-menu" 
-  class="hidden fixed inset-0 z-50" 
-  data-mobile-menu-overlay
-  {...rest}
->
+<div id="mobile-menu" class="hidden fixed inset-0 z-mobileMenu" data-mobile-menu-overlay {...rest}>
   <!-- Backdrop - Semi-transparent overlay -->
-  <div 
-    class="fixed inset-0 bg-black bg-opacity-50"
-    aria-label="Close menu"
-    data-backdrop
-  ></div>
-  
+  <div class="fixed inset-0 bg-black bg-opacity-50" aria-label="Close menu" data-backdrop></div>
+
   <!-- Menu Panel - Right-aligned drawer -->
-  <div 
+  <div
     class={`fixed right-0 top-0 h-full w-full sm:max-w-xs bg-background p-6 shadow-2xl ${className}`}
     data-mobile-menu-panel
   >
@@ -78,50 +69,60 @@ const {
           aria-label="Close menu"
           data-close-button
         >
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
-      
+
       <!-- Navigation container -->
       <nav class="mt-6 flex flex-1 flex-col">
         <!-- Navigation links -->
         <div class="space-y-2">
-          {navigationLinks.map((link) => (
-            <a
-              href={link.href}
-              class="block rounded-lg px-0 py-2 text-base font-semibold leading-7 text-white hover:bg-neutral-700 hover:px-3 transition-all duration-200"
-              onclick="closeMobileMenu()"
-              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-            >
-              {link.text}
-            </a>
-          ))}
+          {
+            navigationLinks.map((link) => (
+              <a
+                href={link.href}
+                class="block rounded-lg px-0 py-2 text-base font-semibold leading-7 text-white hover:bg-neutral-700 hover:px-3 transition-all duration-200"
+                onclick="closeMobileMenu()"
+                {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+              >
+                {link.text}
+              </a>
+            ))
+          }
         </div>
-        
+
         <!-- CTA buttons at bottom -->
-        {showCta && (
-          <div class="mt-auto space-y-2 py-6">
-            <Button
-              variant="secondary"
-              size="md"
-              fullWidth={true}
-              {...getButtonAction('mobileLogin')}
-            >
-              {loginText}
-            </Button>
-            <Button
-              variant="primary"
-              size="md"
-              fullWidth={true}
-              {...getButtonAction('bookDemo')}
-              onclick="closeMobileMenu();"
-            >
-              {ctaText}
-            </Button>
-          </div>
-        )}
+        {
+          showCta && (
+            <div class="mt-auto space-y-2 py-6">
+              <Button
+                variant="secondary"
+                size="md"
+                fullWidth={true}
+                {...getButtonAction('mobileLogin')}
+              >
+                {loginText}
+              </Button>
+              <Button
+                variant="primary"
+                size="md"
+                fullWidth={true}
+                {...getButtonAction('bookDemo')}
+                onclick="closeMobileMenu();"
+              >
+                {ctaText}
+              </Button>
+            </div>
+          )
+        }
       </nav>
     </div>
   </div>
@@ -129,18 +130,17 @@ const {
 
 <script>
   import { mobileMenuManager } from '@/utils/mobile-menu-manager';
-  
+
   // Expose functions globally for backward compatibility
   window.openMobileMenu = () => mobileMenuManager.open();
   window.closeMobileMenu = () => mobileMenuManager.close();
-  
+
   // Set up event listeners for close actions
   document.addEventListener('DOMContentLoaded', () => {
     const backdrop = document.querySelector('[data-backdrop]');
     const closeButton = document.querySelector('[data-close-button]');
-    
+
     backdrop?.addEventListener('click', () => mobileMenuManager.close());
     closeButton?.addEventListener('click', () => mobileMenuManager.close());
   });
 </script>
-

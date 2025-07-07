@@ -11,6 +11,7 @@ After analyzing the codebase, I found **multiple instances of hardcoded `onclick
 The login modal is opened in **3 different ways**:
 
 1. **Desktop Header Login Button** (`/src/components/layout/Header.astro`)
+
    ```astro
    <HeaderButton
      variant="secondary"
@@ -23,6 +24,7 @@ The login modal is opened in **3 different ways**:
    ```
 
 2. **Mobile Menu Login Button** (`/src/components/layout/MobileMenu.astro`)
+
    ```astro
    <Button
      variant="secondary"
@@ -55,7 +57,7 @@ The login modal is opened in **3 different ways**:
 ### 3. **No Central Configuration**
 
 - **NO centralized configuration** for button actions exists
-- Each component independently calls `openLoginModal()` 
+- Each component independently calls `openLoginModal()`
 - The function is defined globally in `LoginModal.astro` and made available via `window.openLoginModal`
 - There's also a legacy `showLoginModal` alias for backward compatibility
 
@@ -100,7 +102,7 @@ window.openLoginModal = () => {
 ## Files Affected
 
 - `/src/components/layout/Header.astro` - Desktop login button
-- `/src/components/layout/MobileMenu.astro` - Mobile login button  
+- `/src/components/layout/MobileMenu.astro` - Mobile login button
 - `/src/components/utils/LoginModal.astro` - Modal definition and global functions
 - `/src/scripts/modal-manager.ts` - Redundant modal management code
 - All compiled HTML files in `/docs/` contain the hardcoded handlers

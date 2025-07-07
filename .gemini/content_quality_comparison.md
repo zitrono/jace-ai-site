@@ -3,6 +3,7 @@
 ## Folder Analysis Excerpt (Comprehensive)
 
 The analysis included:
+
 - Full exploration of directory structure
 - Reading and analyzing configuration files (astro.config.mjs, package.json)
 - Examining individual components and their relationships
@@ -17,6 +18,7 @@ Example insight:
 ## Merged File Analysis Excerpt (Summary)
 
 The analysis provided:
+
 - High-level architectural overview
 - Identification of main patterns
 - Basic understanding of state management

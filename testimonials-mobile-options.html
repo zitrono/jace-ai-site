@@ -1,376 +1,484 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Testimonial Mobile-Optimized Redesign</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @font-face {
-            font-family: 'Geist';
-            src: url('/ralph-web/fonts/Geist-Regular.woff2') format('woff2');
-            font-weight: 400;
-        }
-        @font-face {
-            font-family: 'Geist';
-            src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
-            font-weight: 600;
-        }
-        @font-face {
-            font-family: 'Geist';
-            src: url('/ralph-web/fonts/Geist-Bold.woff2') format('woff2');
-            font-weight: 700;
-        }
-        body {
-            font-family: 'Geist', system-ui, sans-serif;
-        }
-        .wsj-quote {
-            font-family: Georgia, 'Times New Roman', serif;
-        }
+      @font-face {
+        font-family: 'Geist';
+        src: url('/ralph-web/fonts/Geist-Regular.woff2') format('woff2');
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: 'Geist';
+        src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: 'Geist';
+        src: url('/ralph-web/fonts/Geist-Bold.woff2') format('woff2');
+        font-weight: 700;
+      }
+      body {
+        font-family: 'Geist', system-ui, sans-serif;
+      }
+      .wsj-quote {
+        font-family: Georgia, 'Times New Roman', serif;
+      }
     </style>
-</head>
-<body class="bg-gray-900 text-white">
+  </head>
+  <body class="bg-gray-900 text-white">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-        <h1 class="text-3xl font-bold mb-8 text-center text-yellow-400">Mobile-Optimized Testimonial Options</h1>
-        
-        <!-- Current Design Reference -->
-        <section class="mb-16">
-            <h2 class="text-2xl font-semibold mb-6 text-yellow-400">Current Design (for reference)</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <article class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex items-start space-x-4">
-                        <div class="text-6xl text-gray-300 leading-none font-light">"</div>
-                        <div class="flex-1">
-                            <blockquote class="text-lg leading-relaxed font-normal italic mb-6 wsj-quote">
-                                This is a transformational technology. You have to be the first mover in your industry.
-                            </blockquote>
-                            <footer class="border-t border-gray-200 pt-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <cite class="font-bold text-gray-900 not-italic">
-                                            Stephen Schwarzman
-                                        </cite>
-                                        <div class="text-sm text-gray-600">
-                                            Chairman, CEO & Co-Founder
-                                        </div>
-                                        <div class="text-sm text-gray-500 font-medium">
-                                            Blackstone
-                                        </div>
-                                    </div>
-                                    <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-24 h-10 object-contain opacity-80">
-                                </div>
-                            </footer>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+      <h1 class="text-3xl font-bold mb-8 text-center text-yellow-400">
+        Mobile-Optimized Testimonial Options
+      </h1>
 
-        <!-- Option 1: Compact WSJ Style with Edge-to-Edge Mobile -->
-        <section class="mb-16">
-            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">Option 1: Compact WSJ with Full Mobile Width</h2>
-            <p class="text-gray-400 mb-6 text-sm">✓ Edge-to-edge on mobile ✓ Rounded corners ✓ 40% less vertical space ✓ Maintains WSJ authority</p>
-            
-            <!-- Mobile viewport simulation -->
-            <div class="bg-gray-800 p-4 rounded-lg mb-4 max-w-sm mx-auto">
-                <p class="text-xs text-gray-500 mb-2">Mobile View (375px)</p>
-                <div class="-mx-4">
-                    <article class="bg-white text-gray-900 p-4 border-l-4 border-gray-800 shadow-lg">
-                        <div class="flex items-start space-x-2">
-                            <div class="text-3xl text-gray-300 leading-none font-light flex-shrink-0">"</div>
-                            <div class="flex-1 min-w-0">
-                                <blockquote class="text-sm leading-relaxed italic mb-3 wsj-quote text-gray-700">
-                                    This is a transformational technology. You have to be the first mover in your industry.
-                                </blockquote>
-                                <footer class="border-t border-gray-200 pt-2">
-                                    <div class="flex items-center justify-between gap-2">
-                                        <div class="min-w-0">
-                                            <cite class="font-semibold text-gray-900 not-italic text-sm block truncate">
-                                                Stephen Schwarzman
-                                            </cite>
-                                            <div class="text-xs text-gray-600 truncate">
-                                                Chairman & CEO, Blackstone
-                                            </div>
-                                        </div>
-                                        <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-16 h-6 object-contain opacity-60 flex-shrink-0">
-                                    </div>
-                                </footer>
-                            </div>
-                        </div>
-                    </article>
+      <!-- Current Design Reference -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 text-yellow-400">Current Design (for reference)</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <article
+            class="bg-white text-gray-900 p-8 border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="flex items-start space-x-4">
+              <div class="text-6xl text-gray-300 leading-none font-light">"</div>
+              <div class="flex-1">
+                <blockquote class="text-lg leading-relaxed font-normal italic mb-6 wsj-quote">
+                  This is a transformational technology. You have to be the first mover in your
+                  industry.
+                </blockquote>
+                <footer class="border-t border-gray-200 pt-4">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <cite class="font-bold text-gray-900 not-italic"> Stephen Schwarzman </cite>
+                      <div class="text-sm text-gray-600">Chairman, CEO & Co-Founder</div>
+                      <div class="text-sm text-gray-500 font-medium">Blackstone</div>
+                    </div>
+                    <img
+                      src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                      alt="Blackstone"
+                      class="w-24 h-10 object-contain opacity-80"
+                    />
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Option 1: Compact WSJ Style with Edge-to-Edge Mobile -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-4 text-yellow-400">
+          Option 1: Compact WSJ with Full Mobile Width
+        </h2>
+        <p class="text-gray-400 mb-6 text-sm">
+          ✓ Edge-to-edge on mobile ✓ Rounded corners ✓ 40% less vertical space ✓ Maintains WSJ
+          authority
+        </p>
+
+        <!-- Mobile viewport simulation -->
+        <div class="bg-gray-800 p-4 rounded-lg mb-4 max-w-sm mx-auto">
+          <p class="text-xs text-gray-500 mb-2">Mobile View (375px)</p>
+          <div class="-mx-4">
+            <article class="bg-white text-gray-900 p-4 border-l-4 border-gray-800 shadow-lg">
+              <div class="flex items-start space-x-2">
+                <div class="text-3xl text-gray-300 leading-none font-light flex-shrink-0">"</div>
+                <div class="flex-1 min-w-0">
+                  <blockquote class="text-sm leading-relaxed italic mb-3 wsj-quote text-gray-700">
+                    This is a transformational technology. You have to be the first mover in your
+                    industry.
+                  </blockquote>
+                  <footer class="border-t border-gray-200 pt-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <div class="min-w-0">
+                        <cite class="font-semibold text-gray-900 not-italic text-sm block truncate">
+                          Stephen Schwarzman
+                        </cite>
+                        <div class="text-xs text-gray-600 truncate">Chairman & CEO, Blackstone</div>
+                      </div>
+                      <img
+                        src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                        alt="Blackstone"
+                        class="w-16 h-6 object-contain opacity-60 flex-shrink-0"
+                      />
+                    </div>
+                  </footer>
                 </div>
-            </div>
+              </div>
+            </article>
+          </div>
+        </div>
 
-            <!-- Desktop view -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
-                <article class="bg-white text-gray-900 p-4 sm:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex items-start space-x-3">
-                        <div class="text-4xl sm:text-5xl text-gray-300 leading-none font-light flex-shrink-0">"</div>
-                        <div class="flex-1 min-w-0">
-                            <blockquote class="text-sm sm:text-base lg:text-lg leading-relaxed italic mb-4 wsj-quote text-gray-700">
-                                This is a transformational technology. You have to be the first mover in your industry.
-                            </blockquote>
-                            <footer class="border-t border-gray-200 pt-3">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="min-w-0">
-                                        <cite class="font-semibold text-gray-900 not-italic text-sm lg:text-base block">
-                                            Stephen Schwarzman
-                                        </cite>
-                                        <div class="text-xs lg:text-sm text-gray-600">
-                                            Chairman, CEO & Co-Founder
-                                        </div>
-                                        <div class="text-xs text-gray-500 font-medium">
-                                            Blackstone
-                                        </div>
-                                    </div>
-                                    <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-16 lg:w-20 h-8 object-contain opacity-70 flex-shrink-0">
-                                </div>
-                            </footer>
-                        </div>
+        <!-- Desktop view -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
+          <article
+            class="bg-white text-gray-900 p-4 sm:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="flex items-start space-x-3">
+              <div class="text-4xl sm:text-5xl text-gray-300 leading-none font-light flex-shrink-0">
+                "
+              </div>
+              <div class="flex-1 min-w-0">
+                <blockquote
+                  class="text-sm sm:text-base lg:text-lg leading-relaxed italic mb-4 wsj-quote text-gray-700"
+                >
+                  This is a transformational technology. You have to be the first mover in your
+                  industry.
+                </blockquote>
+                <footer class="border-t border-gray-200 pt-3">
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="min-w-0">
+                      <cite
+                        class="font-semibold text-gray-900 not-italic text-sm lg:text-base block"
+                      >
+                        Stephen Schwarzman
+                      </cite>
+                      <div class="text-xs lg:text-sm text-gray-600">Chairman, CEO & Co-Founder</div>
+                      <div class="text-xs text-gray-500 font-medium">Blackstone</div>
                     </div>
-                </article>
-
-                <article class="bg-white text-gray-900 p-4 sm:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex items-start space-x-3">
-                        <div class="text-4xl sm:text-5xl text-gray-300 leading-none font-light flex-shrink-0">"</div>
-                        <div class="flex-1 min-w-0">
-                            <blockquote class="text-sm sm:text-base lg:text-lg leading-relaxed italic mb-4 wsj-quote text-gray-700">
-                                We have adopted generative AI not just as a tool but as a pivotal component.
-                            </blockquote>
-                            <footer class="border-t border-gray-200 pt-3">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="min-w-0">
-                                        <cite class="font-semibold text-gray-900 not-italic text-sm lg:text-base block">
-                                            Robert F. Smith
-                                        </cite>
-                                        <div class="text-xs lg:text-sm text-gray-600">
-                                            Founder, Chairman & CEO
-                                        </div>
-                                        <div class="text-xs text-gray-500 font-medium">
-                                            Vista Equity Partners
-                                        </div>
-                                    </div>
-                                    <img src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg" alt="Vista" class="w-16 lg:w-20 h-8 object-contain opacity-70 flex-shrink-0">
-                                </div>
-                            </footer>
-                        </div>
-                    </div>
-                </article>
+                    <img
+                      src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                      alt="Blackstone"
+                      class="w-16 lg:w-20 h-8 object-contain opacity-70 flex-shrink-0"
+                    />
+                  </div>
+                </footer>
+              </div>
             </div>
-        </section>
+          </article>
 
-        <!-- Option 2: Dark Theme Compact Cards -->
-        <section class="mb-16">
-            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">Option 2: Dark Compact Cards (Matches Site)</h2>
-            <p class="text-gray-400 mb-6 text-sm">✓ Consistent with site theme ✓ 50% space reduction ✓ Yellow accent quote</p>
-            
-            <!-- Mobile viewport -->
-            <div class="bg-gray-800 p-4 rounded-lg mb-4 max-w-sm mx-auto">
-                <p class="text-xs text-gray-500 mb-2">Mobile View</p>
-                <div class="-mx-4">
-                    <article class="bg-gray-800 p-4 border-l-4 border-yellow-400/50">
-                        <div class="flex items-start space-x-2">
-                            <div class="text-2xl text-yellow-400/30 leading-none flex-shrink-0">"</div>
-                            <div class="flex-1">
-                                <blockquote class="text-sm leading-relaxed mb-3 text-gray-300">
-                                    This is a transformational technology. You have to be the first mover.
-                                </blockquote>
-                                <footer class="flex items-center justify-between">
-                                    <div>
-                                        <cite class="font-semibold text-white not-italic text-sm block">
-                                            Stephen Schwarzman
-                                        </cite>
-                                        <div class="text-xs text-gray-500">
-                                            Blackstone
-                                        </div>
-                                    </div>
-                                    <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-14 h-5 object-contain opacity-30 filter invert">
-                                </footer>
-                            </div>
-                        </div>
-                    </article>
+          <article
+            class="bg-white text-gray-900 p-4 sm:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <div class="flex items-start space-x-3">
+              <div class="text-4xl sm:text-5xl text-gray-300 leading-none font-light flex-shrink-0">
+                "
+              </div>
+              <div class="flex-1 min-w-0">
+                <blockquote
+                  class="text-sm sm:text-base lg:text-lg leading-relaxed italic mb-4 wsj-quote text-gray-700"
+                >
+                  We have adopted generative AI not just as a tool but as a pivotal component.
+                </blockquote>
+                <footer class="border-t border-gray-200 pt-3">
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="min-w-0">
+                      <cite
+                        class="font-semibold text-gray-900 not-italic text-sm lg:text-base block"
+                      >
+                        Robert F. Smith
+                      </cite>
+                      <div class="text-xs lg:text-sm text-gray-600">Founder, Chairman & CEO</div>
+                      <div class="text-xs text-gray-500 font-medium">Vista Equity Partners</div>
+                    </div>
+                    <img
+                      src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg"
+                      alt="Vista"
+                      class="w-16 lg:w-20 h-8 object-contain opacity-70 flex-shrink-0"
+                    />
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Option 2: Dark Theme Compact Cards -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-4 text-yellow-400">
+          Option 2: Dark Compact Cards (Matches Site)
+        </h2>
+        <p class="text-gray-400 mb-6 text-sm">
+          ✓ Consistent with site theme ✓ 50% space reduction ✓ Yellow accent quote
+        </p>
+
+        <!-- Mobile viewport -->
+        <div class="bg-gray-800 p-4 rounded-lg mb-4 max-w-sm mx-auto">
+          <p class="text-xs text-gray-500 mb-2">Mobile View</p>
+          <div class="-mx-4">
+            <article class="bg-gray-800 p-4 border-l-4 border-yellow-400/50">
+              <div class="flex items-start space-x-2">
+                <div class="text-2xl text-yellow-400/30 leading-none flex-shrink-0">"</div>
+                <div class="flex-1">
+                  <blockquote class="text-sm leading-relaxed mb-3 text-gray-300">
+                    This is a transformational technology. You have to be the first mover.
+                  </blockquote>
+                  <footer class="flex items-center justify-between">
+                    <div>
+                      <cite class="font-semibold text-white not-italic text-sm block">
+                        Stephen Schwarzman
+                      </cite>
+                      <div class="text-xs text-gray-500">Blackstone</div>
+                    </div>
+                    <img
+                      src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                      alt="Blackstone"
+                      class="w-14 h-5 object-contain opacity-30 filter invert"
+                    />
+                  </footer>
                 </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Desktop grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
+          <article
+            class="bg-gray-800 border border-gray-700 p-5 rounded-none sm:rounded-xl hover:border-yellow-400/30 transition-all duration-300"
+          >
+            <div class="flex items-start space-x-3">
+              <div class="text-3xl sm:text-4xl text-yellow-400/20 leading-none flex-shrink-0">
+                "
+              </div>
+              <div class="flex-1">
+                <blockquote class="text-sm sm:text-base leading-relaxed mb-4 text-gray-300">
+                  This is a transformational technology. You have to be the first mover in your
+                  industry.
+                </blockquote>
+                <footer class="flex items-center justify-between">
+                  <div>
+                    <cite class="font-semibold text-white not-italic text-sm block">
+                      Stephen Schwarzman
+                    </cite>
+                    <div class="text-xs text-gray-500">Chairman & CEO, Blackstone</div>
+                  </div>
+                  <img
+                    src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                    alt="Blackstone"
+                    class="w-16 h-6 object-contain opacity-40 filter invert"
+                  />
+                </footer>
+              </div>
             </div>
+          </article>
 
-            <!-- Desktop grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
-                <article class="bg-gray-800 border border-gray-700 p-5 rounded-none sm:rounded-xl hover:border-yellow-400/30 transition-all duration-300">
-                    <div class="flex items-start space-x-3">
-                        <div class="text-3xl sm:text-4xl text-yellow-400/20 leading-none flex-shrink-0">"</div>
-                        <div class="flex-1">
-                            <blockquote class="text-sm sm:text-base leading-relaxed mb-4 text-gray-300">
-                                This is a transformational technology. You have to be the first mover in your industry.
-                            </blockquote>
-                            <footer class="flex items-center justify-between">
-                                <div>
-                                    <cite class="font-semibold text-white not-italic text-sm block">
-                                        Stephen Schwarzman
-                                    </cite>
-                                    <div class="text-xs text-gray-500">
-                                        Chairman & CEO, Blackstone
-                                    </div>
-                                </div>
-                                <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-16 h-6 object-contain opacity-40 filter invert">
-                            </footer>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="bg-gray-800 border border-gray-700 p-5 rounded-none sm:rounded-xl hover:border-yellow-400/30 transition-all duration-300">
-                    <div class="flex items-start space-x-3">
-                        <div class="text-3xl sm:text-4xl text-yellow-400/20 leading-none flex-shrink-0">"</div>
-                        <div class="flex-1">
-                            <blockquote class="text-sm sm:text-base leading-relaxed mb-4 text-gray-300">
-                                We have adopted generative AI not just as a tool but as a pivotal component.
-                            </blockquote>
-                            <footer class="flex items-center justify-between">
-                                <div>
-                                    <cite class="font-semibold text-white not-italic text-sm block">
-                                        Robert F. Smith
-                                    </cite>
-                                    <div class="text-xs text-gray-500">
-                                        CEO, Vista Equity Partners
-                                    </div>
-                                </div>
-                                <img src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg" alt="Vista" class="w-16 h-6 object-contain opacity-40 filter invert">
-                            </footer>
-                        </div>
-                    </div>
-                </article>
+          <article
+            class="bg-gray-800 border border-gray-700 p-5 rounded-none sm:rounded-xl hover:border-yellow-400/30 transition-all duration-300"
+          >
+            <div class="flex items-start space-x-3">
+              <div class="text-3xl sm:text-4xl text-yellow-400/20 leading-none flex-shrink-0">
+                "
+              </div>
+              <div class="flex-1">
+                <blockquote class="text-sm sm:text-base leading-relaxed mb-4 text-gray-300">
+                  We have adopted generative AI not just as a tool but as a pivotal component.
+                </blockquote>
+                <footer class="flex items-center justify-between">
+                  <div>
+                    <cite class="font-semibold text-white not-italic text-sm block">
+                      Robert F. Smith
+                    </cite>
+                    <div class="text-xs text-gray-500">CEO, Vista Equity Partners</div>
+                  </div>
+                  <img
+                    src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg"
+                    alt="Vista"
+                    class="w-16 h-6 object-contain opacity-40 filter invert"
+                  />
+                </footer>
+              </div>
             </div>
-        </section>
+          </article>
+        </div>
+      </section>
 
-        <!-- Option 3: Ultra-Compact Single Row -->
-        <section class="mb-16">
-            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">Option 3: Ultra-Compact Single Row</h2>
-            <p class="text-gray-400 mb-6 text-sm">✓ Maximum space efficiency ✓ Perfect for mobile ✓ Clean horizontal layout</p>
-            
-            <div class="space-y-3 -mx-4 px-4 lg:mx-0 lg:px-0">
-                <article class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <div class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block">"</div>
-                    <div class="flex-1 min-w-0">
-                        <blockquote class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal">
-                            "This is a transformational technology. You have to be the first mover in your industry."
-                        </blockquote>
-                        <div class="flex items-center justify-between gap-2">
-                            <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
-                                Stephen Schwarzman <span class="text-gray-600 font-normal">• Blackstone</span>
-                            </cite>
-                            <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-12 h-4 object-contain opacity-60 flex-shrink-0">
-                        </div>
-                    </div>
-                </article>
+      <!-- Option 3: Ultra-Compact Single Row -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-4 text-yellow-400">
+          Option 3: Ultra-Compact Single Row
+        </h2>
+        <p class="text-gray-400 mb-6 text-sm">
+          ✓ Maximum space efficiency ✓ Perfect for mobile ✓ Clean horizontal layout
+        </p>
 
-                <article class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <div class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block">"</div>
-                    <div class="flex-1 min-w-0">
-                        <blockquote class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal">
-                            "We have adopted generative AI not just as a tool but as a pivotal component."
-                        </blockquote>
-                        <div class="flex items-center justify-between gap-2">
-                            <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
-                                Robert F. Smith <span class="text-gray-600 font-normal">• Vista Equity Partners</span>
-                            </cite>
-                            <img src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg" alt="Vista" class="w-12 h-4 object-contain opacity-60 flex-shrink-0">
-                        </div>
-                    </div>
-                </article>
-
-                <article class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <div class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block">"</div>
-                    <div class="flex-1 min-w-0">
-                        <blockquote class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal">
-                            "AI is not a fad. It's a tectonic shift in general purpose technology evolution."
-                        </blockquote>
-                        <div class="flex items-center justify-between gap-2">
-                            <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
-                                Christian Sinding <span class="text-gray-600 font-normal">• EQT</span>
-                            </cite>
-                            <img src="/ralph-web/logos/EQT_(Unternehmen)_logo.svg" alt="EQT" class="w-12 h-4 object-contain opacity-60 flex-shrink-0">
-                        </div>
-                    </div>
-                </article>
+        <div class="space-y-3 -mx-4 px-4 lg:mx-0 lg:px-0">
+          <article
+            class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
+            <div
+              class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block"
+            >
+              "
             </div>
-        </section>
-
-        <!-- Option 4: Hybrid WSJ + Modern -->
-        <section class="mb-16">
-            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">Option 4: Hybrid WSJ + Modern (Recommended)</h2>
-            <p class="text-gray-400 mb-6 text-sm">✓ Best of both worlds ✓ Authority + space efficiency ✓ Perfect mobile adaptation</p>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
-                <article class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300">
-                    <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700">
-                        "This is a transformational technology. You have to be the first mover in your industry."
-                    </blockquote>
-                    <footer class="border-t border-gray-200 pt-3">
-                        <div class="flex items-center justify-between gap-3">
-                            <div class="min-w-0">
-                                <cite class="font-bold text-gray-900 not-italic text-sm block">
-                                    Stephen Schwarzman
-                                </cite>
-                                <div class="text-xs text-gray-600">
-                                    Blackstone
-                                </div>
-                            </div>
-                            <img src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg" alt="Blackstone" class="w-16 h-6 object-contain opacity-70 flex-shrink-0">
-                        </div>
-                    </footer>
-                </article>
-
-                <article class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300">
-                    <blockquote class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700">
-                        "We have adopted generative AI not just as a tool but as a pivotal component."
-                    </blockquote>
-                    <footer class="border-t border-gray-200 pt-3">
-                        <div class="flex items-center justify-between gap-3">
-                            <div class="min-w-0">
-                                <cite class="font-bold text-gray-900 not-italic text-sm block">
-                                    Robert F. Smith
-                                </cite>
-                                <div class="text-xs text-gray-600">
-                                    Vista Equity Partners
-                                </div>
-                            </div>
-                            <img src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg" alt="Vista" class="w-16 h-6 object-contain opacity-70 flex-shrink-0">
-                        </div>
-                    </footer>
-                </article>
+            <div class="flex-1 min-w-0">
+              <blockquote
+                class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal"
+              >
+                "This is a transformational technology. You have to be the first mover in your
+                industry."
+              </blockquote>
+              <div class="flex items-center justify-between gap-2">
+                <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
+                  Stephen Schwarzman <span class="text-gray-600 font-normal">• Blackstone</span>
+                </cite>
+                <img
+                  src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                  alt="Blackstone"
+                  class="w-12 h-4 object-contain opacity-60 flex-shrink-0"
+                />
+              </div>
             </div>
-        </section>
+          </article>
 
-        <!-- Comparison Summary -->
-        <section class="mt-12 p-6 bg-gray-800 rounded-lg">
-            <h3 class="text-xl font-semibold mb-4 text-yellow-400">Mobile Optimization Summary:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                <div>
-                    <h4 class="font-semibold text-white mb-2">Space Savings:</h4>
-                    <ul class="space-y-1 text-gray-300">
-                        <li>• Option 1: 40% vertical space reduction</li>
-                        <li>• Option 2: 50% space reduction + theme consistency</li>
-                        <li>• Option 3: 60% space reduction (most compact)</li>
-                        <li>• Option 4: 45% reduction + maintains authority</li>
-                    </ul>
+          <article
+            class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
+            <div
+              class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block"
+            >
+              "
+            </div>
+            <div class="flex-1 min-w-0">
+              <blockquote
+                class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal"
+              >
+                "We have adopted generative AI not just as a tool but as a pivotal component."
+              </blockquote>
+              <div class="flex items-center justify-between gap-2">
+                <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
+                  Robert F. Smith
+                  <span class="text-gray-600 font-normal">• Vista Equity Partners</span>
+                </cite>
+                <img
+                  src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg"
+                  alt="Vista"
+                  class="w-12 h-4 object-contain opacity-60 flex-shrink-0"
+                />
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="bg-white text-gray-900 p-3 sm:p-4 rounded-none sm:rounded-lg flex items-center gap-3 shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
+            <div
+              class="text-3xl text-gray-300 leading-none font-light flex-shrink-0 hidden sm:block"
+            >
+              "
+            </div>
+            <div class="flex-1 min-w-0">
+              <blockquote
+                class="text-sm leading-relaxed italic text-gray-700 mb-1 truncate sm:whitespace-normal"
+              >
+                "AI is not a fad. It's a tectonic shift in general purpose technology evolution."
+              </blockquote>
+              <div class="flex items-center justify-between gap-2">
+                <cite class="font-semibold text-gray-900 not-italic text-xs sm:text-sm">
+                  Christian Sinding <span class="text-gray-600 font-normal">• EQT</span>
+                </cite>
+                <img
+                  src="/ralph-web/logos/EQT_(Unternehmen)_logo.svg"
+                  alt="EQT"
+                  class="w-12 h-4 object-contain opacity-60 flex-shrink-0"
+                />
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Option 4: Hybrid WSJ + Modern -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-4 text-yellow-400">
+          Option 4: Hybrid WSJ + Modern (Recommended)
+        </h2>
+        <p class="text-gray-400 mb-6 text-sm">
+          ✓ Best of both worlds ✓ Authority + space efficiency ✓ Perfect mobile adaptation
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 -mx-4 px-4 lg:mx-0 lg:px-0">
+          <article
+            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <blockquote
+              class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700"
+            >
+              "This is a transformational technology. You have to be the first mover in your
+              industry."
+            </blockquote>
+            <footer class="border-t border-gray-200 pt-3">
+              <div class="flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <cite class="font-bold text-gray-900 not-italic text-sm block">
+                    Stephen Schwarzman
+                  </cite>
+                  <div class="text-xs text-gray-600">Blackstone</div>
                 </div>
-                <div>
-                    <h4 class="font-semibold text-white mb-2">Mobile Features:</h4>
-                    <ul class="space-y-1 text-gray-300">
-                        <li>• Edge-to-edge on mobile (-mx-4 technique)</li>
-                        <li>• Rounded corners on tablet/desktop only</li>
-                        <li>• Responsive text sizing (text-sm → text-base)</li>
-                        <li>• Truncated titles on smallest screens</li>
-                        <li>• Smaller quote marks and logos on mobile</li>
-                    </ul>
+                <img
+                  src="/ralph-web/logos/The_Blackstone_Group_logo_(2).svg"
+                  alt="Blackstone"
+                  class="w-16 h-6 object-contain opacity-70 flex-shrink-0"
+                />
+              </div>
+            </footer>
+          </article>
+
+          <article
+            class="bg-gray-50 text-gray-900 p-4 sm:p-5 lg:p-6 rounded-none sm:rounded-lg border-l-4 border-gray-800 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <blockquote
+              class="text-sm sm:text-base leading-relaxed italic mb-3 wsj-quote text-gray-700"
+            >
+              "We have adopted generative AI not just as a tool but as a pivotal component."
+            </blockquote>
+            <footer class="border-t border-gray-200 pt-3">
+              <div class="flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <cite class="font-bold text-gray-900 not-italic text-sm block">
+                    Robert F. Smith
+                  </cite>
+                  <div class="text-xs text-gray-600">Vista Equity Partners</div>
                 </div>
-            </div>
-            
-            <div class="mt-6 p-4 bg-yellow-400/10 rounded-lg border border-yellow-400/30">
-                <p class="text-yellow-400 font-semibold mb-1">Recommendation:</p>
-                <p class="text-gray-300 text-sm">
-                    <strong>Option 4 (Hybrid WSJ + Modern)</strong> provides the best balance. It maintains the WSJ editorial authority while significantly reducing space usage. The simplified layout works perfectly on mobile while still feeling premium on desktop.
-                </p>
-            </div>
-        </section>
+                <img
+                  src="/ralph-web/logos/Vista_Equity_Partners_logo_2.svg"
+                  alt="Vista"
+                  class="w-16 h-6 object-contain opacity-70 flex-shrink-0"
+                />
+              </div>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- Comparison Summary -->
+      <section class="mt-12 p-6 bg-gray-800 rounded-lg">
+        <h3 class="text-xl font-semibold mb-4 text-yellow-400">Mobile Optimization Summary:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div>
+            <h4 class="font-semibold text-white mb-2">Space Savings:</h4>
+            <ul class="space-y-1 text-gray-300">
+              <li>• Option 1: 40% vertical space reduction</li>
+              <li>• Option 2: 50% space reduction + theme consistency</li>
+              <li>• Option 3: 60% space reduction (most compact)</li>
+              <li>• Option 4: 45% reduction + maintains authority</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-white mb-2">Mobile Features:</h4>
+            <ul class="space-y-1 text-gray-300">
+              <li>• Edge-to-edge on mobile (-mx-4 technique)</li>
+              <li>• Rounded corners on tablet/desktop only</li>
+              <li>• Responsive text sizing (text-sm → text-base)</li>
+              <li>• Truncated titles on smallest screens</li>
+              <li>• Smaller quote marks and logos on mobile</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-yellow-400/10 rounded-lg border border-yellow-400/30">
+          <p class="text-yellow-400 font-semibold mb-1">Recommendation:</p>
+          <p class="text-gray-300 text-sm">
+            <strong>Option 4 (Hybrid WSJ + Modern)</strong> provides the best balance. It maintains
+            the WSJ editorial authority while significantly reducing space usage. The simplified
+            layout works perfectly on mobile while still feeling premium on desktop.
+          </p>
+        </div>
+      </section>
     </div>
-</body>
+  </body>
 </html>

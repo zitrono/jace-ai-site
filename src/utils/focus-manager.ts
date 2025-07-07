@@ -1,29 +1,29 @@
 /**
  * Focus Manager - Centralized focus management utilities for ralph-web
- * 
+ *
  * Provides reusable focus management for modals, menus, and overlays with:
  * - Focus trap management
  * - Focus restoration
  * - Keyboard navigation utilities
  * - Consistent escape key handling
  * - Accessibility compliance
- * 
+ *
  * @example
  * ```typescript
  * import { FocusManager } from '@/utils/focus-manager';
- * 
+ *
  * // Create focus manager for a modal
  * const focusManager = new FocusManager(modalElement);
- * 
+ *
  * // Enable focus trap
  * focusManager.enableFocusTrap();
- * 
+ *
  * // Store current focus for restoration
  * focusManager.storeFocus();
- * 
+ *
  * // Focus first element
  * focusManager.focusFirst();
- * 
+ *
  * // Later, restore focus and cleanup
  * focusManager.restoreFocus();
  * focusManager.destroy();
@@ -92,7 +92,7 @@ export const DEFAULT_FOCUSABLE_SELECTOR = [
   'input[type="number"]:not([disabled])',
   'select:not([disabled])',
   '[tabindex]:not([tabindex="-1"]):not([disabled])',
-  '[contenteditable="true"]:not([disabled])'
+  '[contenteditable="true"]:not([disabled])',
 ].join(', ');
 
 /**
@@ -106,7 +106,7 @@ export class FocusManager {
   private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
   private stateManager: StateManager | null = null;
   private componentId: string | null = null;
-  
+
   constructor(container: HTMLElement, options: FocusManagerOptions = {}) {
     this.container = container;
     this.options = {
@@ -118,7 +118,7 @@ export class FocusManager {
       onEscape: () => {},
       onActivate: () => {},
       onDeactivate: () => {},
-      ...options
+      ...options,
     };
   }
 
@@ -139,17 +139,20 @@ export class FocusManager {
 
     elements.forEach((element) => {
       const htmlElement = element as HTMLElement;
-      
+
       // Skip hidden elements unless includeHidden is true
       if (!this.options.includeHidden && this.isElementHidden(htmlElement)) {
         return;
       }
-      
+
       // Skip disabled elements
-      if (htmlElement.hasAttribute('disabled') || htmlElement.getAttribute('aria-disabled') === 'true') {
+      if (
+        htmlElement.hasAttribute('disabled') ||
+        htmlElement.getAttribute('aria-disabled') === 'true'
+      ) {
         return;
       }
-      
+
       focusableElements.push(htmlElement as FocusableElement);
     });
 
@@ -165,18 +168,18 @@ export class FocusManager {
     if (styles.display === 'none' || styles.visibility === 'hidden') {
       return true;
     }
-    
+
     // Check if element has zero dimensions
     const rect = element.getBoundingClientRect();
     if (rect.width === 0 && rect.height === 0) {
       return true;
     }
-    
+
     // Check for hidden attribute
     if (element.hasAttribute('hidden')) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -193,12 +196,12 @@ export class FocusManager {
       const htmlElement = activeElement as HTMLElement;
       elementId = htmlElement.id || null;
       elementTagName = htmlElement.tagName.toLowerCase();
-      
+
       // Create a more robust selector
       if (elementId) {
         elementSelector = `#${elementId}`;
       } else if (htmlElement.className) {
-        const classes = htmlElement.className.split(' ').filter(c => c.length > 0);
+        const classes = htmlElement.className.split(' ').filter((c) => c.length > 0);
         if (classes.length > 0) {
           elementSelector = `${elementTagName}.${classes.join('.')}`;
         }
@@ -212,7 +215,7 @@ export class FocusManager {
       elementId,
       elementTagName,
       elementSelector,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     return this.focusSnapshot;
@@ -301,7 +304,7 @@ export class FocusManager {
       return false;
     }
 
-    const currentIndex = focusableElements.findIndex(el => el === document.activeElement);
+    const currentIndex = focusableElements.findIndex((el) => el === document.activeElement);
 
     let nextIndex: number;
     switch (direction) {
@@ -346,14 +349,14 @@ export class FocusManager {
     }
 
     this.isActive = true;
-    
+
     // Store current focus
     this.storeFocus();
-    
+
     // Setup keyboard handler
     this.keydownHandler = this.handleKeydown.bind(this);
     document.addEventListener('keydown', this.keydownHandler, { passive: false });
-    
+
     // Auto focus first element if enabled
     if (this.options.autoFocus) {
       // Use requestAnimationFrame to ensure element is ready
@@ -361,7 +364,7 @@ export class FocusManager {
         this.focusFirst();
       });
     }
-    
+
     // Call activate callback
     this.options.onActivate();
   }
@@ -375,13 +378,13 @@ export class FocusManager {
     }
 
     this.isActive = false;
-    
+
     // Remove keyboard handler
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;
     }
-    
+
     // Call deactivate callback
     this.options.onDeactivate();
   }
@@ -399,12 +402,16 @@ export class FocusManager {
     if (event.key === 'Escape' && this.options.handleEscape) {
       event.preventDefault();
       this.options.onEscape();
-      
+
       // Integrate with state manager if available
       if (this.stateManager && this.componentId) {
-        this.stateManager.setState(this.componentId, { isOpen: false }, { source: 'focus-manager-escape' });
+        this.stateManager.setState(
+          this.componentId,
+          { isOpen: false },
+          { source: 'focus-manager-escape' }
+        );
       }
-      
+
       return;
     }
 
@@ -419,7 +426,7 @@ export class FocusManager {
    */
   private handleTabKey(event: KeyboardEvent): void {
     const focusableElements = this.getFocusableElements();
-    
+
     if (focusableElements.length === 0) {
       event.preventDefault();
       return;
@@ -431,8 +438,8 @@ export class FocusManager {
       return;
     }
 
-    const currentIndex = focusableElements.findIndex(el => el === document.activeElement);
-    
+    const currentIndex = focusableElements.findIndex((el) => el === document.activeElement);
+
     if (event.shiftKey) {
       // Shift + Tab (backward)
       if (currentIndex <= 0) {
@@ -507,13 +514,16 @@ export class FocusUtils {
   /**
    * Find all focusable elements within a container
    */
-  static findFocusableElements(container: HTMLElement, includeHidden: boolean = false): HTMLElement[] {
+  static findFocusableElements(
+    container: HTMLElement,
+    includeHidden: boolean = false
+  ): HTMLElement[] {
     const elements = container.querySelectorAll(DEFAULT_FOCUSABLE_SELECTOR);
     const focusableElements: HTMLElement[] = [];
 
     elements.forEach((element) => {
       const htmlElement = element as HTMLElement;
-      
+
       if (FocusUtils.isFocusable(htmlElement) || includeHidden) {
         focusableElements.push(htmlElement);
       }
@@ -534,7 +544,7 @@ export class FocusUtils {
    */
   static storeFocus(): () => boolean {
     const activeElement = document.activeElement as HTMLElement;
-    
+
     return () => {
       if (activeElement && typeof activeElement.focus === 'function') {
         try {
@@ -629,7 +639,7 @@ export class KeyboardNavigationManager {
    */
   private handleKeydown(event: KeyboardEvent): void {
     const elements = Array.from(this.container.querySelectorAll(this.selector)) as HTMLElement[];
-    
+
     if (elements.length === 0) {
       return;
     }
@@ -641,26 +651,26 @@ export class KeyboardNavigationManager {
         this.currentIndex = Math.min(this.currentIndex + 1, elements.length - 1);
         elements[this.currentIndex].focus();
         break;
-        
+
       case 'ArrowUp':
       case 'ArrowLeft':
         event.preventDefault();
         this.currentIndex = Math.max(this.currentIndex - 1, 0);
         elements[this.currentIndex].focus();
         break;
-        
+
       case 'Home':
         event.preventDefault();
         this.currentIndex = 0;
         elements[this.currentIndex].focus();
         break;
-        
+
       case 'End':
         event.preventDefault();
         this.currentIndex = elements.length - 1;
         elements[this.currentIndex].focus();
         break;
-        
+
       case 'Enter':
       case ' ':
         event.preventDefault();
@@ -706,7 +716,9 @@ export class KeyboardNavigationManager {
  * Export default focus manager factory
  */
 export default {
-  create: (container: HTMLElement, options?: FocusManagerOptions) => new FocusManager(container, options),
+  create: (container: HTMLElement, options?: FocusManagerOptions) =>
+    new FocusManager(container, options),
   utils: FocusUtils,
-  keyboard: (container: HTMLElement, selector?: string) => new KeyboardNavigationManager(container, selector)
+  keyboard: (container: HTMLElement, selector?: string) =>
+    new KeyboardNavigationManager(container, selector),
 };

@@ -1,0 +1,119 @@
+/* Minimal global styles - only essentials that can't be Tailwind utilities */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Geist';
+  src: url('/ralph-web/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/ralph-web/fonts/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base resets */
+html {
+  touch-action: pan-y pinch-zoom;
+}
+
+body {
+  touch-action: pan-y pinch-zoom;
+  position: relative;
+  width: 100%;
+  background-color: var(--pom-bg-body);
+  font-family: var(--font-primary);
+}
+
+/* Overflow protection */
+main {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+section {
+  overflow-x: hidden;
+}
+
+/* Gradient text utility - can't be done with Tailwind alone */
+.gradient-hero-title {
+  background: var(--gradient-hero-title);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* FAQ animations */
+.faq-content {
+  transition:
+    max-height 0.3s ease-out,
+    opacity 0.3s ease-out;
+  overflow: hidden;
+}
+
+.faq-arrow {
+  transition: transform 0.3s ease-out;
+}
+
+/* Body scroll lock */
+html.mobile-menu-open,
+body.mobile-menu-open,
+html.modal-open,
+body.modal-open,
+html.scroll-locked,
+body.scroll-locked {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Animation states */
+.is-animating {
+  will-change: transform, opacity;
+}
+
+.is-open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .faq-content,
+  .faq-arrow,
+  header {
+    transition: none !important;
+  }
+}

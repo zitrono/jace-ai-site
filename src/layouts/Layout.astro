@@ -195,417 +195,33 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
     <style is:global>
       @import '../styles/design-tokens.css';
       @import '../styles/tailwind.css';
+      @import '../styles/global-minimal.css';
 
-      /* Font Face Declarations with Inter fallback */
-      @font-face {
-        font-family: 'Geist';
-        src: url('/ralph-web/fonts/Geist-Regular.woff2') format('woff2');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
+      /* Font faces moved to global-minimal.css */
 
-      @font-face {
-        font-family: 'Geist';
-        src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-      }
+      /* Base styles moved to global-minimal.css */
 
-      @font-face {
-        font-family: 'Geist';
-        src: url('/ralph-web/fonts/Geist-SemiBold.woff2') format('woff2');
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
+      /* Component-specific styles should use Tailwind utilities */
 
-      @font-face {
-        font-family: 'Geist';
-        src: url('/ralph-web/fonts/Geist-Bold.woff2') format('woff2');
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
+      /* Header styles should be in HeaderLayout component */
 
-      /* Additional Layout-specific CSS Variables */
-      /* Legacy CSS variables removed - all values now in design system */
+      /* Typography should use Tailwind utilities: text-4xl, text-5xl, font-bold, etc. */
 
-      /* iOS horizontal scroll prevention - moved to specific containers */
-      html {
-        /* overflow-x removed to allow sticky positioning */
-        touch-action: pan-y pinch-zoom;
-      }
-      
-      body {
-        /* overflow-x removed to allow sticky positioning */
-        touch-action: pan-y pinch-zoom;
-        position: relative;
-        width: 100%;
-      }
+      /* Gradient utilities kept in global-minimal.css */
 
-      /* Apply POM body background and font */
-      body {
-        background-color: var(--pom-bg-body);
-        font-family: var(--font-primary);
-      }
+      /* Badge styles should use Tailwind: inline-flex items-center px-4 py-2 rounded-full text-sm font-medium */
 
-      /* Overflow protection for specific containers */
-      /* This prevents horizontal scroll while allowing sticky header */
-      main {
-        overflow-x: hidden;
-        width: 100%;
-      }
+      /* Navigation and button styles should use component-level Tailwind utilities */
 
-      /* Any section that might have animated or wide content */
-      section {
-        overflow-x: hidden;
-      }
+      /* FAQ animations kept in global-minimal.css */
 
-      /* Specific protection for common overflow areas */
-      .testimonials-container,
-      .logo-scroller,
-      .carousel-container {
-        overflow-x: hidden;
-      }
+      /* State management utilities kept in global-minimal.css */
 
-      /* Hero subtitle color */
-      .hero-subtitle {
-        color: var(--pom-text-secondary);
-      }
+      /* Screen reader utilities - use Tailwind's sr-only class */
 
-      /* Header transparent background */
-      .header-transparent {
-        background-color: rgba(40, 40, 40, 0.5);
-        backdrop-filter: blur(12px);
-      }
+      /* Focus styles - use Tailwind's focus-visible utilities */
 
-      /* Note: Background utilities are handled by Tailwind config mapping to design tokens */
-
-      /* Text color utilities moved to Tailwind config */
-
-      /* Mobile-specific header adjustments */
-      @media (max-width: 640px) {
-        /* Reduce header padding on mobile */
-        header nav > div {
-          padding-top: var(--spacing-sm);
-          padding-bottom: var(--spacing-sm);
-        }
-
-        /* Ensure hamburger menu button is properly sized */
-        #mobile-menu-button {
-          min-width: 40px;
-          min-height: 40px;
-          padding: var(--spacing-xs);
-        }
-      }
-
-      /* Header transition for smooth height changes */
-      header {
-        transition: all 0.3s ease;
-      }
-
-      /* Ensure consistent header height when scrolled */
-      header.scrolled nav > div {
-        padding-top: var(--spacing-sm);
-        padding-bottom: var(--spacing-sm);
-      }
-
-      /* Typography utilities */
-      .heading-hero {
-        font-size: 2.25rem;
-        font-weight: 600;
-        line-height: 1.2;
-        letter-spacing: -0.025em;
-      }
-
-      @media (min-width: 640px) {
-        .heading-hero {
-          font-size: 3.75rem;
-        }
-      }
-
-      .heading-1 {
-        font-size: 1.875rem;
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -0.025em;
-        color: var(--color-text-primary);
-      }
-
-      @media (min-width: 640px) {
-        .heading-1 {
-          font-size: 3rem;
-        }
-      }
-
-      /* Heading styles moved to Tailwind utilities in components */
-
-      /* Duplicate text utilities removed - use Tailwind's text-secondary and text-muted */
-
-      /* Unused text-body class removed */
-
-      /* Gradient text utilities */
-      .gradient-text-primary {
-        background: linear-gradient(to right, var(--color-primary-yellow), var(--color-primary-yellowhover));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .gradient-hero-title {
-        background: var(--gradient-hero-title);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: rgba(0, 0, 0, 0);
-      }
-
-      /* Badge utilities */
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        padding: var(--spacing-xs) var(--spacing-sm);
-        border-radius: 9999px;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      .badge-certification {
-        background-color: var(--pom-bg-card);
-        color: var(--pom-text-muted);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-      }
-
-      /* Navigation utilities */
-      .nav-link {
-        font-weight: 600;
-        color: var(--color-text-primary);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-
-      .nav-link:hover {
-        color: var(--pom-accent);
-      }
-
-      /* Mobile navigation has different font weight for visual parity */
-      .mobile-nav-link {
-        font-weight: 500;
-        font-family: 'Geist', system-ui, sans-serif;
-        color: var(--color-text-primary);
-        text-decoration: none;
-        transition: color 0.2s;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      .mobile-nav-link:hover {
-        color: var(--pom-accent);
-      }
-
-      /* Company logos */
-      .company-logos-opacity {
-        opacity: 0.8;
-      }
-
-      /* Mobile CTA responsive styles */
-      .mobile-cta-responsive {
-        font-size: 0.875rem;
-      }
-
-      @media (max-width: 359px) {
-        .mobile-cta-responsive {
-          padding: 0 0.5rem;
-          font-size: 0.75rem;
-        }
-      }
-
-      /* Design tokens handle button sizing through HeaderButton component */
-
-
-      /* FAQ transition styles for smooth expand/collapse */
-      .faq-content {
-        transition:
-          max-height 0.3s ease-out,
-          opacity 0.3s ease-out;
-        overflow: hidden;
-      }
-
-      /* Arrow rotation transition */
-      .faq-arrow {
-        transition: transform 0.3s ease-out;
-      }
-
-      /* Body scroll lock for mobile menu and modals */
-      /* Using overflow hidden instead of fixed positioning to prevent layout shift */
-      html.mobile-menu-open,
-      body.mobile-menu-open,
-      html.modal-open,
-      body.modal-open,
-      html.scroll-locked,
-      body.scroll-locked {
-        overflow: hidden;
-        /* Prevent iOS bounce scrolling */
-        -webkit-overflow-scrolling: touch;
-      }
-
-      /* Animation states for centralized state management */
-      .is-animating {
-        will-change: transform, opacity;
-      }
-
-      .is-open {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-      }
-
-      /* Accessibility: Screen reader only content */
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-      }
-
-      .focus\:not-sr-only:focus {
-        position: static;
-        width: auto;
-        height: auto;
-        padding: 0.5rem 1rem;
-        margin: 0;
-        overflow: visible;
-        clip: auto;
-        white-space: normal;
-      }
-
-      /* Accessibility: Global focus-visible styles */
-      *:focus-visible {
-        outline: 2px solid var(--pom-accent);
-        outline-offset: 2px;
-        border-radius: 2px;
-      }
-
-      /* Remove default focus outline for mouse users */
-      *:focus:not(:focus-visible) {
-        outline: none;
-      }
-
-      /* High contrast focus for buttons */
-      button:focus-visible,
-      .btn:focus-visible,
-      [role='button']:focus-visible {
-        outline: 3px solid var(--pom-accent);
-        outline-offset: 2px;
-        box-shadow: 0 0 0 1px var(--pom-accent-text);
-      }
-
-      /* Focus for interactive elements */
-      a:focus-visible,
-      input:focus-visible,
-      textarea:focus-visible,
-      select:focus-visible {
-        outline: 2px solid var(--pom-accent);
-        outline-offset: 2px;
-      }
-
-      /* Enhanced focus for CTA buttons */
-      .btn-primary:focus-visible {
-        outline: 3px solid var(--color-text-primary);
-        outline-offset: 2px;
-        box-shadow: 0 0 0 6px var(--pom-accent);
-      }
-
-      /* Touch target sizes moved to component-specific classes */
-      /* Components should use min-h-[44px] or touch-manipulation class */
-
-      /* Exception for inline links in text */
-      p a,
-      li a,
-      .text a {
-        min-height: auto;
-        min-width: auto;
-      }
-
-      /* Accessibility: High contrast for better readability */
-      .text-high-contrast {
-        color: var(--color-text-primary);
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-      }
-
-      /* Accessibility: Focus trap for modals */
-      .focus-trap {
-        position: relative;
-      }
-
-      .focus-trap::before,
-      .focus-trap::after {
-        content: '';
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      /* Accessibility: Reduced motion support */
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-
-        .faq-content,
-        .faq-arrow,
-        header {
-          transition: none !important;
-        }
-      }
-
-      /* Accessibility: Better contrast for muted text */
-      .text-muted {
-        color: var(--color-text-muted); /* Improved contrast */
-      }
-
-      /* Accessibility: ARIA live regions */
-      .sr-live-polite {
-        position: absolute;
-        left: -10000px;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      }
-
-      /* Accessibility: Skip links styling */
-      .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 6px;
-        background: var(--pom-accent);
-        color: var(--pom-accent-text);
-        padding: 8px 16px;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 600;
-        z-index: 1000;
-        transition: top 0.3s;
-      }
-
-      .skip-link:focus {
-        top: 6px;
-      }
+      /* Reduced motion support kept in global-minimal.css */
     </style>
   </head>
   <body class="bg-neutral-700 text-white font-sans antialiased">
@@ -621,10 +237,10 @@ const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
     <div aria-live="assertive" aria-atomic="true" class="sr-live-polite" id="alert-messages"></div>
 
     <slot />
-    
+
     <!-- Global Login Modal -->
     <LoginModal />
-    
+
     <script>
       // Legacy functionality - now handled by centralized state management
       // This is preserved for backward compatibility only

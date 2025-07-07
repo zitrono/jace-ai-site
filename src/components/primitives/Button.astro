@@ -6,10 +6,10 @@ import type {
   SizeVariant,
   ButtonState,
 } from '../../types/components';
-import { 
+import {
   getHeaderButtonClasses,
   isValidHeaderVariant,
-  type HeaderButtonVariant 
+  type HeaderButtonVariant,
 } from '@/types/design-tokens';
 
 interface Props extends BaseComponentProps, InteractiveComponentProps {
@@ -76,7 +76,7 @@ const isDisabled = disabled || state === 'disabled' || loading;
 // Size classes using design tokens - Height normalization for alignment with responsive support
 const sizeClasses = {
   xs: 'h-8 px-xs text-xs leading-none', // 32px height - minimal buttons
-  sm: 'h-9 px-sm text-sm leading-none md:h-9 md:px-sm md:text-sm', // 36px height - compact buttons  
+  sm: 'h-9 px-sm text-sm leading-none md:h-9 md:px-sm md:text-sm', // 36px height - compact buttons
   md: 'h-9 px-sm text-sm leading-none md:h-10 md:px-base md:text-base font-medium', // Responsive: 36px mobile, 40px desktop
   lg: 'h-10 px-base text-base leading-none md:h-12 md:px-lg md:text-lg font-medium', // Responsive: 40px mobile, 48px desktop
   xl: 'h-12 px-lg text-lg leading-none md:h-14 md:px-xl md:text-xl font-medium', // Responsive: 48px mobile, 56px desktop
@@ -84,16 +84,14 @@ const sizeClasses = {
 
 // Variant classes using design tokens
 const variantClasses = {
-  primary:
-    'bg-accent text-accent-text hover:bg-accent/90 focus:ring-accent/50 border-transparent',
+  primary: 'bg-accent text-accent-text hover:bg-accent/90 focus:ring-accent/50 border-transparent',
   secondary:
-    'bg-gray-600 text-white hover:bg-gray-500 focus:ring-gray-500/50 border-transparent',
+    'bg-neutral-600 text-white hover:bg-neutral-500 focus:ring-neutral-500/50 border-transparent',
   outline:
     'bg-transparent text-primary border-neutral-600 hover:bg-neutral-600 focus:ring-neutral-500/50',
   ghost:
     'bg-transparent text-secondary hover:bg-neutral-600 focus:ring-neutral-500/50 border-transparent',
-  nav:
-    'bg-transparent text-text-primary hover:text-primary-yellow focus:ring-primary-yellow/50 border-transparent',
+  nav: 'bg-transparent text-text-primary hover:text-primary-yellow focus:ring-primary-yellow/50 border-transparent',
   danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 border-transparent',
 };
 

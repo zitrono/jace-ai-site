@@ -4,13 +4,15 @@ import type { HTMLAttributes } from 'astro/types';
 
 /**
  * Logo - Displays the ralph logo with emphasized LP (Limited Partner)
- * 
+ *
  * @example
  * <Logo variant="default" />
  * <Logo variant="mobile" />
  */
 
-export interface Props extends BaseComponentProps, Omit<HTMLAttributes<'img'>, keyof BaseComponentProps> {
+export interface Props
+  extends BaseComponentProps,
+    Omit<HTMLAttributes<'img'>, keyof BaseComponentProps> {
   variant?: 'default' | 'mobile';
 }
 
@@ -19,11 +21,11 @@ const { variant = 'default', class: className = '', ...rest } = Astro.props;
 // Use larger sizes to match reference site
 const sizeClasses = {
   default: 'h-10 md:h-12 lg:h-14', // 40px, 48px, 56px - much larger
-  mobile: 'h-10' // 40px fixed
+  mobile: 'h-10', // 40px fixed
 };
 ---
 
-<img 
+<img
   src="/ralph-web/src/assets/logos/ralph-logo.svg"
   alt="ralph"
   class={`w-auto ${sizeClasses[variant]} ${className}`}

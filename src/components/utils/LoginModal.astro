@@ -14,30 +14,25 @@ export interface Props extends BaseComponentProps {
   open?: boolean;
 }
 
-const {
-  class: className = '',
-  open = false,
-} = Astro.props;
+const { class: className = '', open = false } = Astro.props;
 ---
 
 <!-- Modal Overlay -->
-<div 
-  id="loginModal" 
+<div
+  id="loginModal"
   class={`fixed inset-0 z-50 ${open ? '' : 'hidden'} ${className}`}
   aria-labelledby="loginModalTitle"
   role="dialog"
   aria-modal="true"
 >
   <!-- Backdrop -->
-  <div 
-    class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
-    id="loginBackdrop"
-  ></div>
+  <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="loginBackdrop">
+  </div>
 
   <!-- Modal Content -->
   <div class="fixed inset-0 z-10 overflow-y-auto">
     <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-      <div 
+      <div
         class="relative transform overflow-hidden rounded-lg bg-background border border-accent/20 shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md"
         id="loginModalContent"
       >
@@ -49,7 +44,11 @@ const {
           aria-label="Close login modal"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
 
@@ -57,12 +56,22 @@ const {
         <div class="border-l-4 border-accent bg-card/30 px-8 py-10">
           <!-- Logo and Title -->
           <div class="text-center mb-8">
-            <div class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-background font-bold" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            <div
+              class="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-background font-bold"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                ></path>
               </svg>
             </div>
-            <h2 id="loginModalTitle" class="text-xl font-bold text-primary mb-2">Sign In to Ralph</h2>
+            <h2 id="loginModalTitle" class="text-xl font-bold text-primary mb-2">
+              Sign In to Ralph
+            </h2>
             <p class="text-secondary text-sm">Access your PE intelligence platform</p>
           </div>
 
@@ -102,19 +111,40 @@ const {
                   id="modalTogglePassword"
                   class="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted hover:text-primary transition-colors"
                 >
-                  <svg id="modalEyeIcon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  <svg
+                    id="modalEyeIcon"
+                    class="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    ></path>
                   </svg>
                 </button>
               </div>
             </div>
 
             <!-- Error Message -->
-            <div id="modalErrorMessage" class="hidden bg-red-900/20 border border-red-500/30 rounded-md p-3">
+            <div
+              id="modalErrorMessage"
+              class="hidden bg-red-900/20 border border-red-500/30 rounded-md p-3"
+            >
               <div class="flex items-center">
                 <svg class="w-4 h-4 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clip-rule="evenodd"></path>
                 </svg>
                 <span id="modalErrorText" class="text-sm text-red-400"></span>
               </div>
@@ -122,24 +152,41 @@ const {
 
             <!-- Remember Me -->
             <div class="flex items-center">
-              <input type="checkbox" id="modalRememberMe" class="w-4 h-4 text-accent bg-background border-neutral-600 rounded focus:ring-accent focus:ring-2">
+              <input
+                type="checkbox"
+                id="modalRememberMe"
+                class="w-4 h-4 text-accent bg-background border-neutral-600 rounded focus:ring-accent focus:ring-2"
+              />
               <label for="modalRememberMe" class="ml-2 text-sm text-secondary">Remember me</label>
             </div>
 
             <!-- Submit Button -->
             <div>
-              <Button 
-                type="submit" 
-                variant="primary" 
-                size="lg" 
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
                 class="w-full relative"
                 id="modalLoginButton"
               >
                 <span id="modalLoginButtonText">Sign In</span>
-                <div id="modalLoginSpinner" class="hidden absolute inset-0 flex items-center justify-center">
+                <div
+                  id="modalLoginSpinner"
+                  class="hidden absolute inset-0 flex items-center justify-center"
+                >
                   <svg class="animate-spin w-5 h-5 text-background" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                 </div>
               </Button>
@@ -156,8 +203,10 @@ const {
               Forgot password?
             </button>
             <div class="text-center text-xs text-muted">
-              Don't have an account? 
-              <a href={siteConfig.demo.url} class="text-accent hover:text-accent/80">Request demo access</a>
+              Don't have an account?
+              <a href={siteConfig.demo.url} class="text-accent hover:text-accent/80"
+                >Request demo access</a
+              >
             </div>
           </div>
         </div>
@@ -189,7 +238,7 @@ const {
       loginButton: document.getElementById('modalLoginButton') as HTMLButtonElement,
       loginButtonText: document.getElementById('modalLoginButtonText') as HTMLElement,
       loginSpinner: document.getElementById('modalLoginSpinner') as HTMLElement,
-      rememberMeCheckbox: document.getElementById('modalRememberMe') as HTMLInputElement
+      rememberMeCheckbox: document.getElementById('modalRememberMe') as HTMLInputElement,
     });
 
     // Global functions for external access

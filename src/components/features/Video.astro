@@ -2,7 +2,7 @@
 /**
  * Video - Video showcase section with responsive container
  * @example
- * <Video 
+ * <Video
  *   title="See Ralph in Action"
  *   subtitle="Watch the demo"
  *   videoSrc="/path/to/video.mp4"
@@ -43,34 +43,34 @@ const {
 ---
 
 <Section class={className} as="section" background="primary" spacing="lg">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-base font-semibold leading-7 text-accent">
-        {title}
-      </h2>
-      <p class="mt-4 text-lg text-text-muted">
-        {subtitle}
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-base font-semibold leading-7 text-accent">
+      {title}
+    </h2>
+    <p class="mt-4 text-lg text-text-muted">
+      {subtitle}
+    </p>
+  </div>
+
+  <div class="mt-16 mx-auto max-w-4xl">
+    <div class="rounded-lg p-8 text-center bg-gradient-video-container" data-test="video-container">
+      {
+        videoSrc ? (
+          <video class="w-full rounded-lg aspect-video" controls poster={posterImage}>
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <div class="bg-neutral-800 rounded-lg flex items-center justify-center aspect-video">
+            <svg class="w-16 h-16 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        )
+      }
+      <p class="mt-4 text-text-primary font-medium">
+        {placeholder}
       </p>
     </div>
-
-    <div class="mt-16 mx-auto max-w-4xl">
-      <div class="rounded-lg p-8 text-center bg-gradient-video-container" data-test="video-container">
-        {
-          videoSrc ? (
-            <video class="w-full rounded-lg aspect-video" controls poster={posterImage}>
-              <source src={videoSrc} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <div class="bg-neutral-800 rounded-lg flex items-center justify-center aspect-video">
-              <svg class="w-16 h-16 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          )
-        }
-        <p class="mt-4 text-text-primary font-medium">
-          {placeholder}
-        </p>
-      </div>
-    </div>
+  </div>
 </Section>

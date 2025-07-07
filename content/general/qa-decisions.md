@@ -654,24 +654,28 @@ All four explanations approved
 **Priority Analysis**: This addresses a key credibility gap - Ralph claims to process "100% of portfolio data" but doesn't show HOW. The matrix provides concrete proof of comprehensive data handling across all PE stages and security levels, potentially improving conversion by demonstrating deep PE understanding.
 
 **Option A: Full Intelligence Fabric Section**
+
 - Impact: Strong credibility boost, demonstrates comprehensive coverage
 - Pros: Visual proof of 100% data claim, differentiates from competitors, educates prospects
 - Cons: Adds complexity to homepage, requires significant development, may overwhelm visitors
 - Constraint check: Would add ~40 lines to homepage, mobile implementation needs careful design
 
 **Option B: Simplified Visual Indicator + Learn Article**
+
 - Impact: Subtle credibility enhancement without complexity
 - Pros: Maintains homepage simplicity, provides depth for interested prospects, easier to implement
 - Cons: Less immediate impact, requires additional Learn content creation
 - Constraint check: Minimal homepage addition (3-4 lines), fully mobile-compatible
 
 **Option C: FAQ Enhancement Only**
+
 - Impact: Answers key objection about data coverage
 - Pros: No homepage changes, quick to implement, maintains current flow
 - Cons: Misses visual storytelling opportunity, buried in FAQ section
 - Constraint check: Adds one FAQ item within existing structure
 
 **Option D: Features Section Integration**
+
 - Impact: Strengthens existing "How Ralph Works" section
 - Pros: Logical placement, enhances current content, no new sections needed
 - Cons: May disrupt current feature focus, needs careful integration
@@ -688,17 +692,19 @@ All four explanations approved
 **Priority Analysis**: The current statistics contain mathematical impossibilities and vague sourcing that undermine credibility with sophisticated PE audiences. From market research, I found properly sourced statistics that tell a more compelling and credible story about the AI opportunity gap in PE.
 
 **Option A: Market Opportunity Focus**
+
 - Impact: High credibility and urgency creation through market size/growth data
 - Pros: Uses verified McKinsey/Deloitte data, shows massive opportunity, creates FOMO
 - Cons: Less direct about current adoption challenges
 - Constraint check: Fits within existing character limits
-- Proposed stats: 
+- Proposed stats:
   - "€8.2 trillion global PE market"
-  - "Only 20-30% of deal flow analyzed" 
+  - "Only 20-30% of deal flow analyzed"
   - "30-45 days faster with AI"
   - "Ralph unlocks the rest"
 
-**Option B: Efficiency Gap Narrative**  
+**Option B: Efficiency Gap Narrative**
+
 - Impact: High relevance by focusing on operational inefficiencies
 - Pros: Directly addresses PE pain points, uses Vista/BlackRock examples
 - Cons: May seem less visionary
@@ -710,6 +716,7 @@ All four explanations approved
   - "Ralph changes the equation"
 
 **Option C: Leader Validation + Market Stats**
+
 - Impact: Maximum credibility through PE leader quotes + hard data
 - Pros: Combines authority (Schwarzman quote) with opportunity size
 - Cons: Requires more complex layout
@@ -717,6 +724,7 @@ All four explanations approved
 - Proposed approach: Quote from Schwarzman about being "first mover" + stat about $15T AI value
 
 **Option D: Success Metrics Focus**
+
 - Impact: High conversion impact through ROI proof points
 - Pros: Shows tangible results, uses real PE examples
 - Cons: May reveal too much about expected outcomes
@@ -730,8 +738,9 @@ All four explanations approved
 **Decision**: Option A - Market Opportunity Focus
 
 **Implementation**: Replace current statistics with market opportunity data:
+
 - "€8.2 trillion" → "global PE market seeking AI transformation"
-- "20-30%" → "of deal flow actually analyzed today"  
+- "20-30%" → "of deal flow actually analyzed today"
 - "30-45 days" → "faster opportunity identification with AI"
 - "Ralph" → "bridges this gap"
 - Sources: McKinsey Global Private Markets Review 2024, Deloitte PE AI Adoption Study
@@ -743,6 +752,7 @@ All four explanations approved
 **Priority Analysis**: The current placement of "Private beta launching Q1 2025 • Enterprise-ready infrastructure" before the McKinsey/Deloitte sources creates a visual hierarchy issue where less important information (beta status) appears more prominent than crucial credibility markers (authoritative sources). This undermines the trust-building impact of the statistics.
 
 **Option A: Swap Order - Sources First**
+
 - Impact: Immediate credibility boost by leading with authoritative sources
 - Pros: McKinsey/Deloitte names provide instant validation, follows journalistic convention
 - Cons: Beta launch info becomes less prominent
@@ -750,6 +760,7 @@ All four explanations approved
 - Implementation: Move sources above beta status line
 
 **Option B: Remove Beta Status Line**
+
 - Impact: Cleaner, more professional presentation focused on market opportunity
 - Pros: Eliminates potentially concerning "beta" language, streamlines message
 - Cons: Loses launch timeline communication
@@ -757,6 +768,7 @@ All four explanations approved
 - Implementation: Delete the beta status line entirely
 
 **Option C: Integrate Into Single Line**
+
 - Impact: Maintains all information but improves flow
 - Pros: Keeps launch info while prioritizing sources
 - Cons: May create overly long line
@@ -764,6 +776,7 @@ All four explanations approved
 - Implementation: "Sources: McKinsey 2024, Deloitte • Private beta Q1 2025"
 
 **Option D: Move Beta Status Elsewhere**
+
 - Impact: Preserves information while fixing hierarchy issue
 - Pros: Sources get proper prominence, beta info relocated to more appropriate spot
 - Cons: Requires finding new location for beta status
@@ -772,7 +785,8 @@ All four explanations approved
 
 **Decision**: Option A - Swap Order - Sources First (with Q3 update)
 
-**Implementation**: 
+**Implementation**:
+
 - Swap the order of source attribution and beta status lines
 - Update Q1 2025 to Q3 2025 for the private beta launch
 - Final order:
@@ -788,6 +802,7 @@ All four explanations approved
 **Current Implementation vs. Specification**:
 
 **Specification Order:**
+
 1. Hero Section ✓
 2. Social Proof (AI Adoption Paradox) ✓
 3. Why Ralph (Competitive Differentiation) ✓
@@ -798,6 +813,7 @@ All four explanations approved
 8. Progressive CTAs throughout ❌ (Extra CTA section added)
 
 **Option A: Follow Specification Exactly**
+
 - Impact: Optimal conversion flow - problem → solution → how → pricing → validation → objections
 - Pros: Testimonials after pricing creates validation at decision point, cleaner journey
 - Cons: Requires moving TestimonialsNew component, removing extra CTA section
@@ -805,6 +821,7 @@ All four explanations approved
 - Implementation: Move testimonials after pricing, remove standalone CTA section
 
 **Option B: Keep Current Order with Justification**
+
 - Impact: Early social proof might build trust sooner
 - Pros: Minimal code changes, testimonials provide early validation
 - Cons: Shows WHO before HOW, may confuse journey, violates approved spec
@@ -812,6 +829,7 @@ All four explanations approved
 - Implementation: Document deviation from spec
 
 **Option C: Hybrid Optimization**
+
 - Impact: Split testimonials - 2-3 early, rest after pricing
 - Pros: Early trust building + validation at decision point
 - Cons: Complex implementation, fragments testimonial impact
@@ -819,6 +837,7 @@ All four explanations approved
 - Implementation: Create two testimonial instances
 
 **Option D: Remove Extra CTA, Keep Early Testimonials**
+
 - Impact: Cleaner flow while maintaining early social proof
 - Pros: Removes redundant CTA, keeps early validation
 - Cons: Still violates specification order
@@ -827,7 +846,8 @@ All four explanations approved
 
 **Decision**: Option A - Follow Specification Exactly
 
-**Implementation**: 
+**Implementation**:
+
 - Move TestimonialsNew component from after "Why Ralph" section to after Pricing section
 - Remove the standalone CTA section (keeping progressive CTAs throughout as specified)
 - Maintain exact order: Hero → Social Proof → Why Ralph → Features → Pricing → Testimonials → FAQ
@@ -841,22 +861,26 @@ All four explanations approved
 **Current Issues Identified:**
 
 **Semantic Violations:**
+
 - Features, Pricing, FAQ, Testimonials: Pre-title uses `<h2>`, main title uses `<p>` (backwards)
 - Social Proof, Why Ralph: Correct structure (`<h2>` for title)
 
 **Styling Inconsistencies:**
+
 - Pricing title styling: `text-lg text-text-muted` (too small/muted for main title)
-- Mixed design tokens: Some use `text-white`, others `text-primary`  
+- Mixed design tokens: Some use `text-white`, others `text-primary`
 - Inconsistent spacing: `mb-6` vs `mt-4` patterns vary
 
 **Option A: Full Semantic and Styling Standardization**
+
 - Impact: Fixes accessibility violations, improves SEO, creates consistent design
 - Pros: Proper semantic structure, unified styling system, better screen reader support
 - Cons: Requires updating 4 components, potential POM test impacts
 - Constraint check: Must maintain visual appearance while fixing semantic structure
 - Implementation: Swap semantic tags, standardize all styling patterns
 
-**Option B: Semantic Fix Only**  
+**Option B: Semantic Fix Only**
+
 - Impact: Fixes critical accessibility issues but leaves styling inconsistencies
 - Pros: Addresses most urgent problem (semantic structure), minimal visual changes
 - Cons: Still has inconsistent styling across sections
@@ -864,6 +888,7 @@ All four explanations approved
 - Implementation: Just swap `<h2>` and `<p>` tags in 4 components
 
 **Option C: Styling Fix Only**
+
 - Impact: Improves visual consistency but leaves semantic violations
 - Pros: Better visual hierarchy, consistent design tokens
 - Cons: Doesn't fix accessibility violations, incomplete solution
@@ -871,6 +896,7 @@ All four explanations approved
 - Implementation: Standardize styling classes only
 
 **Option D: Gradual Fix (Semantic First, Then Styling)**
+
 - Impact: Addresses critical issues first, then improves design
 - Pros: Fixes accessibility immediately, allows testing between phases
 - Cons: Requires two implementation phases
@@ -879,14 +905,14 @@ All four explanations approved
 
 **Decision**: Option A - Full Semantic and Styling Standardization
 
-**Implementation**: 
+**Implementation**:
+
 - Fix semantic structure: Pre-titles use `<p>`, main titles use `<h2>`
 - Standardize styling: Pre-titles use `text-base font-semibold leading-7 text-accent`, titles use `text-3xl font-bold tracking-tight text-primary sm:text-4xl`
 - Apply standard pattern to Features, Pricing, Testimonials, and FAQ components
 - Maintain visual hierarchy while improving accessibility compliance
 
 **Rationale**: The semantic violations are accessibility compliance failures that could affect the site's usability for screen reader users and SEO rankings. The styling inconsistencies undermine the professional appearance needed for PE decision-makers. A comprehensive fix addresses both issues while creating a maintainable design system standard for future components.
-
 
 ## Q90: How should we update the founder's mission quote on the About page to better serve the site's conversion goals?
 
@@ -897,4 +923,3 @@ All four explanations approved
 **Approved Quote**: "AI won't replace PE partners, but PE partners with AI will replace those without. We're building autonomous agents that think like your best analysts but work at 1000x the speed—because the future of private equity is human judgment amplified by machine intelligence."
 
 **Implementation**: Update the mission quote in src/pages/about.astro (around line 273)
-

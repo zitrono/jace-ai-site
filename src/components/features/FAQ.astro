@@ -1,12 +1,12 @@
 ---
 /**
  * FAQ - Frequently Asked Questions section with collapsible items
- * 
+ *
  * Uses centralized utilities for animations, state, and focus management.
  * Follows enterprise architecture patterns for maintainability.
- * 
+ *
  * @example
- * <FAQ 
+ * <FAQ
  *   title="Frequently asked questions"
  *   subtitle="Everything you need to know"
  *   faqs={[
@@ -44,7 +44,7 @@ export interface Props extends BaseComponentProps {
 const {
   class: className = '',
   title = 'Frequently asked questions',
-  subtitle = 'Everything you need to know about Ralph\'s security and deployment',
+  subtitle = "Everything you need to know about Ralph's security and deployment",
   contactEmail: _contactEmail = 'Konstantin@beneficious.com',
   showContactCTA: _showContactCTA = true,
   animated: _animated = true,
@@ -54,13 +54,13 @@ const {
       id: 'data-confidentiality',
       question: 'How does Ralph keep our deal data confidential?',
       answer:
-        'Your data stays on your servers. Ralph\'s AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.',
+        "Your data stays on your servers. Ralph's AI agents run locally within your infrastructure, processing everything in-house. We never see, store, or have access to your deal information. Think of Ralph as software you install, not a service you send data to.",
     },
     {
       id: 'on-premise',
       question: 'Can we run Ralph on our own servers?',
       answer:
-        'Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We\'ll help you set it up.',
+        "Yes, absolutely. Ralph is designed for on-premise deployment. You provide the servers, we provide the AI framework. This gives you complete control over your data, security, and compliance. We'll help you set it up.",
     },
     {
       id: 'security-standards',
@@ -72,19 +72,19 @@ const {
       id: 'lp-confidential',
       question: 'How does Ralph handle LP confidential information?',
       answer:
-        'LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph\'s agents respect your existing data governance policies.',
+        "LP data is treated with the same security as all your data - it never leaves your control. You can configure access permissions to ensure only authorized team members can query LP-sensitive information. Ralph's agents respect your existing data governance policies.",
     },
     {
       id: 'security-integration',
       question: 'Can we integrate Ralph with our existing security tools?',
       answer:
-        'Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We\'ll work with your IT team to ensure Ralph fits seamlessly into your security stack.',
+        "Yes. Ralph supports SAML/SSO authentication, integrates with your identity providers, and can log to your SIEM systems. We'll work with your IT team to ensure Ralph fits seamlessly into your security stack.",
     },
     {
       id: 'security-track-record',
-      question: 'What\'s Ralph\'s track record on data security?',
+      question: "What's Ralph's track record on data security?",
       answer:
-        'We\'re in private beta with select PE firms, building security-first from day one. While we don\'t have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We\'re happy to share our security documentation.',
+        "We're in private beta with select PE firms, building security-first from day one. While we don't have a decade-long track record yet, our architecture ensures your data never leaves your control - eliminating most security risks by design. We're happy to share our security documentation.",
     },
     {
       id: 'access-revocation',
@@ -96,7 +96,7 @@ const {
       id: 'data-training',
       question: 'Does Ralph use our data to improve its AI models?',
       answer:
-        'No. Your data is never used to train or improve Ralph\'s models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.',
+        "No. Your data is never used to train or improve Ralph's models. Each deployment is isolated - what happens in your Ralph stays in your Ralph. We improve our product based on feedback and feature requests, not by analyzing your confidential information.",
     },
     {
       id: 'implementation-time',
@@ -108,7 +108,7 @@ const {
       id: 'technical-infrastructure',
       question: 'What technical infrastructure do we need?',
       answer:
-        'Ralph runs on your cloud infrastructure (AWS, Azure, GCP) or on-premise servers. Minimum requirements: 16GB RAM, 4 CPU cores, 500GB storage for starter deployment. We\'ll help size your infrastructure based on portfolio size and data volume during the planning phase.',
+        "Ralph runs on your cloud infrastructure (AWS, Azure, GCP) or on-premise servers. Minimum requirements: 16GB RAM, 4 CPU cores, 500GB storage for starter deployment. We'll help size your infrastructure based on portfolio size and data volume during the planning phase.",
     },
     {
       id: 'data-integration',
@@ -136,94 +136,91 @@ const _componentId = 'faq-component';
 ---
 
 <Section class={className} spacing="lg">
-    <div class="mx-auto max-w-4xl">
-      <!-- Header -->
-      <div class="text-center">
-        <h2 class="text-4xl lg:text-5xl font-semibold text-primary">
-          {title}
-        </h2>
-        <p class="mt-3 text-lg text-muted">
-          {subtitle}
-        </p>
-      </div>
-
-      <!-- FAQ List -->
-      <dl class="mt-16 divide-y divide-white/10">
-        {
-          faqs.map((faq, index) => (
-            <div 
-              class={`faq-item ${index === 0 ? 'pt-0' : 'pt-6'} ${index === faqs.length - 1 ? 'pb-0' : 'pb-6'}`}
-              data-faq-item
-            >
-              <dt>
-                <button 
-                  class="group flex w-full items-start justify-between text-left text-primary cursor-pointer"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls={`faq-answer-${index}`}
-                  data-faq-button
-                >
-                  <span class="text-lg leading-7 font-medium">{faq.question}</span>
-                  <span class="ml-6 flex h-7 items-center relative">
-                    <!-- Plus icon (shown when collapsed) -->
-                    <svg 
-                      class="size-6 transition-opacity duration-200"
-                      data-icon="plus"
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke-width="1.5" 
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                    </svg>
-                    <!-- Minus icon (hidden by default) -->
-                    <svg 
-                      class="size-6 transition-opacity duration-200 opacity-0 absolute inset-0"
-                      data-icon="minus"
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke-width="1.5" 
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12" />
-                    </svg>
-                  </span>
-                </button>
-              </dt>
-              <dd 
-                id={`faq-answer-${index}`}
-                class="mt-2 pr-12 text-base text-secondary leading-6 overflow-hidden transition-all duration-300 opacity-0"
-                style="max-height: 0;"
-                data-faq-answer
-                aria-hidden="true"
-              >
-                <div class="pb-4">
-                  {faq.answer}
-                </div>
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
+  <div class="mx-auto max-w-4xl">
+    <!-- Header -->
+    <div class="text-center">
+      <h2 class="text-4xl lg:text-5xl font-semibold text-primary">
+        {title}
+      </h2>
+      <p class="mt-3 text-lg text-muted">
+        {subtitle}
+      </p>
     </div>
-</Section>
 
+    <!-- FAQ List -->
+    <dl class="mt-16 divide-y divide-white/10">
+      {
+        faqs.map((faq, index) => (
+          <div
+            class={`faq-item ${index === 0 ? 'pt-0' : 'pt-6'} ${index === faqs.length - 1 ? 'pb-0' : 'pb-6'}`}
+            data-faq-item
+          >
+            <dt>
+              <button
+                class="group flex w-full items-start justify-between text-left text-primary cursor-pointer"
+                type="button"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${index}`}
+                data-faq-button
+              >
+                <span class="text-lg leading-7 font-medium">{faq.question}</span>
+                <span class="ml-6 flex h-7 items-center relative">
+                  {/* Plus icon (shown when collapsed) */}
+                  <svg
+                    class="size-6 transition-opacity duration-200"
+                    data-icon="plus"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                  </svg>
+                  {/* Minus icon (hidden by default) */}
+                  <svg
+                    class="size-6 transition-opacity duration-200 opacity-0 absolute inset-0"
+                    data-icon="minus"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12" />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd
+              id={`faq-answer-${index}`}
+              class="mt-2 pr-12 text-base text-secondary leading-6 overflow-hidden transition-all duration-300 opacity-0"
+              style="max-height: 0;"
+              data-faq-answer
+              aria-hidden="true"
+            >
+              <div class="pb-4">{faq.answer}</div>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</Section>
 
 <script>
   // Client-side accordion functionality
   document.addEventListener('DOMContentLoaded', () => {
     const faqButtons = document.querySelectorAll('[data-faq-button]');
-    
-    faqButtons.forEach(button => {
+
+    faqButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const item = button.closest('[data-faq-item]');
         const answer = item?.querySelector('[data-faq-answer]') as HTMLElement;
         const plusIcon = button.querySelector('[data-icon="plus"]') as HTMLElement;
         const minusIcon = button.querySelector('[data-icon="minus"]') as HTMLElement;
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
+
         if (answer) {
           if (isExpanded) {
             // Collapse
